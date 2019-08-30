@@ -1,6 +1,7 @@
 <template>
 <div class="row">
     <div><Tabs type="card" closable @on-tab-remove="handleTabRemove">
+        <TabPane label="在线用户" v-if="tab1" icon="logo-windows">标签二的内容</TabPane>
         <TabPane label="macOS" v-if="tab0" icon="ios-key">
              <Table :columns="historyColumns" :data="historyData"></Table>
              <Page :total="dataCount" :page-size="pageSize" show-total class="paging" @on-change="changepage"></Page>
