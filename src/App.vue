@@ -68,4 +68,8 @@ body,html{
 .ivu-tree ul li{
     margin: 0px !important;
 }
+.ivu-tabs.ivu-tabs-card>.ivu-tabs-bar .ivu-tabs-tab{
+  border-radius: 0px !important;
+}
+
 </style>

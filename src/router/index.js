@@ -7,6 +7,7 @@ import QRCode from '@/components/QRCode'
 import Banner from '@/components/banner'
 import Lmenu from '@/components/Lmenu'
 import DagTree from '@/components/DagTree'
+import Dmenu from '@/components/Dmenu'
 Vue.use(Router)
 
 export default new Router({
@@ -46,6 +47,10 @@ export default new Router({
       name: 'DagTree',
       component: DagTree
     },
-    
+    {
+      path: '/Dmenu',
+      name: 'Dmenu',
+      component: Dmenu
+    },
   ]
 })
