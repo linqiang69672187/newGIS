@@ -1,7 +1,7 @@
 <template>
 <div class="row">
     <div><Tabs type="card" closable @on-tab-remove="handleTabRemove">
-        <TabPane label="在线用户" v-if="tab1" icon="logo-windows">标签二的内容</TabPane>
+        <TabPane label="在线用户" v-if="tab1" icon="logo-windows"><div id="onlinechar"></div></TabPane>
         <TabPane label="macOS" v-if="tab0" icon="ios-key">
              <Table :columns="historyColumns" :data="historyData"></Table>
              <Page :total="dataCount" :page-size="pageSize" show-total class="paging" @on-change="changepage"></Page>
@@ -267,7 +267,10 @@ import { Tabs,TabPane,Table,Page  } from 'iview';
         },
         created(){
              this.handleListApproveHistory();
-        }
+        },
+        mounted() {
+        this.$chart.line1('onlinechar');
+    },
        
     }
 </script>
@@ -291,6 +294,10 @@ float: right;
 border-top: 1px solid #dcdee2;
 margin-top: 31px;
 padding-left: 5px;
+}
+#onlinechar{
+    width:100%;
+    height: 100%;
 }
 
 </style>
