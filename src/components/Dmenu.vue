@@ -43,11 +43,11 @@ width: 100%;
 height: 250px;
 }
 .row>div:nth-child(1){
-width: calc(100% - 300px);
+width: calc(100% - 400px);
 float: left;
 }
 .row>div:nth-child(2){
-width: 300px;
+width: 400px;
 float: right;
 border-top: 1px solid #dcdee2;
 margin-top: 31px;
