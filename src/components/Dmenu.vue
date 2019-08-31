@@ -269,7 +269,7 @@ import { Tabs,TabPane,Table,Page  } from 'iview';
              this.handleListApproveHistory();
         },
         mounted() {
-        this.$chart.line1('onlinechar');
+        this.$chart.dynamicline('onlinechar');
     },
        
     }
