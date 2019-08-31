@@ -1,7 +1,7 @@
 <template>
 <div class="row">
     <div><Tabs class="tabs" type="card" closable @on-tab-remove="handleTabRemove">
-        <TabPane label="在线用户" class="tabpane" v-if="tab1" icon="logo-windows"><div id="onlinechar"></div></TabPane>
+        <TabPane label="主页" class="tabpane" v-if="tab1" icon="logo-windows"><div id="onlinechar"></div></TabPane>
         <TabPane  class="tabpane" label="macOS" v-if="tab0" icon="ios-key">
              <Table :columns="historyColumns" :data="historyData"></Table>
              <Page :total="dataCount" :page-size="pageSize" show-total class="paging" @on-change="changepage"></Page>
@@ -13,7 +13,7 @@
     <div>
         <Tabs >
         <TabPane label="组呼"  icon="ios-key"> 
-            <Table height="183" class="calltable" :columns="historyColumns" :data="calldata"></Table>  
+            <Table height="183"   class="calltable" :columns="historyColumns" :data="calldata"></Table>  
         </TabPane>
         <TabPane label="单呼"  icon="logo-windows">标签二的内容</TabPane>
         <TabPane label="紧急呼叫"  icon="logo-tux">标签三的内容</TabPane>
@@ -235,7 +235,7 @@ import { Tabs,TabPane,Table,Page  } from 'iview';
 
                 ],
                 historyData: [],
-                calldata:[{"ISSI":"24006",  "time": "2019-08-31 8:12"},{"ISSI":"24001",  "time": "2019-08-31 8:01"},{"ISSI":"24003",  "time": "2019-08-31 7:11"},{"ISSI":"24001",  "time": "2019-08-31 8:01"},{"ISSI":"24003",  "time": "2019-08-31 7:11"},],
+                calldata:[{"ISSI":"24006",  "time": "2019-08-31 8:12"},{"ISSI":"24001",  "time": "2019-08-31 8:01"},{"ISSI":"24003",  "time": "2019-08-31 7:11"},{"ISSI":"24001",  "time": "2019-08-31 8:01"},{"ISSI":"24003",  "time": "2019-08-31 7:11"},{"ISSI":"34003",  "time": "2019-08-31 7:11"}],
                  historyColumns: [
                     {
                         title: 'ISSI',
@@ -322,7 +322,9 @@ margin-top: 31px;
 padding-left: 5px;
 height: 100%;
 background-color: #fff;
-
+}
+.row>div:nth-child(2) tr{
+height: 18px;
 }
 #onlinechar{
     width:100%;
@@ -339,6 +341,7 @@ background-color: #fff;
 .tabs .ivu-tabs-tab{
  border: 0;
 }
+ 
 </style>
 <style >
 .tabs .ivu-tabs-tab{
@@ -347,9 +350,9 @@ background-color: #fff;
  color: #fff !important;
 }
 .tabs .ivu-tabs-tab-focused{
- border: 1px solid #dcdee2 !important;
- background-color: #2B81BE !important;
- color: #fff !important;
+
+ background-color: #fff !important;
+ color: #164B77 !important;
 }
 
 *::-webkit-scrollbar {/*滚动条整体样式*/
@@ -365,5 +368,8 @@ background-color: #fff;
         -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
         border-radius: 10px;
         background: #EDEDED;
+    }
+   .calltable th,.calltable td{
+    height: 30px !important;
     }
 </style>
