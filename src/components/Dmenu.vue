@@ -298,6 +298,8 @@ import { Tabs,TabPane,Table,Page  } from 'iview';
 margin: 0px;
 width: 100%;
 height: 250px;
+box-shadow: 0 0 15px #000;
+background-color: #164B77;
 }
 .paging{
       float:right;
@@ -320,10 +322,12 @@ margin-top: 31px;
 padding-left: 5px;
 height: 100%;
 background-color: #fff;
+
 }
 #onlinechar{
     width:100%;
     height: 100%;
+    
 }
 .ivu-tabs{
     height: 250px;
