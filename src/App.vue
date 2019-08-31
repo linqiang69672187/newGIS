@@ -31,6 +31,7 @@ export default {
 <style>
 body,html{
   height: 100%;
+  overflow-y: hidden;
 }
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -71,5 +72,11 @@ body,html{
 .ivu-tabs.ivu-tabs-card>.ivu-tabs-bar .ivu-tabs-tab{
   border-radius: 0px !important;
 }
-
+.ivu-tabs-bar {
+   margin-bottom:0px !important;
+}
+.ivu-tabs-content{
+    height: 220px !important;
+    background-color: #fff;
+}
 </style>

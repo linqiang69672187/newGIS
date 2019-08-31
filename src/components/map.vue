@@ -45,7 +45,7 @@ export default {
 </script>
 <style>
 #map{
-    widows: 500px; 
-    height: 500px;
+    widows: 100%; 
+    height:100%;
 }
 </style>

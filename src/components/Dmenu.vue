@@ -1,18 +1,20 @@
 <template>
 <div class="row">
     <div><Tabs type="card" closable @on-tab-remove="handleTabRemove">
-        <TabPane label="在线用户" v-if="tab1" icon="logo-windows"><div id="onlinechar"></div></TabPane>
-        <TabPane label="macOS" v-if="tab0" icon="ios-key">
+        <TabPane label="在线用户" class="tabpane" v-if="tab1" icon="logo-windows"><div id="onlinechar"></div></TabPane>
+        <TabPane  class="tabpane" label="macOS" v-if="tab0" icon="ios-key">
              <Table :columns="historyColumns" :data="historyData"></Table>
              <Page :total="dataCount" :page-size="pageSize" show-total class="paging" @on-change="changepage"></Page>
         </TabPane>
-        <TabPane label="Windows" v-if="tab1" icon="logo-windows">标签二的内容</TabPane>
-        <TabPane label="Linux" v-if="tab2" icon="logo-tux">标签三的内容</TabPane>
+        <TabPane class="tabpane"  label="Windows" v-if="tab1" icon="logo-windows">标签二的内容</TabPane>
+        <TabPane class="tabpane"  label="Linux" v-if="tab2" icon="logo-tux">标签三的内容</TabPane>
     </Tabs>
     </div>
     <div>
         <Tabs >
-        <TabPane label="组呼"  icon="ios-key">标签一的内容1</TabPane>
+        <TabPane label="组呼"  icon="ios-key"> 
+            <Table height="183" class="calltable" :columns="historyColumns" :data="calldata"></Table>  
+        </TabPane>
         <TabPane label="单呼"  icon="logo-windows">标签二的内容</TabPane>
         <TabPane label="紧急呼叫"  icon="logo-tux">标签三的内容</TabPane>
          </Tabs>
@@ -199,7 +201,8 @@ import { Tabs,TabPane,Table,Page  } from 'iview';
                 "shenpicomments": "自动审批通过",
                 "time": "2017-07-19 18:27"
             }
-        ]
+        ],
+    
     }
     export default {
         data () {
@@ -207,7 +210,7 @@ import { Tabs,TabPane,Table,Page  } from 'iview';
                         tab0: true,
                         tab1: true,
                         tab2: true,
-                         ajaxHistoryData:[],
+                        ajaxHistoryData:[],
                 // 初始化信息总条数
                 dataCount:0,
                 // 每页显示多少条
@@ -231,7 +234,23 @@ import { Tabs,TabPane,Table,Page  } from 'iview';
                     }
 
                 ],
-                historyData: []
+                historyData: [],
+                calldata:[{"ISSI":"24006",  "time": "2019-08-31 8:12"},{"ISSI":"24001",  "time": "2019-08-31 8:01"},{"ISSI":"24003",  "time": "2019-08-31 7:11"},{"ISSI":"24001",  "time": "2019-08-31 8:01"},{"ISSI":"24003",  "time": "2019-08-31 7:11"},],
+                 historyColumns: [
+                    {
+                        title: 'ISSI',
+                        key: 'ISSI'
+                    },
+                    {
+                        title: '时间',
+                        key: 'time'
+                    },
+                    {
+                        title: '操作',
+                        key: ''
+                    }
+
+                ],
                 }
         },
         components:{
@@ -284,9 +303,14 @@ height: 250px;
       float:right;
       margin-top:10px;
   }
+  .tabpane{
+      background-color: #fff;
+  }
 .row>div:nth-child(1){
 width: calc(100% - 400px);
 float: left;
+height: 250px;
+position:absolute;
 }
 .row>div:nth-child(2){
 width: 400px;
@@ -294,10 +318,18 @@ float: right;
 border-top: 1px solid #dcdee2;
 margin-top: 31px;
 padding-left: 5px;
+height: 100%;
+background-color: #fff;
 }
 #onlinechar{
     width:100%;
     height: 100%;
 }
-
+.ivu-tabs{
+    height: 250px;
+    width: 100%;
+}
+.calltable{
+    height: 183px;
+}
 </style>

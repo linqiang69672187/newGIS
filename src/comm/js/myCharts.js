@@ -68,16 +68,9 @@ const install = function(Vue) {
                                     }
                                 }
                             },
+                            grid:{x:40,y:60,x2:40,y2:30},
                             legend: {
                                 data:['在线设备', '在线时长']
-                            },
-                            toolbox: {
-                                show: true,
-                                feature: {
-                                    dataView: {readOnly: false},
-                                    restore: {},
-                                    saveAsImage: {}
-                                }
                             },
                             dataZoom: {
                                 show: false,
