@@ -44,7 +44,7 @@ import tabindex from "@/components/tabs/index"
 margin: 0px;
 width: 100%;
 height: 250px;
-box-shadow: 0 0 15px #000;
+
 background-color: #164B77;
 }
 .paging{
@@ -94,6 +94,10 @@ height: 18px;
  border: 0 !important;
  background-color: transparent !important;
  color: #fff !important;
+
+}
+.ivu-tabs-bar {
+    border: 0 !important;
 }
 .tabs .ivu-tabs-tab-focused{
 

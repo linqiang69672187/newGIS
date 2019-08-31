@@ -126,8 +126,21 @@ const install = function(Vue) {
                             series: [
                                 {
                                     name:'在线时长',
-                                    type:'bar',
+                                    type:'line',
                                     xAxisIndex: 1,
+                                    smooth:true, 
+                                    itemStyle: {
+                                        color: 'rgb(6, 70, 131)'
+                                    },
+                                    areaStyle: {
+                                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                            offset: 0,
+                                            color: 'rgb(0, 158, 68)'
+                                        }, {
+                                            offset: 1,
+                                            color: 'rgb(0, 70, 131)'
+                                        }])
+                                    },
                                     yAxisIndex: 1,
                                     data:(function (){
                                         var res = [];
