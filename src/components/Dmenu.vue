@@ -72,11 +72,6 @@ background-color: #fff;
 .row>div:nth-child(2) tr{
 height: 18px;
 }
-#onlinechar{
-    width:100%;
-    height: 100%;
-    
-}
 .ivu-tabs{
     height: 250px;
     width: 100%;
