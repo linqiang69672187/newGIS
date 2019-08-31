@@ -1,6 +1,6 @@
 <template>
 <div class="row">
-    <div><Tabs type="card" closable @on-tab-remove="handleTabRemove">
+    <div><Tabs class="tabs" type="card" closable @on-tab-remove="handleTabRemove">
         <TabPane label="在线用户" class="tabpane" v-if="tab1" icon="logo-windows"><div id="onlinechar"></div></TabPane>
         <TabPane  class="tabpane" label="macOS" v-if="tab0" icon="ios-key">
              <Table :columns="historyColumns" :data="historyData"></Table>
@@ -336,4 +336,34 @@ background-color: #fff;
 .calltable{
     height: 183px;
 }
+.tabs .ivu-tabs-tab{
+ border: 0;
+}
+</style>
+<style >
+.tabs .ivu-tabs-tab{
+ border: 0 !important;
+ background-color: transparent !important;
+ color: #fff !important;
+}
+.tabs .ivu-tabs-tab-focused{
+ border: 1px solid #dcdee2 !important;
+ background-color: #2B81BE !important;
+ color: #fff !important;
+}
+
+*::-webkit-scrollbar {/*滚动条整体样式*/
+        width: 10px;     /*高宽分别对应横竖滚动条的尺寸*/
+        height: 1px;
+    }
+*::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+        border-radius: 10px;
+         -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+        background: #535353;
+    }
+*::-webkit-scrollbar-track {/*滚动条里面轨道*/
+        -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+        border-radius: 10px;
+        background: #EDEDED;
+    }
 </style>
