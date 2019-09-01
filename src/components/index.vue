@@ -1,6 +1,9 @@
 <template>
     <div id="main">
-       <div> <Map></Map></div>
+       <div>
+           <Map></Map>
+           <MapToolbox></MapToolbox>
+       </div>
        <div>
            <div class="top"><banner></banner></div>
            <div class="left"><Lmenu></Lmenu></div>
@@ -13,6 +16,7 @@ import banner from "@/components/banner"
 import Map from "@/components/map"
 import Lmenu from "@/components/Lmenu"
 import Dmenu from "@/components/Dmenu"
+import MapToolbox from "@/components/MapToolbox"
 export default {
     data(){
        return{              
@@ -27,6 +31,7 @@ export default {
         Map,
         Lmenu,
         Dmenu,
+        MapToolbox
     },
     methods:{
         increase:function(val){
@@ -63,5 +68,10 @@ export default {
       height: 250px;
       width: 100%;
       bottom: 0;
+  }
+  .toolbox{
+      position: absolute;
+      right: 60px;
+      top: 90px;
   }
 </style>

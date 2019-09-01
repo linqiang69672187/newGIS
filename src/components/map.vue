@@ -17,7 +17,7 @@ export default {
     methods:{
         initMap() {
 
-       var url = "http://127.0.0.1:8081/"+"/baidu/tiles/{z}/{x}/{-y}.jpg";
+       var url = "http://127.0.0.1:8081/"+"baidu/tiles/{z}/{x}/{-y}.jpg";
 
         var baiduMapLayer2 = new TileLayer({
             source: new sourceXYZ({

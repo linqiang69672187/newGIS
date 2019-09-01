@@ -10,7 +10,7 @@ import DagTree from '@/components/DagTree'
 import Dmenu from '@/components/Dmenu'
 import video from '@/components/tabs/videplayer'
 import eyemaps from '@/components/tabs/eyemaps'
-
+import MapToolbox from '@/components/MapToolbox'
 Vue.use(Router)
 
 export default new Router({
@@ -64,6 +64,12 @@ export default new Router({
       path: '/eyemaps',
       name: 'eyemaps',
       component: eyemaps
+    },
+    ,
+    {
+      path: '/MapToolbox',
+      name: 'MapToolbox',
+      component: MapToolbox
     },
   ]
 })
