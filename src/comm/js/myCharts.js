@@ -68,7 +68,7 @@ const install = function(Vue) {
                                     }
                                 }
                             },
-                            grid:{x:40,y:60,x2:40,y2:30},
+                            grid:{x:40,y:60,x2:50,y2:30},
                             legend: {
                                 data:['在线设备', '在线时长']
                             },
@@ -80,11 +80,11 @@ const install = function(Vue) {
                             xAxis: [
                                 {
                                     type: 'category',
-                                    boundaryGap: true,
+                                    boundaryGap: false,
                                     data: (function (){
                                         var now = new Date();
                                         var res = [];
-                                        var len = 10;
+                                        var len = 20;
                                         while (len--) {
                                             res.unshift(now.toLocaleTimeString().replace(/^\D*/,''));
                                             now = new Date(now - 2000);
@@ -94,15 +94,8 @@ const install = function(Vue) {
                                 },
                                 {
                                     type: 'category',
-                                    boundaryGap: true,
-                                    data: (function (){
-                                        var res = [];
-                                        var len = 10;
-                                        while (len--) {
-                                            res.push(10 - len - 1);
-                                        }
-                                        return res;
-                                    })()
+                                    boundaryGap: false,
+                                   
                                 }
                             ],
                             yAxis: [
@@ -135,7 +128,7 @@ const install = function(Vue) {
                                     areaStyle: {
                                         color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
                                             offset: 0,
-                                            color: 'rgb(0, 158, 68)'
+                                            color: 'rgb(255, 255, 68)'
                                         }, {
                                             offset: 1,
                                             color: 'rgb(0, 70, 131)'
@@ -144,7 +137,7 @@ const install = function(Vue) {
                                     yAxisIndex: 1,
                                     data:(function (){
                                         var res = [];
-                                        var len = 10;
+                                        var len = 20;
                                         while (len--) {
                                             res.push(Math.round(Math.random() * 1000));
                                         }
@@ -170,7 +163,7 @@ const install = function(Vue) {
                                     data:(function (){
                                         var res = [];
                                         var len = 0;
-                                        while (len < 10) {
+                                        while (len < 20) {
                                             res.push((Math.random()*10 + 5).toFixed(1) - 0);
                                             len++;
                                         }
@@ -194,12 +187,12 @@ const install = function(Vue) {
                         
                             option.xAxis[0].data.shift();
                             option.xAxis[0].data.push(axisData);
-                            option.xAxis[1].data.shift();
-                            option.xAxis[1].data.push(app.count++);
+                          
                         
                             that.chart.setOption(option);
                         }, 2000);
-                    }
+                    },
+                  
 
                 }
             }

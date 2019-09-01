@@ -1,7 +1,7 @@
 <template>
 <div class="row">
     <div><Tabs class="tabs" type="card" closable @on-tab-remove="handleTabRemove">
-        <TabPane label="主页" class="tabpane" v-if="tab1" icon="logo-windows"><tabindex></tabindex></TabPane>
+        <TabPane label="实时状况" class="tabpane" v-if="tab1" icon="logo-windows"><tabindex></tabindex></TabPane>
         <TabPane  class="tabpane" label="macOS" v-if="tab0" icon="ios-key">
            
         </TabPane>
