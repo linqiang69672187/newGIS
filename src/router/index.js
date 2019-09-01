@@ -8,6 +8,9 @@ import Banner from '@/components/banner'
 import Lmenu from '@/components/Lmenu'
 import DagTree from '@/components/DagTree'
 import Dmenu from '@/components/Dmenu'
+import video from '@/components/tabs/videplayer'
+import eyemaps from '@/components/tabs/eyemaps'
+
 Vue.use(Router)
 
 export default new Router({
@@ -51,6 +54,16 @@ export default new Router({
       path: '/Dmenu',
       name: 'Dmenu',
       component: Dmenu
+    },
+    {
+      path: '/video',
+      name: 'video',
+      component: video
+    },
+    {
+      path: '/eyemaps',
+      name: 'eyemaps',
+      component: eyemaps
     },
   ]
 })

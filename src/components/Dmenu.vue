@@ -2,11 +2,9 @@
 <div class="row">
     <div><Tabs class="tabs" type="card" closable @on-tab-remove="handleTabRemove">
         <TabPane label="实时状况" class="tabpane" v-if="tab1" icon="logo-windows"><tabindex></tabindex></TabPane>
-        <TabPane  class="tabpane" label="macOS" v-if="tab0" icon="ios-key">
-           
-        </TabPane>
-        <TabPane class="tabpane"  label="Windows" v-if="tab1" icon="logo-windows">标签二的内容</TabPane>
-        <TabPane class="tabpane"  label="Linux" v-if="tab2" icon="logo-tux">标签三的内容</TabPane>
+        <TabPane class="tabpane" label="GPS控制" v-if="tab0" icon="ios-key"></TabPane>
+        <TabPane class="tabpane"  label="鸟览图" v-if="tab1" icon="logo-windows"><eyemaps></eyemaps></TabPane>
+        <TabPane class="tabpane"  label="视频窗口" v-if="tab2" icon="logo-tux"><videos></videos></TabPane>
     </Tabs>
     </div>
 </div>
@@ -14,6 +12,8 @@
 <script>
 import { Tabs,TabPane  } from 'iview';
 import tabindex from "@/components/tabs/index"
+import videos from "@/components/tabs/videplayer"
+import eyemaps from "@/components/tabs/eyemaps"
     export default {
         data () {
                 return {
@@ -25,7 +25,9 @@ import tabindex from "@/components/tabs/index"
         components:{
           Tabs,
           TabPane, 
-          tabindex
+          tabindex,
+          videos,
+          eyemaps
         },
         methods: {
               handleTabRemove (name) {
@@ -102,7 +104,7 @@ height: 18px;
 
 *::-webkit-scrollbar {/*滚动条整体样式*/
         width: 10px;     /*高宽分别对应横竖滚动条的尺寸*/
-        height: 1px;
+        height: 10px;
     }
 *::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
         border-radius: 10px;
