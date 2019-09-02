@@ -73,10 +73,10 @@ export default {
       width: 100%;
       bottom: 0;
   }
-  .toolbox{
+  .toolboxdiv{
       position: absolute;
-      right: 60px;
-      top: 90px;
+      right: -100px;
+      top: 70px;
   }
   .callbox{
       position: absolute;

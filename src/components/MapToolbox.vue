@@ -1,26 +1,41 @@
 <template>
 <div class="toolboxdiv">
-    <div class="toolbox">
+    <div class="toolbox " >
         <ul>
-            <li><a @click="show = !show"><div><i class="fas fa-ruler"></i></div></a></li>
+            <li><a @click="showdistance($event)" ><div><i class="fas fa-ruler"></i></div></a></li>
             <li><a><div><i class="fas fa-map"></i></div></a></li>
             <li><a><div><i class="fas fa-object-ungroup"></i></div></a></li>
             <li><a><div><i class="fas fa-search-minus"></i></div></a></li>
             <li><a><div><i class="fas fa-search-plus"></i></div></a></li>           
         </ul>
     </div>
-    <transition name='slide-fade' >
-     <div  v-if="show" class="computedistance"></div>
+    <transition name='slide-fade' v-on:after-enter="afterEnter"  >
+     <div  v-show="show" class="computedistance">
+         <ul>
+            <li><a><div><i class="fas fa-map"></i></div></a></li>
+            <li><a><div><i class="fas fa-object-ungroup"></i></div></a></li>
+         </ul>
+     </div>
      </transition>
 </div>
 </template>
 <script>
+import func from '../../vue-temp/vue-editor-bridge';
 
 export default {
     mounted(){
     },
     methods:{
-        
+        showdistance:function(ev){
+              if (show){
+                
+              }
+              show = !show
+          },
+         afterEnter: function (el) {
+             el.style.zIndex=4
+         },
+         
     },
    data(){
        return{ 
@@ -44,8 +59,8 @@ export default {
         line-height: 36px;
         position:absolute;
         top:0px;
-        left: 145px;
-        z-index: 1;
+        left: 85px;
+        z-index: 2;
     }
     .toolbox{
         height: 36px;
@@ -56,24 +71,26 @@ export default {
         line-height: 36px;
         left: 145px;
         position:absolute;
-        z-index: 2;
+        z-index: 3;
     }
-    .toolbox>ul,.toolbox>ul>li{
+ 
+    ul,ul>li{
         display: inline-block;
     }
 
     .toolbox>ul>li{
         width: 32px;
         height: 32px;
-      
     }
-   .toolbox>ul>li div{
+   ul>li div{
         width: 32px;
         height: 32px;
         line-height: 32px;
-        z-index: 999;
     }
-   .toolbox>ul>li a{
+
+  
+  
+   ul>li a{
       color: #fff;
     }
     .toolbox>ul>li:nth-child(2) div{
@@ -85,14 +102,14 @@ export default {
     /* 可以设置不同的进入和离开动画 */
     /* 设置持续时间和动画函数 */
     .slide-fade-enter-active {
-    transition: all .3s ease;
+    transition: all .5s ease;
     }
     .slide-fade-leave-active {
-    transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+    transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
     }
     .slide-fade-enter, .slide-fade-leave-to
     /* .slide-fade-leave-active for below version 2.1.8 */ {
-    transform: translateX(-70px);
-    opacity: 1;
+    transform: translateX(70px);
+   
     }
 </style>
