@@ -1,15 +1,15 @@
 <template>
 <div class="toolboxdiv">
-    <div class="toolbox " >
+    <div class="toolbox " :class="{toolboxzindex:toolzindex}" >
         <ul>
-            <li><a @click="showdistance($event)" ><div><i class="fas fa-ruler"></i></div></a></li>
+            <li><a @click="showdistance" ><div><i class="fas fa-ruler"></i></div></a></li>
             <li><a><div><i class="fas fa-map"></i></div></a></li>
             <li><a><div><i class="fas fa-object-ungroup"></i></div></a></li>
             <li><a><div><i class="fas fa-search-minus"></i></div></a></li>
             <li><a><div><i class="fas fa-search-plus"></i></div></a></li>           
         </ul>
     </div>
-    <transition name='slide-fade' v-on:after-enter="afterEnter"  >
+    <transition name='slide-fade' v-on:before-enter="beforeEnter"  >
      <div  v-show="show" class="computedistance">
          <ul>
             <li><a><div><i class="fas fa-map"></i></div></a></li>
@@ -20,26 +20,27 @@
 </div>
 </template>
 <script>
-import func from '../../vue-temp/vue-editor-bridge';
 
 export default {
     mounted(){
     },
     methods:{
-        showdistance:function(ev){
-              if (show){
-                
+        showdistance:function(){
+              this.show = !this.show
+              if (this.show){ 
+                this.toolzindex=true;
               }
-              show = !show
+             
           },
-         afterEnter: function (el) {
-             el.style.zIndex=4
+         beforeEnter: function (el) {
+              this.toolzindex=true;
          },
          
     },
    data(){
        return{ 
-           show: false             
+           show: false ,
+           toolzindex:false           
        }
     },
 }
@@ -73,7 +74,9 @@ export default {
         position:absolute;
         z-index: 3;
     }
- 
+    .toolboxzindex{
+        z-index: 1;
+    }
     ul,ul>li{
         display: inline-block;
     }
