@@ -1,13 +1,18 @@
 <template>
+<div class="toolboxdiv">
     <div class="toolbox">
         <ul>
-            <li><a><div><i class="fas fa-ruler"></i></div></a></li>
+            <li><a @click="show = !show"><div><i class="fas fa-ruler"></i></div></a></li>
             <li><a><div><i class="fas fa-map"></i></div></a></li>
             <li><a><div><i class="fas fa-object-ungroup"></i></div></a></li>
             <li><a><div><i class="fas fa-search-minus"></i></div></a></li>
             <li><a><div><i class="fas fa-search-plus"></i></div></a></li>           
         </ul>
     </div>
+    <transition name='slide-fade' >
+     <div  v-if="show" class="computedistance"></div>
+     </transition>
+</div>
 </template>
 <script>
 
@@ -15,18 +20,43 @@ export default {
     mounted(){
     },
     methods:{
-    }
-
+        
+    },
+   data(){
+       return{ 
+           show: false             
+       }
+    },
 }
 </script>
 <style scoped>
+    .toolboxdiv{
+        height: 400px;
+        width: 500px;
+    }
+    .computedistance{
+        height: 36px;
+        width: 80px;
+        background-color: #164b77;
+        border-top-left-radius:18px 18px;
+        border-bottom-left-radius:18px 18px;
+        font-size: 18px;
+        line-height: 36px;
+        position:absolute;
+        top:0px;
+        left: 145px;
+        z-index: 1;
+    }
     .toolbox{
         height: 36px;
         width: 210px;
         background-color: #164b77;
         border-radius: 18px;
         font-size: 18px;
-           line-height: 36px;
+        line-height: 36px;
+        left: 145px;
+        position:absolute;
+        z-index: 2;
     }
     .toolbox>ul,.toolbox>ul>li{
         display: inline-block;
@@ -41,6 +71,7 @@ export default {
         width: 32px;
         height: 32px;
         line-height: 32px;
+        z-index: 999;
     }
    .toolbox>ul>li a{
       color: #fff;
@@ -48,6 +79,20 @@ export default {
     .toolbox>ul>li:nth-child(2) div{
       background-color: #fff;
       color: #164b77;
-      border-radius: 50%;
+      border-radius: 16px;
+      height: 32px;
+    }
+    /* 可以设置不同的进入和离开动画 */
+    /* 设置持续时间和动画函数 */
+    .slide-fade-enter-active {
+    transition: all .3s ease;
+    }
+    .slide-fade-leave-active {
+    transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+    }
+    .slide-fade-enter, .slide-fade-leave-to
+    /* .slide-fade-leave-active for below version 2.1.8 */ {
+    transform: translateX(-70px);
+    opacity: 1;
     }
 </style>

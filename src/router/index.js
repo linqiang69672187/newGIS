@@ -11,6 +11,9 @@ import Dmenu from '@/components/Dmenu'
 import video from '@/components/tabs/videplayer'
 import eyemaps from '@/components/tabs/eyemaps'
 import MapToolbox from '@/components/MapToolbox'
+import CallBox from '@/components/control/CallBox'
+import test from '@/components/test'
+
 Vue.use(Router)
 
 export default new Router({
@@ -65,11 +68,20 @@ export default new Router({
       name: 'eyemaps',
       component: eyemaps
     },
-    ,
     {
       path: '/MapToolbox',
       name: 'MapToolbox',
       component: MapToolbox
+    },
+    {
+      path: '/CallBox',
+      name: 'CallBox',
+      component: CallBox
+    },
+    {
+      path: '/test',
+      name: 'test',
+      component: test
     },
   ]
 })

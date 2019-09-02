@@ -3,6 +3,7 @@
        <div>
            <Map></Map>
            <MapToolbox></MapToolbox>
+           <Callbox></Callbox>
        </div>
        <div>
            <div class="top"><banner></banner></div>
@@ -17,6 +18,8 @@ import Map from "@/components/map"
 import Lmenu from "@/components/Lmenu"
 import Dmenu from "@/components/Dmenu"
 import MapToolbox from "@/components/MapToolbox"
+import Callbox from "@/components/control/CallBox"
+
 export default {
     data(){
        return{              
@@ -31,7 +34,8 @@ export default {
         Map,
         Lmenu,
         Dmenu,
-        MapToolbox
+        MapToolbox,
+        Callbox
     },
     methods:{
         increase:function(val){
@@ -73,5 +77,10 @@ export default {
       position: absolute;
       right: 60px;
       top: 90px;
+  }
+  .callbox{
+      position: absolute;
+      bottom: 250px;
+    
   }
 </style>
