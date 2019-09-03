@@ -1,9 +1,22 @@
 <template>
- <vue-fab mainBtnColor="#3599DB">
-  <fab-item @clickItem="clickItem" :idx="0" title="add" icon="add" />
-  <fab-item @clickItem="clickItem" :idx="1" title="https" icon="https" />
-  <fab-item @clickItem="clickItem" :idx="2" title="edit" icon="edit" />
+<div>
+    <i class="material-icons">add</i>
+ <vue-fab 
+  :mainBtnColor="mainBtnColor" 
+  :zIndex="zIndex" 
+  :icon="icon" 
+  :size="size" 
+  :activeIcon="activeIcon">
+  <fab-item 
+    @clickItem="clickItem"
+    :idx="fabItem.idx" 
+    :title="fabItem.title" 
+    :icon="fabItem.icon" 
+    :color="fabItem.color" 
+    :titleColor="fabItem.titleColor" 
+    :titleBgColor="fabItem.titleBgColor" />
 </vue-fab>
+</div>
 </template>
 
 <script>

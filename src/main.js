@@ -12,20 +12,15 @@ import solid from '@fortawesome/fontawesome-free-solid'
 import regular from '@fortawesome/fontawesome-free-regular'
 import brands from '@fortawesome/fontawesome-free-brands'
 import   './assets/Iconfont/iconfont.css'
-import VueFab from 'vue-float-action-button'
-
+import Fab from '../dist/vue-fab'
 
 fontawesome.library.add(solid)
 fontawesome.library.add(regular)
 fontawesome.library.add(brands)
-
+Vue.use(Fab)
 Vue.use(myCharts)
 
-Vue.use(VueFab,  {
-  // opitons 可选iconfont图标或MaterialIcons
- // iconType: 'MaterialDesign'
-  iconType: 'iconfont'
-} )
+
 
 Vue.config.productionTip = false
 
