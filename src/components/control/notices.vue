@@ -10,7 +10,8 @@ let count=0;
         mounted() {
            let that =this;
            Notice.config({
-                top: 120
+                top: 120,
+              //  duration: 30
             });
             setInterval(function (){
 
@@ -51,3 +52,14 @@ let count=0;
         }
     }
 </script>
+
+<style >
+.ivu-notice-notice-with-desc{
+    background-color: #2B81BE !important;
+    border-radius: 10px  !important;
+    color: #fff  !important;
+}
+.ivu-notice-desc,.ivu-notice-title,.ivu-notice-notice-close i{
+    color: #fff  !important;
+}
+</style>
