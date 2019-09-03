@@ -55,7 +55,7 @@ let count=0;
 
 <style >
 .ivu-notice-notice-with-desc{
-    background-color: #2B81BE !important;
+    background-color: #042657 !important;
     border-radius: 10px  !important;
     color: #fff  !important;
 }
