@@ -11,13 +11,17 @@ import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
 import solid from '@fortawesome/fontawesome-free-solid'
 import regular from '@fortawesome/fontawesome-free-regular'
 import brands from '@fortawesome/fontawesome-free-brands'
-import   './assets/Iconfont/iconfont.css'
-import Fab from '../dist/vue-fab'
+import './assets/Iconfont/iconfont.css'
+import VueFab from 'vue-float-action-button'
 
 fontawesome.library.add(solid)
 fontawesome.library.add(regular)
 fontawesome.library.add(brands)
-Vue.use(Fab)
+Vue.use(VueFab ,{
+ 
+  //iconType: 'MaterialDesign'
+ iconType: 'iconfont'
+} )
 Vue.use(myCharts)
 
 

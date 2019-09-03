@@ -1,6 +1,6 @@
 <template>
 <div>
-    <i class="material-icons">add</i>
+    <i class="iconfont icon-Ruler"></i>
  <vue-fab 
   :mainBtnColor="mainBtnColor" 
   :zIndex="zIndex" 
