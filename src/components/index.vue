@@ -5,6 +5,7 @@
            <MapToolbox></MapToolbox>
            <Callbox></Callbox>
            <notice></notice>
+           <LeftToolbox></LeftToolbox>
        </div>
        <div>
            <div class="top"><banner></banner></div>
@@ -21,6 +22,7 @@ import Dmenu from "@/components/Dmenu"
 import MapToolbox from "@/components/MapToolbox"
 import Callbox from "@/components/control/CallBox"
 import notice from "@/components/control/notices"
+import LeftToolbox from "@/components/control/LeftToolbox"
 
 export default {
     data(){
@@ -38,7 +40,8 @@ export default {
         Dmenu,
         MapToolbox,
         Callbox,
-        notice
+        notice,
+        LeftToolbox
     },
     methods:{
         increase:function(val){

@@ -24,7 +24,7 @@ export default {
               },
               {
                   name: 'alertMe',
-                  icon: 'add_alert'
+                  icon: 'https'
               }
           ]
       }

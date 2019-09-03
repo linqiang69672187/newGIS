@@ -1,47 +1,65 @@
 <template>
-<div>
-    <i class="iconfont icon-Ruler"></i>
- <vue-fab 
-  :mainBtnColor="mainBtnColor" 
-  :zIndex="zIndex" 
-  :icon="icon" 
-  :size="size" 
-  :activeIcon="activeIcon">
-  <fab-item 
-    @clickItem="clickItem"
-    :idx="fabItem.idx" 
-    :title="fabItem.title" 
-    :icon="fabItem.icon" 
-    :color="fabItem.color" 
-    :titleColor="fabItem.titleColor" 
-    :titleBgColor="fabItem.titleBgColor" />
-</vue-fab>
-</div>
-</template>
+  <fab :actions="fabActions"
+       @cache="cache"
+       @alertMe="alert"
+       main-tooltip="点击展开"	
+     	
+  ></fab>
 
+
+</template>
 <script>
+import fab from 'vue-fab'
+
 export default {
-  data () {
-    return {
-      icon: 'add',
-      activeIcon: 'add',
-      size: 'normal',
-      mainBtnColor: '#E64C3B',
-      zIndex: 5,
-      fabItem: {
-        idx: 1,
-        title: '这是一个演示的标题',
-        icon: 'toc',
-        color: '#C7D23B',
-        titleColor: '#666',
-        titleBgColor: '#FFF'
-      }
-    }
+  components: {
+    fab
   },
-  methods: {
-    clickItem (item) {
-      window.alert(item.idx)
-    }
+   data(){
+      return {
+          bgColor: '#778899',
+          position: 'top-right',
+          fabActions: [
+              {
+                  name: 'cache',
+                  icon: 'add'
+              },
+              {
+                  name: 'alertMe',
+                  icon: 'search'
+              }
+              ,
+              {
+                  name: 'alertMe',
+                  icon: 'https'
+              }
+              ,
+              {
+                  name: 'alertMe',
+                  icon: 'select_all'
+              }
+          ]
+      }
+  },
+  methods:{
+      cache(){
+          console.log('Cache Cleared');
+      },
+      alert(){
+          alert('Clicked on alert icon');
+      }
   }
 }
 </script>
+
+<style scoped>
+#bottom-right-wrapper{
+  bottom: 260px !important;
+  right: 30px !important;
+}
+</style>
+<style>
+.fab-main{
+  padding: 24px !important;
+}
+</style>

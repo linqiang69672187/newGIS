@@ -9,6 +9,9 @@ let count=0;
         },
         mounted() {
            let that =this;
+           Notice.config({
+                top: 120
+            });
             setInterval(function (){
 
                            that.open(false);

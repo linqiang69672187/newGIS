@@ -1,6 +1,5 @@
 <template>
-    <div>
-        
+    <div >
     </div>
 </template>
 <script>
@@ -9,6 +8,7 @@ import TileLayer from 'ol/layer/Tile';
 import sourceXYZ from 'ol/source/XYZ';
 import layerGroup from 'ol/layer/Group';
 import {defaults as defaultControls} from 'ol/control';
+import FullScreen from 'ol/control/FullScreen.js';
 import {transform} from 'ol/proj.js';
 export default {
     mounted(){
@@ -29,7 +29,9 @@ export default {
             })
         })
 
-    
+    //var fullScreenControl = new FullScreen({
+    //    target:"fullscreenid"
+   // });
     // 创建地图
             var map = new Map({
                 layers: [new layerGroup({
@@ -52,8 +54,10 @@ export default {
                 }),
                 target: this.$el
             });
+            
 
-    
+           
+
 
       
         }
@@ -65,4 +69,5 @@ export default {
 div{
     height: 100%;
 }
+
 </style>
