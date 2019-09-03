@@ -27,8 +27,8 @@ export default {
     methods:{
         showdistance:function(){
               this.show = !this.show
-              if (this.show){ 
-                this.toolzindex=true;
+              if (!this.show){ 
+                this.toolzindex=true; 
               }
              
           },
@@ -113,6 +113,6 @@ export default {
     .slide-fade-enter, .slide-fade-leave-to
     /* .slide-fade-leave-active for below version 2.1.8 */ {
     transform: translateX(70px);
-   
+   opacity: 0;
     }
 </style>

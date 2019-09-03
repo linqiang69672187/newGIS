@@ -19,6 +19,7 @@
             <li><a><div>张警官</div></a></li>
         </ul>
     </div>
+    <div class="changewindows"><i class="fas fa-exchange-alt"></i></div>
   </div>
 </template>
 
@@ -42,6 +43,17 @@ html,body{
   margin: 0;
   padding: 0;
   
+}
+.changewindows{
+  position: absolute;
+  top: 0;
+  right: 5px;
+  width:22px;
+  height: 22px;
+  font-size: 16px;
+  line-height: 22px;
+  border: 1px solid #fff;
+  cursor: pointer;
 }
 h1, h2 {
   font-weight: normal;

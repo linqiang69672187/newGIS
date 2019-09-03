@@ -4,6 +4,7 @@
            <Map></Map>
            <MapToolbox></MapToolbox>
            <Callbox></Callbox>
+           <notice></notice>
        </div>
        <div>
            <div class="top"><banner></banner></div>
@@ -19,6 +20,7 @@ import Lmenu from "@/components/Lmenu"
 import Dmenu from "@/components/Dmenu"
 import MapToolbox from "@/components/MapToolbox"
 import Callbox from "@/components/control/CallBox"
+import notice from "@/components/control/notices"
 
 export default {
     data(){
@@ -35,7 +37,8 @@ export default {
         Lmenu,
         Dmenu,
         MapToolbox,
-        Callbox
+        Callbox,
+        notice
     },
     methods:{
         increase:function(val){
@@ -69,7 +72,7 @@ export default {
   }
 .bottom{
       position:absolute;
-      height: 250px;
+      height: 265px;
       width: 100%;
       bottom: 0;
   }
