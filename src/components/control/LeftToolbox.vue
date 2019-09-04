@@ -22,21 +22,36 @@ export default {
           fabActions: [
               {
                   name: 'cache',
-                  icon: 'add'
+                  icon: 'add',
+                  color:'#164B77',
+                  tooltip:'添加功能'
+              },
+              {
+                  name: 'cache',
+                  icon: 'screen_lock_landscape',
+                  tooltip:'锁屏',
+                   color:'#cccccc',
               },
               {
                   name: 'alertMe',
-                  icon: 'search'
+                  icon: 'search',
+                  tooltip:'搜索',
+                   color:'#999999',
+
               }
               ,
               {
                   name: 'alertMe',
-                  icon: 'https'
+                  icon: 'dialpad',
+                  tooltip:'拨号盘',
+                   color:'#FE9900',
               }
               ,
               {
                   name: 'alertMe',
-                  icon: 'select_all'
+                  icon: 'select_all',
+                  tooltip:'框选',
+                   color:'#E54C3B',
               }
           ]
       }
@@ -60,6 +75,6 @@ export default {
 </style>
 <style>
 .fab-main{
-  padding: 24px !important;
+  padding: 26px !important;
 }
 </style>

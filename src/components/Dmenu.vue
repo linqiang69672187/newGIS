@@ -4,7 +4,7 @@
     <div><Tabs class="tabs" type="card" closable @on-tab-remove="handleTabRemove">
         <TabPane label="实时状况" class="tabpane" v-if="tab1" icon="logo-windows"><tabindex></tabindex></TabPane>
         <TabPane class="tabpane" label="GPS控制" v-if="tab0" icon="ios-key"></TabPane>
-        <TabPane class="tabpane"  label="鸟览图" v-if="tab1" icon="logo-windows"><eyemaps></eyemaps></TabPane>
+        <TabPane class="tabpane"  label="锁定跟踪" v-if="tab1" icon="logo-windows"><eyemaps></eyemaps></TabPane>
         <TabPane class="tabpane"  label="视频窗口" v-if="tab2" icon="logo-tux"><videos></videos></TabPane>
     </Tabs>
     </div>
@@ -70,13 +70,16 @@ height: 15px;
  opacity: 0.6;
  cursor: pointer;
 }
-.controlmenu ul li{
+.controlmenu ul li:nth-child(1){
     float: left;
+    margin-left: 5px;
     margin-top: -8px
 
 }
 .controlmenu ul li:nth-child(3){
     float: right;
+    margin-right: 5px;
+    margin-top: -8px
 }
 .paging{
       float:right;

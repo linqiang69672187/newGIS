@@ -2,6 +2,7 @@
   <fab :actions="fabActions"
        @cache="cache"
        @alertMe="alert"
+       toggle-when-away="false"
   ></fab>
 
 
@@ -34,7 +35,7 @@ export default {
           console.log('Cache Cleared');
       },
       alert(){
-          alert('Clicked on alert icon');
+          alert('您点击了按钮');
       }
   }
 }

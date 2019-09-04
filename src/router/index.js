@@ -15,6 +15,7 @@ import CallBox from '@/components/control/CallBox'
 import test from '@/components/test'
 import notices from '@/components/control/notices'
 import LeftToolbox from '@/components/control/LeftToolbox'
+import Ds2000 from '@/components/Ds2000'
 
 Vue.use(Router)
 
@@ -94,6 +95,11 @@ export default new Router({
       path: '/LeftToolbox',
       name: 'LeftToolbox',
       component: LeftToolbox
+    }, 
+    {
+      path: '/Ds2000',
+      name: 'Ds2000',
+      component: Ds2000
     },
   ]
 })

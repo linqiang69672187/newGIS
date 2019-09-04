@@ -13,6 +13,8 @@
          <div>用户列表</div>
          <div><DagTree></DagTree></div>
     </div>
+         <div  class="controlLmenu"><ul ><li><i class="fas fa-caret-left"></i></li><li></li><li><i class="fas fa-caret-left"></i></li></ul></div>
+   
   </div>
 </template>
 
@@ -85,5 +87,25 @@ html,body{
      height: 100%;
      padding-top: 5px;
 }
-
+.controlLmenu{
+  height: 100%;
+  width: 15px;
+  z-index: 999;
+  position: absolute;
+  left: 80px;
+display: flex;
+align-items: center;
+}
+.controlLmenu ul{
+  height:180px;
+  width: 15px;
+ background-color: #164B77;
+ display:block;
+ opacity: 0.6;
+ list-style-type: none;
+ font-size: 20px;
+}
+.controlLmenu ul li:nth-child(2){
+height: 125px;
+}
 </style>

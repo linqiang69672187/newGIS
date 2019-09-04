@@ -19,7 +19,7 @@
             <li><a><div>张警官</div></a></li>
         </ul>
     </div>
-    <div class="changewindows"><i class="fas fa-exchange-alt"></i></div>
+    <div class="changewindows"><router-link tag="a"  :to="{name:'Ds2000'}" ><i class="fas fa-exchange-alt"></i></router-link></div>
   </div>
 </template>
 

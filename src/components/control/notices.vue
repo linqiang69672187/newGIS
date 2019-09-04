@@ -3,21 +3,25 @@
 <script>
 import { Notice  } from 'iview';
 let count=0;
+let noticemod;
     export default {
         components:{
          Notice
         },
-        mounted() {
+        created() {
            let that =this;
            Notice.config({
                 top: 120,
               //  duration: 30
             });
-            setInterval(function (){
+         noticemod= setInterval(function (){
 
                            that.open(false);
                             count+=1;
                         }, 7000);
+        },
+        destroyed(){
+            clearInterval(noticemod);
         },
         methods: {
             open:function (nodesc) {
