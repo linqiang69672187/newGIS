@@ -1,7 +1,7 @@
 <template>
     <div class="callbox">
         <ul>
-            <li><a><div><i class="fas fa-phone"></i></div></a></li>
+            <li><div v-show="shwophonebg" class="callboxbg heartBeat animated  infinite"></div><a @mouseover="shwophonebg=true" @mouseout="shwophonebg=false"><div><i class="fas fa-phone"></i></div></a></li>
             <li><a><div><i class="fas fa-microphone-alt"></i></div></a></li>           
         </ul>
     </div>
@@ -9,6 +9,12 @@
 <script>
 
 export default {
+    data () {
+                return {
+                        shwophonebg: false,
+                        
+                    }
+        },
     mounted(){
     },
     methods:{
@@ -28,29 +34,40 @@ export default {
     }
 
     .callbox>ul>li{
-        width: 40px;
-        height: 40px;
+        width: 50px;
+        height: 50px;
         margin-left: 25px;
     }
    .callbox>ul>li div{
-        width: 40px;
-        height: 40px;
-        line-height: 40px;
-      
+        width: 50px;
+        height: 50px;
+        line-height: 50px;
+        
+         z-index: 2 !important;
+        position: absolute;
+        top: 24px;
     }
    .toolbox>ul>li a{
       color: #fff;
     }
    .callbox>ul>li:nth-child(2) div{
-      background-color: #fff;
-      color: #164b77;
+      background-color: #FE9900;
+      color: #fff;
       border-radius: 50%;
-      border:1px solid #164b77;
+     
     }
    .callbox>ul>li:nth-child(1) div{
       background-color: #164b77;
       color: #fff;
       border-radius: 50%;
-      border:1px solid #164b77;
+      
+    }
+    .callbox>ul>li  .callboxbg{
+      background-color: #999 !important;
+      position:absolute;
+      top: 24px;
+      opacity: 0.8;
+      border: 0 !important;
+      z-index: 1 !important;
     }
 </style>

@@ -12,7 +12,7 @@ import solid from '@fortawesome/fontawesome-free-solid'
 import regular from '@fortawesome/fontawesome-free-regular'
 import brands from '@fortawesome/fontawesome-free-brands'
 import './assets/Iconfont/iconfont.css'
-
+import animate from 'animate.css'
 
 fontawesome.library.add(solid)
 fontawesome.library.add(regular)
