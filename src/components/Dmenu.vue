@@ -1,11 +1,13 @@
 <template>
 <div class="row"  >
    <div  class="controlmenu"><ul ><li><i class="fas fa-sort-down"></i></li><li></li><li><i class="fas fa-sort-down"></i></li></ul></div>
-    <div><Tabs class="tabs" type="card" closable @on-tab-remove="handleTabRemove">
+    <div>
+    <Tabs class="tabs" type="card" closable @on-tab-remove="handleTabRemove">
         <TabPane label="实时状况" class="tabpane" v-if="tab1" icon="logo-windows"><tabindex></tabindex></TabPane>
         <TabPane class="tabpane" label="GPS控制" v-if="tab0" icon="ios-key"></TabPane>
         <TabPane class="tabpane"  label="锁定跟踪" v-if="tab1" icon="logo-windows"><eyemaps></eyemaps></TabPane>
         <TabPane class="tabpane"  label="视频窗口" v-if="tab2" icon="logo-tux"><videos></videos></TabPane>
+        <TabPane class="tabpane"  label="拨号键盘" v-if="tab2" icon="ios-apps"></TabPane>
     </Tabs>
     </div>
 </div>
