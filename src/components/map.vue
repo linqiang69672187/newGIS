@@ -36,6 +36,7 @@ export default {
             clearInterval(noticemod);
         },
    methods:{
+      
         initMap() {
        
        var url = "http://127.0.0.1:8081/"+"baidu/tiles/{z}/{x}/{-y}.jpg";
@@ -208,6 +209,7 @@ export default {
                    
                    point_overlay.setPosition(coordinates);
                    map.getView().animate({center:coordinates},{rotation:rotationvalue});
+                
                    map.render();
                  }    
                            
@@ -227,9 +229,9 @@ div{
     height: 100%;
 }
 .css_animation{
-    height:50px;
-    width:50px;
-    border-radius: 25px;
+    height:20px;
+    width:20px;
+    border-radius: 10px;
     background: rgba(255, 0, 0, 0.9);
     transform: scale(0);
     animation: myfirst 3s;
