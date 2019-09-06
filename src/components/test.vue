@@ -1,10 +1,7 @@
 <template>
-  <fab :actions="fabActions"
-       @cache="cache"
-       @alertMe="alert"
-       toggle-when-away="false"
-  ></fab>
-
+<div>
+    <i class="iconfont icon-Ruler"></i>
+</div>
 
 </template>
 <script>

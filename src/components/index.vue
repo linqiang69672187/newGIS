@@ -1,7 +1,7 @@
 <template>
     <div id="main">
        <div>
-           <Map></Map>
+           <Map move-type="0"></Map>
            <MapToolbox></MapToolbox>
            <Callbox></Callbox>
            <notice></notice>

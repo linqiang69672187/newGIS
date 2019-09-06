@@ -2,22 +2,22 @@
     <div class="row">
         <ul>
             <li> 
-             <Map></Map>
+             <Map move-type="1"></Map>
             </li>
             <li> 
-             <Map></Map>
+             <Map move-type="2"></Map>
             </li>
             <li> 
-             <Map></Map>
+             <Map move-type="3"></Map>
             </li>
             <li> 
-             <Map></Map>
+             <Map move-type="4"></Map>
             </li>
             <li> 
-             <Map></Map>
+             <Map move-type="5"></Map>
             </li>
             <li> 
-             <Map></Map>
+             <Map move-type="6"></Map>
             </li>
             <li> 
              <Map></Map>
