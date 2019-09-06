@@ -36,7 +36,28 @@ export default {
             clearInterval(noticemod);
         },
    methods:{
+       moveFeature(event){
+        var vectorContext = event.vectorContext;
+        var frameState = event.frameState;
+
+       
+          var elapsedTime = frameState.time - now;
+          // here the trick to increase speed is to jump some indexes
+          // on lineString coordinates
+          var index = Math.round(speed * elapsedTime / 1000);
+
+          if (index >= routeLength) {
+            stopAnimation(true);
+            return;
+          }
+
+          var currentPoint = new Point(routeCoords[index]);
+          var feature = new Feature(currentPoint);
+          vectorContext.drawFeature(feature, styles.geoMarker);
       
+        // tell OpenLayers to continue the postcompose animation
+        map.render();
+       },
         initMap() {
        
        var url = "http://127.0.0.1:8081/"+"baidu/tiles/{z}/{x}/{-y}.jpg";
@@ -205,11 +226,11 @@ export default {
 
                     }
                     
-                   feature[0].setGeometry(new Point(coordinates));
+                   //feature[0].setGeometry(new Point(coordinates));
                    
                    point_overlay.setPosition(coordinates);
                    map.getView().animate({center:coordinates},{rotation:rotationvalue});
-                
+                   map.on('postcompose', moveFeature);
                    map.render();
                  }    
                            
