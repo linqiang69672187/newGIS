@@ -21,6 +21,7 @@ import { debug } from 'util';
 import Overlay from 'ol/Overlay.js';
 
 let noticemod;
+let coordinates
 export default {
     mounted(){
         this.initMap();
@@ -41,17 +42,9 @@ export default {
         var frameState = event.frameState;
 
        
-          var elapsedTime = frameState.time - now;
-          // here the trick to increase speed is to jump some indexes
-          // on lineString coordinates
-          var index = Math.round(speed * elapsedTime / 1000);
+         
 
-          if (index >= routeLength) {
-            stopAnimation(true);
-            return;
-          }
-
-          var currentPoint = new Point(routeCoords[index]);
+          var currentPoint = new Point(coordinates);
           var feature = new Feature(currentPoint);
           vectorContext.drawFeature(feature, styles.geoMarker);
       
@@ -173,7 +166,7 @@ export default {
                  if (feature){
                    var cd1= that.getRandomNumberByRange(0,2);
                    var cd2 = that.getRandomNumberByRange(0,2);
-                   var coordinates = feature[0].getGeometry().getCoordinates();
+                    coordinates = feature[0].getGeometry().getCoordinates();
                     switch (cd1){
                         case 1:
                             coordinates[0]+=100;
