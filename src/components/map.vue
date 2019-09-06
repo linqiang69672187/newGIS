@@ -1,5 +1,6 @@
 <template>
-    <div >
+    <div >   
+        <div class="css_animation"></div>
     </div>
 </template>
 <script>
@@ -17,6 +18,7 @@ import Feature from 'ol/Feature.js';
 import Point from 'ol/geom/Point.js';
 import {Circle as CircleStyle, Fill, Stroke, Style,Text} from 'ol/style.js';
 import { debug } from 'util';
+import Overlay from 'ol/Overlay.js';
 
 let noticemod;
 export default {
@@ -67,6 +69,12 @@ export default {
                 url: url
             })
         })
+        var point_div = this.$el.getElementsByClassName("css_animation")[0];
+        var point_overlay = new Overlay({
+            element: point_div,
+            positioning: 'center-center'
+        });
+        
         if (this.type!=0){
         var features = new Array(1);
         let coordinates = transform(center, 'EPSG:4326', 'EPSG:3857');
@@ -114,27 +122,28 @@ export default {
    // });
     // 创建地图
            
-            var map = new Map({
-                layers: [new layerGroup({
-                    'title': '基础图层',
-                    layers: [baiduMapLayer2,vectorLayer]
-                })
-                ],
-                controls: defaultControls({
-                    attribution: false,
-                    rotate: false,
-                    zoom:false
-                }).extend([]),
-                view: new View({
-                    // 设置地图中心
-                    center: transform(center, 'EPSG:4326', 'EPSG:3857'),
-                    zoom: 14,
-                    maxZoom: 17,
-                    minZoom: 10
+    var map = new Map({
+        layers: [new layerGroup({
+            'title': '基础图层',
+            layers: [baiduMapLayer2,vectorLayer]
+        })
+        ],
+        controls: defaultControls({
+            attribution: false,
+            rotate: false,
+            zoom:false
+        }).extend([]),
+        view: new View({
+            // 设置地图中心
+            center: transform(center, 'EPSG:4326', 'EPSG:3857'),
+            zoom: 14,
+            maxZoom: 17,
+            minZoom: 10
 
-                }),
-                target: this.$el
-            });
+        }),
+        target: this.$el
+    });
+    map.addOverlay(point_overlay);
      if (this.type!=0){
          var that = this;
         noticemod= setInterval(function (){
@@ -196,6 +205,8 @@ export default {
                     }
                     
                    feature[0].setGeometry(new Point(coordinates));
+                   
+                   point_overlay.setPosition(coordinates);
                    map.getView().animate({center:coordinates},{rotation:rotationvalue});
                    map.render();
                  }    
@@ -214,6 +225,21 @@ export default {
 <style scoped>
 div{
     height: 100%;
+}
+.css_animation{
+    height:50px;
+    width:50px;
+    border-radius: 25px;
+    background: rgba(255, 0, 0, 0.9);
+    transform: scale(0);
+    animation: myfirst 3s;
+    animation-iteration-count: infinite;
+}
+@keyframes myfirst{
+    to{
+        transform: scale(2);
+        background: rgba(0, 0, 0, 0);
+    }
 }
 
 </style>
