@@ -1,6 +1,6 @@
 <template>
     <div >   
-        <div class="css_animation"></div>
+        <div class="css_animation"><div class="laydiv"></div><div class="fontdiv cssrota" ><i class="fas fa-location-arrow"></i></div></div>
     </div>
 </template>
 <script>
@@ -38,18 +38,6 @@ export default {
         },
    methods:{
        moveFeature(event){
-        var vectorContext = event.vectorContext;
-        var frameState = event.frameState;
-
-       
-         
-
-          var currentPoint = new Point(coordinates);
-          var feature = new Feature(currentPoint);
-          vectorContext.drawFeature(feature, styles.geoMarker);
-      
-        // tell OpenLayers to continue the postcompose animation
-        map.render();
        },
         initMap() {
        
@@ -84,53 +72,15 @@ export default {
                 url: url
             })
         })
+   
         var point_div = this.$el.getElementsByClassName("css_animation")[0];
         var point_overlay = new Overlay({
             element: point_div,
             positioning: 'center-center'
         });
         
-        if (this.type!=0){
-        var features = new Array(1);
-        let coordinates = transform(center, 'EPSG:4326', 'EPSG:3857');
-        features[0]=new Feature(new Point(coordinates));
-        }
-        var vectorSource = new VectorSource({
-            features: features//add an array of features
-        });
-        var styleCache = {};
-        var vectorLayer = new VectorLayer({
-            source: vectorSource,
-            title: '警员',
-            visible: true,
-            style: function(feature) {
-                var size = 1;
-                var style = styleCache[size];
-                if (!style) {
-                    style = new Style({
-                    image: new CircleStyle({
-                        radius: 8,
-                        stroke: new Stroke({
-                        color: '#fff'
-                        }),
-                        fill: new Fill({
-                        color: 'rgba(0, 0, 0, 0.6)'
-                        })
-                    }),
-                    text:  new Text({
-                        text: '\uf077',
-                        font: 'normal 16px FontAwesome',
-                        textBaseline: 'middle',
-                        fill: new Fill({
-                        color: '#fff',
-                        })
-                    })
-                    });
-                    styleCache[size] = style;
-                }
-                return style;
-        }
-        });
+
+    
 
     //var fullScreenControl = new FullScreen({
     //    target:"fullscreenid"
@@ -140,7 +90,7 @@ export default {
     var map = new Map({
         layers: [new layerGroup({
             'title': '基础图层',
-            layers: [baiduMapLayer2,vectorLayer]
+            layers: [baiduMapLayer2]
         })
         ],
         controls: defaultControls({
@@ -158,15 +108,15 @@ export default {
         }),
         target: this.$el
     });
+    coordinates= transform(center, 'EPSG:4326', 'EPSG:3857');
     map.addOverlay(point_overlay);
      if (this.type!=0){
          var that = this;
         noticemod= setInterval(function (){
-                 var feature =vectorSource.getFeatures();
-                 if (feature){
+              //   var feature =vectorSource.getFeatures();
+              
                    var cd1= that.getRandomNumberByRange(0,2);
                    var cd2 = that.getRandomNumberByRange(0,2);
-                    coordinates = feature[0].getGeometry().getCoordinates();
                     switch (cd1){
                         case 1:
                             coordinates[0]+=100;
@@ -220,12 +170,13 @@ export default {
                     }
                     
                    //feature[0].setGeometry(new Point(coordinates));
-                   
+                  point_div.style.transform = 'rotate('+rotationvalue+'deg)';
                    point_overlay.setPosition(coordinates);
-                   map.getView().animate({center:coordinates},{rotation:rotationvalue});
-                   map.on('postcompose', moveFeature);
+                   map.getView().animate({center:coordinates}); //,{rotation:rotationvalue}
+                   console.log(coordinates);
+                  // map.on('postcompose', moveFeature);
                    map.render();
-                 }    
+                 
                            
          }, 3000);
         
@@ -243,6 +194,10 @@ div{
     height: 100%;
 }
 .css_animation{
+  height:20px;
+  width:20px;  
+}
+.css_animation .laydiv{
     height:20px;
     width:20px;
     border-radius: 10px;
@@ -250,12 +205,28 @@ div{
     transform: scale(0);
     animation: myfirst 3s;
     animation-iteration-count: infinite;
+     position: absolute; 
 }
 @keyframes myfirst{
     to{
         transform: scale(2);
         background: rgba(0, 0, 0, 0);
     }
+}
+.css_animation .fontdiv{
+   position: absolute; 
+    height:20px;
+    width:20px;
+    border-radius: 10px;
+    border: 1px solid #fff;
+    
+}
+.cssrota{
+transform:rotate(315deg);
+-ms-transform:rotate(315deg); 	/* IE 9 */
+-moz-transform:rotate(315deg); 	/* Firefox */
+-webkit-transform:rotate(315deg); /* Safari 和 Chrome */
+-o-transform:rotate(315deg); 	/* Opera */
 }
 
 </style>
