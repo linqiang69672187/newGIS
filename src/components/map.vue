@@ -175,7 +175,7 @@ export default {
                    map.getView().animate({center:that.coordinates}); //,{rotation:rotationvalue}
                    point_overlay.setPosition(that.coordinates);
                  //  point_div.style.transform = 'rotate(0deg)';
-                   console.log(that.coordinates);
+                  // console.log(that.coordinates);
                   // map.on('postcompose', moveFeature);
                    map.render();
                  
@@ -205,14 +205,14 @@ div{
     border-radius: 10px;
     background: rgba(255, 0, 0, 0.9);
     transform: scale(0);
-    animation: myfirst 3s;
+    animation: myfirst 1s;
     animation-iteration-count: infinite;
      position: absolute; 
 }
 @keyframes myfirst{
     to{
         transform: scale(2);
-        background: rgba(0, 0, 0, 0);
+        background: rgba(0, 255, 0, 0);
     }
 }
 .css_animation .fontdiv{
