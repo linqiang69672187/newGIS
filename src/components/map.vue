@@ -21,7 +21,6 @@ import { debug } from 'util';
 import Overlay from 'ol/Overlay.js';
 
 let noticemod;
-let coordinates
 export default {
     mounted(){
         this.initMap();
@@ -29,7 +28,8 @@ export default {
     mixins:[math,],
     data: function () {
         return {
-            type: this.moveType
+            type: this.moveType,
+            coordinates:[]
         }
         },
    props:['moveType'],
@@ -108,7 +108,7 @@ export default {
         }),
         target: this.$el
     });
-    coordinates= transform(center, 'EPSG:4326', 'EPSG:3857');
+    this.coordinates= transform(center, 'EPSG:4326', 'EPSG:3857');
     map.addOverlay(point_overlay);
      if (this.type!=0){
          var that = this;
@@ -119,20 +119,20 @@ export default {
                    var cd2 = that.getRandomNumberByRange(0,2);
                     switch (cd1){
                         case 1:
-                            coordinates[0]+=100;
+                            that.coordinates[0]+=100;
                               break;
                         case 2:
-                            coordinates[0]-=100;
+                            that.coordinates[0]-=100;
                         break;
                         default:
                             break;
                     }
                      switch (cd2){
                         case 1:
-                            coordinates[1]+=100;
+                            that.coordinates[1]+=100;
                               break;
                         case 2:
-                            coordinates[1]-=100;
+                            that.coordinates[1]-=100;
                         break;
                         default:
                             break;
@@ -170,10 +170,12 @@ export default {
                     }
                     
                    //feature[0].setGeometry(new Point(coordinates));
-                  point_div.style.transform = 'rotate('+rotationvalue+'deg)';
-                   point_overlay.setPosition(coordinates);
-                   map.getView().animate({center:coordinates}); //,{rotation:rotationvalue}
-                   console.log(coordinates);
+                   point_div.style.transform = 'rotate('+rotationvalue+'deg)';
+                  // map.getView().animate({rotation:rotationvalue});
+                   map.getView().animate({center:that.coordinates}); //,{rotation:rotationvalue}
+                   point_overlay.setPosition(that.coordinates);
+                 //  point_div.style.transform = 'rotate(0deg)';
+                   console.log(that.coordinates);
                   // map.on('postcompose', moveFeature);
                    map.render();
                  
