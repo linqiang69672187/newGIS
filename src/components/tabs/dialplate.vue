@@ -101,7 +101,7 @@ export default {
     display: inline;   
 }
 .row > ul>li:nth-child(1){
-   width: 400px;
+   width: 300px;
    height: 220px;
 }
 .dialpane{
@@ -127,7 +127,7 @@ export default {
   margin-left: 10px;
 }
 .number{
-    width: 260px;
+    width: 240px;
 }
 .number div{
     height: 40px;
@@ -139,7 +139,7 @@ export default {
 .number li{
    display: inline;
    float:left;
-   margin-left: 15px;
+   margin-left: 12px;
    margin-bottom: 10px;
 }
 </style>
