@@ -24,7 +24,7 @@ import { Input  } from 'iview';
 export default {
   components: {
       Input,
-      Button
+      
   },
    data(){
       return {
