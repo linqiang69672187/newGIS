@@ -62,7 +62,7 @@ export default {
  .row{
      height: 220px;
      width: 100%;
-    
+     background-color: #515a6e;
  }
  .input:hover{
      border: #2B81BE;
@@ -109,8 +109,8 @@ export default {
     
 }
 .number{
-    width: 260px;
-    background-color: #515a6e;
+    width: 200px;
+   
 }
 .number div{
     height: 40px;
@@ -122,6 +122,7 @@ export default {
 .number li{
    display: inline;
    float:left;
+   margin-left: 15px;
 }
 </style>
 <style>
