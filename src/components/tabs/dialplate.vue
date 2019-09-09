@@ -3,30 +3,32 @@
 <ul>
     <li>
         <div class="dialpane">
-            <div>
-                <Input class="input" placeholder="输入组号/个号"  />
-                   <i class="material-icons">backspace</i>
+            <div >
+                 <ul> 
+                   <li class="inputli"><Input class="input" placeholder="输入组号/个号"  /></li>
+                   <li> <i class="material-icons">backspace</i></li>
+                </ul>
             </div>
             <div >
                 <div class="number">
                     <ul>
                         <li><div>1</div></li>
-                        <li><div>1</div></li>
-                        <li><div>1</div></li>
-                        <li><div>1</div></li>
-                        <li><div>1</div></li>
-                        <li><div>1</div></li>
-                        <li><div>1</div></li>
-                        <li><div>1</div></li>
-                        <li><div>1</div></li>
-                        <li><div>1</div></li>
-                        <li><div>1</div></li>
-                        <li><div>1</div></li>
+                        <li><div>2</div></li>
+                        <li><div>3</div></li>
+                        <li><div>4</div></li>
+                        <li><div>5</div></li>
+                        <li><div>6</div></li>
+                        <li><div>7</div></li>
+                        <li><div>8</div></li>
+                        <li><div>9</div></li>
+                        <li><div>0</div></li>
+                        <li><div>*</div></li>
+                        <li><div>#</div></li>
                     </ul>
                 </div>
-                <div></div>
-            </div>          
               
+            </div>          
+               <div><span>这是一条消息</span></div> 
         </div>
     </li>
     <li></li>
@@ -63,6 +65,8 @@ export default {
      height: 220px;
      width: 100%;
      background-color: #515a6e;
+     z-index: 10;
+     color: #fff;
  }
  .input:hover{
      border: #2B81BE;
@@ -76,18 +80,22 @@ export default {
     border: 1px solid #dcdee2;
     border-radius: 4px;
     color: #515a6e;
-    background-color: #fff;
-    position: absolute;
+ 
+    position: relative;
     left: 10px;
     top: 5px;
     cursor: text;
     transition: border .2s ease-in-out,background .2s ease-in-out,box-shadow .2s ease-in-out;
  }
- .input+i{
+ .inputli{
+     float: left;
+ }
+ .inputli+li i{
      font-size: 40px;
      position: relative;
      left: 40px;
      color: #fff;
+     float: left;
  }
 .row > ul{
     display: inline;   
@@ -105,12 +113,21 @@ export default {
     height: 40px !important;
 }
 .dialpane>div:nth-child(2){
-    height:160px !important;
-    
+    height:140px !important;  
+}
+.dialpane>div:nth-child(3){
+    height:30px !important;  
+    line-height: 30px;
+    text-align: left;
+}
+.dialpane>div:nth-child(3) span{
+  width: 100%;
+  text-align: left;
+  float: left;
+  margin-left: 10px;
 }
 .number{
-    width: 200px;
-   
+    width: 260px;
 }
 .number div{
     height: 40px;
@@ -123,6 +140,7 @@ export default {
    display: inline;
    float:left;
    margin-left: 15px;
+   margin-bottom: 10px;
 }
 </style>
 <style>
