@@ -1,8 +1,8 @@
 <template>
     <div class="callbox">
         <ul>
-            <li><div v-show="shwophonebg" class="callboxbg heartBeat animated  infinite"></div><a @mouseover="shwophonebg=true" @mouseout="shwophonebg=false"><div><i class="fas fa-phone"></i></div></a></li>
-            <li><a><div><i class="fas fa-microphone-alt"></i></div></a></li>           
+            <li><div v-show="shwophonebg" class="callboxbg heartBeat animated  infinite"></div><a @mouseover="shwophonebg=true" @mouseout="shwophonebg=false"><div><i class="fas fa-user"></i></div></a></li>
+            <li><a><div><i class="fas fa-users"></i></div></a></li>           
         </ul>
     </div>
 </template>
@@ -36,6 +36,9 @@ export default {
     .callbox>ul>li{
         width: 50px;
         height: 50px;
+      
+    }
+   .callbox>ul>li:nth-child(2){
         margin-left: 25px;
     }
    .callbox>ul>li div{

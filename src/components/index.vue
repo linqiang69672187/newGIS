@@ -3,14 +3,14 @@
        <div>
            <Map move-type="0"></Map>
            <MapToolbox></MapToolbox>
-           <Callbox></Callbox>
-           <notice></notice>
-           <LeftToolbox></LeftToolbox>
+           <Callbox :class="{hidedmenu}"></Callbox>
+           <notice ></notice>
+           <LeftToolbox :style="{bottom:dmenuszie}"></LeftToolbox>
        </div>
        <div>
            <div class="top"><banner></banner></div>
-           <div class="left"><Lmenu></Lmenu></div>
-           <div class="bottom"><Dmenu></Dmenu></div>
+           <div class="left" :class="{hidedmenu}"><Lmenu></Lmenu></div>
+           <div class="bottom"><Dmenu @listenchange="listenchangeDmenu"></Dmenu></div>
        </div>
     </div>
 </template>
@@ -26,7 +26,9 @@ import LeftToolbox from "@/components/control/LeftToolbox"
 
 export default {
     data(){
-       return{              
+       return{
+           hidedmenu:true,
+           dmenuszie: '10px !important',             
        }
     },
     mounted() {
@@ -41,10 +43,15 @@ export default {
         MapToolbox,
         Callbox,
         notice,
-        LeftToolbox
+        LeftToolbox,
     },
     methods:{
         increase:function(val){
+        },
+        listenchangeDmenu:function(isshow){
+           this.hidedmenu=!isshow;
+           (isshow)?this.dmenuszie='260px !important':this.dmenuszie='10px !important'
+          // console.info(isshow+this.dmenuszie)
         }
     }
 }
@@ -71,11 +78,13 @@ export default {
       width: 280px;
       top:58px;
       bottom: 250px;
-      background-color: #fff;
+   
+  }
+  .hidedmenu{
+      bottom: 0 !important;
   }
 .bottom{
       position:absolute;
-      height: 265px;
       width: 100%;
       bottom: 0;
   }
@@ -83,10 +92,17 @@ export default {
       position: absolute;
       right: -100px;
       top: 70px;
+      
   }
   .callbox{
       position: absolute;
       bottom: 250px;
-    
+ 
+  }
+  #bottom-right-wrapper,.callbox,.left{
+         transition:all 0.6s;
+    -moz-transition:all 0.6s; /* Firefox 4 */
+    -webkit-transition:all 0.6s; /* Safari and Chrome */
+     -o-transition:all 0.6s; /* Opera */
   }
 </style>

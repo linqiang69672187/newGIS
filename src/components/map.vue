@@ -216,12 +216,13 @@ div{
     }
 }
 .css_animation .fontdiv{
-   position: absolute; 
+    position: absolute; 
     height:20px;
     width:20px;
     border-radius: 10px;
     border: 1px solid #fff;
-    
+    background-color: #164b77;
+    color: #fff;
 }
 .cssrota{
 transform:rotate(315deg);

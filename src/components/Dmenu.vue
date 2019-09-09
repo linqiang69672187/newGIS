@@ -1,15 +1,17 @@
 <template>
-<div class="row"  >
-   <div  class="controlmenu"><ul ><li><i class="fas fa-sort-down"></i></li><li></li><li><i class="fas fa-sort-down"></i></li></ul></div>
-    <div>
+<div class="row" :class="{showdmenu}" >
+   <div  class="controlmenu" :class="{rationicon}"><ul @click="leave" ><li ><i class="fas fa-sort-down" ></i></li><li></li><li><i class="fas fa-sort-down" ></i></li></ul></div>
+  
+    <div >
     <Tabs class="tabs" type="card" closable @on-tab-remove="handleTabRemove">
-        <TabPane label="实时状况" class="tabpane" v-if="tab1" icon="logo-windows"><tabindex></tabindex></TabPane>
+        <TabPane label="实时状况" class="tabpane" v-if="tab1" icon="ios-stats"><tabindex></tabindex></TabPane>
         <TabPane class="tabpane" label="GPS控制" v-if="tab0" icon="ios-key"></TabPane>
         <TabPane class="tabpane"  label="锁定跟踪" v-if="tab1" icon="logo-windows"><eyemaps></eyemaps></TabPane>
         <TabPane class="tabpane"  label="视频窗口" v-if="tab2" icon="logo-tux"><videos></videos></TabPane>
-        <TabPane class="tabpane"  label="拨号键盘" v-if="tab2" icon="ios-apps"></TabPane>
+        <TabPane class="tabpane"  label="拨号键盘" v-if="tab2" icon="ios-apps"><dialplate></dialplate></TabPane>
     </Tabs>
     </div>
+     
 </div>
 
 </template>
@@ -18,13 +20,16 @@ import { Tabs,TabPane  } from 'iview';
 import tabindex from "@/components/tabs/index"
 import videos from "@/components/tabs/videplayer"
 import eyemaps from "@/components/tabs/eyemaps"
+import dialplate from "@/components/tabs/dialplate"
     export default {
         data () {
                 return {
                         tab0: true,
                         tab1: true,
                         tab2: true,
-                         show: false ,
+                        show: false,
+                        showdmenu:false,
+                        rationicon:false
                     }
         },
         components:{
@@ -32,12 +37,18 @@ import eyemaps from "@/components/tabs/eyemaps"
           TabPane, 
           tabindex,
           videos,
-          eyemaps
+          eyemaps,
+          dialplate
         },
         methods: {
               handleTabRemove (name) {
                 this['tab' + name] = false;
             },
+            leave(el){
+                this.showdmenu=!this.showdmenu;
+                this.rationicon=!this.rationicon;
+                this.$emit("listenchange",this.showdmenu);
+            }
            
         },
         created(){
@@ -51,8 +62,11 @@ import eyemaps from "@/components/tabs/eyemaps"
 .row{
 margin: 0px;
 width: 100%;
-height: 265px;
-
+height: 15px;
+  transition:all 0.6s;
+  -moz-transition:all 0.6s; /* Firefox 4 */
+  -webkit-transition:all 0.6s; /* Safari and Chrome */
+  -o-transition:all 0.6s; /* Opera */
 
 }
 .controlmenu{
@@ -119,7 +133,22 @@ height: 18px;
 .tabs .ivu-tabs-tab{
  border: 0;
 }
- 
+.showdmenu{
+ height: 265px !important;
+}
+.controlmenu  i{
+  transition:all 0.6;
+  -moz-transition:all 0.6s; /* Firefox 4 */
+  -webkit-transition:all 0.6s; /* Safari and Chrome */
+  -o-transition:all 0.6s; /* Opera */
+}
+.rationicon{
+transform:rotate(180deg);
+-ms-transform:rotate(180deg); 	/* IE 9 */
+-moz-transform:rotate(180deg); 	/* Firefox */
+-webkit-transform:rotate(180deg); /* Safari 和 Chrome */
+-o-transform:rotate(180deg); 	/* Opera */
+}
 </style>
 <style >
 .tabs .ivu-tabs-tab{
@@ -142,14 +171,14 @@ height: 18px;
         height: 10px;
     }
 *::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
-        border-radius: 10px;
-         -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
-        background: #535353;
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    background: #535353;
     }
 *::-webkit-scrollbar-track {/*滚动条里面轨道*/
-        -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
-        border-radius: 10px;
-        background: #EDEDED;
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    border-radius: 10px;
+    background: #EDEDED;
     }
    .calltable th,.calltable td{
     height: 30px !important;
