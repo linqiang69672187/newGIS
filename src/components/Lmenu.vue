@@ -173,10 +173,11 @@ html,body{
   -o-transition:all 2s; /* Opera */
 }
 .fade-enter-active, .fade-leave-active {
-  transition: opacity .5s;
+  transition: all .5s;
 }
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-  opacity: 0;
+ transform: scale(0);
+ opacity: 0;
 }
 .ismenufaded{
   padding-top:10px;

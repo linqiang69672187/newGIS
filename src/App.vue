@@ -77,8 +77,7 @@ body,html{
    margin-bottom:0px !important;
 }
 .ivu-tabs-content{
-    height: 220px !important;
-    background-color: #fff;
+  
 }
 
 </style>

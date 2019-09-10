@@ -13,7 +13,7 @@ import eyemaps from '@/components/tabs/eyemaps'
 import MapToolbox from '@/components/MapToolbox'
 import CallBox from '@/components/control/CallBox'
 import test from '@/components/test'
-import notices from '@/components/tabs/dialplate'
+import notices from '@/components/button/callbuttons'
 import LeftToolbox from '@/components/control/LeftToolbox'
 import Ds2000 from '@/components/Ds2000'
 

@@ -1,8 +1,8 @@
 <template>
     <div class="callbox">
         <ul>
-            <li><div v-show="shwophonebg" class="callboxbg heartBeat animated  infinite"></div><a @mouseover="shwophonebg=true" @mouseout="shwophonebg=false"><div><i class="fas fa-user"></i></div></a></li>
-            <li><a><div><i class="fas fa-users"></i></div></a></li>           
+            <li><div v-show="shwophonebg" class="callboxbg heartBeat animated  infinite"></div><a @mouseover="shwophonebg=true" @mouseout="shwophonebg=false"><div><i class="material-icons">person</i></div></a></li>
+            <li><a><div><i class="material-icons">group</i></div></a></li>           
         </ul>
     </div>
 </template>
@@ -72,5 +72,9 @@ export default {
       opacity: 0.8;
       border: 0 !important;
       z-index: 1 !important;
+    }
+    .callbox .material-icons{
+        font-size: 34px;
+        margin-top: 8px;
     }
 </style>
