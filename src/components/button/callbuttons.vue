@@ -1,5 +1,5 @@
 <template>
-<div v-ripple="'rgba(255, 128, 0, 0.35)'" class="comonul">
+<div v-ripple="'rgba(255, 255, 255, 0.35)'" class="comonul">
     <ul >
         <li><div><i class="material-icons">{{buttonType}}</i><span>{{buttonName}}</span></div></li>
         <li><Divider /></li>

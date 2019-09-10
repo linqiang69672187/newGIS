@@ -5,23 +5,23 @@
         <div class="dialpane">
             <div >
                  <ul> 
-                   <li class="inputli"><input v-model='inputnum' @keypress="keypress" class="input" placeholder="输入组号/个号"  /></li>
+                   <li class="inputli"><input v-model='inputnum' @keydown="keypress" @keyup="keyup" class="input" placeholder="输入组号/个号"  /></li>
                    <li> <i  class="material-icons">backspace</i></li>
                 </ul>
             </div>
             <div >
                 <div class="number">
                     <ul>
-                        <li><div class="nod1" v-ripple="'rgba(255, 255, 255, 0.35)'">1</div></li>
-                        <li><div v-ripple="'rgba(255, 255, 255, 0.35)'">2</div></li>
-                        <li><div v-ripple="'rgba(255, 255, 255, 0.35)'">3</div></li>
-                        <li><div v-ripple="'rgba(255, 255, 255, 0.35)'">4</div></li>
-                        <li><div v-ripple="'rgba(255, 255, 255, 0.35)'">5</div></li>
-                        <li><div v-ripple="'rgba(255, 255, 255, 0.35)'">6</div></li>
-                        <li><div v-ripple="'rgba(255, 255, 255, 0.35)'">7</div></li>
-                        <li><div v-ripple="'rgba(255, 255, 255, 0.35)'">8</div></li>
-                        <li><div v-ripple="'rgba(255, 255, 255, 0.35)'">9</div></li>
-                        <li><div v-ripple="'rgba(255, 255, 255, 0.35)'">0</div></li>
+                        <li><div :class="buttonspress=='Digit1'?'buttonspress':''"  v-ripple="'rgba(255, 255, 255, 0.35)'">1</div></li>
+                        <li><div :class="buttonspress=='Digit2'?'buttonspress':''" v-ripple="'rgba(255, 255, 255, 0.35)'">2</div></li>
+                        <li><div :class="buttonspress=='Digit3'?'buttonspress':''" v-ripple="'rgba(255, 255, 255, 0.35)'">3</div></li>
+                        <li><div :class="buttonspress=='Digit4'?'buttonspress':''" v-ripple="'rgba(255, 255, 255, 0.35)'">4</div></li>
+                        <li><div :class="buttonspress=='Digit5'?'buttonspress':''" v-ripple="'rgba(255, 255, 255, 0.35)'">5</div></li>
+                        <li><div :class="buttonspress=='Digit6'?'buttonspress':''" v-ripple="'rgba(255, 255, 255, 0.35)'">6</div></li>
+                        <li><div :class="buttonspress=='Digit7'?'buttonspress':''" v-ripple="'rgba(255, 255, 255, 0.35)'">7</div></li>
+                        <li><div :class="buttonspress=='Digit8'?'buttonspress':''" v-ripple="'rgba(255, 255, 255, 0.35)'">8</div></li>
+                        <li><div :class="buttonspress=='Digit9'?'buttonspress':''" v-ripple="'rgba(255, 255, 255, 0.35)'">9</div></li>
+                        <li><div :class="buttonspress=='Digit0'?'buttonspress':''" v-ripple="'rgba(255, 255, 255, 0.35)'">0</div></li>
                         <li><div v-ripple="'rgba(255, 255, 255, 0.35)'">*</div></li>
                         <li><div v-ripple="'rgba(255, 255, 255, 0.35)'">#</div></li>
                     </ul>
@@ -120,14 +120,18 @@ export default {
   data(){
       return {
       inputnum:'',
+      buttonspress:0,
       }
   
   },
   methods:{
-      keypress(event){
-         console.info(event);
+      keypress(event,el){
+         console.info(event.code);
+          console.info(el);
+          this.buttonspress =event.code;
       },
-      alert(){
+      keyup(event){
+          this.buttonspress = 0;
       }
   }
 }
@@ -280,5 +284,10 @@ cursor: pointer;
 .callcomonul li {
   float: left;
   list-style: none;
+}
+.buttonspress{
+    background-color: #000;
+    color: #fff;
+    opacity: 0.35;
 }
 </style>
