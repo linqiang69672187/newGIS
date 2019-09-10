@@ -5,32 +5,32 @@
         <div class="dialpane">
             <div >
                  <ul> 
-                   <li class="inputli"><Input class="input" placeholder="输入组号/个号"  /></li>
-                   <li> <i class="material-icons">backspace</i></li>
+                   <li class="inputli"><input v-model='inputnum' @keypress="keypress" class="input" placeholder="输入组号/个号"  /></li>
+                   <li> <i  class="material-icons">backspace</i></li>
                 </ul>
             </div>
             <div >
                 <div class="number">
                     <ul>
-                        <li><div>1</div></li>
-                        <li><div>2</div></li>
-                        <li><div>3</div></li>
-                        <li><div>4</div></li>
-                        <li><div>5</div></li>
-                        <li><div>6</div></li>
-                        <li><div>7</div></li>
-                        <li><div>8</div></li>
-                        <li><div>9</div></li>
-                        <li><div>0</div></li>
-                        <li><div>*</div></li>
-                        <li><div>#</div></li>
+                        <li><div class="nod1" v-ripple="'rgba(255, 255, 255, 0.35)'">1</div></li>
+                        <li><div v-ripple="'rgba(255, 255, 255, 0.35)'">2</div></li>
+                        <li><div v-ripple="'rgba(255, 255, 255, 0.35)'">3</div></li>
+                        <li><div v-ripple="'rgba(255, 255, 255, 0.35)'">4</div></li>
+                        <li><div v-ripple="'rgba(255, 255, 255, 0.35)'">5</div></li>
+                        <li><div v-ripple="'rgba(255, 255, 255, 0.35)'">6</div></li>
+                        <li><div v-ripple="'rgba(255, 255, 255, 0.35)'">7</div></li>
+                        <li><div v-ripple="'rgba(255, 255, 255, 0.35)'">8</div></li>
+                        <li><div v-ripple="'rgba(255, 255, 255, 0.35)'">9</div></li>
+                        <li><div v-ripple="'rgba(255, 255, 255, 0.35)'">0</div></li>
+                        <li><div v-ripple="'rgba(255, 255, 255, 0.35)'">*</div></li>
+                        <li><div v-ripple="'rgba(255, 255, 255, 0.35)'">#</div></li>
                     </ul>
                 </div>
                 <div class="buttons">
                     <ul>
-                        <li><div><i class="material-icons">person</i><span>全双功</span></div></li>
+                        <li><div v-ripple="'rgba(255, 255, 255, 0.35)'" ><i class="material-icons">person</i><span>全双功</span></div></li>
                         <li><div><i class="material-icons">mic</i><span>半双功</span></div></li>
-                        <li><div><i class="material-icons">group</i><span>组&nbsp;&nbsp;&nbsp;&nbsp;呼</span></div></li>                       
+                        <li><div><i class="material-icons">group</i><span>组&nbsp;&nbsp;&nbsp;呼</span></div></li>                       
                     </ul>
                 </div>   
               
@@ -46,7 +46,7 @@
             <div>
                 <ul class="callcomonul">
                    
-                    <li> <callbuttons button-type="group" button-name="TG1" button-number="89999999"></callbuttons> </li>
+                    <li> <callbuttons  button-type="group" button-name="TG1" button-number="89999999"></callbuttons> </li>
                     <li> <callbuttons button-type="group" button-name="TG2" button-number="89999997"></callbuttons> </li>
                     <li> <callbuttons button-type="group" button-name="TG2" button-number="89999996"></callbuttons> </li>
                     <li> <callbuttons button-type="group" button-name="TG2" button-number="89999995"></callbuttons> </li>
@@ -62,7 +62,7 @@
             <div >
                    <ul class="callcomonul">
                    
-                    <li> <callbuttons button-type="person" button-name="张警官" button-number="24001"></callbuttons> </li>
+                    <li> <callbuttons  v-ripple="'rgba(255, 255, 255, 0.35)'" button-type="person" button-name="张警官" button-number="24001"></callbuttons> </li>
                     <li> <callbuttons button-type="person" button-name="朱警官" button-number="24002"></callbuttons> </li>
                     <li> <callbuttons button-type="person" button-name="张警官" button-number="24003"></callbuttons> </li>
                     <li> <callbuttons button-type="person" button-name="周警官" button-number="24004"></callbuttons> </li>
@@ -105,7 +105,7 @@
 </div>
 </template>
 <script>
-
+import Ripple from 'vue-ripple-directive'
 import { Divider ,TabPane,Tabs  } from 'iview';
 import callbuttons from '@/components/button/callbuttons';
 
@@ -116,15 +116,16 @@ export default {
      TabPane,
      callbuttons,
   },
-   data(){
+  directives: {Ripple,},
+  data(){
       return {
-        backgroundDiv: {
-           
-        }
-    }
+      inputnum:'',
+      }
+  
   },
   methods:{
-      cache(){
+      keypress(event){
+         console.info(event);
       },
       alert(){
       }
@@ -220,6 +221,7 @@ export default {
     border-radius: 50%;
     border: #fff solid 1px;
     line-height: 40px;
+    cursor: pointer;
 }
 .number li{
    display: inline;
@@ -237,13 +239,13 @@ height: 100%;
 
 }
 .buttons div{
-width: 100%;
+width: 70px;;
 background-color: #164B77;
 height: 35px;
 margin-bottom: 15px;
 margin-top: 3px;
 border-radius: 5px;
-
+cursor: pointer;
 }
 .buttons i{
     margin-top: 5px;
@@ -256,6 +258,7 @@ border-radius: 5px;
  float: right;
  margin-right: 5px;
 }
+
 .ivu-divider-vertical{
     height: 80%;
     margin-top: 20px;
@@ -278,7 +281,4 @@ border-radius: 5px;
   float: left;
   list-style: none;
 }
-</style>
-<style>
-
 </style>

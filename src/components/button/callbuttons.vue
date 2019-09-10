@@ -1,5 +1,5 @@
 <template>
-<div class="comonul">
+<div v-ripple="'rgba(255, 128, 0, 0.35)'" class="comonul">
     <ul >
         <li><div><i class="material-icons">{{buttonType}}</i><span>{{buttonName}}</span></div></li>
         <li><Divider /></li>
@@ -9,12 +9,14 @@
 
 </template>
 <script>
+import Ripple from 'vue-ripple-directive'
 import { Divider   } from 'iview';
 
 export default {
   components: {
     Divider
   },
+ directives: {Ripple,},
   props: ['buttonType','buttonName','buttonNumber'],
    data(){
       return {
@@ -53,6 +55,7 @@ export default {
     margin-left: 15px;
     color: #fff;
     font-size: 20px;
+    cursor: pointer;
 }
 .comonul li>div i{
    float: left;
