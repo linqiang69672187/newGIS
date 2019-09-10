@@ -46,19 +46,14 @@
             <div>
                 <ul class="callcomonul">
                    
-                    <li> <callbuttons></callbuttons> </li>
-                    <li> <callbuttons></callbuttons> </li>
-                    <li> <callbuttons></callbuttons> </li>
-                    <li> <callbuttons></callbuttons> </li>
-                    <li> <callbuttons></callbuttons> </li>
-                    <li> <callbuttons></callbuttons> </li>
-                    <li> <callbuttons></callbuttons> </li>
-                    <li> <callbuttons></callbuttons> </li>
-                    <li> <callbuttons></callbuttons> </li>
-                    <li> <callbuttons></callbuttons> </li>
-                    <li> <callbuttons></callbuttons> </li>
-                    <li> <callbuttons></callbuttons> </li>
-                    
+                    <li> <callbuttons button-type="group" button-name="TG1" button-number="89999999"></callbuttons> </li>
+                    <li> <callbuttons button-type="group" button-name="TG2" button-number="89999997"></callbuttons> </li>
+                    <li> <callbuttons button-type="group" button-name="TG2" button-number="89999996"></callbuttons> </li>
+                    <li> <callbuttons button-type="group" button-name="TG2" button-number="89999995"></callbuttons> </li>
+                    <li> <callbuttons button-type="group" button-name="TG2" button-number="89999994"></callbuttons> </li>
+                    <li> <callbuttons button-type="group" button-name="TG2" button-number="89999993"></callbuttons> </li>
+                    <li> <callbuttons button-type="group" button-name="TG2" button-number="89999991"></callbuttons> </li>
+                    <li> <callbuttons button-type="group" button-name="TG2" button-number="81999995"></callbuttons> </li>             
 
                 </ul>
             </div>
@@ -67,20 +62,14 @@
             <div >
                    <ul class="callcomonul">
                    
-                    <li> <callbuttons></callbuttons> </li>
-                    <li> <callbuttons></callbuttons> </li>
-                    <li> <callbuttons></callbuttons> </li>
-                    <li> <callbuttons></callbuttons> </li>
-                    <li> <callbuttons></callbuttons> </li>
-                    <li> <callbuttons></callbuttons> </li>
-                    <li> <callbuttons></callbuttons> </li>
-                    <li> <callbuttons></callbuttons> </li>
-                    <li> <callbuttons></callbuttons> </li>
-                    <li> <callbuttons></callbuttons> </li>
-                    <li> <callbuttons></callbuttons> </li>
-                    <li> <callbuttons></callbuttons> </li>
-                    
-
+                    <li> <callbuttons button-type="person" button-name="张警官" button-number="24001"></callbuttons> </li>
+                    <li> <callbuttons button-type="person" button-name="朱警官" button-number="24002"></callbuttons> </li>
+                    <li> <callbuttons button-type="person" button-name="张警官" button-number="24003"></callbuttons> </li>
+                    <li> <callbuttons button-type="person" button-name="周警官" button-number="24004"></callbuttons> </li>
+                    <li> <callbuttons button-type="person" button-name="李警官" button-number="24005"></callbuttons> </li>
+                    <li> <callbuttons button-type="person" button-name="林警官" button-number="24006"></callbuttons> </li>
+                    <li> <callbuttons button-type="person" button-name="杨警官" button-number="24007"></callbuttons> </li>
+                    <li> <callbuttons button-type="person" button-name="肖警官" button-number="24008"></callbuttons> </li>             
                 </ul>
             </div>
         </TabPane>
@@ -88,20 +77,22 @@
             <div>
                  <ul class="callcomonul">
                    
-                    <li> <callbuttons></callbuttons> </li>
-                    <li> <callbuttons></callbuttons> </li>
-                    <li> <callbuttons></callbuttons> </li>
-                    <li> <callbuttons></callbuttons> </li>
-                    <li> <callbuttons></callbuttons> </li>
-                    <li> <callbuttons></callbuttons> </li>
-                    <li> <callbuttons></callbuttons> </li>
-                    <li> <callbuttons></callbuttons> </li>
-                    <li> <callbuttons></callbuttons> </li>
-                    <li> <callbuttons></callbuttons> </li>
-                    <li> <callbuttons></callbuttons> </li>
-                    <li> <callbuttons></callbuttons> </li>
-                    
-
+                    <li> <callbuttons button-type="person" button-name="张警官" button-number="24001"></callbuttons> </li>
+                    <li> <callbuttons button-type="person" button-name="肖警官" button-number="24008"></callbuttons> </li>             
+                    <li> <callbuttons button-type="group" button-name="TG1" button-number="89999999"></callbuttons> </li>
+                    <li> <callbuttons button-type="group" button-name="TG2" button-number="89999997"></callbuttons> </li>
+                    <li> <callbuttons button-type="group" button-name="TG2" button-number="89999996"></callbuttons> </li>
+                    <li> <callbuttons button-type="group" button-name="TG2" button-number="89999995"></callbuttons> </li>
+                    <li> <callbuttons button-type="person" button-name="朱警官" button-number="24002"></callbuttons> </li>
+                    <li> <callbuttons button-type="person" button-name="张警官" button-number="24003"></callbuttons> </li>
+                    <li> <callbuttons button-type="person" button-name="周警官" button-number="24004"></callbuttons> </li>
+                    <li> <callbuttons button-type="person" button-name="李警官" button-number="24005"></callbuttons> </li>
+                    <li> <callbuttons button-type="person" button-name="林警官" button-number="24006"></callbuttons> </li>
+                    <li> <callbuttons button-type="person" button-name="杨警官" button-number="24007"></callbuttons> </li>
+                    <li> <callbuttons button-type="group" button-name="TG2" button-number="89999994"></callbuttons> </li>
+                    <li> <callbuttons button-type="group" button-name="TG2" button-number="89999993"></callbuttons> </li>
+                    <li> <callbuttons button-type="group" button-name="TG2" button-number="89999991"></callbuttons> </li>
+                    <li> <callbuttons button-type="group" button-name="TG2" button-number="81999995"></callbuttons> </li>              
                 </ul>
 
             </div>

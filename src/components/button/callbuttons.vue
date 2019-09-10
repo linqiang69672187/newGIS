@@ -1,9 +1,9 @@
 <template>
 <div class="comonul">
     <ul >
-        <li><div><i class="material-icons">group</i><span>TG121</span></div></li>
+        <li><div><i class="material-icons">{{buttonType}}</i><span>{{buttonName}}</span></div></li>
         <li><Divider /></li>
-        <li><span>969999</span></li>
+        <li><span>{{buttonNumber}}</span></li>
     </ul>                
 </div>
 
@@ -15,6 +15,7 @@ export default {
   components: {
     Divider
   },
+  props: ['buttonType','buttonName','buttonNumber'],
    data(){
       return {
           bgColor: '#778899',
