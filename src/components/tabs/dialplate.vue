@@ -313,5 +313,7 @@ cursor: pointer;
 <style>
 .dialtabs .ivu-tabs-nav{
     float:right !important;
+
 }
+
 </style>
