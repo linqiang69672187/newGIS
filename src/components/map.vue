@@ -203,7 +203,7 @@ div{
     height:20px;
     width:20px;
     border-radius: 10px;
-    background: rgba(255, 0, 0, 0.9);
+    background: rgba(0, 0, 0, 1);
     transform: scale(0);
     animation: myfirst 1s;
     animation-iteration-count: infinite;
@@ -212,7 +212,7 @@ div{
 @keyframes myfirst{
     to{
         transform: scale(2);
-        background: rgba(0, 255, 0, 0);
+        background: rgba(0, 0, 0, 0.2);
     }
 }
 .css_animation .fontdiv{
