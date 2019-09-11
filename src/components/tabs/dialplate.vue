@@ -40,7 +40,7 @@
     </li>
     <li><Divider type="vertical" /></li>
     <li>
-       <div>
+       <div class="dialtabs">
        <Tabs name="commonplane" type="line" >
         <TabPane tab="commonplane" label="常用组"> 
             <div>
@@ -308,5 +308,10 @@ cursor: pointer;
 
 .backspacespress{
     color: #333333 !important; 
+}
+</style>
+<style>
+.dialtabs .ivu-tabs-nav{
+    float:right !important;
 }
 </style>
