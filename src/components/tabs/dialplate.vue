@@ -5,25 +5,25 @@
         <div class="dialpane">
             <div >
                  <ul> 
-                   <li class="inputli"><input v-model='inputnum' @keydown="keypress" @keyup="keyup" class="input" placeholder="输入组号/个号"  /></li>
-                   <li> <i  class="material-icons">backspace</i></li>
+                   <li class="inputli"><input v-model='inputnum'    maxlength='15' @keydown="keypress" @keyup="keyup" class="input" placeholder="输入组号/个号"  /></li>
+                   <li> <i @mousedown="buttonspress='Backspace'"  @click="backbtnclick"     @mouseleave="buttonspress=''" @mouseup="buttonspress=''" :class="buttonspress=='Backspace'?'backspacespress':''"  class="material-icons">backspace</i></li>
                 </ul>
             </div>
             <div >
                 <div class="number">
                     <ul>
-                        <li><div :class="buttonspress=='Digit1'?'buttonspress':''"  v-ripple="'rgba(255, 255, 255, 0.35)'">1</div></li>
-                        <li><div :class="buttonspress=='Digit2'?'buttonspress':''" v-ripple="'rgba(255, 255, 255, 0.35)'">2</div></li>
-                        <li><div :class="buttonspress=='Digit3'?'buttonspress':''" v-ripple="'rgba(255, 255, 255, 0.35)'">3</div></li>
-                        <li><div :class="buttonspress=='Digit4'?'buttonspress':''" v-ripple="'rgba(255, 255, 255, 0.35)'">4</div></li>
-                        <li><div :class="buttonspress=='Digit5'?'buttonspress':''" v-ripple="'rgba(255, 255, 255, 0.35)'">5</div></li>
-                        <li><div :class="buttonspress=='Digit6'?'buttonspress':''" v-ripple="'rgba(255, 255, 255, 0.35)'">6</div></li>
-                        <li><div :class="buttonspress=='Digit7'?'buttonspress':''" v-ripple="'rgba(255, 255, 255, 0.35)'">7</div></li>
-                        <li><div :class="buttonspress=='Digit8'?'buttonspress':''" v-ripple="'rgba(255, 255, 255, 0.35)'">8</div></li>
-                        <li><div :class="buttonspress=='Digit9'?'buttonspress':''" v-ripple="'rgba(255, 255, 255, 0.35)'">9</div></li>
-                        <li><div :class="buttonspress=='Digit0'?'buttonspress':''" v-ripple="'rgba(255, 255, 255, 0.35)'">0</div></li>
-                        <li><div v-ripple="'rgba(255, 255, 255, 0.35)'">*</div></li>
-                        <li><div v-ripple="'rgba(255, 255, 255, 0.35)'">#</div></li>
+                        <li><div @click="numbtnclick"  :class="buttonspress=='Digit1'?'buttonspress':''"  v-ripple="'rgba(255, 255, 255, 0.35)'">1</div></li>
+                        <li><div @click="numbtnclick"  :class="buttonspress=='Digit2'?'buttonspress':''" v-ripple="'rgba(255, 255, 255, 0.35)'">2</div></li>
+                        <li><div @click="numbtnclick"  :class="buttonspress=='Digit3'?'buttonspress':''" v-ripple="'rgba(255, 255, 255, 0.35)'">3</div></li>
+                        <li><div @click="numbtnclick"  :class="buttonspress=='Digit4'?'buttonspress':''" v-ripple="'rgba(255, 255, 255, 0.35)'">4</div></li>
+                        <li><div @click="numbtnclick"  :class="buttonspress=='Digit5'?'buttonspress':''" v-ripple="'rgba(255, 255, 255, 0.35)'">5</div></li>
+                        <li><div @click="numbtnclick"  :class="buttonspress=='Digit6'?'buttonspress':''" v-ripple="'rgba(255, 255, 255, 0.35)'">6</div></li>
+                        <li><div @click="numbtnclick"  :class="buttonspress=='Digit7'?'buttonspress':''" v-ripple="'rgba(255, 255, 255, 0.35)'">7</div></li>
+                        <li><div @click="numbtnclick"  :class="buttonspress=='Digit8'?'buttonspress':''" v-ripple="'rgba(255, 255, 255, 0.35)'">8</div></li>
+                        <li><div @click="numbtnclick"  :class="buttonspress=='Digit9'?'buttonspress':''" v-ripple="'rgba(255, 255, 255, 0.35)'">9</div></li>
+                        <li><div @click="numbtnclick"  :class="buttonspress=='Digit0'?'buttonspress':''" v-ripple="'rgba(255, 255, 255, 0.35)'">0</div></li>
+                        <li><div @click="numbtnclick"  v-ripple="'rgba(255, 255, 255, 0.35)'">*</div></li>
+                        <li><div @click="numbtnclick"  v-ripple="'rgba(255, 255, 255, 0.35)'">#</div></li>
                     </ul>
                 </div>
                 <div class="buttons">
@@ -46,14 +46,14 @@
             <div>
                 <ul class="callcomonul">
                    
-                    <li> <callbuttons  button-type="group" button-name="TG1" button-number="89999999"></callbuttons> </li>
-                    <li> <callbuttons button-type="group" button-name="TG2" button-number="89999997"></callbuttons> </li>
-                    <li> <callbuttons button-type="group" button-name="TG2" button-number="89999996"></callbuttons> </li>
-                    <li> <callbuttons button-type="group" button-name="TG2" button-number="89999995"></callbuttons> </li>
-                    <li> <callbuttons button-type="group" button-name="TG2" button-number="89999994"></callbuttons> </li>
-                    <li> <callbuttons button-type="group" button-name="TG2" button-number="89999993"></callbuttons> </li>
-                    <li> <callbuttons button-type="group" button-name="TG2" button-number="89999991"></callbuttons> </li>
-                    <li> <callbuttons button-type="group" button-name="TG2" button-number="81999995"></callbuttons> </li>             
+                    <li> <callbuttons @btnclick="btnclk"   button-type="group" button-name="TG1" button-number="89999999"></callbuttons> </li>
+                    <li> <callbuttons  @btnclick="btnclk"  button-type="group" button-name="TG2" button-number="89999997"></callbuttons> </li>
+                    <li> <callbuttons  @btnclick="btnclk"  button-type="group" button-name="TG2" button-number="89999996"></callbuttons> </li>
+                    <li> <callbuttons  @btnclick="btnclk"  button-type="group" button-name="TG2" button-number="89999995"></callbuttons> </li>
+                    <li> <callbuttons  @btnclick="btnclk"  button-type="group" button-name="TG2" button-number="89999994"></callbuttons> </li>
+                    <li> <callbuttons  @btnclick="btnclk"  button-type="group" button-name="TG2" button-number="89999993"></callbuttons> </li>
+                    <li> <callbuttons  @btnclick="btnclk"  button-type="group" button-name="TG2" button-number="89999991"></callbuttons> </li>
+                    <li> <callbuttons  @btnclick="btnclk"  button-type="group" button-name="TG2" button-number="81999995"></callbuttons> </li>             
 
                 </ul>
             </div>
@@ -62,14 +62,14 @@
             <div >
                    <ul class="callcomonul">
                    
-                    <li> <callbuttons  v-ripple="'rgba(255, 255, 255, 0.35)'" button-type="person" button-name="张警官" button-number="24001"></callbuttons> </li>
-                    <li> <callbuttons button-type="person" button-name="朱警官" button-number="24002"></callbuttons> </li>
-                    <li> <callbuttons button-type="person" button-name="张警官" button-number="24003"></callbuttons> </li>
-                    <li> <callbuttons button-type="person" button-name="周警官" button-number="24004"></callbuttons> </li>
-                    <li> <callbuttons button-type="person" button-name="李警官" button-number="24005"></callbuttons> </li>
-                    <li> <callbuttons button-type="person" button-name="林警官" button-number="24006"></callbuttons> </li>
-                    <li> <callbuttons button-type="person" button-name="杨警官" button-number="24007"></callbuttons> </li>
-                    <li> <callbuttons button-type="person" button-name="肖警官" button-number="24008"></callbuttons> </li>             
+                    <li> <callbuttons  @btnclick="btnclk"   v-ripple="'rgba(255, 255, 255, 0.35)'" button-type="person" button-name="张警官" button-number="24001"></callbuttons> </li>
+                    <li> <callbuttons  @btnclick="btnclk"  button-type="person" button-name="朱警官" button-number="24002"></callbuttons> </li>
+                    <li> <callbuttons  @btnclick="btnclk"  button-type="person" button-name="张警官" button-number="24003"></callbuttons> </li>
+                    <li> <callbuttons  @btnclick="btnclk"  button-type="person" button-name="周警官" button-number="24004"></callbuttons> </li>
+                    <li> <callbuttons  @btnclick="btnclk"  button-type="person" button-name="李警官" button-number="24005"></callbuttons> </li>
+                    <li> <callbuttons  @btnclick="btnclk"  button-type="person" button-name="林警官" button-number="24006"></callbuttons> </li>
+                    <li> <callbuttons  @btnclick="btnclk"  button-type="person" button-name="杨警官" button-number="24007"></callbuttons> </li>
+                    <li> <callbuttons  @btnclick="btnclk"  button-type="person" button-name="肖警官" button-number="24008"></callbuttons> </li>             
                 </ul>
             </div>
         </TabPane>
@@ -77,22 +77,22 @@
             <div>
                  <ul class="callcomonul">
                    
-                    <li> <callbuttons button-type="person" button-name="张警官" button-number="24001"></callbuttons> </li>
-                    <li> <callbuttons button-type="person" button-name="肖警官" button-number="24008"></callbuttons> </li>             
-                    <li> <callbuttons button-type="group" button-name="TG1" button-number="89999999"></callbuttons> </li>
-                    <li> <callbuttons button-type="group" button-name="TG2" button-number="89999997"></callbuttons> </li>
-                    <li> <callbuttons button-type="group" button-name="TG2" button-number="89999996"></callbuttons> </li>
-                    <li> <callbuttons button-type="group" button-name="TG2" button-number="89999995"></callbuttons> </li>
-                    <li> <callbuttons button-type="person" button-name="朱警官" button-number="24002"></callbuttons> </li>
-                    <li> <callbuttons button-type="person" button-name="张警官" button-number="24003"></callbuttons> </li>
-                    <li> <callbuttons button-type="person" button-name="周警官" button-number="24004"></callbuttons> </li>
-                    <li> <callbuttons button-type="person" button-name="李警官" button-number="24005"></callbuttons> </li>
-                    <li> <callbuttons button-type="person" button-name="林警官" button-number="24006"></callbuttons> </li>
-                    <li> <callbuttons button-type="person" button-name="杨警官" button-number="24007"></callbuttons> </li>
-                    <li> <callbuttons button-type="group" button-name="TG2" button-number="89999994"></callbuttons> </li>
-                    <li> <callbuttons button-type="group" button-name="TG2" button-number="89999993"></callbuttons> </li>
-                    <li> <callbuttons button-type="group" button-name="TG2" button-number="89999991"></callbuttons> </li>
-                    <li> <callbuttons button-type="group" button-name="TG2" button-number="81999995"></callbuttons> </li>              
+                    <li> <callbuttons  @btnclick="btnclk"  button-type="person" button-name="张警官" button-number="24001"></callbuttons> </li>
+                    <li> <callbuttons  @btnclick="btnclk"  button-type="person" button-name="肖警官" button-number="24008"></callbuttons> </li>             
+                    <li> <callbuttons  @btnclick="btnclk"  button-type="group" button-name="TG1" button-number="89999999"></callbuttons> </li>
+                    <li> <callbuttons  @btnclick="btnclk"  button-type="group" button-name="TG2" button-number="89999997"></callbuttons> </li>
+                    <li> <callbuttons  @btnclick="btnclk"  button-type="group" button-name="TG2" button-number="89999996"></callbuttons> </li>
+                    <li> <callbuttons  @btnclick="btnclk"  button-type="group" button-name="TG2" button-number="89999995"></callbuttons> </li>
+                    <li> <callbuttons  @btnclick="btnclk"  button-type="person" button-name="朱警官" button-number="24002"></callbuttons> </li>
+                    <li> <callbuttons  @btnclick="btnclk"  button-type="person" button-name="张警官" button-number="24003"></callbuttons> </li>
+                    <li> <callbuttons  @btnclick="btnclk"  button-type="person" button-name="周警官" button-number="24004"></callbuttons> </li>
+                    <li> <callbuttons  @btnclick="btnclk"  button-type="person" button-name="李警官" button-number="24005"></callbuttons> </li>
+                    <li> <callbuttons  @btnclick="btnclk"  button-type="person" button-name="林警官" button-number="24006"></callbuttons> </li>
+                    <li> <callbuttons  @btnclick="btnclk"  button-type="person" button-name="杨警官" button-number="24007"></callbuttons> </li>
+                    <li> <callbuttons  @btnclick="btnclk"  button-type="group" button-name="TG2" button-number="89999994"></callbuttons> </li>
+                    <li> <callbuttons  @btnclick="btnclk"  button-type="group" button-name="TG2" button-number="89999993"></callbuttons> </li>
+                    <li> <callbuttons  @btnclick="btnclk"  button-type="group" button-name="TG2" button-number="89999991"></callbuttons> </li>
+                    <li> <callbuttons  @btnclick="btnclk"  button-type="group" button-name="TG2" button-number="81999995"></callbuttons> </li>              
                 </ul>
 
             </div>
@@ -126,13 +126,27 @@ export default {
   },
   methods:{
       keypress(event,el){
-         console.info(event.code);
-          console.info(el);
+          console.info(event.code);
+        
           this.buttonspress =event.code;
       },
       keyup(event){
           this.buttonspress = 0;
-      }
+      },
+      btnclk(type,name,issi){
+          this.inputnum =issi;
+      },
+      numbtnclick(el){
+           this.inputnum +=el.target.innerText;
+      },
+      backbtnclick(el){
+            
+            console.info(this.inputnum.length);
+           var n = this.inputnum.length;
+           this.inputnum= this.inputnum.slice(0,n-1);
+ 
+
+      },
   }
 }
 </script>
@@ -146,7 +160,7 @@ export default {
      color: #fff;
  }
  .input:hover{
-     border: #2B81BE;
+     border: 1px solid #2B81BE;
  }
  .input{
     display: inline-block;
@@ -157,11 +171,11 @@ export default {
     border: 1px solid #dcdee2;
     border-radius: 4px;
     color: #515a6e;
- 
     position: relative;
     left: 10px;
     top: 5px;
     cursor: text;
+  
     transition: border .2s ease-in-out,background .2s ease-in-out,box-shadow .2s ease-in-out;
  }
  .inputli{
@@ -170,9 +184,10 @@ export default {
  .inputli+li i{
      font-size: 40px;
      position: relative;
-     left: 40px;
-     color: #fff;
+     left: -30px;
+     color: #000;
      float: left;
+     cursor: pointer;
  }
 .row > ul{
     display: inline;  
@@ -289,5 +304,9 @@ cursor: pointer;
     background-color: #000;
     color: #fff;
     opacity: 0.35;
+}
+
+.backspacespress{
+    color: #333333 !important; 
 }
 </style>

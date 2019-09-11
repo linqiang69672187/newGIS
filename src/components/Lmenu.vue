@@ -1,16 +1,24 @@
 <template>
   <div class="row" :class="{rowwidth}">
     <div :class="{lmenuicon}"> <ul>
-            <li @click="showtree=!showtree" :class="{ismenufaded,showtree}"><a><i class="fas fa-list" ></i>
-            <transition  @after-leave="afterfade" @before-enter="afterendfade" name="fade">
-            <div v-if="!minimenu">用户列表</div>
-            </transition>
-            </a></li>
-            <li  :class="{ismenufaded}"><a><i class="fas fa-globe"></i>
-            <transition name="fade" @before-enter="afterendfade" >
-            <div v-if="!minimenu">GPS上报</div>
-            </transition>
-            </a></li>
+            <li  @click="showtree=!showtree" :class="{ismenufaded,showtree}">
+             <Tooltip :disabled="!minimenu"  content="用户列表" placement="right"> 
+                <a ><i class="fas fa-list" ></i>
+                <transition  @after-leave="afterfade" @before-enter="afterendfade" name="fade">
+                <div v-if="!minimenu">用户列表</div>
+                </transition>
+                </a>
+            </Tooltip>
+            </li>
+            <li  :class="{ismenufaded}">
+             <Tooltip :disabled="!minimenu"  content="GPS上报" placement="right"> 
+              <a><i class="fas fa-globe"></i>
+              <transition name="fade" @before-enter="afterendfade" >
+              <div v-if="!minimenu">GPS上报</div>
+              </transition>
+              </a>
+             </Tooltip>
+            </li>
             <li  :class="{ismenufaded}" ><a><i class="fas fa-street-view"></i>
             <transition name="fade" @before-enter="afterendfade" >
             <div v-if="!minimenu">GPS上拉</div>
@@ -43,7 +51,7 @@
 </template>
 
 <script>
-
+import {Tooltip} from 'iview'
 import DagTree from "@/components/DagTree.vue"
 export default {
     data () {
@@ -56,8 +64,10 @@ export default {
         showtree:false,
       }
     },
+  
     components:{
-      DagTree
+      DagTree,
+      Tooltip
   },
   computed: {
     classOismenufadedbject: function () {
@@ -195,4 +205,23 @@ html,body{
 -webkit-transform:rotate(180deg); /* Safari 和 Chrome */
 -o-transform:rotate(180deg); 	/* Opera */
 }
+.top,.bottom{
+      text-align: center;
+  }
+  .center{
+      width: 300px;
+      margin: 10px auto;
+      overflow: hidden;
+  }
+  .center-left{
+      float: left;
+  }
+  .center-right{
+      float: right;
+  }
+</style>
+<style >
+.ivu-tooltip-popper{
+    left:37px !important;
+  }
 </style>

@@ -1,5 +1,5 @@
 <template>
-<div v-ripple="'rgba(255, 255, 255, 0.35)'" class="comonul">
+<div v-ripple="'rgba(255, 255, 255, 0.35)'" @click="btnclick" class="comonul">
     <ul >
         <li><div><i class="material-icons">{{buttonType}}</i><span>{{buttonName}}</span></div></li>
         <li><Divider /></li>
@@ -21,24 +21,15 @@ export default {
    data(){
       return {
           bgColor: '#778899',
-          fabActions: [
-              {
-                  name: 'cache',
-                  icon: 'add'
-              },
-              {
-                  name: 'alertMe',
-                  icon: 'https'
-              }
-          ]
+          fabActions: ''
       }
   },
   methods:{
       cache(){
           console.log('Cache Cleared');
       },
-      alert(){
-          alert('点击了按钮');
+      btnclick(){
+         this.$emit("btnclick",this.buttonType,this.buttonName,this.buttonNumber);
       }
   }
 }
