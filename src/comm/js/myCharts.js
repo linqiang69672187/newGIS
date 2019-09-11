@@ -111,8 +111,8 @@ const install = function(Vue) {
                                     type: 'value',
                                     scale: true,
                                     name: '时长',
-                                    max: 1200,
-                                    min: 0,
+                                   
+                                    min: 100,
                                     boundaryGap: [0.2, 0.2]
                                 }
                             ],
@@ -139,7 +139,8 @@ const install = function(Vue) {
                                         var res = [];
                                         var len = 20;
                                         while (len--) {
-                                            res.push(Math.round(Math.random() * 1000));
+                                            console.info(res);
+                                            res.push(100+Math.round(Math.random())-len);
                                         }
                                         return res;
                                     })()
@@ -181,7 +182,7 @@ const install = function(Vue) {
                             var data0 = option.series[0].data;
                             var data1 = option.series[1].data;
                             data0.shift();
-                            data0.push(Math.round(Math.random() * 1000));
+                            data0.push(data0[data0.length-1]+Math.round(Math.random()));
                             data1.shift();
                             data1.push((Math.random() * 10 + 5).toFixed(1) - 0);
                         
