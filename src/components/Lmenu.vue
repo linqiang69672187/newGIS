@@ -19,26 +19,42 @@
               </a>
              </Tooltip>
             </li>
-            <li  :class="{ismenufaded}" ><a><i class="fas fa-street-view"></i>
-            <transition name="fade" @before-enter="afterendfade" >
-            <div v-if="!minimenu">GPS上拉</div>
-            </transition>
-            </a></li>
-            <li  :class="{ismenufaded}"><a><i class="fas fa-map-marker"></i>
-            <transition name="fade" @before-enter="afterendfade" >
-            <div v-if="!minimenu">历史轨迹</div>
-            </transition>
-            </a></li>
-            <li  :class="{ismenufaded}"><a><i class="fas fa-map"></i>
-            <transition name="fade" @before-enter="afterendfade" >
-            <div v-if="!minimenu">实时轨迹</div>
-            </transition>
-            </a></li>
-            <li  :class="{ismenufaded}"><a><i class="fas fa-crosshairs"></i>
-            <transition name="fade" @before-enter="afterendfade" >
-            <div v-if="!minimenu">锁定功能</div>
-            </transition>
-            </a></li>
+            <li  :class="{ismenufaded}" >
+            <Tooltip :disabled="!minimenu"  content="GPS上拉" placement="right"> 
+              <a><i class="fas fa-street-view"></i>
+              <transition name="fade" @before-enter="afterendfade" >
+              <div v-if="!minimenu">GPS上拉</div>
+              </transition>
+              </a>
+            </Tooltip>
+            </li>
+            <li  :class="{ismenufaded}">
+              <Tooltip :disabled="!minimenu"  content="历史轨迹" placement="right"> 
+              <a><i class="fas fa-map-marker"></i>
+              <transition name="fade" @before-enter="afterendfade" >
+              <div v-if="!minimenu">历史轨迹</div>
+              </transition>
+              </a>
+                </Tooltip>
+              </li>
+            <li  :class="{ismenufaded}">
+            <Tooltip :disabled="!minimenu"  content="实时轨迹" placement="right"> 
+              <a><i class="fas fa-map"></i>
+              <transition name="fade" @before-enter="afterendfade" >
+              <div v-if="!minimenu">实时轨迹</div>
+              </transition>
+              </a>
+           </Tooltip>
+            </li>
+            <li  :class="{ismenufaded}">
+              <Tooltip :disabled="!minimenu"  content="锁定功能" placement="right"> 
+              <a><i class="fas fa-crosshairs"></i>
+              <transition name="fade" @before-enter="afterendfade" >
+              <div v-if="!minimenu">锁定功能</div>
+              </transition>
+              </a>
+            </Tooltip>
+            </li>
         </ul>
     </div>
     <div id="lmenu_2"  v-if="showtree" >

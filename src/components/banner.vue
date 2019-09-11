@@ -77,7 +77,7 @@ h1, h2 {
 
 .row>div:nth-child(2) {
     float: left;
-    width: calc(100% - 720px);
+    width: calc(100% - 520px);
 }
 .row>div:nth-child(2) svg {
    display: block !important;
