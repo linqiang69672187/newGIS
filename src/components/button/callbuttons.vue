@@ -47,7 +47,7 @@ export default {
     color: #fff;
     font-size: 20px;
     cursor: pointer;
-    border: 1px solid #2B81BE;
+  
 }
 .comonul li>div i{
    float: left;
