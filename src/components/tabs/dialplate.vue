@@ -5,7 +5,7 @@
         <div class="dialpane">
             <div >
                  <ul> 
-                   <li class="inputli"><input v-model='inputnum'    maxlength='15' @keydown="keypress" @keyup="keyup" class="input" placeholder="输入组号/个号"  /></li>
+                   <li class="inputli"><input v-model='inputnum' maxlength='15' @keydown="keypress" @keyup="keyup" class="input" placeholder="输入组号/个号"  /></li>
                    <li> <i @mousedown="buttonspress='Backspace'"  @click="backbtnclick"     @mouseleave="buttonspress=''" @mouseup="buttonspress=''" :class="buttonspress=='Backspace'?'backspacespress':''"  class="material-icons">backspace</i></li>
                 </ul>
             </div>
@@ -121,6 +121,7 @@ export default {
       return {
       inputnum:'',
       buttonspress:0,
+    
       }
   
   },
@@ -138,15 +139,20 @@ export default {
       },
       numbtnclick(el){
            this.inputnum +=el.target.innerText;
+           this.$el.getElementsByClassName("input")[0].focus();
       },
       backbtnclick(el){
-            
-            console.info(this.inputnum.length);
            var n = this.inputnum.length;
            this.inputnum= this.inputnum.slice(0,n-1);
- 
-
+           this.$el.getElementsByClassName("input")[0].focus();
       },
+      sendparentvalue(val){
+          this.inputnum=val;
+          var _this = this;
+          setTimeout(() => {
+              _this.$el.getElementsByClassName("input")[0].focus();
+          }, 500);
+      }
   }
 }
 </script>
@@ -310,6 +316,9 @@ cursor: pointer;
 
 .backspacespress{
     color: #333333 !important; 
+}
+.isfocus{
+    
 }
 </style>
 <style>

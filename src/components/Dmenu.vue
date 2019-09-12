@@ -3,12 +3,12 @@
    <div  class="controlmenu" :class="{rationicon}"><ul @click="leave" ><li ><i class="fas fa-sort-down" ></i></li><li></li><li><i class="fas fa-sort-down" ></i></li></ul></div>
   
     <div >
-    <Tabs class="tabs" name="plane" type="card" closable @on-tab-remove="handleTabRemove">
-        <TabPane  tab="plane" label="实时状况" class="tabpane" v-if="tab1" icon="ios-stats"><tabindex></tabindex></TabPane>
-        <TabPane  tab="plane" class="tabpane" label="GPS控制" v-if="tab0" icon="ios-key"></TabPane>
-        <TabPane  tab="plane" class="tabpane"  label="锁定跟踪" v-if="tab1" icon="logo-windows"><eyemaps></eyemaps></TabPane>
-        <TabPane  tab="plane" class="tabpane"  label="视频窗口" v-if="tab2" icon="logo-tux"><videos></videos></TabPane>
-        <TabPane  tab="plane" class="tabpane"  label="拨号键盘" v-if="tab2" icon="ios-apps"><dialplate></dialplate></TabPane>
+    <Tabs class='tabs' v-model='tabname' name='plane' type='card' closable @on-tab-remove='handleTabRemove'>
+        <TabPane  tab="plane"  name="实时状况" label="实时状况" class="tabpane" v-if="tab1" icon="ios-stats"><tabindex></tabindex></TabPane>
+        <TabPane  tab="plane" name="GPS控制" class="tabpane" label="GPS控制" v-if="tab0" icon="ios-key"></TabPane>
+        <TabPane  tab="plane"  name="锁定跟踪" class="tabpane"  label="锁定跟踪" v-if="tab1" icon="logo-windows"><eyemaps></eyemaps></TabPane>
+        <TabPane  tab="plane" name="视频窗口" class="tabpane"  label="视频窗口" v-if="tab2" icon="logo-tux"><videos></videos></TabPane>
+        <TabPane  tab="plane" name="拨号键盘"   class="tabpane"  label="拨号键盘" v-if="tab2" icon="ios-apps"><dialplate ref="dail"></dialplate></TabPane>
     </Tabs>
     </div>
      
@@ -28,8 +28,10 @@ import dialplate from "@/components/tabs/dialplate"
                         tab1: true,
                         tab2: true,
                         show: false,
-                        showdmenu:false,
-                        rationicon:false
+                        showdmenu:true,
+                        rationicon:true,
+                        tabname:'实时状况',
+                        dailval:'',
                     }
         },
         components:{
@@ -45,10 +47,26 @@ import dialplate from "@/components/tabs/dialplate"
                 this['tab' + name] = false;
             },
             leave(el){
+              
                 this.showdmenu=!this.showdmenu;
                 this.rationicon=!this.rationicon;
-                this.$emit("listenchange",this.showdmenu);
+                this.$emit("listenchange",this.showdmenu);                   
+            },
+            changeshowtab(key,tabs){
+    
+               
+                this.showdmenu=true;
+                this.rationicon=true;
+                this.$emit("listenchange",this.showdmenu); 
+                console.info(tabs); 
+         
+              if(this.tabname!=tabs){
+                  this.tabname=tabs;  
+                }
+                 this.$refs.dail.sendparentvalue(key);
+               
             }
+
            
         },
         created(){

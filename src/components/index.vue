@@ -8,9 +8,9 @@
            <LeftToolbox :style="{bottom:dmenuszie}"></LeftToolbox>
        </div>
        <div>
-           <div class="top"><banner></banner></div>
+           <div class="top" @click="ck"><banner></banner></div>
            <div class="left" :class="{hidedmenu}"><Lmenu></Lmenu></div>
-           <div class="bottom"><Dmenu @listenchange="listenchangeDmenu"></Dmenu></div>
+           <div class="bottom"><Dmenu ref="dmenu"  @listenchange="listenchangeDmenu"></Dmenu></div>
        </div>
     </div>
 </template>
@@ -27,11 +27,34 @@ import LeftToolbox from "@/components/control/LeftToolbox"
 export default {
     data(){
        return{
-           hidedmenu:true,
+           hidedmenu:false,
            dmenuszie: '10px !important',             
        }
     },
-    mounted() {
+   mounted(){
+      var _this = this;        
+      document.onkeydown = function(e) {            
+         if(document.activeElement.nodeName!='INPUT'){
+             switch(window.event.key)
+             {
+                 case "0":
+                 case "1":
+                 case "2":
+                 case "3":
+                 case "4": 
+                 case "5": 
+                 case "6": 
+                 case "7": 
+                 case "8": 
+                 case "9": 
+                   _this.$refs.dmenu.changeshowtab(window.event.key,'拨号键盘');
+                    break;
+                default:
+                    break;
+             }         
+          
+         }
+        };
     },
     computed:{
     },
@@ -52,6 +75,9 @@ export default {
            this.hidedmenu=!isshow;
            (isshow)?this.dmenuszie='260px !important':this.dmenuszie='10px !important'
           // console.info(isshow+this.dmenuszie)
+        },
+        ck:function(el){
+            this.$refs.dmenu.leave();
         }
     }
 }
