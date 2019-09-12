@@ -29,8 +29,8 @@
                 <div class="buttons">
                     <ul>
                         <li><div v-ripple="'rgba(255, 255, 255, 0.35)'" ><i class="material-icons">person</i><span>全双功</span></div></li>
-                        <li><div><i class="material-icons">mic</i><span>半双功</span></div></li>
-                        <li><div><i class="material-icons">group</i><span>组&nbsp;&nbsp;&nbsp;呼</span></div></li>                       
+                        <li><div v-ripple="'rgba(255, 255, 255, 0.35)'"><i class="material-icons">mic</i><span>半双功</span></div></li>
+                        <li><div v-ripple="'rgba(255, 255, 255, 0.35)'"><i class="material-icons">group</i><span>组&nbsp;&nbsp;&nbsp;呼</span></div></li>                       
                     </ul>
                 </div>   
               
@@ -205,12 +205,13 @@ export default {
    float: left;
 }
 .row > ul>li:nth-child(2){
-   width: 30px;
+   width: 7px;
    height: 220px;
    float: left;
+   margin-left: 15px;
 }
 .row > ul>li:nth-child(3){
-   width: calc(100% - 335px);
+   width: calc(100% - 355px);
    height: 220px;
    float: left;
 }
@@ -264,24 +265,25 @@ height: 100%;
 
 }
 .buttons div{
-width: 70px;;
+width: 90px;;
 background-color: #164B77;
-height: 35px;
-margin-bottom: 15px;
-margin-top: 3px;
-border-radius: 5px;
+height: 50px;
+margin-bottom: 50px;
+margin-top: -35px;
+border-radius: 10px;
 cursor: pointer;
 }
 .buttons i{
     margin-top: 5px;
     float: left;
     margin-left: 5px;
-    font-size: 24px;
+    font-size: 34px;
 }
 .buttons span{
- margin-top: 10px;
+ margin-top: 15px;
  float: right;
  margin-right: 5px;
+  font-size: 14px;
 }
 
 .ivu-divider-vertical{
