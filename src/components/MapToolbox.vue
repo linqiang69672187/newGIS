@@ -96,7 +96,7 @@ export default {
    ul>li a{
       color: #fff;
     }
-    .toolbox>ul>li:nth-child(2) div{
+    .focus{
       background-color: #fff;
       color: #164b77;
       border-radius: 16px;

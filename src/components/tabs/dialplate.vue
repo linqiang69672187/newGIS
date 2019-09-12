@@ -28,9 +28,9 @@
                 </div>
                 <div class="buttons">
                     <ul>
-                        <li><div v-ripple="'rgba(255, 255, 255, 0.35)'" ><i class="material-icons">person</i><span>全双功</span></div></li>
-                        <li><div v-ripple="'rgba(255, 255, 255, 0.35)'"><i class="material-icons">mic</i><span>半双功</span></div></li>
-                        <li><div v-ripple="'rgba(255, 255, 255, 0.35)'"><i class="material-icons">group</i><span>组&nbsp;&nbsp;&nbsp;呼</span></div></li>                       
+                        <li v-if="showsingalcall"><div v-ripple="'rgba(255, 255, 255, 0.35)'" ><i class="material-icons">person</i><span>全双功</span></div></li>
+                        <li v-if="showsingalcall"><div v-ripple="'rgba(255, 255, 255, 0.35)'"><i class="material-icons">mic</i><span>半双功</span></div></li>
+                        <li v-if="showgroupcall"><div v-ripple="'rgba(255, 255, 255, 0.35)'"><i class="material-icons">group</i><span>组&nbsp;&nbsp;&nbsp;呼</span></div></li>                       
                     </ul>
                 </div>   
               
@@ -121,14 +121,16 @@ export default {
       return {
       inputnum:'',
       buttonspress:0,
-    
+      showgroupcall:true,
+      showsingalcall:true, 
       }
   
   },
   methods:{
       keypress(event,el){
           console.info(event.code);
-        
+          this.showgroupcall = true;//后续优化，传值判断后，是否显示按钮
+          this.showsingalcall=true;
           this.buttonspress =event.code;
       },
       keyup(event){
@@ -136,15 +138,37 @@ export default {
       },
       btnclk(type,name,issi){
           this.inputnum =issi;
+          switch(type){
+              case "group":
+                this.showgroupcall = true;
+                this.showsingalcall=false;
+              break;
+              case "person":
+                 this.showgroupcall = false;
+                 this.showsingalcall=true;
+              break;
+              default:
+                 this.showgroupcall = true;
+                 this.showsingalcall=true;
+              break;
+
+          }
+         
+          
+         
       },
       numbtnclick(el){
            this.inputnum +=el.target.innerText;
            this.$el.getElementsByClassName("input")[0].focus();
+           this.showgroupcall = true;//后续优化，传值判断后，是否显示按钮
+          this.showsingalcall=true;
       },
       backbtnclick(el){
            var n = this.inputnum.length;
            this.inputnum= this.inputnum.slice(0,n-1);
            this.$el.getElementsByClassName("input")[0].focus();
+           this.showgroupcall = true;//后续优化，传值判断后，是否显示按钮
+          this.showsingalcall=true;
       },
       sendparentvalue(val){
           this.inputnum=val;
@@ -329,5 +353,4 @@ cursor: pointer;
     background-color: #2B81BE;
     width: 283px;
 }
-
 </style>
