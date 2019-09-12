@@ -1,5 +1,5 @@
 <template>
-<div class="row">
+<div :style="backgroundDiv"  class="row" >
 <ul>
     <li>
         <div class="dialpane">
@@ -123,6 +123,9 @@ export default {
       buttonspress:0,
       showgroupcall:true,
       showsingalcall:true, 
+      backgroundDiv: {
+                            backgroundImage: 'url(' + require('@/assets/images/tabs_table_bg.jpg') + ')'
+                    } ,  
       }
   
   },
@@ -189,7 +192,8 @@ export default {
  .row{
      height: 220px;
      width: 100%;
-     background-color: #515a6e;
+    background:no-repeat no-repeat;;
+    background-size: 100%;  
      z-index: 10;
      color: #fff;
  }
@@ -294,7 +298,7 @@ height: 100%;
 }
 .buttons div{
 width: 90px;;
-background-color: #164B77;
+background-color: #2B81BE;
 height: 50px;
 margin-bottom: 50px;
 margin-top: -35px;

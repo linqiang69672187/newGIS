@@ -24,11 +24,12 @@ import Callbox from "@/components/control/CallBox"
 import notice from "@/components/control/notices"
 import LeftToolbox from "@/components/control/LeftToolbox"
 
+
 export default {
     data(){
        return{
            hidedmenu:false,
-           dmenuszie: '10px !important',             
+           dmenuszie: '260px !important',             
        }
     },
    mounted(){
