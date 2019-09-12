@@ -58,7 +58,7 @@ import dialplate from "@/components/tabs/dialplate"
                 this.showdmenu=true;
                 this.rationicon=true;
                 this.$emit("listenchange",this.showdmenu); 
-                console.info(tabs); 
+               
          
               if(this.tabname!=tabs){
                   this.tabname=tabs;  
@@ -73,6 +73,7 @@ import dialplate from "@/components/tabs/dialplate"
         },
         mounted() {
        },
+       
        
     }
 </script>

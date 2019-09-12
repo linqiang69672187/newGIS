@@ -170,13 +170,17 @@ export default {
            this.showgroupcall = true;//后续优化，传值判断后，是否显示按钮
           this.showsingalcall=true;
       },
-      sendparentvalue(val){
-          this.inputnum=val;
+      sendparentvalue(val){  
+         // this.inputnum='';
           var _this = this;
           setTimeout(() => {
               _this.$el.getElementsByClassName("input")[0].focus();
           }, 500);
+      },
+      clearval(){
+          this.inputnum='';
       }
+       
   }
 }
 </script>
