@@ -302,8 +302,10 @@ cursor: pointer;
 }
 .buttonspress{
     background-color: #000;
-    color: #fff;
-    opacity: 0.35;
+    opacity: 0.5;
+    -webkit-transform:scale(1.2) ; 
+    -moz-transform:scale(1.2) ; 
+    -o-transform:scale(1.2) ;
 }
 
 .backspacespress{
