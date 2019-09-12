@@ -8,7 +8,7 @@
            <LeftToolbox :style="{bottom:dmenuszie}"></LeftToolbox>
        </div>
        <div>
-           <div class="top" @click="ck"><banner></banner></div>
+           <div class="top" ><banner></banner></div>
            <div class="left" :class="{hidedmenu}"><Lmenu></Lmenu></div>
            <div class="bottom"><Dmenu ref="dmenu"  @listenchange="listenchangeDmenu"></Dmenu></div>
        </div>
@@ -76,9 +76,7 @@ export default {
            (isshow)?this.dmenuszie='260px !important':this.dmenuszie='10px !important'
           // console.info(isshow+this.dmenuszie)
         },
-        ck:function(el){
-            this.$refs.dmenu.leave();
-        }
+       
     }
 }
 </script>
