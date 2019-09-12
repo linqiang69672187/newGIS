@@ -325,8 +325,9 @@ cursor: pointer;
 </style>
 <style>
 .dialtabs .ivu-tabs-nav{
-    float:right !important;
-
+    margin-left: 15px;
+    background-color: #2B81BE;
+    width: 283px;
 }
 
 </style>
