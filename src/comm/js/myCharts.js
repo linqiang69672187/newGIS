@@ -4,6 +4,7 @@
  */
 
 import echarts from 'echarts'
+import { faFastForward } from '@fortawesome/fontawesome-free-solid'
 const install = function(Vue) {
     Object.defineProperties(Vue.prototype, {
         $chart: {
@@ -70,16 +71,29 @@ const install = function(Vue) {
                             },
                             grid:{x:40,y:60,x2:50,y2:30},
                             legend: {
-                                data:['在线设备', '在线时长']
+                                data:['在线设备', '在线时长'],
+                                textStyle:{
+                                    color:'#fff'
+                                }
                             },
                             dataZoom: {
-                                show: false,
+                                show: true,
                                 start: 0,
                                 end: 100
                             },
                             xAxis: [
                                 {
                                     type: 'category',
+                                  
+                                    axisLine:{
+                                        show: false
+                                    },
+                                   
+                                    axisLine:{
+                                       lineStyle:{
+                                           color:'#fff'
+                                       } 
+                                    },
                                     boundaryGap: false,
                                     data: (function (){
                                         var now = new Date();
@@ -94,26 +108,57 @@ const install = function(Vue) {
                                 },
                                 {
                                     type: 'category',
+                                  
+                                    axisLine:{
+                                        show: false
+                                    },
                                     boundaryGap: false,
                                    
-                                }
+                                },
                             ],
                             yAxis: [
                                 {
                                     type: 'value',
                                     scale: true,
-                                    name: '数量',
+                                    splitLine: {
+                                        show: false
+                                    },
+                                    axisLabel:{
+                                        color:'#fff'
+                                    },
+                                    name: '设备数量',
                                     max: 30,
+                                    nameTextStyle:{
+                                        color:'#fff'
+                                    },
                                     min: 0,
-                                    boundaryGap: [0.2, 0.2]
+                                    boundaryGap: [0.2, 0.2],
+                                    axisLine:{
+                                       lineStyle:{
+                                           color:'#fff'
+                                       } 
+                                    }
                                 },
                                 {
                                     type: 'value',
                                     scale: true,
-                                    name: '时长',
-                                   
-                                    min: 95,
-                                    boundaryGap: [0.2, 0.2]
+                                    name: '在线时长',
+                                    nameTextStyle:{
+                                        color:'#fff'
+                                    },
+                                    axisLabel:{
+                                        color:'#fff'
+                                    },
+                                    splitLine: {
+                                        show: false
+                                    },
+                                    min: 80,
+                                    boundaryGap: [0.2, 0.2],
+                                    axisLine:{
+                                       lineStyle:{
+                                           color:'#fff'
+                                       } 
+                                    }
                                 }
                             ],
                             series: [
@@ -123,7 +168,7 @@ const install = function(Vue) {
                                     xAxisIndex: 1,
                                     smooth:true, 
                                     itemStyle: {
-                                        color: 'rgb(6, 70, 131)'
+                                        color: 'rgb(180, 255, 11)'
                                     },
                                     areaStyle: {
                                         color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
@@ -137,9 +182,10 @@ const install = function(Vue) {
                                     yAxisIndex: 1,
                                     data:(function (){
                                         var res = [];
-                                        var len = 20;
-                                        while (len--) {
+                                        let len = 20;
+                                        while (len >= 0) {
                                             res.push(100+Math.round(Math.random())-len);
+                                            len--;
                                         }
                                         return res;
                                     })()
@@ -147,22 +193,22 @@ const install = function(Vue) {
                                 {
                                     name:'在线设备',
                                     type:'line',
-                                    smooth:true, 
+                                    smooth:false, 
                                     itemStyle: {
-                                        color: 'rgb(255, 70, 131)'
+                                        color: 'rgb(43, 129, 190)'
                                     },
                                     areaStyle: {
                                         color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
                                             offset: 0,
-                                            color: 'rgb(0, 158, 68)'
+                                            color: 'rgb(4, 38, 87)'
                                         }, {
                                             offset: 1,
-                                            color: 'rgb(0, 70, 131)'
+                                            color: 'rgb(237, 46, 96)'
                                         }])
                                     },
                                     data:(function (){
                                         var res = [];
-                                        var len = 0;
+                                        let len = 0;
                                         while (len < 20) {
                                             res.push((Math.random()*10 + 5).toFixed(1) - 0);
                                             len++;

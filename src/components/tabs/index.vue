@@ -1,5 +1,5 @@
 <template>
-<div class="row">
+<div :style="backgroundDiv"  class="row">
     <div id="onlinechar"></div>
 </div>
 </template>
@@ -7,7 +7,10 @@
 import {Table} from 'iview';
   export default {
         data () {
-                return {                       
+                return { 
+                     backgroundDiv: {
+                            backgroundImage: 'url(' + require('@/assets/images/tabs_table_bg.jpg') + ')'
+                    } ,                        
                 }
         },
         components:{
@@ -29,9 +32,15 @@ import {Table} from 'iview';
 #onlinechar{
     width:100%;
     height: 220px;
-    background-color: #fff;
+    color: #fff !important;
 }
- 
+ .row{
+         height: 220px;
+         width: 100%;
+         background:no-repeat no-repeat;;
+         background-size: 100%;  
+         color: #fff;
+    }
 </style>
 <style >
 
