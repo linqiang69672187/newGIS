@@ -5,7 +5,7 @@
            <MapToolbox></MapToolbox>
            <Callbox :class="{hidedmenu}"></Callbox>
            <notice ></notice>
-           <LeftToolbox :style="{bottom:dmenuszie}"></LeftToolbox>
+           <LeftToolbox @daiplate="cldaiplate" :style="{bottom:dmenuszie}"></LeftToolbox>
        </div>
        <div>
            <div class="top" ><banner></banner></div>
@@ -77,6 +77,9 @@ export default {
            (isshow)?this.dmenuszie='260px !important':this.dmenuszie='10px !important'
           // console.info(isshow+this.dmenuszie)
         },
+        cldaiplate:function(){  
+              this.$refs.dmenu.changeshowtab('','拨号键盘');
+        }
        
     }
 }

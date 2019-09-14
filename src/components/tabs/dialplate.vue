@@ -5,7 +5,7 @@
         <div class="dialpane">
             <div >
                  <ul> 
-                   <li class="inputli"><input v-model='inputnum' maxlength='15' @keydown="keypress" @keyup="keyup" class="input" placeholder="输入组号/个号"  /></li>
+                   <li class="inputli"><input v-model='inputnum' maxlength='15' @keydown="keypress" @keyup="keyup" class="input" placeholder="输入组号/个号/姓名"  /></li>
                    <li> <i @mousedown="buttonspress='Backspace'"  @click="backbtnclick"     @mouseleave="buttonspress=''" @mouseup="buttonspress=''" :class="buttonspress=='Backspace'?'backspacespress':''"  class="material-icons">backspace</i></li>
                 </ul>
             </div>
@@ -27,10 +27,15 @@
                     </ul>
                 </div>
                 <div class="buttons">
-                    <ul>
+                    <ul><transition name="fade">
                         <li v-if="showsingalcall"><div v-ripple="'rgba(255, 255, 255, 0.35)'" ><i class="material-icons">person</i><span>全双功</span></div></li>
+                         </transition>
+                         <transition name="fade">
                         <li v-if="showsingalcall"><div v-ripple="'rgba(255, 255, 255, 0.35)'"><i class="material-icons">mic</i><span>半双功</span></div></li>
+                        </transition>
+                        <transition name="fade">
                         <li v-if="showgroupcall"><div v-ripple="'rgba(255, 255, 255, 0.35)'"><i class="material-icons">group</i><span>组&nbsp;&nbsp;&nbsp;呼</span></div></li>                       
+                        </transition>
                     </ul>
                 </div>   
               
@@ -353,6 +358,13 @@ cursor: pointer;
 }
 .isfocus{
     
+}
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+   
 }
 </style>
 <style>

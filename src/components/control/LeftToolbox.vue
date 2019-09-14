@@ -1,6 +1,6 @@
 <template>
   <fab :actions="fabActions"
-       @cache="cache"
+       @daiplate="daiplate"
        @alertMe="alert"
        main-tooltip="点击展开"	
      	
@@ -41,7 +41,7 @@ export default {
               }
               ,
               {
-                  name: 'alertMe',
+                  name: 'daiplate',
                   icon: 'dialpad',
                   tooltip:'拨号盘',
                    color:'#FE9900',
@@ -57,8 +57,8 @@ export default {
       }
   },
   methods:{
-      cache(){
-          console.log('Cache Cleared');
+      daiplate(){
+          this.$emit("daiplate");  
       },
       alert(){
           alert('Clicked on alert icon');
