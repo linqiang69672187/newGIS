@@ -171,6 +171,9 @@ transform:rotate(180deg);
 -webkit-transform:rotate(180deg); /* Safari 和 Chrome */
 -o-transform:rotate(180deg); 	/* Opera */
 }
+ .ivu-tabs{
+     overflow: visible !important;
+ }
 </style>
 <style >
 .tabs .ivu-tabs-tab{
@@ -205,5 +208,5 @@ transform:rotate(180deg);
    .calltable th,.calltable td{
     height: 30px !important;
     }
-  
+ 
 </style>
