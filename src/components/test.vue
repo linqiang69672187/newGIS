@@ -1,43 +1,55 @@
 <template>
-<div>
-    <i class="iconfont icon-Ruler"></i>
+<div :style="backgroundDiv"  class="row">
+    <div id="onlinechar"></div>
 </div>
-
 </template>
 <script>
-import fab from 'vue-fab'
-
-export default {
-  components: {
-    fab
-  },
-   data(){
-      return {
-          bgColor: '#778899',
-          position: 'top-right',
-          fabActions: [
-              {
-                  name: 'cache',
-                  icon: 'add'
-              },
-              {
-                  name: 'alertMe',
-                  icon: 'https'
-              }
-          ]
-      }
-  },
-  methods:{
-      cache(){
-          console.log('Cache Cleared');
-      },
-      alert(){
-          alert('您点击了按钮');
-      }
-  }
-}
+import {Table} from 'iview';
+  export default {
+        data () {
+                return { 
+                     backgroundDiv: {
+                            backgroundImage: 'url(' + require('@/assets/images/tabs_table_bg.jpg') + ')'
+                    } ,                        
+                }
+        },
+        components:{
+         
+        },
+        methods: {
+           
+        },
+        created(){
+    
+        },
+        mounted() {
+        Vue.axios.get('/assets/Json/hangzhou.json', {
+                            params: 'data'
+                          }).then((res) => {
+                            console.log(res)
+                            
+                          }).catch((err) => {
+                            console.log(err)
+                            alert('请求出错！')
+                          })
+        }
+    }
 </script>
-
 <style scoped>
+
+#onlinechar{
+    width:100%;
+    height: 220px;
+    color: #fff !important;
+}
+ .row{
+         height: 220px;
+         width: 100%;
+         background:no-repeat no-repeat;;
+         background-size: 100%;  
+         color: #fff;
+    }
+</style>
+<style >
 
 </style>
