@@ -4,6 +4,7 @@
  */
 
 import echarts from 'echarts'
+
 import { faFastForward } from '@fortawesome/fontawesome-free-solid'
 const install = function(Vue) {
     Object.defineProperties(Vue.prototype, {
@@ -236,6 +237,10 @@ const install = function(Vue) {
                             that.chart.setOption(option);
                         }, 5000);
                     },
+                    drawmap:function(id){ 
+                        console.info(this.$axios);
+                        
+                    }
                   
 
                 }
