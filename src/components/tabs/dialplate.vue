@@ -75,15 +75,13 @@
                     </ul>
                 </div>
                 <div class="buttons">
-                    <ul><transition name="fade">
+                    <ul>
                         <li v-if="showsingalcall"><div v-ripple="'rgba(255, 255, 255, 0.35)'" ><i class="material-icons">person</i><span>全双功</span></div></li>
-                         </transition>
-                         <transition name="fade">
+                       
                         <li v-if="showsingalcall"><div v-ripple="'rgba(255, 255, 255, 0.35)'"><i class="material-icons">mic</i><span>半双功</span></div></li>
-                        </transition>
-                        <transition name="fade">
+                        
                         <li v-if="showgroupcall"><div v-ripple="'rgba(255, 255, 255, 0.35)'"><i class="material-icons">group</i><span>组&nbsp;&nbsp;&nbsp;呼</span></div></li>                       
-                        </transition>
+                       
                     </ul>
                 </div>   
               
