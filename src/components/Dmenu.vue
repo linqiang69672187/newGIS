@@ -66,13 +66,15 @@ import GPScontrol from "@/components/tabs/GPScontrol"
               if(this.tabname!=tabs){
                   this.tabname=tabs;  
                 }
-                 this.$refs.dail.sendparentvalue(key);
+                 tabclick();
                
             },
             tabclick(){
                 if (this.tabname=="拨号键盘"){
                 this.$refs.dail.sendparentvalue('');
+                return;
                 }
+                this.$refs.dail.hidetab();
             }
            
         },

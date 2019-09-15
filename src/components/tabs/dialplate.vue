@@ -12,18 +12,18 @@
             <div >
                 <div class="number">
                     <ul>
-                        <li><div @click="numbtnclick"  :class="[buttonspress=='Digit1'?'buttonspress':'',showthetab==true?'zoomIn animated':'']"  v-ripple="'rgba(255, 255, 255, 0.35)'">1</div></li>
-                        <li><div @click="numbtnclick"  :class="[buttonspress=='Digit2'?'buttonspress':'',showthetab==true?'zoomIn animated':'']"  v-ripple="'rgba(255, 255, 255, 0.35)'">2</div></li>
-                        <li><div @click="numbtnclick"  :class="[buttonspress=='Digit3'?'buttonspress':'',showthetab==true?'zoomIn animated':'']"  v-ripple="'rgba(255, 255, 255, 0.35)'">3</div></li>
-                        <li><div @click="numbtnclick"  :class="[buttonspress=='Digit4'?'buttonspress':'',showthetab==true?'zoomIn animated':'']"  v-ripple="'rgba(255, 255, 255, 0.35)'">4</div></li>
-                        <li><div @click="numbtnclick"  :class="[buttonspress=='Digit5'?'buttonspress':'',showthetab==true?'zoomIn animated':'']"  v-ripple="'rgba(255, 255, 255, 0.35)'">5</div></li>
-                        <li><div @click="numbtnclick"  :class="[buttonspress=='Digit6'?'buttonspress':'',showthetab==true?'zoomIn animated':'']"  v-ripple="'rgba(255, 255, 255, 0.35)'">6</div></li>
-                        <li><div @click="numbtnclick"  :class="[buttonspress=='Digit7'?'buttonspress':'',showthetab==true?'zoomIn animated':'']"  v-ripple="'rgba(255, 255, 255, 0.35)'">7</div></li>
-                        <li><div @click="numbtnclick"  :class="[buttonspress=='Digit8'?'buttonspress':'',showthetab==true?'zoomIn animated':'']"  v-ripple="'rgba(255, 255, 255, 0.35)'">8</div></li>
-                        <li><div @click="numbtnclick"  :class="[buttonspress=='Digit9'?'buttonspress':'',showthetab==true?'zoomIn animated':'']"  v-ripple="'rgba(255, 255, 255, 0.35)'">9</div></li>
-                        <li><div @click="numbtnclick"  :class="[buttonspress=='Digit0'?'buttonspress':'',showthetab==true?'zoomIn animated':'']"  v-ripple="'rgba(255, 255, 255, 0.35)'">0</div></li>
-                        <li><div @click="numbtnclick"  :class="[buttonspress=='*'?'buttonspress':'',showthetab==true?'zoomIn animated':'']"  v-ripple="'rgba(255, 255, 255, 0.35)'">*</div></li>
-                        <li><div @click="numbtnclick" :class="[buttonspress=='#'?'buttonspress':'',showthetab==true?'zoomIn animated':'']"   v-ripple="'rgba(255, 255, 255, 0.35)'">#</div></li>
+                        <li><div @click="numbtnclick"  :class="[buttonspress=='Digit1'?'buttonspress':'',showthetab==true?'show zoomIn animated':'show']"  v-ripple="'rgba(255, 255, 255, 0.35)'">1</div></li>
+                        <li><div @click="numbtnclick"  :class="[buttonspress=='Digit2'?'buttonspress':'',showthetab==true?'show zoomIn animated':'show']"  v-ripple="'rgba(255, 255, 255, 0.35)'">2</div></li>
+                        <li><div @click="numbtnclick"  :class="[buttonspress=='Digit3'?'buttonspress':'',showthetab==true?'show zoomIn animated':'show']"  v-ripple="'rgba(255, 255, 255, 0.35)'">3</div></li>
+                        <li><div @click="numbtnclick"  :class="[buttonspress=='Digit4'?'buttonspress':'',showthetab==true?'show zoomIn animated':'show']"  v-ripple="'rgba(255, 255, 255, 0.35)'">4</div></li>
+                        <li><div @click="numbtnclick"  :class="[buttonspress=='Digit5'?'buttonspress':'',showthetab==true?'show zoomIn animated':'show']"  v-ripple="'rgba(255, 255, 255, 0.35)'">5</div></li>
+                        <li><div @click="numbtnclick"  :class="[buttonspress=='Digit6'?'buttonspress':'',showthetab==true?'show zoomIn animated':'show']"  v-ripple="'rgba(255, 255, 255, 0.35)'">6</div></li>
+                        <li><div @click="numbtnclick"  :class="[buttonspress=='Digit7'?'buttonspress':'',showthetab==true?'show zoomIn animated':'show']"  v-ripple="'rgba(255, 255, 255, 0.35)'">7</div></li>
+                        <li><div @click="numbtnclick"  :class="[buttonspress=='Digit8'?'buttonspress':'',showthetab==true?'show zoomIn animated':'show']"  v-ripple="'rgba(255, 255, 255, 0.35)'">8</div></li>
+                        <li><div @click="numbtnclick"  :class="[buttonspress=='Digit9'?'buttonspress':'',showthetab==true?'show zoomIn animated':'show']"  v-ripple="'rgba(255, 255, 255, 0.35)'">9</div></li>
+                        <li><div @click="numbtnclick"  :class="[buttonspress=='Digit0'?'buttonspress':'',showthetab==true?'show zoomIn animated':'show']"  v-ripple="'rgba(255, 255, 255, 0.35)'">0</div></li>
+                        <li><div @click="numbtnclick"  :class="[buttonspress=='*'?'buttonspress':'',showthetab==true?'show zoomIn animated':'show']"  v-ripple="'rgba(255, 255, 255, 0.35)'">*</div></li>
+                        <li><div @click="numbtnclick" :class="[buttonspress=='#'?'buttonspress':'',showthetab==true?'show zoomIn animated':'show']"   v-ripple="'rgba(255, 255, 255, 0.35)'">#</div></li>
                     </ul>
                 </div>
                 <div class="buttons">
@@ -195,6 +195,9 @@ export default {
       },
       clearval(){
           this.inputnum='';
+      },
+      hidetab(){
+          this.hidethetab=true;
       }
        
   }
@@ -299,6 +302,7 @@ export default {
    float:left;
    margin-left: 12px;
    margin-bottom: 10px;
+
 }
 .buttons{
 float: right;
@@ -364,15 +368,16 @@ cursor: pointer;
 .backspacespress{
     color: #333333 !important; 
 }
-.isfocus{
-    
-}
 .fade-enter-active, .fade-leave-active {
   transition: opacity 0.5s;
 }
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
    
+}
+
+.show{
+   display: block;
 }
 </style>
 <style>
