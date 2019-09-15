@@ -186,6 +186,10 @@ export default {
           setTimeout(() => {
               _this.$el.getElementsByClassName("input")[0].focus();
               _this.showthetab=true;
+                let __this=_this;
+                setTimeout(() => {
+                    __this.showthetab=false;
+                },3000);
                
           }, 500);
       },
