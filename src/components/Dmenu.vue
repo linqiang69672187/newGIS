@@ -70,7 +70,9 @@ import GPScontrol from "@/components/tabs/GPScontrol"
                
             },
             tabclick(){
+                if (this.tabname=="拨号键盘"){
                 this.$refs.dail.sendparentvalue('');
+                }
             }
            
         },
