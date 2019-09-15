@@ -3,7 +3,7 @@
    <div  class="controlmenu" :class="{rationicon}"><ul @click="leave" ><li ><i class="fas fa-sort-down" ></i></li><li></li><li><i class="fas fa-sort-down" ></i></li></ul></div>
   
     <div >
-    <Tabs class='tabs' v-model='tabname' name='plane' type='card' closable @on-tab-remove='handleTabRemove'>
+    <Tabs class='tabs' @on-click='tabclick' v-model='tabname' name='plane' type='card' closable @on-tab-remove='handleTabRemove'>
         <TabPane  tab="plane"  name="实时状况" label="实时状况" class="tabpane" v-if="tab1" icon="ios-stats"><tabindex></tabindex></TabPane>
         <TabPane  tab="plane" name="GPS控制" class="tabpane" label="GPS控制" v-if="tab0" icon="ios-key"><GPScontrol></GPScontrol></TabPane>
         <TabPane  tab="plane"  name="锁定跟踪" class="tabpane"  label="锁定跟踪" v-if="tab1" icon="logo-windows"><eyemaps></eyemaps></TabPane>
@@ -68,8 +68,10 @@ import GPScontrol from "@/components/tabs/GPScontrol"
                 }
                  this.$refs.dail.sendparentvalue(key);
                
+            },
+            tabclick(){
+                this.$refs.dail.sendparentvalue('');
             }
-
            
         },
         created(){
