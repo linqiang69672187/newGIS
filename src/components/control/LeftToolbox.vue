@@ -74,7 +74,10 @@ export default {
 }
 </style>
 <style>
-.fab-main{
-  padding: 26px !important;
+@media screen and(-ms-high-contrast:active),(-ms-high-contrast:none){
+  .fab-wrapper .fab-main i{
+    margin-top: -17px !important;
+    margin-left: -17px !important;
+  }
 }
 </style>
