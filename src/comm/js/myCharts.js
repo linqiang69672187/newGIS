@@ -395,8 +395,8 @@ const install = function(Vue) {
                         this.chart.setOption(option);
                         let _this =this;
                         setInterval(function (){
-                            let val = parseFloat(60)+parseFloat((Math.random() * 20).toFixed(2));
-                            option.series[0].data[0].value = val;
+                            let val = parseFloat(60)+parseFloat((Math.random() * 20));
+                            option.series[0].data[0].value = val.toFixed(2);
                             _this.chart.setOption(option,true);
                         },5000)
 

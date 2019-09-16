@@ -195,8 +195,8 @@ import Table from "@/components/control/tables"
     color: #fff;
 }
 .right th{
-    background-color: #2B81BE;
-       height:30px;
+    background-color: #2B81BE !important;
+    height:30px !important;
      border: 0 !important;
      font-weight: normal;
 }

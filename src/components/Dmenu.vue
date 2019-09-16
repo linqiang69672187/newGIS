@@ -4,11 +4,11 @@
   
     <div >
     <Tabs class='tabs' @on-click='tabclick' v-model='tabname' name='plane' type='card' closable @on-tab-remove='handleTabRemove'>
-        <TabPane  tab="plane"  name="实时状况" label="实时状况" class="tabpane" v-if="tab1" icon="ios-stats"><tabindex></tabindex></TabPane>
-        <TabPane  tab="plane" name="GPS控制" class="tabpane" label="GPS控制" v-if="tab0" icon="ios-key"><GPScontrol></GPScontrol></TabPane>
-        <TabPane  tab="plane"  name="锁定跟踪" class="tabpane"  label="锁定跟踪" v-if="tab1" icon="logo-windows"><eyemaps></eyemaps></TabPane>
-        <TabPane  tab="plane" name="视频窗口" class="tabpane"  label="视频窗口" v-if="tab2" icon="logo-tux"><videos></videos></TabPane>
-        <TabPane  tab="plane" name="拨号键盘"   class="tabpane"  label="拨号键盘" v-if="tab2" icon="ios-apps"><dialplate ref="dail"></dialplate></TabPane>
+        <TabPane  tab="plane"  name="实时状况" label="实时状况" class="tabpane" v-if="tab0" icon="ios-stats"><tabindex></tabindex></TabPane>
+        <TabPane  tab="plane" name="GPS控制" class="tabpane" label="GPS控制" v-if="tab1" icon="ios-key"><GPScontrol></GPScontrol></TabPane>
+        <TabPane  tab="plane"  name="锁定跟踪" class="tabpane"  label="锁定跟踪" v-if="tab2" icon="ios-lock"><eyemaps></eyemaps></TabPane>
+        <TabPane  tab="plane" name="视频窗口" class="tabpane"  label="视频窗口" v-if="tab3" icon="logo-windows"><videos></videos></TabPane>
+        <TabPane  tab="plane" name="拨号键盘"   class="tabpane"  label="拨号键盘" v-if="tab4" icon="ios-apps"><dialplate ref="dail"></dialplate></TabPane>
     </Tabs>
     </div>
      
@@ -29,6 +29,8 @@ import GPScontrol from "@/components/tabs/GPScontrol"
                         tab0: true,
                         tab1: true,
                         tab2: true,
+                        tab3: true,
+                        tab4: true,
                         show: false,
                         showdmenu:true,
                         rationicon:true,

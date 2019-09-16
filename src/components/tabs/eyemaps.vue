@@ -1,5 +1,5 @@
 <template>
-    <div class="row">
+    <div   class="row">
         <ul>
             <li> 
              <Map move-type="1"></Map>
@@ -31,7 +31,7 @@ import Map from "@/components/map"
 export default {
         data () {
                 return {
-                         
+                          
                     }
         },
     mounted(){
@@ -50,6 +50,8 @@ export default {
 .row{
     width: 100%; 
     height:220px;
+    background:no-repeat no-repeat;;
+    background-size: 100%;  
     background-color: #fff;
     overflow-x: auto;
     overflow-y: hidden;

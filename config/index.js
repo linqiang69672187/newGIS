@@ -17,7 +17,21 @@ module.exports = {
         pathRewrite:{
             '^/app':''
         }
-      }
+      },
+      '/baidu':{
+        target:'http://127.0.0.1:8081/baidu',
+        changeOrigin:true,
+        pathRewrite:{
+            '^/baidu':''
+        }
+      },
+      '/video':{
+        target:'http://127.0.0.1:8081/video',
+        changeOrigin:true,
+        pathRewrite:{
+            '^/video':''
+        }
+      },
     },
 
     // Various Dev Server settings

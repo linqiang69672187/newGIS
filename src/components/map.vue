@@ -41,7 +41,7 @@ export default {
        },
         initMap() {
        
-       var url = "http://127.0.0.1:8081/"+"baidu/tiles/{z}/{x}/{-y}.jpg";
+       var url = ""+"baidu/tiles/{z}/{x}/{-y}.jpg";
        var center;
             switch(this.type){
                 case "1":
