@@ -22,7 +22,7 @@ const createLintingRule = () => ({
 module.exports = {
   context: path.resolve(__dirname, '../'),
   entry: {
-    app: './src/main.js'
+    app:['babel-polyfill', './src/main.js']
   },
   output: {
     path: config.build.assetsRoot,
@@ -74,6 +74,12 @@ module.exports = {
           limit: 10000,
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
+      }
+      ,
+            //这里的意思是遇到路径为文件名为iview.src.xxxxjs的都用babel转换为ES5的支持的语法
+      {
+        test: /iview.src.*?js$/,
+        loader: 'babel-loader'
       }
     ]
   },
