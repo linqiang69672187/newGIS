@@ -118,6 +118,19 @@ import { Table,Page  } from 'iview';
                 var _end = index * this.pageSize;
                 this.historyData = this.ajaxHistoryData.slice(_start,_end);
             },
+            creatindextable(datas,Columns){
+                     // 保存取到的所有数据
+                this.historyColumns=Columns;
+                this.ajaxHistoryData = datas
+                this.dataCount = datas.length;
+                // 初始化显示，小于每页显示条数，全显，大于每页显示条数，取前每页条数显示
+                if(datas.length < this.pageSize){
+                    this.historyData = this.ajaxHistoryData;
+                }else{
+                    this.historyData = this.ajaxHistoryData.slice(0,this.pageSize);
+                } 
+            }
+            
          },
         created(){
            

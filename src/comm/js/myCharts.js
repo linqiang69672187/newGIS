@@ -70,7 +70,7 @@ const install = function(Vue) {
                                     }
                                 }
                             },
-                            grid:{x:40,y:60,x2:50,y2:30},
+                            grid:{x:40,y:60,x2:30,y2:30},
                             legend: {
                                 data:['在线设备', '在线时长'],
                                 textStyle:{
@@ -78,7 +78,7 @@ const install = function(Vue) {
                                 }
                             },
                             dataZoom: {
-                                show: true,
+                                show: false,
                                 start: 0,
                                 end: 100
                             },
@@ -222,6 +222,7 @@ const install = function(Vue) {
                         this.chart.setOption(option);
                         let that =this;
                         app.count = 11;
+                      
                         setInterval(function (){
                             let axisData = (new Date()).toLocaleTimeString().replace(/^\D*/,'');
                         
@@ -238,8 +239,167 @@ const install = function(Vue) {
                         }, 5000);
                     },
                     drawmap:function(id){ 
-                        console.info(this.$axios);
+                        this.chart = echarts.init(document.getElementById(id));
+                        this.chart.clear();
+                        this.chart.showLoading();
+                        let that =this;
+                        Vue.axios.get('app/data/Json/hangzhou.json', {
+                            params: 'data'
+                          }).then((res) => {
+                         that.chart.hideLoading();
+                         echarts.registerMap('HZ', res.data);
+                         console.info(res.data);
+                            
+                        var option = {
+                            title: {
+                                text: '',
+                                subtext: '',
+                                sublink: '',
+                                left: 'center'
+                            },
+                            tooltip: {
+                                trigger: 'item',
+                                showDelay: 0,
+                                transitionDuration: 0.2,
+                                formatter: function (params) {
+                                    var value = params.value;
+                                    return params.seriesName + '<br/>' + params.name + ': ' + value;
+                                }
+                            },
+                            series: [
+                                {
+                                    name: '设备数量',
+                                    type: 'map',
+                                    roam: true,
+                                    map: 'HZ',
+                                    itemStyle:{
+                                        //默认显示地图地名
+                                        normal:{label:{show:true}},
+                                        emphasis:{label:{show:true}}
+                                    },
+                                    // 文本位置修正
+                                    textFixed: {
+                                        Alaska: [20, -20]
+                                    },
+                                    data:[
+                                
+                                  
+                                        {name: '西湖区', value: 11},
+                                        {name: '拱墅区', value: 12},
+                                        {name: '上城区', value: 14},
+                                        {name: '下城区', value: 15},
+                                        {name: '江干区', value: 11},
+                                        {name: '萧山区', value: 12},
+                                       
+                                    ],
+                                }
+                            ]
+                        };
+                        console.info(this.chart);  
+                        that.chart.setOption(option);
+                       
+                          }).catch((err) => {
+                            console.log(err)
+                            alert('请求出错！')
+                          })
+                    },
+                    gaugeindex:function(id){
+                        this.chart = echarts.init(document.getElementById(id));
+                        this.chart.clear();
                         
+                        let option = {
+                            tooltip : {
+                                formatter: "{a} <br/>{b} : {c}%"
+                            },
+                   
+                         
+                            toolbox: {
+                                show:false,
+                                feature: {
+                                    restore: {},
+                                    saveAsImage: {}
+                                }
+                            },
+                            series: [
+                                {
+                                    radius: '90%',
+                                    name: '在线指标',
+                                    type: 'gauge',
+                                    detail: {formatter:'{value}%'},
+                                    data: [{value: 50, name: '在线率'}],
+                                    axisLine: {            // 坐标轴线
+                                        lineStyle: {       // 属性lineStyle控制线条样式
+                                            color: [[0.09, 'lime'],[0.82, '#1e90ff'],[1, '#ff4500']],
+                                            width: 3,
+                                            shadowColor : '#fff', //默认透明
+                                            shadowBlur: 10
+                                        }
+                                    },
+                                    axisLabel: {            // 坐标轴小标记
+                                        textStyle: {       // 属性lineStyle控制线条样式
+                                            fontWeight: 'bolder',
+                                            color: '#fff',
+                                            shadowColor : '#fff', //默认透明
+                                            shadowBlur: 10
+                                        }
+                                    },
+                                    axisTick: {            // 坐标轴小标记
+                                        length :15,        // 属性length控制线长
+                                        lineStyle: {       // 属性lineStyle控制线条样式
+                                            color: 'auto',
+                                            shadowColor : '#fff', //默认透明
+                                            shadowBlur: 10
+                                        }
+                                    },
+                                    splitLine: {           // 分隔线
+                                        length :25,         // 属性length控制线长
+                                        lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
+                                            width:3,
+                                            color: '#fff',
+                                            shadowColor : '#fff', //默认透明
+                                            shadowBlur: 10
+                                        }
+                                    },
+                                    pointer: {           // 分隔线
+                                        shadowColor : '#fff', //默认透明
+                                        shadowBlur: 5
+                                    },
+                                    title : {
+                                        textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                                            fontWeight: 'bolder',
+                                            fontSize: 14,
+                                        
+                                            fontStyle: 'italic',
+                                            color: '#fff',
+                                            shadowColor : '#fff', //默认透明
+                                            shadowBlur: 10
+                                        }
+                                    },
+                                    detail : {
+                                        backgroundColor: 'rgba(30,144,255,0.8)',
+                                        borderWidth: 1,
+                                        borderColor: '#fff',
+                                        shadowColor : '#fff', //默认透明
+                                        shadowBlur: 5,
+                                        offsetCenter: [0, '80%'],       // x, y，单位px
+                                        textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                                            fontWeight: 'bolder',
+                                            color: '#fff',
+                                            fontSize:12,
+                                        }
+                                    },
+                                }
+                            ]
+                        };
+
+                        this.chart.setOption(option);
+                        let _this =this;
+                        setInterval(function (){
+                            let val = parseFloat(60)+parseFloat((Math.random() * 20).toFixed(2));
+                            option.series[0].data[0].value = val;
+                            _this.chart.setOption(option,true);
+                        },5000)
+
                     }
                   
 

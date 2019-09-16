@@ -66,7 +66,7 @@ import GPScontrol from "@/components/tabs/GPScontrol"
               if(this.tabname!=tabs){
                   this.tabname=tabs;  
                 }
-                 tabclick();
+                 this.tabclick();
                
             },
             tabclick(){

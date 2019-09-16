@@ -339,7 +339,7 @@ export default {
     border: #fff solid 1px;
     line-height: 40px;
     cursor: pointer;
-    background: rgba(255,255,255,.3);
+    background: rgba(43,129,190,.3);
 
 }
 .number li{
