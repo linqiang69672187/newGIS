@@ -100,7 +100,7 @@ import { setTimeout } from 'timers';
 }
 
 #onlinechartable{
-    margin-top: 10px;
+    margin-top: 5px;
     width:25%;
     height: 220px;
     color: #fff !important;
