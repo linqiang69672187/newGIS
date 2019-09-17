@@ -1,7 +1,7 @@
 <template>
-<div v-ripple="'rgba(255, 255, 255, 0.35)'" @click="btnclick" class="comonul">
+<div v-ripple="'rgba(255, 255, 255, 0.35)'" @click="btnclick" :class="buttonType" class="comonul">
     <ul >
-        <li><div><i class="material-icons">{{buttonType}}</i><span>{{buttonName}}</span></div></li>
+        <li><div><i class="material-icons" >{{buttonType}}</i><span>{{buttonName}}</span></div></li>
         <li><Divider /></li>
         <li><span>{{buttonNumber}}</span></li>
     </ul>                
@@ -36,9 +36,14 @@ export default {
 </script>
 
 <style scoped>
+.group{
+   background-color: #FE9900 !important;
+}
+.person{
+       background-color: #3857ad !important;
+}
 .comonul{
     width: 110px;
-    background-color: #FE9900 !important;
     height: 50px;
     margin-bottom: 5px;
     margin-top: 3px;
