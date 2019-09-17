@@ -49,7 +49,7 @@ export default {
                             fluid: false, // 当true时，Video.js player将拥有流体大小。换句话说，它将按比例缩放以适应其容器。
                             sources: [{
                             type: "",//这里的种类支持很多种：基本视频格式、直播、流媒体等，具体可以参看git网址项目
-                            src: "http://127.0.0.1:8081/video/madagascar3.mp4" //url地址
+                            src: "video/madagascar3.mp4" //url地址
                             }],
                             //poster: "@/asset/logo.png", //你的封面地址
                             height:220, //播放器宽度
