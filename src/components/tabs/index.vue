@@ -93,7 +93,7 @@ import { setTimeout } from 'timers';
 <style scoped>
 
 #onlinechar{
-    width:calc(65% - 220px);
+    width:calc(50% - 110px);
     height: 220px;
     color: #fff !important;
     float: left;
@@ -107,7 +107,7 @@ import { setTimeout } from 'timers';
 
 #onlinechartable{
     margin-top: 10px;
-    width:35%;
+    width:calc(50% - 110px);
     height: 220px;
     color: #fff !important;
     float: right;

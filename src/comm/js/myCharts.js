@@ -70,7 +70,7 @@ const install = function(Vue) {
                                     }
                                 }
                             },
-                            grid:{x:40,y:60,x2:30,y2:30},
+                            grid:{x:40,y:60,x2:40,y2:30},
                             legend: {
                                 data:['在线设备', '在线时长'],
                                 textStyle:{
@@ -127,7 +127,7 @@ const install = function(Vue) {
                                     axisLabel:{
                                         color:'#fff'
                                     },
-                                    name: '设备数量',
+                                    name: '设备数量(个)',
                                     max: 30,
                                     nameTextStyle:{
                                         color:'#fff'
@@ -143,7 +143,7 @@ const install = function(Vue) {
                                 {
                                     type: 'value',
                                     scale: true,
-                                    name: '在线时长',
+                                    name: '在线时长(小时)',
                                     nameTextStyle:{
                                         color:'#fff'
                                     },
@@ -412,22 +412,22 @@ const install = function(Vue) {
                                     type: 'cross',
                                     crossStyle: {
                                         color: '#999'
+                                    },
+                                    label:{
+                                        backgroundColor:'#000'
                                     }
-                                }
+                                },
+                             
                             },
-                            grid:{x:20,y:15,x2:30,y2:35},
+                            grid:{x:40,y:35,x2:40,y2:35},
                             toolbox: {
-                                feature: {
-                                    dataView: {show: false, readOnly: false},
-                                    magicType: {show: false, type: ['line', 'bar']},
-                                    restore: {show: false},
-                                    saveAsImage: {show: false}
-                                }
+                                show: false,
                             },
                             legend: {
                                 data:['在线设备','在线时长'],
                                 textStyle:{
-                                    color:'#fff'
+                                    color:'#fff',
+                                   
                                 }
                             },
                             xAxis: [
@@ -447,7 +447,7 @@ const install = function(Vue) {
                             yAxis: [
                                 {
                                     type: 'value',
-                                    name: '在线设备',
+                                    name: '设备数量(个)',
                                     min: 0,
                             
                                
@@ -455,7 +455,7 @@ const install = function(Vue) {
                                         show: false
                                     },
                                     axisLabel: {
-                                        formatter: '{value} ml'
+                                        formatter: '{value} 个'
                                     },
                                     axisLabel:{
                                         color:'#fff'
@@ -472,7 +472,7 @@ const install = function(Vue) {
                                 },
                                 {
                                     type: 'value',
-                                    name: '在线时长',
+                                    name: '在线时长(小时)',
                                     min: 0,
                                                                 
                                     splitLine: {
@@ -518,11 +518,43 @@ const install = function(Vue) {
                                     },
                                  
                                     yAxisIndex: 1,
-                                    data:[2.6, 5.9, 9.0, 26.4, 28.7, 70.7,17]
+                                    data:[2.6, 5.9, 9.0, 26.4, 18.7, 20.7,17]
                                 }
                             ]
                         };
                         this.chart.setOption(option);
+                        let that =this;
+                                         
+                        setInterval(function (){              
+                            var data0 = option.series[0].data;
+                            var data1 = option.series[1].data;
+                            
+                            for ( var i = 0; i <data0.length; i++){
+                                var oper =Math.round(Math.random());
+                                if (oper==0){
+                                    data0[i]+=Math.round(Math.random()*2);
+                                }
+                                else{
+                                    data0[i]-=Math.round(Math.random()*2);
+                                }
+                                if (data0[i]<0)data0[i]=0;
+                                if (data0[i]>=30)data0[i]=20;
+                            }
+
+                            for ( var i = 0; i <data1.length; i++){
+   
+                                 data1[i]+=Math.floor(Math.random());
+                               
+                            }
+                          
+                         
+                            
+                           console.info(option.series[0].data);
+                           console.info(data0);
+                           // option.xAxis[0].data.shift();
+                           // option.xAxis[0].data.push(axisData);  
+                            that.chart.setOption(option);
+                        }, 5000);
 
                     }
                   
