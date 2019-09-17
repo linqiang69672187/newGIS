@@ -400,6 +400,128 @@ const install = function(Vue) {
                             _this.chart.setOption(option,true);
                         },5000)
 
+                    },
+                    echarbar:function(id){
+                        this.chart = echarts.init(document.getElementById(id));
+                        this.chart.clear();
+                        
+                        let option = {
+                            tooltip: {
+                                trigger: 'axis',
+                                axisPointer: {
+                                    type: 'cross',
+                                    crossStyle: {
+                                        color: '#999'
+                                    }
+                                }
+                            },
+                            grid:{x:30,y:15,x2:30,y2:35},
+                            toolbox: {
+                                feature: {
+                                    dataView: {show: false, readOnly: false},
+                                    magicType: {show: false, type: ['line', 'bar']},
+                                    restore: {show: false},
+                                    saveAsImage: {show: false}
+                                }
+                            },
+                            legend: {
+                                data:['在线设备','在线时长'],
+                                textStyle:{
+                                    color:'#fff'
+                                }
+                            },
+                            xAxis: [
+                                {
+                                    type: 'category',
+                                    data: ['滨江','上城','下城','萧山','拱墅','江干','萧山'],
+                                    axisPointer: {
+                                        type: 'shadow'
+                                    },
+                                    axisLine:{
+                                        lineStyle:{
+                                            color:'#fff'
+                                        } 
+                                     },
+                                }
+                            ],
+                            yAxis: [
+                                {
+                                    type: 'value',
+                                    name: '在线设备',
+                                    min: 0,
+                            
+                               
+                                    splitLine: {
+                                        show: false
+                                    },
+                                    axisLabel: {
+                                        formatter: '{value} ml'
+                                    },
+                                    axisLabel:{
+                                        color:'#fff'
+                                    },
+                                    nameTextStyle:{
+                                        color:'#fff'
+                                    },
+                                    axisLine:{
+                                        lineStyle:{
+                                            color:'#fff'
+                                        } 
+                                     }
+
+                                },
+                                {
+                                    type: 'value',
+                                    name: '在线时长',
+                                    min: 0,
+                                                                
+                                    splitLine: {
+                                        show: false
+                                    },
+                                    axisLabel: {
+                                        formatter: '{value} '
+                                    },
+                                    nameTextStyle:{
+                                        color:'#fff'
+                                    },
+                                    axisLine:{
+                                        lineStyle:{
+                                            color:'#fff'
+                                        } 
+                                     }
+                                }
+                            ],
+                            series: [
+                                {
+                                    name:'在线设备',
+                                    type:'bar',
+                                    itemStyle: {
+                                        color: 'rgb(180, 255, 11)'
+                                    },
+                                    data:[2, 4, 7, 8, 5, 7,15]
+                                },
+                                {
+                                    name:'在线时长',
+                                    type:'bar',
+                                    itemStyle: {
+                                        color: 'rgb(43, 129, 190)'
+                                    },
+                                    areaStyle: {
+                                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                            offset: 0,
+                                            color: 'rgb(4, 38, 87)'
+                                        }, {
+                                            offset: 1,
+                                            color: 'rgb(237, 46, 96)'
+                                        }])
+                                    },
+                                    yAxisIndex: 1,
+                                    data:[2.6, 5.9, 9.0, 26.4, 28.7, 70.7,17]
+                                }
+                            ]
+                        };
+                        this.chart.setOption(option);
+
                     }
                   
 
