@@ -415,7 +415,7 @@ const install = function(Vue) {
                                     }
                                 }
                             },
-                            grid:{x:30,y:15,x2:30,y2:35},
+                            grid:{x:20,y:15,x2:30,y2:35},
                             toolbox: {
                                 feature: {
                                     dataView: {show: false, readOnly: false},
@@ -496,25 +496,27 @@ const install = function(Vue) {
                                     name:'在线设备',
                                     type:'bar',
                                     itemStyle: {
-                                        color: 'rgb(180, 255, 11)'
+                                        color:  'rgb(43, 129, 190)',
+                                        barBorderRadius:[5, 5, 0, 0],
+
                                     },
-                                    data:[2, 4, 7, 8, 5, 7,15]
+                                    data:[12, 4, 7, 8, 5, 7,15],
+                                    markPoint : {
+                                        data : [
+                                           
+                                            {type : 'min', name: '最小值'}
+                                        ]
+                                        
+                                    },
                                 },
                                 {
                                     name:'在线时长',
                                     type:'bar',
                                     itemStyle: {
-                                        color: 'rgb(43, 129, 190)'
+                                        color:'rgb(180, 255, 11)',
+                                        barBorderRadius:[5, 5, 0, 0],
                                     },
-                                    areaStyle: {
-                                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                                            offset: 0,
-                                            color: 'rgb(4, 38, 87)'
-                                        }, {
-                                            offset: 1,
-                                            color: 'rgb(237, 46, 96)'
-                                        }])
-                                    },
+                                 
                                     yAxisIndex: 1,
                                     data:[2.6, 5.9, 9.0, 26.4, 28.7, 70.7,17]
                                 }

@@ -34,6 +34,7 @@ import { setTimeout } from 'timers';
         this.$chart.dynamicline('onlinechar');
         this.$chart.gaugeindex('gauguchar');
         this.$chart.echarbar('onlinechartable');
+        /**
         let _this =this;
                 setTimeout(function(){
                     let datas=[
@@ -85,6 +86,7 @@ import { setTimeout } from 'timers';
                 _this.loading = false;
                 _this.$refs.tabledata.creatindextable(datas,coloums);
                 },2000);
+                 **/
         }
     }
 </script>
