@@ -2,12 +2,15 @@
 <div :style="backgroundDiv"  class="row">
     <div id="onlinechar"></div>
     <div id="gauguchar" class="middle"></div>
-    <div id="onlinechartable" class="right"><Table ref="tabledata"  :loading="loading"></Table></div>
+    <div id="onlinechartable" class="right">
+        <!-- <Table ref="tabledata"  :loading="loading"></Table>  -->
+
+    </div>
 
 </div>
 </template>
 <script>
-import Table from "@/components/control/tables"
+//import Table from "@/components/control/tables"
 import { setTimeout } from 'timers';
   export default {
         data () {
@@ -19,7 +22,7 @@ import { setTimeout } from 'timers';
                 }
         },
         components:{
-         Table
+         //Table
         },
         methods: {
            
@@ -29,7 +32,9 @@ import { setTimeout } from 'timers';
         },
         mounted() {
         this.$chart.dynamicline('onlinechar');
-          this.$chart.gaugeindex('gauguchar');
+        this.$chart.gaugeindex('gauguchar');
+        this.$chart.echarbar('onlinechartable');
+        /**
         let _this =this;
                 setTimeout(function(){
                     let datas=[
@@ -81,13 +86,14 @@ import { setTimeout } from 'timers';
                 _this.loading = false;
                 _this.$refs.tabledata.creatindextable(datas,coloums);
                 },2000);
+                 **/
         }
     }
 </script>
 <style scoped>
 
 #onlinechar{
-    width:calc(75% - 220px);
+    width:calc(50% - 110px);
     height: 220px;
     color: #fff !important;
     float: left;
@@ -100,8 +106,8 @@ import { setTimeout } from 'timers';
 }
 
 #onlinechartable{
-    margin-top: 5px;
-    width:25%;
+    margin-top: 10px;
+    width:calc(50% - 110px);
     height: 220px;
     color: #fff !important;
     float: right;

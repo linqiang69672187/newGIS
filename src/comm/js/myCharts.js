@@ -70,7 +70,7 @@ const install = function(Vue) {
                                     }
                                 }
                             },
-                            grid:{x:40,y:60,x2:30,y2:30},
+                            grid:{x:40,y:60,x2:40,y2:30},
                             legend: {
                                 data:['在线设备', '在线时长'],
                                 textStyle:{
@@ -127,7 +127,7 @@ const install = function(Vue) {
                                     axisLabel:{
                                         color:'#fff'
                                     },
-                                    name: '设备数量',
+                                    name: '设备数量(个)',
                                     max: 30,
                                     nameTextStyle:{
                                         color:'#fff'
@@ -143,7 +143,7 @@ const install = function(Vue) {
                                 {
                                     type: 'value',
                                     scale: true,
-                                    name: '在线时长',
+                                    name: '在线时长(小时)',
                                     nameTextStyle:{
                                         color:'#fff'
                                     },
@@ -399,6 +399,162 @@ const install = function(Vue) {
                             option.series[0].data[0].value = val.toFixed(2);
                             _this.chart.setOption(option,true);
                         },5000)
+
+                    },
+                    echarbar:function(id){
+                        this.chart = echarts.init(document.getElementById(id));
+                        this.chart.clear();
+                        
+                        let option = {
+                            tooltip: {
+                                trigger: 'axis',
+                                axisPointer: {
+                                    type: 'cross',
+                                    crossStyle: {
+                                        color: '#999'
+                                    },
+                                    label:{
+                                        backgroundColor:'#000'
+                                    }
+                                },
+                             
+                            },
+                            grid:{x:40,y:35,x2:40,y2:35},
+                            toolbox: {
+                                show: false,
+                            },
+                            legend: {
+                                data:['在线设备','在线时长'],
+                                textStyle:{
+                                    color:'#fff',
+                                   
+                                }
+                            },
+                            xAxis: [
+                                {
+                                    type: 'category',
+                                    data: ['滨江','上城','下城','萧山','拱墅','江干','萧山'],
+                                    axisPointer: {
+                                        type: 'shadow'
+                                    },
+                                    axisLine:{
+                                        lineStyle:{
+                                            color:'#fff'
+                                        } 
+                                     },
+                                }
+                            ],
+                            yAxis: [
+                                {
+                                    type: 'value',
+                                    name: '设备数量(个)',
+                                    min: 0,
+                            
+                               
+                                    splitLine: {
+                                        show: false
+                                    },
+                                    axisLabel: {
+                                        formatter: '{value} 个'
+                                    },
+                                    axisLabel:{
+                                        color:'#fff'
+                                    },
+                                    nameTextStyle:{
+                                        color:'#fff'
+                                    },
+                                    axisLine:{
+                                        lineStyle:{
+                                            color:'#fff'
+                                        } 
+                                     }
+
+                                },
+                                {
+                                    type: 'value',
+                                    name: '在线时长(小时)',
+                                    min: 0,
+                                                                
+                                    splitLine: {
+                                        show: false
+                                    },
+                                    axisLabel: {
+                                        formatter: '{value} '
+                                    },
+                                    nameTextStyle:{
+                                        color:'#fff'
+                                    },
+                                    axisLine:{
+                                        lineStyle:{
+                                            color:'#fff'
+                                        } 
+                                     }
+                                }
+                            ],
+                            series: [
+                                {
+                                    name:'在线设备',
+                                    type:'bar',
+                                    itemStyle: {
+                                        color:  'rgb(43, 129, 190)',
+                                        barBorderRadius:[5, 5, 0, 0],
+
+                                    },
+                                    data:[12, 4, 7, 8, 5, 7,15],
+                                    markPoint : {
+                                        data : [
+                                           
+                                            {type : 'min', name: '最小值'}
+                                        ]
+                                        
+                                    },
+                                },
+                                {
+                                    name:'在线时长',
+                                    type:'bar',
+                                    itemStyle: {
+                                        color:'rgb(180, 255, 11)',
+                                        barBorderRadius:[5, 5, 0, 0],
+                                    },
+                                 
+                                    yAxisIndex: 1,
+                                    data:[2.6, 5.9, 9.0, 26.4, 18.7, 20.7,17]
+                                }
+                            ]
+                        };
+                        this.chart.setOption(option);
+                        let that =this;
+                                         
+                        setInterval(function (){              
+                            var data0 = option.series[0].data;
+                            var data1 = option.series[1].data;
+                            
+                            for ( var i = 0; i <data0.length; i++){
+                                var oper =Math.round(Math.random());
+                                if (oper==0){
+                                    data0[i]+=Math.round(Math.random()*2);
+                                }
+                                else{
+                                    data0[i]-=Math.round(Math.random()*2);
+                                }
+                                if (data0[i]<0)data0[i]=0;
+                                if (data0[i]>=30)data0[i]=20;
+                            }
+
+                            for ( var i = 0; i <data1.length; i++){
+   
+                                 data1[i]+=Math.floor(Math.random());
+                               
+                            }
+                          
+                         
+                            
+                           console.info(option.series[0].data);
+                           console.info(data0);
+                           // option.xAxis[0].data.shift();
+                           // option.xAxis[0].data.push(axisData);  
+                            that.chart.setOption(option);
+                        }, 5000);
 
                     }
                   
