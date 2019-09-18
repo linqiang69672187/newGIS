@@ -6,13 +6,21 @@
             <div >
                  <ul> 
                    <li class="inputli">
-                       <!-- <AutoComplete
-                            v-model='inputnum'
-                            :data='data1'
-                             @keydown="keypress" @keyup="keyup"  placeholder="输入组号/个号/姓名"
-                            @on-search="handleSearch1">
-                            </AutoComplete> -->
-                      <input v-model='inputnum' maxlength='15' @keydown="keypress" @keyup="keyup" class="input" placeholder="输入组号/个号/姓名"  /> 
+                             <AutoComplete
+                                v-model="inputnum"
+                                @on-search="handleSearch2"
+                                placeholder="输入组号/个号/姓名"
+                                :transfer='transfer'
+                                 class="input"
+                                 
+                                style="width:200px">
+                                <Option v-for="item in data2" :value="item.issi" :key="item">
+                                    <div>
+                                        <span><i class="material-icons" >{{item.type}}</i></span> <span> {{ item.issi }}({{ item.name }})</span>
+                                    </div>           
+                                </Option>
+                            </AutoComplete>
+                      <!-- <input v-model='inputnum' maxlength='15' class="input" placeholder="输入组号/个号/姓名"  />  -->
                        </li>
                    <li> <i @mousedown="buttonspress='Backspace'"  @click="backbtnclick"     @mouseleave="buttonspress=''" @mouseup="buttonspress=''" :class="buttonspress=='Backspace'?'backspacespress':''"  class="material-icons">backspace</i></li>
                 </ul>
@@ -165,7 +173,7 @@
 </template>
 <script>
 import Ripple from 'vue-ripple-directive'
-import { Divider ,TabPane,Tabs,AutoComplete  } from 'iview';
+import { Divider ,TabPane,Tabs,AutoComplete,Option  } from 'iview';
 import callbuttons from '@/components/button/callbuttons';
 
 export default {
@@ -174,7 +182,8 @@ export default {
      Tabs,
      TabPane,
      callbuttons,
-     AutoComplete
+     AutoComplete,
+     Option
   },
   directives: {Ripple,},
   data(){
@@ -182,25 +191,45 @@ export default {
       inputnum:'',
       buttonspress:0,
       showgroupcall:true,
+      transfer:false,
       showsingalcall:true, 
       showthetab:false,
-      data1: [],
+      data2: [],
       backgroundDiv: {
                             backgroundImage: 'url(' + require('@/assets/images/tabs_table_bg.jpg') + ')'
                     } ,  
       }
   
+  }
+  ,
+ mounted(){
+      var _this = this;     
+      this.$el.getElementsByClassName("ivu-input")[0].onkeydown = function(e) {   
+             
+         _this.keypress(e);
+        };
+      this.$el.getElementsByClassName("ivu-input")[0].onkeyup = function(e) {   
+             
+         _this.keyup(e);
+        };
+    },
+  computed:{
+
   },
   methods:{
-      handleSearch1 (value) {
-                this.data1 = !value ? [] : [
-                    value,
-                    value + value,
-                    value + value + value
-                ];
+       handleSearch2 (value) {
+                 if (value.indexOf('2')>=0){
+                    this.data2 = [
+                                {'type':'person','issi':'24001','name':'张警官'},
+                                {'type':'group','issi':'822889','name':'TG1'}
+                                ]
+                 }else{
+               
+                                  this.data2 = []
+                }
             },
-      keypress(event,el){
-        // console.info(event.code);
+      keypress(event){
+          console.info(event.code);
           this.showgroupcall = true;//后续优化，传值判断后，是否显示按钮
           this.showsingalcall=true;
           this.buttonspress =event.code;
@@ -231,14 +260,14 @@ export default {
       },
       numbtnclick(el){
            this.inputnum +=el.target.innerText;
-           this.$el.getElementsByClassName("input")[0].focus();
+           this.$el.getElementsByClassName("ivu-input-default")[0].focus();
            this.showgroupcall = true;//后续优化，传值判断后，是否显示按钮
           this.showsingalcall=true;
       },
       backbtnclick(el){
            var n = this.inputnum.length;
            this.inputnum= this.inputnum.slice(0,n-1);
-           this.$el.getElementsByClassName("input")[0].focus();
+           this.$el.getElementsByClassName("ivu-input-default")[0].focus();
            this.showgroupcall = true;//后续优化，传值判断后，是否显示按钮
           this.showsingalcall=true;
       },
@@ -247,7 +276,7 @@ export default {
           var _this = this;
          
           setTimeout(() => {
-              _this.$el.getElementsByClassName("input")[0].focus();
+              _this.$el.getElementsByClassName("ivu-input-default")[0].focus();
               _this.showthetab=true;
              
                
@@ -276,22 +305,7 @@ export default {
  .input:hover{
      border: 1px solid #2B81BE;
  }
- .input{
-    display: inline-block;
-    width: 200px;
-    height: 30px;
-    padding: 4px 7px;
-    font-size: 16px;
-    border: 1px solid #dcdee2;
-    border-radius: 4px;
-    color: #515a6e;
-    position: relative;
-    left: 10px;
-    top: 5px;
-    cursor: text;
-  
-    transition: border .2s ease-in-out,background .2s ease-in-out,box-shadow .2s ease-in-out;
- }
+
  .inputli{
      float: left;
  }
@@ -302,6 +316,7 @@ export default {
      color: #000;
      float: left;
      cursor: pointer;
+     
  }
 .row > ul{
     display: inline;  
@@ -438,7 +453,24 @@ cursor: pointer;
     transform: scale(0);
 }
 
+.ivu-select-item div span:nth-child(1){
+    float: left;
+    width: 20px;
+    margin-top: -5px;
+    margin-left: -15px;
+}
 
+.ivu-select-item div span:nth-child(2){
+      margin-left: 10px;
+   
+}
+.ivu-select-item{
+    text-align: left;
+    font-size: 14px !important;
+}
+.ivu-select-item {
+    width: 100%;
+}
 
 </style>
 <style>
@@ -446,5 +478,53 @@ cursor: pointer;
     margin-left: 15px;
     background-color: #2B81BE;
     width: 283px;
+}
+.demo-auto-complete-item{
+        padding: 4px 0;
+        border-bottom: 1px solid #F6F6F6;
+    }
+    .demo-auto-complete-group{
+        font-size: 12px;
+        padding: 4px 6px;
+    }
+    .demo-auto-complete-group span{
+        color: #666;
+        font-weight: bold;
+    }
+    .demo-auto-complete-group a{
+        float: right;
+    }
+    .demo-auto-complete-count{
+        float: right;
+        color: #999;
+    }
+    .demo-auto-complete-more{
+        display: block;
+        margin: 0 auto;
+        padding: 4px;
+        text-align: center;
+        font-size: 12px;
+    }
+     .input input{
+    display: inline-block;
+    width: 200px;
+    height: 30px;
+    padding: 4px 7px;
+    font-size: 16px;
+    border: 1px solid #fff;
+    border-radius: 4px;
+    color: #515a6e;
+    position: relative;
+    left: 10px;
+    top: 5px;
+    cursor: text;
+    transition: border .2s ease-in-out,background .2s ease-in-out,box-shadow .2s ease-in-out;
+ }
+ .input{
+  border: 0px !important;   
+ }
+ .dialpane .ivu-select-dropdown{
+    margin-left: 5px ;
+    margin-top: 6px;
 }
 </style>
