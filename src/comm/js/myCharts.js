@@ -546,11 +546,6 @@ const install = function(Vue) {
                                  data1[i]+=Math.floor(Math.random());
                                
                             }
-                          
-                         
-                            
-                           console.info(option.series[0].data);
-                           console.info(data0);
                            // option.xAxis[0].data.shift();
                            // option.xAxis[0].data.push(axisData);  
                             that.chart.setOption(option);
