@@ -5,7 +5,15 @@
         <div class="dialpane">
             <div >
                  <ul> 
-                   <li class="inputli"><input v-model='inputnum' maxlength='15' @keydown="keypress" @keyup="keyup" class="input" placeholder="输入组号/个号/姓名"  /></li>
+                   <li class="inputli">
+                       <!-- <AutoComplete
+                            v-model='inputnum'
+                            :data='data1'
+                             @keydown="keypress" @keyup="keyup"  placeholder="输入组号/个号/姓名"
+                            @on-search="handleSearch1">
+                            </AutoComplete> -->
+                      <input v-model='inputnum' maxlength='15' @keydown="keypress" @keyup="keyup" class="input" placeholder="输入组号/个号/姓名"  /> 
+                       </li>
                    <li> <i @mousedown="buttonspress='Backspace'"  @click="backbtnclick"     @mouseleave="buttonspress=''" @mouseup="buttonspress=''" :class="buttonspress=='Backspace'?'backspacespress':''"  class="material-icons">backspace</i></li>
                 </ul>
             </div>
@@ -157,7 +165,7 @@
 </template>
 <script>
 import Ripple from 'vue-ripple-directive'
-import { Divider ,TabPane,Tabs  } from 'iview';
+import { Divider ,TabPane,Tabs,AutoComplete  } from 'iview';
 import callbuttons from '@/components/button/callbuttons';
 
 export default {
@@ -166,6 +174,7 @@ export default {
      Tabs,
      TabPane,
      callbuttons,
+     AutoComplete
   },
   directives: {Ripple,},
   data(){
@@ -175,6 +184,7 @@ export default {
       showgroupcall:true,
       showsingalcall:true, 
       showthetab:false,
+      data1: [],
       backgroundDiv: {
                             backgroundImage: 'url(' + require('@/assets/images/tabs_table_bg.jpg') + ')'
                     } ,  
@@ -182,6 +192,13 @@ export default {
   
   },
   methods:{
+      handleSearch1 (value) {
+                this.data1 = !value ? [] : [
+                    value,
+                    value + value,
+                    value + value + value
+                ];
+            },
       keypress(event,el){
         // console.info(event.code);
           this.showgroupcall = true;//后续优化，传值判断后，是否显示按钮
