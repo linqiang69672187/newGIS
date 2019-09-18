@@ -183,7 +183,7 @@ export default {
   },
   methods:{
       keypress(event,el){
-          console.info(event.code);
+        // console.info(event.code);
           this.showgroupcall = true;//后续优化，传值判断后，是否显示按钮
           this.showsingalcall=true;
           this.buttonspress =event.code;

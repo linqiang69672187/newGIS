@@ -4,7 +4,7 @@
         <ul>
             <li><a @click="showdistance" ><div><i class="fas fa-ruler"></i></div></a></li>
             <li><a><div><i class="fas fa-map"></i></div></a></li>
-            <li><a><div><i class="fas fa-object-ungroup"></i></div></a></li>
+            <li><a><div><i class="fas fa-window-maximize"></i></div></a></li>
             <li><a><div><i class="fas fa-search-minus"></i></div></a></li>
             <li><a><div><i class="fas fa-search-plus"></i></div></a></li>           
         </ul>
@@ -12,7 +12,7 @@
     <transition name='slide-fade' v-on:before-enter="beforeEnter"  >
      <div  v-show="show" class="computedistance">
          <ul>
-            <li><a><div><i class="fas fa-map"></i></div></a></li>
+            <li><a><div><i class="fas fa-map-pin"></i></div></a></li>
             <li><a><div><i class="fas fa-object-ungroup"></i></div></a></li>
          </ul>
      </div>

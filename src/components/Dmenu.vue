@@ -9,6 +9,7 @@
         <TabPane  tab="plane"  name="锁定跟踪" class="tabpane"  label="锁定跟踪" v-if="tab2" icon="ios-lock"><eyemaps></eyemaps></TabPane>
         <TabPane  tab="plane" name="视频窗口" class="tabpane"  label="视频窗口" v-if="tab3" icon="logo-windows"><videos></videos></TabPane>
         <TabPane  tab="plane" name="拨号键盘"   class="tabpane"  label="拨号键盘" v-if="tab4" icon="ios-apps"><dialplate ref="dail"></dialplate></TabPane>
+  
     </Tabs>
     </div>
      
@@ -227,5 +228,5 @@ transform:rotate(180deg);
    .calltable th,.calltable td{
     height: 30px !important;
     }
- 
+  
 </style>
