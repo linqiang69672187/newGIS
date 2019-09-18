@@ -1,6 +1,6 @@
 <template>
-<div class="row" :class="{showdmenu}" >
-   <div  class="controlmenu" :class="{rationicon}"><ul @click="leave" ><li ><i class="fas fa-sort-down" ></i></li><li></li><li><i class="fas fa-sort-down" ></i></li></ul></div>
+<div class="row"  @mouseenter="downrowshow=true" @mouseleave="downrowshow=false" :class="{showdmenu}" >
+   <div  class="controlmenu" :class="{rationicon}"><ul :class="{downrowshow}" @click="leave" ><li ><i class="fas fa-sort-down" ></i></li><li></li><li><i class="fas fa-sort-down" ></i></li></ul></div>
   
     <div >
     <Tabs class='tabs' @on-click='tabclick' v-model='tabname' name='plane' type='card' closable @on-tab-remove='handleTabRemove'>
@@ -36,6 +36,7 @@ import GPScontrol from "@/components/tabs/GPScontrol"
                         rationicon:true,
                         tabname:'实时状况',
                         dailval:'',
+                        downrowshow:false
                     }
         },
         components:{
@@ -103,17 +104,22 @@ height: 15px;
 width: 100%;
 height: 15px;
 }
+.downrowshow{
+    opacity: 1 !important;
+}
 .controlmenu ul{
  width: 180px;
  height: 15px;
  margin: 0 auto;
  background-color: #164B77;
  display:inline-block;
+ border-top-left-radius: 5px;
+ border-top-right-radius: 5px;
  list-style: none;
  color: #fff;
  font-size: 22px;
  line-height: 15px;
- opacity: 0.6;
+ opacity: 0.3;
  cursor: pointer;
 }
 .controlmenu ul li:nth-child(1){
@@ -172,13 +178,18 @@ height: 18px;
   -webkit-transition:all 0.6s; /* Safari and Chrome */
   -o-transition:all 0.6s; /* Opera */
 }
-.rationicon{
+.rationicon li{
 transform:rotate(180deg);
 -ms-transform:rotate(180deg); 	/* IE 9 */
 -moz-transform:rotate(180deg); 	/* Firefox */
 -webkit-transform:rotate(180deg); /* Safari 和 Chrome */
 -o-transform:rotate(180deg); 	/* Opera */
+
 }
+.rationicon li{
+    margin-top: 2px !important;
+}
+
  .ivu-tabs{
      overflow: visible !important;
  }

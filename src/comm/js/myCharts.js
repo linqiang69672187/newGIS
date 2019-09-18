@@ -433,7 +433,7 @@ const install = function(Vue) {
                             xAxis: [
                                 {
                                     type: 'category',
-                                    data: ['滨江','上城','下城','萧山','拱墅','江干','萧山'],
+                                    data: ['滨江','上城','下城','萧山','拱墅','江干','钱江新区'],
                                     axisPointer: {
                                         type: 'shadow'
                                     },

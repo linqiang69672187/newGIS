@@ -184,6 +184,7 @@ import Table from "@/components/control/tables"
 .left .ivu-cascader-label{
     text-align: left;
 }
+
 .left .material-icons{
     margin-top: 8px !important;
     margin-left: 25px;
