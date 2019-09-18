@@ -224,7 +224,6 @@ export default {
                                 {'type':'group','issi':'822889','name':'TG1'}
                                 ]
                  }else{
-               
                                   this.data2 = []
                 }
             },
