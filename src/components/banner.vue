@@ -3,11 +3,8 @@
     <div>东方通信GIS指挥调度台</div>
     <div>
         <ul>
-            <li  @click="menuclk"><a><i class="fas fa-headphones"></i><div>调度功能</div></a></li>
-            <li  @click="menuclk"><a><i class="fas fa-address-card"></i><div>信息管理</div></a></li>
-            <li  @click="menuclk"><a><i class="fas fa-cogs"></i><div>参数设置</div></a></li>
-            <li  @click="menuclk"><a><i class="fas fa-question-circle"></i><div>帮助</div></a></li>
-            <li  @click="menuclk"><a><i class="fas fa-door-open"></i><div>结束系统</div></a></li>
+            <li v-for="(item,key) in items" @click="menuclk(item.name)" :key="key" :class="[(item.name==selectitem)?'selectitem':'']"><a><i class="fas " :class="item.icon"></i><div>{{item.label}}</div></a></li>
+           
         </ul>
     </div>
     <div>
@@ -31,20 +28,25 @@
 import { Badge  } from 'iview';
 export default {
     data () {
-      return {
-        selectBannerItem:'dispatchFunction',
+      return {  
         items:[
           {name:'dispatchFunction',label:'调度功能',icon:'fa-headphones'},
-
-        ]
+          {name:'infomanager',label:'信息管理',icon:'fa-address-card'},
+          {name:'edits',label:'参数设置',icon:'fa-cogs'},
+          {name:'help',label:'帮助',icon:'fa-question-circle'},
+          {name:'exit',label:'结束系统',icon:'fa-door-open'},
+        ],
+        selectitem:'dispatchFunction'
       }
     },
     components:{
       Badge
     },
     methods:{
-      menuclk:function(event){
-        console.info(event)
+      menuclk:function(val){
+        if (val==this.selectitem)return;
+        this.selectitem=val;
+        this.$emit('Bannerselectedchange',val);
       }
     }
   }
@@ -125,13 +127,12 @@ ul {
   vertical-align: middle;
   text-align: center;
   line-height: 58px;
+  transition: width 0.2s,background 0.2s, 0.2s linear .2s;/*反向过渡*/
 }
 a {
   color: #42b983;
 }
-.row>div:nth-child(2) ul>li:nth-child(1){
-  background-color:#2B81BE;
-}
+
 .row>div:nth-child(3) li {
   margin: 0 0px;
   float: left;
@@ -147,5 +148,8 @@ a {
  margin-top: 35px;
   font-size: 14px;
 }
-
+.selectitem{
+  background-color:#2B81BE;
+   transition: width,background, 0.2s linear 0.2s;
+}
 </style>

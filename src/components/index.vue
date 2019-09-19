@@ -8,7 +8,7 @@
            <LeftToolbox @daiplate="cldaiplate" :style="{bottom:dmenuszie}"></LeftToolbox>
        </div>
        <div>
-           <div class="top" ><banner></banner></div>
+           <div class="top" ><banner @Bannerselectedchange='Bannerselectedchange'></banner></div>
            <div class="left" :class="{hidedmenu}"><Lmenu :items='lmenuitems'></Lmenu></div>
            <div class="bottom"><Dmenu ref="dmenu"  @listenchange="listenchangeDmenu"></Dmenu></div>
        </div>
@@ -31,10 +31,10 @@ export default {
            hidedmenu:false,
            dmenuszie: '260px !important', 
            lmenuitems: [
-                        {label:'GPS控制',icon:'fa-street-view'},
-                        {label:'历史轨迹',icon:'fa-map-marker'},
-                        {label:'实时轨迹',icon:'fa-map'},
-                        {label:'锁定功能',icon:'fa-crosshairs'},
+                        {label:'GPS控制',icon:'gps_fixed'},
+                        {label:'历史轨迹',icon:'history'},
+                        {label:'实时轨迹',icon:'navigation'},
+                        {label:'锁定功能',icon:'vpn_lock'},
           ]            
        }
     },
@@ -85,6 +85,28 @@ export default {
         },
         cldaiplate:function(){  
               this.$refs.dmenu.changeshowtab('','拨号键盘');
+        },
+        Bannerselectedchange:function(val){
+            this.lmenuitems.splice(0)
+           switch (val){
+                case "infomanager":
+                    this.lmenuitems.push( 
+                            {label:'用户信息',icon:'supervisor_account'},
+                            {label:'设备信息',icon:'storage'},
+                            {label:'编组信息',icon:'speaker_group'},
+                            {label:'单位信息',icon:'account_balance'},
+                          ) ;
+                 break;
+               default:
+                   this.lmenuitems.push( 
+                            {label:'GPS控制',icon:'gps_fixed'},
+                            {label:'历史轨迹',icon:'history'},
+                            {label:'实时轨迹',icon:'navigation'},
+                            {label:'锁定功能',icon:'vpn_lock'},
+                         );  
+                   break;
+               
+           }
         }
        
     }

@@ -3,16 +3,17 @@
     <div :class="{lmenuicon}"> <ul>
             <li  @click="showtree=!showtree" :class="{ismenufaded,showtree}">
              <Tooltip :disabled="!minimenu"  content="用户列表" placement="right"> 
-                <a ><i class="fas fa-list" ></i>
+                <a > <i class="material-icons">account_tree</i>
                 <transition  @after-leave="afterfade" @before-enter="afterendfade" name="fade">
                 <div v-if="!minimenu">用户列表</div>
                 </transition>
                 </a>
             </Tooltip>
             </li>
-             <li  v-for="(item,key) in items" :key="key"  :class="{ismenufaded}">
+             <li  v-for="(item,key) in items" :key="key"  :class="[ismenufaded,listnewchange?'animated lightSpeedIn':'']">
              <Tooltip :disabled="!minimenu"  :content="item.label" placement="right"> 
-                <a ><i class="fas fa-list" :class="item.icon" ></i>
+                <a >
+                  <i class="material-icons">{{item.icon}}</i>
                 <transition  @after-leave="afterfade" @before-enter="afterendfade" name="fade">
                 <div v-if="!minimenu">{{item.label}}</div>
                 </transition>
@@ -43,7 +44,7 @@ export default {
         rowwidth:false,
         rotationIcon:false,
         showtree:false,
-        
+        listnewchange:false
       }
     },
   
@@ -69,7 +70,16 @@ export default {
       this.rowwidth =false;
       this.rotationIcon=false;
     },
-  }
+  },
+  watch:{
+      items:function(newval,oldval){
+        this.listnewchange=true;
+        var _this =this;
+        setTimeout(function(){
+          _this.listnewchange=false;
+        },1000)
+      }
+   }
   }
 </script>
 
@@ -108,10 +118,14 @@ html,body{
    vertical-align: middle;
    height: 58px;
   cursor: pointer;
+  list-style-type: none;
 }
-.row>div:nth-child(1) svg{
-    font-size: 24px;  
-    margin-top: 8px;
+.row>div:nth-child(1) i{
+    font-size: 30px;  
+    margin: 0 auto;  
+}
+.row>div:nth-child(1) div{ 
+    margin-top: -3px; 
 }
 .showtree{
    vertical-align: middle;
