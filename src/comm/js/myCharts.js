@@ -78,7 +78,7 @@ const install = function(Vue) {
                                 }
                             },
                             dataZoom: {
-                                show: false,
+                                show: true,
                                 start: 0,
                                 end: 100
                             },
