@@ -229,7 +229,11 @@ const install = function(Vue) {
                             var data0 = option.series[0].data;
                             var data1 = option.series[1].data;
                             data0.shift();
-                            data0.push(data0[data0.length-1]+Math.round(Math.random()));
+                            var val =data0[data0.length-1]+Math.round(Math.random());
+                            if (val>200){
+                                val=80;
+                            }
+                            data0.push(val);
                             data1.shift();
                             data1.push((Math.random() * 10 + 5).toFixed(1) - 0);
                         

@@ -16,6 +16,10 @@
               <Badge  :count="3">
                  <i class="fas fa-bell"></i>
               </Badge></a></li>
+              <li><a>
+              <Badge  :count="1">
+                 <i class="fas fa-envelope"></i>
+              </Badge></a></li>
             <li><a><div>张警官</div></a></li>
         </ul>
     </div>
@@ -31,7 +35,7 @@ export default {
         selectBannerItem:'dispatchFunction',
         items:[
           {name:'dispatchFunction',label:'调度功能',icon:'fa-headphones'},
-          
+
         ]
       }
     },
@@ -102,7 +106,7 @@ h1, h2 {
 }
 .row>div:nth-child(3) {
     float: right;
-    width:120px;
+    width:150px;
 }
 ul {
   list-style-type: none;
@@ -134,12 +138,12 @@ a {
   list-style-type: none;
   display: list-item;
 }
-.row>div:nth-child(3) li:nth-child(1) {
+.row>div:nth-child(3) li:nth-child(-n+2) {
  width: 40px;
  margin-top: 25px;
  font-size: 22px;
 }
-.row>div:nth-child(3) li:nth-child(2) {
+.row>div:nth-child(3) li:nth-child(3) {
  margin-top: 35px;
   font-size: 14px;
 }
