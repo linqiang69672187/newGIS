@@ -12,7 +12,7 @@
   
     </Tabs>
     </div>
-     
+     <div class="navcationx"><i  class="fas fa-angle-double-right"></i></div>
 </div>
 
 </template>
@@ -148,15 +148,7 @@ height: 250px;
 position:absolute;
 background-color: #164B77;
 }
-.row>div:nth-child(3){
-width: 400px;
-float: right;
-border-top: 1px solid #dcdee2;
-margin-top: 31px;
-padding-left: 5px;
-height: 100%;
-background-color: #fff;
-}
+
 .row>div:nth-child(3) tr{
 height: 18px;
 }
@@ -194,6 +186,20 @@ transform:rotate(180deg);
  .ivu-tabs{
      overflow: visible !important;
  }
+ .navcationx{
+     position: absolute;
+     width: 30px !important;
+     height: 30px !important;
+    background-color: transparent;
+     right: 0px;
+     top:15px;
+     color: #333;
+     font-size: 20px;
+     cursor: pointer;
+ }
+  .navcationx:hover{
+      color: #fff;
+  }
 </style>
 <style >
 .tabs .ivu-tabs-tab{
