@@ -1,6 +1,12 @@
 <template>
   <div class="row">
-    <div>东方通信GIS指挥调度台</div>
+    <div class="logo">
+      <div>LDS2000</div>
+      <div><ul>
+          <li>单兵和车辆定位</li>
+          <li>指挥调度系统</li>
+      </ul></div>
+      </div>
     <div>
         <ul>
             <li v-for="(item,key) in items" @click="menuclk(item.name)" :key="key" :class="[(item.name==selectitem)?'selectitem':'']"><a><i class="fas " :class="item.icon"></i><div>{{item.label}}</div></a></li>
@@ -151,5 +157,29 @@ a {
 .selectitem{
   background-color:#2B81BE;
    transition: width,background, 0.2s linear 0.2s;
+}
+.logo div:nth-child(1){
+  width: 100px;
+  float:left;
+  font-size: 20px;
+}
+.logo div:nth-child(2){
+  width: calc(100% - 100px);
+  float:left;
+  font-size: 16px;
+  text-align: right;
+  text-align:justify;
+}
+.logo div:nth-child(2) li{
+ height: 16px;
+
+   text-align:justify;
+}
+.logo div:nth-child(2) ul{
+  margin-top: -8px;
+  margin-left: -2px;
+}
+.logo div:nth-child(2) li:nth-child(2){
+ letter-spacing:3px
 }
 </style>
