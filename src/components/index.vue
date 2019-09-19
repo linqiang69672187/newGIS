@@ -9,7 +9,7 @@
        </div>
        <div>
            <div class="top" ><banner></banner></div>
-           <div class="left" :class="{hidedmenu}"><Lmenu></Lmenu></div>
+           <div class="left" :class="{hidedmenu}"><Lmenu :items='lmenuitems'></Lmenu></div>
            <div class="bottom"><Dmenu ref="dmenu"  @listenchange="listenchangeDmenu"></Dmenu></div>
        </div>
     </div>
@@ -29,7 +29,13 @@ export default {
     data(){
        return{
            hidedmenu:false,
-           dmenuszie: '260px !important',             
+           dmenuszie: '260px !important', 
+           lmenuitems: [
+                        {label:'GPS控制',icon:'fa-street-view'},
+                        {label:'历史轨迹',icon:'fa-map-marker'},
+                        {label:'实时轨迹',icon:'fa-map'},
+                        {label:'锁定功能',icon:'fa-crosshairs'},
+          ]            
        }
     },
    mounted(){

@@ -218,14 +218,27 @@ export default {
   },
   methods:{
        handleSearch2 (value) {
-                 if (value.indexOf('2')>=0){
+                 if (value.indexOf('2')==0){
                     this.data2 = [
                                 {'type':'person','issi':'24001','name':'张警官'},
                                 {'type':'group','issi':'822889','name':'TG1'}
                                 ]
-                 }else{
-                                  this.data2 = []
-                }
+                                return;
+                 }
+                 if (value.indexOf('t')==0){
+                    this.data2 = [ 
+                                {'type':'group','issi':'822889','name':'TG1'}
+                                ]
+                                return;
+                 }
+                if (value.indexOf('张')==0){
+                    this.data2 = [ 
+                                 {'type':'person','issi':'24001','name':'张警官'},
+                                ]
+                                return;
+                 }
+                this.data2 = []
+               
             },
       keypress(event){
           console.info(event.code);

@@ -3,11 +3,11 @@
     <div>东方通信GIS指挥调度台</div>
     <div>
         <ul>
-            <li><a><i class="fas fa-headphones"></i><div>调度功能</div></a></li>
-            <li><a><i class="fas fa-address-card"></i><div>信息管理</div></a></li>
-            <li><a><i class="fas fa-cogs"></i><div>参数设置</div></a></li>
-            <li><a><i class="fas fa-question-circle"></i><div>帮助</div></a></li>
-            <li><a><i class="fas fa-door-open"></i><div>结束系统</div></a></li>
+            <li  @click="menuclk"><a><i class="fas fa-headphones"></i><div>调度功能</div></a></li>
+            <li  @click="menuclk"><a><i class="fas fa-address-card"></i><div>信息管理</div></a></li>
+            <li  @click="menuclk"><a><i class="fas fa-cogs"></i><div>参数设置</div></a></li>
+            <li  @click="menuclk"><a><i class="fas fa-question-circle"></i><div>帮助</div></a></li>
+            <li  @click="menuclk"><a><i class="fas fa-door-open"></i><div>结束系统</div></a></li>
         </ul>
     </div>
     <div>
@@ -28,12 +28,21 @@ import { Badge  } from 'iview';
 export default {
     data () {
       return {
-        msg: "1"
+        selectBannerItem:'dispatchFunction',
+        items:[
+          {name:'dispatchFunction',label:'调度功能',icon:'fa-headphones'},
+          
+        ]
       }
     },
     components:{
       Badge
-  }
+    },
+    methods:{
+      menuclk:function(event){
+        console.info(event)
+      }
+    }
   }
 </script>
 

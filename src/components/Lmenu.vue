@@ -10,49 +10,13 @@
                 </a>
             </Tooltip>
             </li>
-            <li  :class="{ismenufaded}">
-             <Tooltip :disabled="!minimenu"  content="GPS上报" placement="right"> 
-              <a><i class="fas fa-globe"></i>
-              <transition name="fade" @before-enter="afterendfade" >
-              <div v-if="!minimenu">GPS上报</div>
-              </transition>
-              </a>
-             </Tooltip>
-            </li>
-            <li  :class="{ismenufaded}" >
-            <Tooltip :disabled="!minimenu"  content="GPS上拉" placement="right"> 
-              <a><i class="fas fa-street-view"></i>
-              <transition name="fade" @before-enter="afterendfade" >
-              <div v-if="!minimenu">GPS上拉</div>
-              </transition>
-              </a>
-            </Tooltip>
-            </li>
-            <li  :class="{ismenufaded}">
-              <Tooltip :disabled="!minimenu"  content="历史轨迹" placement="right"> 
-              <a><i class="fas fa-map-marker"></i>
-              <transition name="fade" @before-enter="afterendfade" >
-              <div v-if="!minimenu">历史轨迹</div>
-              </transition>
-              </a>
-                </Tooltip>
-              </li>
-            <li  :class="{ismenufaded}">
-            <Tooltip :disabled="!minimenu"  content="实时轨迹" placement="right"> 
-              <a><i class="fas fa-map"></i>
-              <transition name="fade" @before-enter="afterendfade" >
-              <div v-if="!minimenu">实时轨迹</div>
-              </transition>
-              </a>
-           </Tooltip>
-            </li>
-            <li  :class="{ismenufaded}">
-              <Tooltip :disabled="!minimenu"  content="锁定功能" placement="right"> 
-              <a><i class="fas fa-crosshairs"></i>
-              <transition name="fade" @before-enter="afterendfade" >
-              <div v-if="!minimenu">锁定功能</div>
-              </transition>
-              </a>
+             <li  v-for="(item,key) in items" :key="key"  :class="{ismenufaded}">
+             <Tooltip :disabled="!minimenu"  :content="item.label" placement="right"> 
+                <a ><i class="fas fa-list" :class="item.icon" ></i>
+                <transition  @after-leave="afterfade" @before-enter="afterendfade" name="fade">
+                <div v-if="!minimenu">{{item.label}}</div>
+                </transition>
+                </a>
             </Tooltip>
             </li>
         </ul>
@@ -70,6 +34,7 @@
 import {Tooltip} from 'iview'
 import DagTree from "@/components/DagTree.vue"
 export default {
+    props:{items:Array},
     data () {
       return {
         minimenu: false,
@@ -78,6 +43,7 @@ export default {
         rowwidth:false,
         rotationIcon:false,
         showtree:false,
+        
       }
     },
   
