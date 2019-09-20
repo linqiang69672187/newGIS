@@ -225,7 +225,7 @@ html,body{
     }
 </style>
 <style >
-.ivu-tooltip-popper{
+.left .ivu-tooltip-popper{
     left:37px !important;
   }
 </style>

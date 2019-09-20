@@ -2,25 +2,36 @@
 <div class="toolboxdiv">
     <div class="toolbox " :class="{toolboxzindex:toolzindex}" >
         <ul>
-            <li><a @click="showdistance" ><div><i class="fas fa-ruler"></i></div></a></li>
-            <li><a><div><i class="fas fa-map"></i></div></a></li>
-            <li><a><div><i class="fas fa-window-maximize"></i></div></a></li>
-            <li><a><div><i class="fas fa-search-minus"></i></div></a></li>
-            <li><a><div><i class="fas fa-search-plus"></i></div></a></li>           
+            <li><a @click="showdistance" ><Tooltip content="测量" placement="bottom"> <div><i class="fas fa-ruler"></i></div></Tooltip></a></li>
+            <li><a><Tooltip content="地图切换" placement="bottom"> <div><i class="fas fa-map"></i></div></Tooltip></a></li>
+            <li><a><Tooltip content="全屏" placement="bottom"> <div><i class="fas fa-window-maximize"></i></div></Tooltip></a></li>
+            <li><a><Tooltip content="缩小" placement="bottom"> <div><i class="fas fa-search-minus"></i></div></Tooltip></a></li>
+            <li><a><Tooltip content="放大" placement="bottom"> <div><i class="fas fa-search-plus"></i></div></Tooltip></a></li>           
         </ul>
     </div>
     <transition name='slide-fade' v-on:before-enter="beforeEnter"  >
      <div  v-show="show" class="computedistance">
          <ul>
-            <li><a><div><i class="fas fa-map-pin"></i></div></a></li>
-            <li><a><div><i class="fas fa-object-ungroup"></i></div></a></li>
+            
+            <li><a>
+                <Tooltip content="距离" placement="bottom"> 
+                <div><i class="fas fa-map-pin"></i></div>
+                </Tooltip>
+                </a></li>
+            
+
+            <li><a>
+                <Tooltip content="面积" placement="bottom"> 
+                <div><i class="fas fa-object-ungroup"></i></div>
+                  </Tooltip>
+                </a></li>
          </ul>
      </div>
      </transition>
 </div>
 </template>
 <script>
-
+import {Tooltip} from 'iview'
 export default {
     mounted(){
     },
@@ -36,7 +47,10 @@ export default {
               this.toolzindex=true;
          },
          
-    },
+    },  
+    components:{
+           Tooltip
+         },
    data(){
        return{ 
            show: false ,
