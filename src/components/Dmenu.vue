@@ -234,5 +234,10 @@ transform:rotate(180deg);
    .calltable th,.calltable td{
     height: 30px !important;
     }
-  
+  .ivu-tabs-close{
+      color: #fff !important;
+  }
+  .ivu-tabs-tab-active  .ivu-tabs-close{
+           color: #000 !important; 
+  }
 </style>
