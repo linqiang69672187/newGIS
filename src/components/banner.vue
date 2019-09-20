@@ -10,15 +10,45 @@
     <div>
         <ul>
             <li v-for="(item,key) in items" @click="menuclk(item.name)" :key="key" :class="[(item.name==selectitem)?'selectitem':'']"><a><i class="fas " :class="item.icon"></i><div>{{item.label}}</div></a></li>
-           
         </ul>
     </div>
     <div>
         <ul>
             <li><a>
+               <Poptip offset=10 placement="bottom-end" width="400">
               <Badge  :count="3">
                  <i class="fas fa-bell"></i>
-              </Badge></a></li>
+              </Badge>
+              <div class="api" slot="content">
+                  <table>
+                      <thead>
+                          <tr>
+                              <th>Version</th>
+                              <th>Update Time</th>
+                              <th>Description</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr>
+                              <td>0.9.5</td>
+                              <td>2016-10-26</td>
+                              <td>Add new components <code>Tooltip</code> and <code>Poptip</code></td>
+                          </tr>
+                          <tr>
+                              <td>0.9.4</td>
+                              <td>2016-10-25</td>
+                              <td>Add new components <code>Modal</code></td>
+                          </tr>
+                          <tr>
+                              <td>0.9.2</td>
+                              <td>2016-09-28</td>
+                              <td>Add new components <code>Select</code></td>
+                          </tr>
+                      </tbody>
+                  </table>
+                 </div>
+               </Poptip>
+              </a></li>
               <li><a>
               <Badge  :count="1">
                  <i class="fas fa-envelope"></i>
@@ -31,7 +61,7 @@
 </template>
 
 <script>
-import { Badge  } from 'iview';
+import { Badge,Poptip  } from 'iview';
 export default {
     data () {
       return {  
@@ -46,7 +76,8 @@ export default {
       }
     },
     components:{
-      Badge
+      Badge,
+      Poptip,
     },
     methods:{
       menuclk:function(val){
