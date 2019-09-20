@@ -1,12 +1,18 @@
 <template>
 <div :style="backgroundDiv"  class="row">
     <div id="onlinechar"></div>
-    <div id="gauguchar" class="middle"></div>
+    <div  class="middle"> 
+        <div id="gauguchar"></div>
+         <div class='loader-ring'>
+            <div class='loader-ring-light'></div>
+            <div class='loader-ring-track'></div>
+        </div>
+      </div>
     <div id="onlinechartable" class="right">
         <!-- <Table ref="tabledata"  :loading="loading"></Table>  -->
 
     </div>
-
+       
 </div>
 </template>
 <script>
@@ -98,10 +104,9 @@ import { setTimeout } from 'timers';
     color: #fff !important;
     float: left;
 }
-.middle{
+.middle,#gauguchar{
     width:220px;
     height: 220px;
-
     float: left; 
 }
 
@@ -119,6 +124,57 @@ import { setTimeout } from 'timers';
          background-size: 100%;  
          color: #fff;
     }
+
+
+.loader-ring {
+  position: relative;
+  top: 0;
+  left: 0;
+  margin:12px 0 0 12px;
+  width: 198px;
+  height: 198px;
+}
+
+.loader-ring-light {
+  width: 198px;
+  height: 198px;
+  -moz-border-radius: 198px;
+  -webkit-border-radius: 198px;
+  border-radius: 198px;
+  -moz-box-shadow: 0 4px 0 #B4FF0B inset;
+  -webkit-box-shadow: 0 4px 0 #B4FF0B inset;
+  box-shadow: 0 4px 0 #B4FF0B inset;
+  animation: rotate-360 2s linear infinite;
+}
+
+.loader-ring-track {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 220px;
+  height: 220px;
+  -moz-border-radius: 220px;
+  -webkit-border-radius: 220px;
+  border-radius: 220px;
+  -moz-box-shadow: 0 0 10px 4px rgba(0, 0, 0, 0.3) inset;
+  -webkit-box-shadow: 0 0 10px 4px rgba(0, 0, 0, 0.3) inset;
+  box-shadow: 0 0 10px 4px rgba(0, 0, 0, 0.3) inset;
+}
+
+@keyframes rotate-360 {
+  from {
+    -moz-transform: rotate(0);
+    -ms-transform: rotate(0);
+    -webkit-transform: rotate(0);
+    transform: rotate(0);
+  }
+  to {
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
 </style>
 <style >
 

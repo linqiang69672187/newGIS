@@ -385,7 +385,7 @@ const install = function(Vue) {
                                         borderColor: '#fff',
                                         shadowColor : '#fff', //默认透明
                                         shadowBlur: 5,
-                                        offsetCenter: [0, '80%'],       // x, y，单位px
+                                        offsetCenter: [0, '70%'],       // x, y，单位px
                                         textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
                                             fontWeight: 'bolder',
                                             color: '#fff',
