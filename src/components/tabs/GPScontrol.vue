@@ -230,4 +230,5 @@ import Table from "@/components/control/tables"
 .right .ivu-spin-fix{
    background-color: rgba(255,255,255,.3);
 }
+
 </style>
