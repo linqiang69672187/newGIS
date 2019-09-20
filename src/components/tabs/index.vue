@@ -9,7 +9,7 @@
         </div>
       </div>
     <div id="onlinechartable" class="right">
-        <!-- <Table ref="tabledata"  :loading="loading"></Table>  -->
+      
 
     </div>
        
@@ -40,59 +40,7 @@ import { setTimeout } from 'timers';
         this.$chart.dynamicline('onlinechar');
         this.$chart.gaugeindex('gauguchar');
         this.$chart.echarbar('onlinechartable');
-        /**
-        let _this =this;
-                setTimeout(function(){
-                    let datas=[
-                        {
-                            "entity": "上城区",
-                            "count": "5",
-                            "onlinetime": "2.3"
-                        },
-                        {
-                            "entity": "滨江区",
-                            "count": "4",
-                            "onlinetime": "1.7"
-                        },
-                        {
-                            "entity": "拱墅区",
-                            "count": "3",
-                            "onlinetime": "1.3"
-                        },
-                        {
-                            "entity": "下城区",
-                            "count": "5",
-                            "onlinetime": "2.3"
-                        },
-                        {
-                            "entity": "江干区",
-                            "count": "5",
-                            "onlinetime": "2.3"
-                        },
-                        {
-                            "entity": "萧山区",
-                            "count": "7",
-                            "onlinetime": "2.9"
-                        },
-                    ]
-                    let coloums=[
-                         {
-                        title: '单位',
-                        key: 'entity'
-                    },
-                    {
-                        title: '在线设备',
-                        key: 'count'
-                    },
-                    {
-                        title: '在线时长',
-                        key: 'onlinetime'
-                    }
-                    ];
-                _this.loading = false;
-                _this.$refs.tabledata.creatindextable(datas,coloums);
-                },2000);
-                 **/
+       
         }
     }
 </script>
