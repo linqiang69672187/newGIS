@@ -240,4 +240,9 @@ transform:rotate(180deg);
   .ivu-tabs-tab-active  .ivu-tabs-close{
            color: #000 !important; 
   }
+  .ivu-tabs-close:hover{
+     
+      border-radius: 50%;
+      background-color: #ED4014;
+  }
 </style>
