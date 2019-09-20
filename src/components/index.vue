@@ -91,9 +91,9 @@ export default {
            switch (val){
                 case "infomanager":
                     this.lmenuitems.push( 
-                            {label:'用户信息',icon:'supervisor_account'},
-                            {label:'设备信息',icon:'storage'},
-                            {label:'编组信息',icon:'speaker_group'},
+                            {label:'用户信息',icon:'person'},
+                            {label:'设备信息',icon:'tap_and_play'},
+                            {label:'编组信息',icon:'supervisor_account'},
                             {label:'单位信息',icon:'account_balance'},
                           ) ;
                  break;

@@ -16,6 +16,8 @@ import regular from '@fortawesome/fontawesome-free-regular'
 import brands from '@fortawesome/fontawesome-free-brands'
 import './assets/Iconfont/iconfont.css'
 import animate from 'animate.css'
+import materialIcons from 'material-design-icons/iconfont/material-icons.css'
+
 
 
 

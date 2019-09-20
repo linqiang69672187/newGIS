@@ -3,7 +3,7 @@
     <div :class="{lmenuicon}"> <ul>
             <li  @click="showtree=!showtree" :class="{ismenufaded,showtree}">
              <Tooltip :disabled="!minimenu"  content="用户列表" placement="right"> 
-                <a > <i class="material-icons">account_tree</i>
+                <a > <i class="material-icons ">format_list_bulleted</i>
                 <transition  @after-leave="afterfade" @before-enter="afterendfade" name="fade">
                 <div v-if="!minimenu">用户列表</div>
                 </transition>
@@ -215,6 +215,14 @@ html,body{
   .center-right{
       float: right;
   }
+ .rotaction
+    {
+    transform:rotate(90deg);
+    -ms-transform:rotate(90deg); 	/* IE 9 */
+    -moz-transform:rotate(90deg); 	/* Firefox */
+    -webkit-transform:rotate(90deg); /* Safari 和 Chrome */
+    -o-transform:rotate(90deg); 	/* Opera */
+    }
 </style>
 <style >
 .ivu-tooltip-popper{
