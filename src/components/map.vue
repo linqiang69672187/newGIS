@@ -1,6 +1,6 @@
 <template>
     <div >   
-        <div class="css_animation"><div class="laydiv"></div><div class="fontdiv cssrota" ><i class="fas fa-location-arrow"></i></div></div>
+        <div  class="css_animation "><div class="laydiv"></div><div class="fontdiv cssrota" ><i class="fas fa-location-arrow"></i></div><div class="circle"></div></div>
     </div>
 </template>
 <script>
@@ -199,6 +199,19 @@ div{
   height:20px;
   width:20px;  
 }
+.circle{
+    margin: 10px auto;
+    width: 20px;
+    height: 20px;
+    border: 2px transparent solid;
+    border-left-color: #ff5500;
+    border-right-color:#0c80fe;
+    border-radius: 100%;
+    animation: loading1 1s infinite linear;
+}
+@keyframes loading1{
+    from{transform: rotate(0deg)}to{transform: rotate(360deg)}
+}
 .css_animation .laydiv{
     height:20px;
     width:20px;
@@ -208,6 +221,7 @@ div{
     animation: myfirst 1s;
     animation-iteration-count: infinite;
      position: absolute; 
+     
 }
 @keyframes myfirst{
     to{

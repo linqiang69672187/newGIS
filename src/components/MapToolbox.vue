@@ -129,4 +129,5 @@ export default {
     transform: translateX(70px);
    opacity: 0;
     }
+    
 </style>

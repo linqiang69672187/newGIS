@@ -15,42 +15,14 @@
     <div>
         <ul>
             <li><a>
-               <Poptip offset=10 placement="bottom-end" width="400">
-              <Badge  :count="3">
-                 <i class="fas fa-bell"></i>
+              
+              <Badge  :count="2">
+                 <i class="fas fa-phone"></i>
               </Badge>
-              <div class="api" slot="content">
-                  <table>
-                      <thead>
-                          <tr>
-                              <th>Version</th>
-                              <th>Update Time</th>
-                              <th>Description</th>
-                          </tr>
-                      </thead>
-                      <tbody>
-                          <tr>
-                              <td>0.9.5</td>
-                              <td>2016-10-26</td>
-                              <td>Add new components <code>Tooltip</code> and <code>Poptip</code></td>
-                          </tr>
-                          <tr>
-                              <td>0.9.4</td>
-                              <td>2016-10-25</td>
-                              <td>Add new components <code>Modal</code></td>
-                          </tr>
-                          <tr>
-                              <td>0.9.2</td>
-                              <td>2016-09-28</td>
-                              <td>Add new components <code>Select</code></td>
-                          </tr>
-                      </tbody>
-                  </table>
-                 </div>
-               </Poptip>
+           
               </a></li>
               <li><a>
-              <Badge  :count="1">
+              <Badge  :count="3">
                  <i class="fas fa-envelope"></i>
               </Badge></a></li>
             <li><a><div>张警官</div></a></li>
@@ -61,7 +33,7 @@
 </template>
 
 <script>
-import { Badge,Poptip  } from 'iview';
+import { Badge  } from 'iview';
 export default {
     data () {
       return {  
@@ -77,7 +49,7 @@ export default {
     },
     components:{
       Badge,
-      Poptip,
+    
     },
     methods:{
       menuclk:function(val){
