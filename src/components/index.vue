@@ -1,7 +1,28 @@
 <template>
     <div id="main">
+         <v-contextmenu ref="contextmenu" >
+            <v-contextmenu-item @click="handleClick('拨号盘')">拨号盘</v-contextmenu-item>
+            <v-contextmenu-item @click="handleClick">实时状况</v-contextmenu-item>
+
+            <v-contextmenu-item divider></v-contextmenu-item>
+
+            <v-contextmenu-submenu title="调度功能">
+                <v-contextmenu-item @click="handleClick">菜单3</v-contextmenu-item>
+
+                <v-contextmenu-item divider></v-contextmenu-item>
+
+                <v-contextmenu-submenu title="子菜单">
+                <v-contextmenu-item @click="handleClick">菜单5</v-contextmenu-item>
+                </v-contextmenu-submenu>
+
+                <v-contextmenu-item @click="handleClick">菜单4</v-contextmenu-item>
+
+                <v-contextmenu-item :auto-hide="false">不自动关闭1</v-contextmenu-item>
+                <v-contextmenu-item :auto-hide="false">不自动关闭2</v-contextmenu-item>
+            </v-contextmenu-submenu>
+            </v-contextmenu>
        <div>
-           <Map move-type="0"></Map>
+           <Map  v-contextmenu:contextmenu move-type="0"></Map>
            <MapToolbox></MapToolbox>
            <Callbox :class="{hidedmenu}"></Callbox>
            <notice ></notice>
@@ -85,6 +106,9 @@ export default {
         },
         cldaiplate:function(){  
               this.$refs.dmenu.changeshowtab('','拨号键盘');
+        },
+        handleClick:function(text){
+            alert(text);
         },
         Bannerselectedchange:function(val){
             this.lmenuitems.splice(0)

@@ -28,6 +28,7 @@
     "material-design-icons": "^3.0.1",
     "ol": "^5.3.3",
     "qrcode": "^1.3.3",
+    "v-contextmenu": "^2.8.1",
     "vue": "^2.5.2",
     "vue-axios": "^2.1.4",
     "vue-fab": "^2.3.1",

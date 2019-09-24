@@ -17,7 +17,8 @@ import brands from '@fortawesome/fontawesome-free-brands'
 import './assets/Iconfont/iconfont.css'
 import animate from 'animate.css'
 import materialIcons from 'material-design-icons/iconfont/material-icons.css'
-
+import contentmenu from 'v-contextmenu'
+import 'v-contextmenu/dist/index.css'
 
 
 
@@ -26,6 +27,7 @@ fontawesome.library.add(solid)
 fontawesome.library.add(regular)
 fontawesome.library.add(brands)
 
+Vue.use(contentmenu)
 Vue.use(myCharts)
 Vue.use(VueAxios, axios)
 
