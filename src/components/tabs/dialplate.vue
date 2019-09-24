@@ -12,7 +12,7 @@
                                 placeholder="输入组号/个号/姓名"
                                 :transfer='transfer'
                                  class="input"
-                                 
+                                 placement="top"
                                 style="width:200px">
                                 <Option v-for="item in data2" :value="item.issi" :key="item">
                                     <div>
