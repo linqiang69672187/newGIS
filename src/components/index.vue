@@ -185,4 +185,14 @@ export default {
     -webkit-transition:all 0.6s; /* Safari and Chrome */
      -o-transition:all 0.6s; /* Opera */
   }
+ 
+</style>
+<style>
+ .v-contextmenu--default,.v-contextmenu{
+      background-color: #13204d!important;
+     
+  }
+  .v-contextmenu-item,.v-contextmenu-divider{
+    color:#fff!important;
+  }
 </style>
