@@ -155,7 +155,7 @@ html,body{
 .controlLmenu{
   height: 80px;
   left: 0;
-  z-index: 999;
+
   position: absolute;
   width: 80px;
   bottom: 0px;
@@ -223,6 +223,9 @@ html,body{
     -webkit-transform:rotate(90deg); /* Safari 和 Chrome */
     -o-transform:rotate(90deg); 	/* Opera */
     }
+  .rotationIcon .fa-arrow-circle-left{
+    
+  }
 </style>
 <style >
 .left .ivu-tooltip-popper{

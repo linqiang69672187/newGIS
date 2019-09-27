@@ -14,7 +14,7 @@
                                  class="input"
                                  placement="top"
                                 style="width:200px">
-                                <Option v-for="item in data2" :value="item.issi" :key="item">
+                                <Option v-for="item in data2" :value="item.issi" :key="item.issi">
                                     <div>
                                         <span><i class="material-icons" >{{item.type}}</i></span> <span> {{ item.issi }}({{ item.name }})</span>
                                     </div>           
