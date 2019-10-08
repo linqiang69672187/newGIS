@@ -137,6 +137,7 @@ export default {
         },
         fullscreen:function(){
             this.isshowmini=!this.isshowmini;
+            this.$refs.dmenu.leave(this.isshowmini)
         }
        
     }
