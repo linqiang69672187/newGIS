@@ -4,7 +4,7 @@
         <ul>
             <li><a @click="showdistance" ><Tooltip content="测量" placement="bottom"> <div><i class="fas fa-ruler"></i></div></Tooltip></a></li>
             <li><a><Tooltip content="地图切换" placement="bottom"> <div><i class="fas fa-map"></i></div></Tooltip></a></li>
-            <li><a><Tooltip content="全屏" placement="bottom"> <div><i class="fas fa-window-maximize"></i></div></Tooltip></a></li>
+            <li><a @click="fullscreen"><Tooltip content="全屏" :class="[isshowmini?'hide':'']" placement="bottom"> <div><i class="fas fa-window-maximize"></i></div></Tooltip><Tooltip content="恢复" placement="bottom" :class="[isshowmini?'':'hide']"> <div><i class="fas fa-window-minimize"></i></div></Tooltip></a></li>
             <li><a><Tooltip content="缩小" placement="bottom"> <div><i class="fas fa-search-minus"></i></div></Tooltip></a></li>
             <li><a><Tooltip content="放大" placement="bottom"> <div><i class="fas fa-search-plus"></i></div></Tooltip></a></li>           
         </ul>
@@ -46,6 +46,10 @@ export default {
          beforeEnter: function (el) {
               this.toolzindex=true;
          },
+         fullscreen:function(){
+             this.isshowmini=!this.isshowmini;
+             this.$emit("fullscreen");  
+         }
          
     },  
     components:{
@@ -54,12 +58,16 @@ export default {
    data(){
        return{ 
            show: false ,
-           toolzindex:false           
+           toolzindex:false,
+           isshowmini:false           
        }
     },
 }
 </script>
 <style scoped>
+    .hide{
+        display: none;
+    }
     .toolboxdiv{
         height: 400px;
         width: 500px;

@@ -24,7 +24,7 @@
       <div class="top" ><banner @Bannerselectedchange='Bannerselectedchange'></banner></div>
        <div>
             <Map  class="map" v-contextmenu:contextmenu move-type="0"></Map>
-           <MapToolbox></MapToolbox>
+           <MapToolbox @fullscreen="fullscreen"></MapToolbox>
            <Callbox :class="{hidedmenu}"></Callbox>
            <notice ></notice>
            <LeftToolbox @daiplate="cldaiplate" :style="{bottom:dmenuszie}"></LeftToolbox>
@@ -133,6 +133,9 @@ export default {
                    break;
                
            }
+        },
+        fullscreen:function(){
+            alert('fullscreen');
         }
        
     }
