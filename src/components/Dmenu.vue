@@ -53,14 +53,19 @@ import GPScontrol from "@/components/tabs/GPScontrol"
               handleTabRemove (name) {
                 this['tab' + name] = false;
             },
-            leave(el){
-              
+            leave(el){ 
                 this.showdmenu=!this.showdmenu;
                 this.rationicon=!this.rationicon;
                 this.$emit("listenchange",this.showdmenu);                   
             },
+            hide(){
+                if (this.showdmenu==false)return;
+                 this.showdmenu=false;
+                 this.rationicon=false;
+                 this.$emit("listenchange",this.showdmenu);  
+            },
             changeshowtab(key,tabs){
-    
+                
                
                 this.showdmenu=true;
                 this.rationicon=true;

@@ -138,7 +138,7 @@ export default {
         fullscreen:function(){
             this.isshowmini=!this.isshowmini;
             if (this.isshowmini==true){
-            this.$refs.dmenu.leave(false)
+            this.$refs.dmenu.hide();
             }
         }
        
