@@ -49,10 +49,10 @@ export default {
           {name:'help',label:'帮助',icon:'fa-question-circle'},
           {name:'exit',label:'结束系统',icon:'fa-door-open'},
         ],
-        selectitem:'dispatchFunction',
-        isshowmini:false
+        selectitem:'dispatchFunction',    
       }
     },
+     props: ['isshowmini'],
     components:{
       Badge,
     

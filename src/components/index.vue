@@ -21,7 +21,7 @@
                 <v-contextmenu-item :auto-hide="false">不自动关闭2</v-contextmenu-item>
             </v-contextmenu-submenu>
             </v-contextmenu>
-      <div class="top" ><banner @Bannerselectedchange='Bannerselectedchange'></banner></div>
+      <div class="top" ><banner :isshowmini="isshowmini" @Bannerselectedchange='Bannerselectedchange'></banner></div>
        <div>
             <Map  class="map" v-contextmenu:contextmenu move-type="0"></Map>
            <MapToolbox @fullscreen="fullscreen"></MapToolbox>
@@ -58,7 +58,8 @@ export default {
                         {label:'历史轨迹',icon:'history'},
                         {label:'实时轨迹',icon:'navigation'},
                         {label:'锁定功能',icon:'vpn_lock'},
-          ]            
+          ],
+          isshowmini:false            
        }
     },
    mounted(){
@@ -135,7 +136,7 @@ export default {
            }
         },
         fullscreen:function(){
-            alert('fullscreen');
+            this.isshowmini=!this.isshowmini;
         }
        
     }
