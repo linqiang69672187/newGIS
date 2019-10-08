@@ -1,34 +1,39 @@
 <template>
-  <div class="row">
-    <div class="logo">
-      <div>LDS2000</div>
-      <div><ul>
-          <li>单兵和车辆定位</li>
-          <li>指挥调度系统</li>
-      </ul></div>
+  <div class="banner">
+    <div class="row"  >
+      <div class="logo">
+        <div>LDS2000</div>
+        <div><ul>
+            <li>单兵和车辆定位</li>
+            <li>指挥调度系统</li>
+        </ul></div>
+        </div>
+      <div class="menu" :class="[isshowmini?'animated bounceOutRight':'',isshowmini==false?'animated bounceInRight':'']">
+      <div>
+          <ul>
+              <li v-for="(item,key) in items" @click="menuclk(item.name)" :key="key" :class="[(item.name==selectitem)?'selectitem':'']"><a><i class="fas " :class="item.icon"></i><div>{{item.label}}</div></a></li>
+          </ul>
       </div>
-    <div>
-        <ul>
-            <li v-for="(item,key) in items" @click="menuclk(item.name)" :key="key" :class="[(item.name==selectitem)?'selectitem':'']"><a><i class="fas " :class="item.icon"></i><div>{{item.label}}</div></a></li>
-        </ul>
-    </div>
-    <div>
-        <ul>
-            <li><a>
-              
-              <Badge  :count="2">
-                 <i class="fas fa-phone"></i>
-              </Badge>
-           
-              </a></li>
+      <div>
+          <ul>
               <li><a>
-              <Badge  :count="3">
-                 <i class="fas fa-envelope"></i>
-              </Badge></a></li>
-            <li><a><div>张警官</div></a></li>
-        </ul>
+                
+                <Badge  :count="2">
+                  <i class="fas fa-phone"></i>
+                </Badge>
+            
+                </a></li>
+                <li><a>
+                <Badge  :count="3">
+                  <i class="fas fa-envelope"></i>
+                </Badge></a></li>
+              <li><a><div>张警官</div></a></li>
+          </ul>
+      </div>
+      <div class="changewindows"></div>
+      </div>
     </div>
-    <div class="changewindows"><router-link tag="a"  :to="{name:'Ds2000'}" ><i class="fas fa-exchange-alt"></i></router-link></div>
+  <div class="trangle" @click="isshowmini=!isshowmini" :class="[isshowmini?'animated bounceInLeft':'',isshowmini==false?'animated bounceOutLeft':'']"></div>
   </div>
 </template>
 
@@ -44,7 +49,8 @@ export default {
           {name:'help',label:'帮助',icon:'fa-question-circle'},
           {name:'exit',label:'结束系统',icon:'fa-door-open'},
         ],
-        selectitem:'dispatchFunction'
+        selectitem:'dispatchFunction',
+        isshowmini:false
       }
     },
     components:{
@@ -68,6 +74,18 @@ html,body{
   padding: 0;
   
 }
+.trangle{
+  position:absolute;
+  width: 0px;
+  height: 0px;
+  border-left: 29px solid #164B77;
+  border-top: 29px solid transparent;
+  border-bottom: 29px solid transparent;
+  left: 240px;
+  top: 0px;
+  z-index: -1;
+}
+
 .changewindows{
   position: absolute;
   top: 0;
@@ -76,16 +94,24 @@ html,body{
   height: 22px;
   font-size: 16px;
   line-height: 22px;
-  border: 1px solid #fff;
+
   cursor: pointer;
+}
+
+.banner{
+  height: 58px;
 }
 h1, h2 {
   font-weight: normal;
 }
 .row {
   height: 58px;
-  background-color: #164B77;
+  
   color: #ffffff ;
+}
+.menu{
+background-color: #164B77;
+  height: 58px;
 }
 .row a{
   color: #ffffff ;
@@ -101,7 +127,7 @@ h1, h2 {
 
 .row>div:nth-child(2) {
     float: left;
-    width: calc(100% - 520px);
+    width: calc(100% - 240px);
 }
 .row>div:nth-child(2) svg {
    display: block !important;
@@ -109,15 +135,16 @@ h1, h2 {
    margin-top: 10px;
    font-size: 24px;
 }
-.row>div:nth-child(2) div {
+.row>div:nth-child(2) div div {
    
    margin-top: -15px;
    width: 80px;
    text-align: center;
 }
-.row>div:nth-child(3) {
+.row>div:nth-child(2)>div:nth-child(2) {
     float: right;
     width:150px;
+    margin-top: -62px;
 }
 ul {
   list-style-type: none;
@@ -142,20 +169,21 @@ a {
   color: #42b983;
 }
 
-.row>div:nth-child(3) li {
+.row>div:nth-child(2)>div:nth-child(2) li {
   margin: 0 0px;
   float: left;
   list-style-type: none;
   display: list-item;
 }
-.row>div:nth-child(3) li:nth-child(-n+2) {
+.row>div:nth-child(2)>div:nth-child(2) li:nth-child(-n+2) {
  width: 40px;
  margin-top: 25px;
  font-size: 22px;
 }
-.row>div:nth-child(3) li:nth-child(3) {
- margin-top: 35px;
+.row>div:nth-child(2)>div:nth-child(2) li:nth-child(3) {
+  margin-top: -45px;
   font-size: 14px;
+  margin-left: 80px;
 }
 .selectitem{
   background-color:#2B81BE;
@@ -184,5 +212,11 @@ a {
 }
 .logo div:nth-child(2) li:nth-child(2){
  letter-spacing:3px
+}
+
+</style>
+<style>
+.banner .ivu-badge-count{
+  top: 0px !important;
 }
 </style>

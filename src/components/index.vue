@@ -21,18 +21,20 @@
                 <v-contextmenu-item :auto-hide="false">不自动关闭2</v-contextmenu-item>
             </v-contextmenu-submenu>
             </v-contextmenu>
+      <div class="top" ><banner @Bannerselectedchange='Bannerselectedchange'></banner></div>
        <div>
-           <Map  v-contextmenu:contextmenu move-type="0"></Map>
+            <Map  class="map" v-contextmenu:contextmenu move-type="0"></Map>
            <MapToolbox></MapToolbox>
            <Callbox :class="{hidedmenu}"></Callbox>
            <notice ></notice>
            <LeftToolbox @daiplate="cldaiplate" :style="{bottom:dmenuszie}"></LeftToolbox>
        </div>
        <div>
-           <div class="top" ><banner @Bannerselectedchange='Bannerselectedchange'></banner></div>
+      
            <div class="left" :class="{hidedmenu}"><Lmenu :items='lmenuitems'></Lmenu></div>
            <div class="bottom"><Dmenu ref="dmenu"  @listenchange="listenchangeDmenu"></Dmenu></div>
        </div>
+      
     </div>
 </template>
 <script>
@@ -137,6 +139,13 @@ export default {
 }
 </script>
 <style scoped>
+  .map {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+    }
   #main {
     width: 100%;
     height: 100%;
@@ -146,11 +155,13 @@ export default {
     height: 100%;
   }
   .top{
-      position:absolute;
+      position: relative;;
       top: 0;
-      height: 58px;
+      height: 58px !important;
       width: 100%;
-      background-color: #fff;
+
+      float: left;
+      z-index: 2;
   }
   .left{
       position:absolute;
