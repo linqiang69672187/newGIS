@@ -6,6 +6,7 @@ export default{
         },
         myname(){
             return "林强"
-        }
+        },
+        
     },
 }

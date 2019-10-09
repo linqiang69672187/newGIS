@@ -7,7 +7,6 @@
         <TabPane  tab="plane"  name="实时状况" label="实时状况" class="tabpane" v-if="tab0" icon="ios-stats"><tabindex></tabindex></TabPane>
         <TabPane  tab="plane" name="GPS控制" class="tabpane" label="GPS控制" v-if="tab1" icon="ios-key"><GPScontrol></GPScontrol></TabPane>
         <TabPane  tab="plane"  name="锁定跟踪" class="tabpane"  label="锁定跟踪" v-if="tab2" icon="ios-lock"><eyemaps></eyemaps></TabPane>
-        <TabPane  tab="plane" name="视频窗口" class="tabpane"  label="视频窗口" v-if="tab3" icon="logo-windows"><videos></videos></TabPane>
         <TabPane  tab="plane" name="拨号键盘"   class="tabpane"  label="拨号键盘" v-if="tab4" icon="ios-apps"><dialplate ref="dail"></dialplate></TabPane>
   
     </Tabs>
@@ -58,10 +57,10 @@ import GPScontrol from "@/components/tabs/GPScontrol"
                 this.rationicon=!this.rationicon;
                 this.$emit("listenchange",this.showdmenu);                   
             },
-            hide(){
-                if (this.showdmenu==false)return;
-                 this.showdmenu=false;
-                 this.rationicon=false;
+            hide(isshow){
+              
+                 this.showdmenu=isshow;
+                 this.rationicon=isshow;
                  this.$emit("listenchange",this.showdmenu);  
             },
             changeshowtab(key,tabs){

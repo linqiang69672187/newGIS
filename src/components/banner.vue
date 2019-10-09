@@ -30,7 +30,7 @@
               <li><a><div>张警官</div></a></li>
           </ul>
       </div>
-      <div class="changewindows"></div>
+      <div class="changewindows">{{servertime}}</div>
       </div>
     </div>
   <div class="trangle" @click="isshowmini=!isshowmini" :class="[isshowmini?'animated bounceInLeft':'',isshowmini==false?'animated bounceOutLeft':'']"></div>
@@ -39,6 +39,7 @@
 
 <script>
 import { Badge  } from 'iview';
+import date from '@/mixin/date'
 export default {
     data () {
       return {  
@@ -49,10 +50,12 @@ export default {
           {name:'help',label:'帮助',icon:'fa-question-circle'},
           {name:'exit',label:'结束系统',icon:'fa-door-open'},
         ],
-        selectitem:'dispatchFunction',    
+        selectitem:'dispatchFunction',
+        date:new Date(1499996760000),    
       }
     },
-     props: ['isshowmini'],
+    props: ['isshowmini'],
+    mixins:[date],
     components:{
       Badge,
     
@@ -62,6 +65,28 @@ export default {
         if (val==this.selectitem)return;
         this.selectitem=val;
         this.$emit('Bannerselectedchange',val);
+      },
+      updatetime:function(value){
+        var crtTime = new Date(value);
+        return dateFtt("yyyy-MM-dd hh:mm:ss",crtTime);
+      },
+    },
+    mounted(){
+      let _this = this; // 声明一个变量指向Vue实例this，保证作用域一致
+      this.timer = setInterval(() => {
+      _this.date = new Date( _this.date).getTime()+1000; // 修改数据date
+      _this.date =  new Date(_this.date);
+      
+     }, 1000)
+    },
+    beforeDestroy() {
+      if (this.timer) {
+        clearInterval(this.timer); // 在Vue实例销毁前，清除我们的定时器
+      }
+    }
+    ,computed:{
+      servertime: function () {
+          return this.dateFtt("yyyy-MM-dd hh:mm:ss",this.date);
       }
     }
   }
@@ -90,7 +115,7 @@ html,body{
   position: absolute;
   top: 0;
   right: 5px;
-  width:22px;
+  width:155px;
   height: 22px;
   font-size: 16px;
   line-height: 22px;

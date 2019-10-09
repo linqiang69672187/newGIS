@@ -26,7 +26,7 @@
          <div>用户列表</div>
          <div><DagTree></DagTree></div>
     </div>
-         <div  class="controlLmenu" :class="{lmenuicon}"><div @click="minimenu=!minimenu" :class="{rotationIcon}"><i class="fas fa-arrow-circle-left"></i></div></div>
+    <div  class="controlLmenu" :class="{lmenuicon}"><div @click="minimenu=!minimenu" :class="{rotationIcon}"><i class="fas fa-arrow-circle-left"></i></div></div>
    
   </div>
 </template>
@@ -70,6 +70,12 @@ export default {
       this.rowwidth =false;
       this.rotationIcon=false;
     },
+    fullscreen:function(){
+      this.minimenu=true;
+    },
+    exitfullscreen:function(){
+      this.minimenu=false;
+    }
   },
   watch:{
       items:function(newval,oldval){
@@ -92,7 +98,7 @@ html,body{
 }
 .row {
   height: 100%;
-  width: 280px;
+  
   color: #ffffff ;
 
   transition:width 2s;

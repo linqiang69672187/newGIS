@@ -31,7 +31,7 @@
        </div>
        <div>
       
-           <div class="left" :class="{hidedmenu}"><Lmenu :items='lmenuitems'></Lmenu></div>
+           <div class="left" :class="{hidedmenu}"><Lmenu  ref="lmenu"  :items='lmenuitems'></Lmenu></div>
            <div class="bottom"><Dmenu ref="dmenu"  @listenchange="listenchangeDmenu"></Dmenu></div>
        </div>
       
@@ -138,8 +138,15 @@ export default {
         fullscreen:function(){
             this.isshowmini=!this.isshowmini;
             if (this.isshowmini==true){
-            this.$refs.dmenu.hide();
+            this.$refs.dmenu.hide(false);
+            this.$refs.lmenu.fullscreen();
             }
+            else
+            {
+           this.$refs.dmenu.hide(true);
+            this.$refs.lmenu.exitfullscreen(); 
+            }
+           
         }
        
     }
@@ -173,7 +180,6 @@ export default {
   .left{
       position:absolute;
       left: 0;
-      width: 280px;
       top:58px;
       bottom: 250px;
    
