@@ -180,6 +180,7 @@ export default {
   .left{
       position:absolute;
       left: 0;
+     
       top:58px;
       bottom: 250px;
    

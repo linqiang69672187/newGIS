@@ -3,7 +3,6 @@ export default{
       
         dateFtt(fmt,date) 
             { //author: meizz 
-               console.info(date);
             var o = { 
             "M+" : date.getMonth()+1,     //月份 
             "d+" : date.getDate(),     //日 

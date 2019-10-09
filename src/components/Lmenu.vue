@@ -1,5 +1,5 @@
 <template>
-  <div class="row" :class="{rowwidth}">
+  <div class="row" :class="[{rowwidth},showtree?'wide':'']">
     <div :class="{lmenuicon}"> <ul>
             <li  @click="showtree=!showtree" :class="{ismenufaded,showtree}">
              <Tooltip :disabled="!minimenu"  content="用户列表" placement="right"> 
@@ -84,6 +84,11 @@ export default {
         setTimeout(function(){
           _this.listnewchange=false;
         },1000)
+      },
+      showtree:function(newval,oldval){
+        if (newval==false){
+          this.rowwidth =false;
+          }
       }
    }
   }
@@ -100,11 +105,13 @@ html,body{
   height: 100%;
   
   color: #ffffff ;
-
   transition:width 2s;
   -moz-transition:width 2s; /* Firefox 4 */
   -webkit-transition:width 2s; /* Safari and Chrome */
   -o-transition:width 2s; /* Opera */
+}
+.wide{
+width: 280px; 
 }
 .row a{
   color: #ffffff ;
