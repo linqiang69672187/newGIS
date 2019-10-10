@@ -1,5 +1,5 @@
 <template>
-<div class="row">
+<div class="tree">
     <Tree :data="data3" :load-data="loadData" show-checkbox></Tree>
 </div>
 </template>
@@ -31,8 +31,7 @@ import { Tree  } from 'iview';
                         },
                         {
                             title: '朱警官',
-                            loading: false,
-                            children: []
+                         
                         }
                     ];
                     callback(data);
@@ -42,12 +41,16 @@ import { Tree  } from 'iview';
     }
 </script>
 <style scoped>
-.row{
-margin: 0px;
-width: 200px;
-text-align: left;
-padding-left: 5px;
-color: #000;
+.tree{
+    margin: 0px;
+    width: 200px;
+    text-align: left;
+    padding-left: 5px;
+    color: #000;
+    height: calc(100% - 30px);
+    overflow: auto;
+    z-index: 999;
+    position: relative;
 }
 
 </style>

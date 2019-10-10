@@ -68,7 +68,7 @@ export default {
       },
       updatetime:function(value){
         var crtTime = new Date(value);
-        return dateFtt("yyyy-MM-dd hh:mm:ss",crtTime);
+        return dateFtt("yyyy-MM-dd hh:mm",crtTime);
       },
     },
     mounted(){
@@ -77,7 +77,7 @@ export default {
       _this.date = new Date( _this.date).getTime()+1000; // 修改数据date
       _this.date =  new Date(_this.date);
       
-     }, 1000)
+     }, 60000)
     },
     beforeDestroy() {
       if (this.timer) {
@@ -86,7 +86,7 @@ export default {
     }
     ,computed:{
       servertime: function () {
-          return this.dateFtt("yyyy-MM-dd hh:mm:ss",this.date);
+          return this.dateFtt("yyyy-MM-dd hh:mm",this.date);
       }
     }
   }

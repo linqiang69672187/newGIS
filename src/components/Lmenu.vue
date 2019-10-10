@@ -84,7 +84,7 @@ export default {
         setTimeout(function(){
           _this.listnewchange=false;
         },1000)
-      },
+      }, 
       showtree:function(newval,oldval){
         if (newval==false){
           this.rowwidth =false;

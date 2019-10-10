@@ -25,7 +25,7 @@
        <div>
             <Map  class="map" v-contextmenu:contextmenu move-type="0"></Map>
            <MapToolbox @fullscreen="fullscreen"></MapToolbox>
-           <Callbox :class="{hidedmenu}"></Callbox>
+           <!-- <Callbox :class="{hidedmenu}"></Callbox> 地图上呼叫按钮-->
            <notice ></notice>
            <LeftToolbox @daiplate="cldaiplate" :style="{bottom:dmenuszie}"></LeftToolbox>
        </div>
