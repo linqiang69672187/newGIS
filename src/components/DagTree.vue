@@ -13,6 +13,11 @@ import { Tree  } from 'iview';
                         title: '杭州市公安局',
                         loading: false,
                         children: []
+                    },
+                     {
+                        title: '杭州市公安局',
+                        loading: false,
+                        children: []
                     }
                 ]
             }
