@@ -61,7 +61,9 @@ export default {
     afterfade:function(el){
       this.ismenufaded=true;
       this.lmenuicon =true;
+      if (this.showtree){
       this.rowwidth =true;
+      }
       this.rotationIcon=true;
     }, 
     afterendfade:function(el){
@@ -89,6 +91,12 @@ export default {
         if (newval==false){
           this.rowwidth =false;
           }
+          else{
+            if (this.minimenu){
+             this.rowwidth =true;
+             }
+          }
+          
       }
    }
   }
