@@ -16,6 +16,7 @@ import test from '@/components/control/keyboard'
 import notices from '@/components/tabs/GPScontrol'
 import LeftToolbox from '@/components/control/LeftToolbox'
 import Ds2000 from '@/components/Ds2000'
+import OCX from '@/components/OCX'
 
 Vue.use(Router)
 
@@ -100,6 +101,11 @@ export default new Router({
       path: '/Ds2000',
       name: 'Ds2000',
       component: Ds2000
+    },
+    {
+      path: '/OCX',
+      name: 'OCX',
+      component: OCX
     },
   ]
 })

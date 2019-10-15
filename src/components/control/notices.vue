@@ -10,47 +10,22 @@ let noticemod;
         },
         created() {
            let that =this;
+           window.vue_notice= this;
            Notice.config({
                 top: 120,
               //  duration: 30
             });
-         noticemod= setInterval(function (){
 
-                           that.open(false);
-                            count+=1;
-                        }, 7000);
         },
         destroyed(){
-            clearInterval(noticemod);
+        
         },
         methods: {
-            open:function (nodesc) {
-                switch(count%4){
-                    case 0:
-                         Notice.info({
-                           title: '短信提醒',
-                           desc: nodesc ? '' : '张警官24001，已到岗 '
+            regmsg:function (nodesc,msg,dispatchname) {
+              Notice.info({
+                           title: '注册信息',
+                           desc: nodesc ? '' : msg
                             });
-                        break;
-                    case 1:
-                        Notice.success({
-                           title: '短信发送提醒',
-                           desc: nodesc ? '' : '发送成功 '
-                            });
-                        break;
-                    case 2:
-                          Notice.warning({
-                           title: '告警',
-                           desc: nodesc ? '' : '张警官24001，已经越出电子栅栏 '
-                            });
-                        break;
-                    default:
-                        Notice.error({
-                           title: '错误',
-                           desc: nodesc ? '' : '控件注册失败，请联系管理员 '
-                            });
-                        break;
-                }
                
             }
         }

@@ -22,7 +22,6 @@ import 'v-contextmenu/dist/index.css'
 
 
 
-
 fontawesome.library.add(solid)
 fontawesome.library.add(regular)
 fontawesome.library.add(brands)

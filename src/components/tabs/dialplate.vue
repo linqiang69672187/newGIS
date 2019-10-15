@@ -92,7 +92,7 @@
                 </div>
                 <div class="buttons">
                     <ul>
-                        <li v-if="showsingalcall"><div v-ripple="'rgba(255, 255, 255, 0.35)'" ><i class="material-icons">person</i><span>全双功</span></div></li>
+                        <li v-if="showsingalcall" @click="startSC()"><div v-ripple="'rgba(255, 255, 255, 0.35)'" ><i class="material-icons">person</i><span>全双功</span></div></li>
                        
                         <li v-if="showsingalcall"><div v-ripple="'rgba(255, 255, 255, 0.35)'"><i class="material-icons">mic</i><span>半双功</span></div></li>
                         
@@ -102,7 +102,7 @@
                 </div>   
               
             </div>          
-               <div><span>这是一条消息</span></div> 
+               <div><span :class="[fadeinanimation?'animated fadeInLeft':'']">{{msg}}</span></div> 
         </div>
     </li>
     <li><Divider type="vertical" /></li>
@@ -175,7 +175,7 @@
 import Ripple from 'vue-ripple-directive'
 import { Divider ,TabPane,Tabs,AutoComplete,Option  } from 'iview';
 import callbuttons from '@/components/button/callbuttons';
-
+let msgtimetick;
 export default {
   components: {
      Divider,
@@ -183,7 +183,7 @@ export default {
      TabPane,
      callbuttons,
      AutoComplete,
-     Option
+     Option,
   },
   directives: {Ripple,},
   data(){
@@ -194,7 +194,10 @@ export default {
       transfer:false,
       showsingalcall:true, 
       showthetab:false,
+      IsEncrypt:0,  //是否加密
+      msg:'',
       data2: [],
+      fadeinanimation:false,
       backgroundDiv: {
                             backgroundImage: 'url(' + require('@/assets/images/tabs_table_bg.jpg') + ')'
                     } ,  
@@ -203,7 +206,8 @@ export default {
   }
   ,
  mounted(){
-      var _this = this;     
+      var _this = this; 
+      window.vue_dialplate =this;    
       this.$el.getElementsByClassName("ivu-input")[0].onkeydown = function(e) {   
              
          _this.keypress(e);
@@ -299,8 +303,25 @@ export default {
       },
       hidetab(){
           this.showthetab=false;
-      }
-       
+      },
+      startSC () { 
+           let scactionX = document.getElementById("SCactionX");
+           scactionX.StartSCall(this.inputnum,this.IsEncrypt);
+      },
+      CallMsg(issi,eventtype,msg,gssi,hookmethodsel){
+         console.info(issi+','+eventtype+','+msg+','+gssi+','+hookmethodsel);
+         this.showmsg(msg);
+      },
+      showmsg(msg){
+        clearTimeout(msgtimetick);
+                this.msg=msg;
+                this.fadeinanimation=true;
+                let _this = this;
+                msgtimetick =  setTimeout(() => {
+                    _this.fadeinanimation=false;   
+                    _this.msg='';            
+                }, 3000);
+      } 
   }
 }
 </script>

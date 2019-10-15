@@ -1,5 +1,6 @@
 <template>
     <div id="main">
+        <OCX></OCX>
          <v-contextmenu ref="contextmenu" >
             <v-contextmenu-item @click="handleClick('拨号盘')">拨号盘</v-contextmenu-item>
             <v-contextmenu-item @click="handleClick">实时状况</v-contextmenu-item>
@@ -26,7 +27,7 @@
             <Map  class="map" v-contextmenu:contextmenu move-type="0"></Map>
            <MapToolbox @fullscreen="fullscreen"></MapToolbox>
            <!-- <Callbox :class="{hidedmenu}"></Callbox> 地图上呼叫按钮-->
-           <notice ></notice>
+           <notice ref="notice"></notice>
            <LeftToolbox @daiplate="cldaiplate" :style="{bottom:dmenuszie}"></LeftToolbox>
        </div>
        <div>
@@ -46,6 +47,7 @@ import MapToolbox from "@/components/MapToolbox"
 import Callbox from "@/components/control/CallBox"
 import notice from "@/components/control/notices"
 import LeftToolbox from "@/components/control/LeftToolbox"
+import OCX from "@/components/OCX"
 
 
 export default {
@@ -63,7 +65,8 @@ export default {
        }
     },
    mounted(){
-      var _this = this;        
+      var _this = this;  
+    
       document.onkeydown = function(e) {            
          if(document.activeElement.nodeName!='INPUT'){
              switch(window.event.key)
@@ -98,6 +101,7 @@ export default {
         Callbox,
         notice,
         LeftToolbox,
+        OCX,
     },
     methods:{
         increase:function(val){
