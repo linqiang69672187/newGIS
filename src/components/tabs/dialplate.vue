@@ -109,6 +109,12 @@
     <li>
        <div class="dialtabs">
        <Tabs name="commonplane" type="line" >
+       <TabPane tab="commonplane" label="通话中"> 
+            <div>
+                <ul class="callcomonul">
+                </ul>
+            </div>
+        </TabPane>
         <TabPane tab="commonplane" label="常用组"> 
             <div>
                 <ul class="callcomonul">
@@ -164,6 +170,7 @@
 
             </div>
         </TabPane>
+        
         </Tabs>
        
        </div>
@@ -510,7 +517,10 @@ cursor: pointer;
 .dialtabs .ivu-tabs-nav{
     margin-left: 15px;
     background-color: #2B81BE;
-    width: 283px;
+    
+}
+.dialtabs .ivu-tabs-tab:last-child{
+margin-right: 0px !important;
 }
 .demo-auto-complete-item{
         padding: 4px 0;

@@ -7,3 +7,8 @@ function REGMsg(msg, dispName)
 function CallMsg(issi,eventtype,msg,gssi,hookmethodsel){
     window.vue_dialplate.CallMsg(issi,eventtype,msg,gssi,hookmethodsel);
 }
+
+function openwindows(windowstr){
+    alert(windowstr);
+    console.info(windowstr);
+}

@@ -56,10 +56,12 @@ export default {
            hidedmenu:false,
            dmenuszie: '260px !important', 
            lmenuitems: [
-                        {label:'GPS控制',icon:'gps_fixed'},
-                        {label:'历史轨迹',icon:'history'},
-                        {label:'实时轨迹',icon:'navigation'},
-                        {label:'锁定功能',icon:'vpn_lock'},
+                        {label:'操作窗口',icon:'gps_fixed'},
+                        {label:'GPS上报',icon:'history'},
+                        {label:'GPS上拉',icon:'navigation'},
+                        {label:'短信',icon:'vpn_lock'},
+                        {label:'操作日志',icon:'vpn_lock'},
+                        {label:'动态重组',icon:'vpn_lock'},
           ],
           isshowmini:false            
        }
@@ -118,26 +120,36 @@ export default {
             alert(text);
         },
         Bannerselectedchange:function(val){
-            this.lmenuitems.splice(0)
+         
            switch (val){
-                case "infomanager":
+               case "edits":
+                   openwindows("edits");
+                   break;
+                case "servicemanager":
+                    this.lmenuitems.splice(0);
                     this.lmenuitems.push( 
-                            {label:'用户信息',icon:'person'},
-                            {label:'设备信息',icon:'tap_and_play'},
-                            {label:'编组信息',icon:'supervisor_account'},
-                            {label:'单位信息',icon:'account_balance'},
+                            {label:'GPS上报统计',icon:'person'},
+                            {label:'单键报备统计',icon:'tap_and_play'},
+                            {label:'人员设备管理',icon:'supervisor_account'},
+                            {label:'GPS数据管理',icon:'account_balance'},
+                            {label:'预案管理',icon:'account_balance'},
+                            {label:'实时警力',icon:'account_balance'},
                           ) ;
                  break;
                default:
+                   this.lmenuitems.splice(0);
                    this.lmenuitems.push( 
-                            {label:'GPS控制',icon:'gps_fixed'},
-                            {label:'历史轨迹',icon:'history'},
-                            {label:'实时轨迹',icon:'navigation'},
-                            {label:'锁定功能',icon:'vpn_lock'},
+                        {label:'操作窗口',icon:'gps_fixed'},
+                        {label:'GPS上报',icon:'history'},
+                        {label:'GPS上拉',icon:'navigation'},
+                        {label:'短信',icon:'vpn_lock'},
+                        {label:'操作日志',icon:'vpn_lock'},
+                        {label:'动态重组',icon:'vpn_lock'},
                          );  
                    break;
                
            }
+            
         },
         fullscreen:function(){
             this.isshowmini=!this.isshowmini;

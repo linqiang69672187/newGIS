@@ -45,7 +45,7 @@ export default {
       return {  
         items:[
           {name:'dispatchFunction',label:'调度功能',icon:'fa-headphones'},
-          {name:'infomanager',label:'信息管理',icon:'fa-address-card'},
+          {name:'servicemanager',label:'勤务管理',icon:'fa-address-card'},
           {name:'edits',label:'参数设置',icon:'fa-cogs'},
           {name:'help',label:'帮助',icon:'fa-question-circle'},
           {name:'exit',label:'结束系统',icon:'fa-door-open'},
