@@ -24,7 +24,7 @@
             </v-contextmenu>
       <div class="top" ><banner :isshowmini="isshowmini" @Bannerselectedchange='Bannerselectedchange'></banner></div>
        <div>
-            <Map  class="map" v-contextmenu:contextmenu move-type="0"></Map>
+           <Map  class="map" v-contextmenu:contextmenu move-type="0"></Map>
            <MapToolbox @fullscreen="fullscreen"></MapToolbox>
            <!-- <Callbox :class="{hidedmenu}"></Callbox> 地图上呼叫按钮-->
            <notice ref="notice"></notice>
@@ -56,12 +56,12 @@ export default {
            hidedmenu:false,
            dmenuszie: '260px !important', 
            lmenuitems: [
-                        {label:'操作窗口',icon:'gps_fixed'},
-                        {label:'GPS上报',icon:'history'},
-                        {label:'GPS上拉',icon:'navigation'},
-                        {label:'短信',icon:'vpn_lock'},
-                        {label:'操作日志',icon:'vpn_lock'},
-                        {label:'动态重组',icon:'vpn_lock'},
+                        {label:'操作窗口',icon:'gps_fixed',name:'oper_window'},
+                        {label:'GPS上报',icon:'history',name:'gps_report'},
+                        {label:'GPS上拉',icon:'navigation',name:'gps_pull'},
+                        {label:'短信',icon:'vpn_lock',name:'sms'},
+                        {label:'操作日志',icon:'vpn_lock',name:'oper_log'},
+                        {label:'动态重组',icon:'vpn_lock',name:'dynamic_reconfiguration'},
           ],
           isshowmini:false            
        }
@@ -128,28 +128,26 @@ export default {
                 case "servicemanager":
                     this.lmenuitems.splice(0);
                     this.lmenuitems.push( 
-                            {label:'GPS上报统计',icon:'person'},
-                            {label:'单键报备统计',icon:'tap_and_play'},
-                            {label:'人员设备管理',icon:'supervisor_account'},
-                            {label:'GPS数据管理',icon:'account_balance'},
-                            {label:'预案管理',icon:'account_balance'},
-                            {label:'实时警力',icon:'account_balance'},
-                          ) ;
+                            {label:'GPS上报统计',icon:'person',name:'gps_statistics'},
+                            {label:'单键报备统计',icon:'tap_and_play',name:'report_statistics'},
+                            {label:'人员设备管理',icon:'supervisor_account',name:'users_statistics'},
+                            {label:'GPS数据管理',icon:'account_balance',name:'gps_manager'},
+                            {label:'预案管理',icon:'account_balance',name:'plan_manager'},
+                            {label:'实时警力',icon:'account_balance',name:'realtime_polices'},
+                          );
                  break;
                default:
                    this.lmenuitems.splice(0);
                    this.lmenuitems.push( 
-                        {label:'操作窗口',icon:'gps_fixed'},
-                        {label:'GPS上报',icon:'history'},
-                        {label:'GPS上拉',icon:'navigation'},
-                        {label:'短信',icon:'vpn_lock'},
-                        {label:'操作日志',icon:'vpn_lock'},
-                        {label:'动态重组',icon:'vpn_lock'},
+                            {label:'操作窗口',icon:'gps_fixed',name:'oper_window'},
+                            {label:'GPS上报',icon:'history',name:'gps_report'},
+                            {label:'GPS上拉',icon:'navigation',name:'gps_pull'},
+                            {label:'短信',icon:'vpn_lock',name:'sms'},
+                            {label:'操作日志',icon:'vpn_lock',name:'oper_log'},
+                            {label:'动态重组',icon:'vpn_lock',name:'dynamic_reconfiguration'},
                          );  
-                   break;
-               
-           }
-            
+                   break;             
+           }   
         },
         fullscreen:function(){
             this.isshowmini=!this.isshowmini;

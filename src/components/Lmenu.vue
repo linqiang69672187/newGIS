@@ -12,7 +12,7 @@
             </li>
              <li  v-for="(item,key) in items" :key="key"  :class="[ismenufaded,listnewchange?'animated lightSpeedIn':'']">
              <Tooltip :disabled="!minimenu"  :content="item.label" placement="right"> 
-                <a >
+                <a @click="openwindows(item.name)">
                   <i class="material-icons">{{item.icon}}</i>
                 <transition  @after-leave="afterfade" @before-enter="afterendfade" name="fade">
                 <div v-if="!minimenu">{{item.label}}</div>
@@ -77,6 +77,9 @@ export default {
     },
     exitfullscreen:function(){
       this.minimenu=false;
+    },
+    openwindows:function(windowstr){
+      openwindows(windowstr);
     }
   },
   watch:{
