@@ -545,65 +545,37 @@ const install = function(Vue) {
                                     }
                                 ]
                             },
-                            options: [
-                                {
-                                    series: [
-                                        {
-                                          data:[2, 4, 7, 8, 5, 7,15],
-                                            
-                                        },
-                                        {
-                                          data:[28, 5.9, 9.0, 26.4, 18.7, 20.7,17]
-                                        }
-                                    ]
-                                    ,
-                                    xAxis: [
-                                        {
-                                            data: ['滨江','上城','下城','萧山','拱墅','江干','钱江新区'],
-                                        }
-                                    ],  
-                                },
-                                {
-                                    series: [
-                                        {
-                                          data:[12, 4, 7, 8, 5, 7,15],
-                                            
-                                        },
-                                        {
-                                          data:[6, 9, 3, 6.4, 8.7, 10,17]
-                                        }
-                                    ],
-                                    xAxis: [
-                                        {
-                                            data: ['滨2江','临安','建德','萧山','拱墅','江干','钱江新区'],
-                                        }
-                                    ], 
-                                },
-                            ]
+                            options: []
                         };
                         this.chart.setOption(option);
                         let that =this;
                         let updatedata = function(data){
-                            var data0 = option.series[0].data;
-                            var data1 = option.series[1].data;
-                            
-                            for ( var i = 0; i <data0.length; i++){
-                                var oper =Math.round(Math.random());
-                                if (oper==0){
-                                    data0[i]+=Math.round(Math.random()*2);
+                            let count =  Math.ceil(data.length / 7);
+                        
+                            option.baseOption.timeline.data.length=0;
+                            option.options.length=0;
+                            for (let i = 0; i < count; i++) { 
+                                option.baseOption.timeline.data.push(i+1);
+                                let dataonlinetime=[];
+                                let dataonlinecount=[];
+                                let dataxAxis=[];
+                                for (let ndata = 0; ndata <7; ndata++) { 
+                                    if (i*7+ndata>=data.length) break;
+                                    dataonlinetime.push((data[i*7+ndata].onlineTime/3600).toFixed(2));
+                                    dataonlinecount.push(data[i*7+ndata].onlineTerminal);
+                                    dataxAxis.push(data[i*7+ndata].entityName)
                                 }
-                                else{
-                                    data0[i]-=Math.round(Math.random()*2);
-                                }
-                                if (data0[i]<0)data0[i]=0;
-                                if (data0[i]>=30)data0[i]=20;
-                            }
+                              
+                                let series =[];
+                                series.push({data:dataonlinetime});   
+                                series.push({data:dataonlinecount});   
+                                let xAxis=[];
+                                xAxis.push({data:dataxAxis});
+                                option.options.push({series:series,xAxis:xAxis});
+                             }
 
-                            for ( var i = 0; i <data1.length; i++){
-   
-                                 data1[i]+=Math.floor(Math.random());
-                               
-                            }
+
+                          
                            // option.xAxis[0].data.shift();
                            // option.xAxis[0].data.push(axisData);  
                             that.chart.setOption(option);

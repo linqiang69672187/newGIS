@@ -42,28 +42,33 @@ import { setTimeout } from 'timers';
              this.updateecharbar('122');
            },
            interLoadData(){
-              Vue.axios.get('app/data/Json/hangzhou.json', {
+             let _this = this;
+              Vue.axios.get('app/data/Json/hongkong.json', {
                             params: {
                                 ctrl:'DialPadDao',
                                 action: "MatchUserAndGroup",
                                  txtDialPad:this.inputnum
                             }
                           }).then((res) => {
-                          console.info(res);
+                          //console.info(res);
+                          _this.praseData(res.data); 
                           }).catch((err) => {
-                            console.log(err)
+                          console.log(err)
                            
                    })
 
            },
+          praseData(data){
+           this.updateecharbar(data);
 
+          },
            
         },
         created(){
     
         },
         destroyed() {
-         clearInterval(loadinter);
+         clearInterval(this.loadinter);
         },
         mounted() {
           
@@ -71,9 +76,10 @@ import { setTimeout } from 'timers';
         this.updategaugeindex = this.$chart.gaugeindex('gauguchar');
         this.updateecharbar = this.$chart.echarbar('onlinechartable');
         let _this=this;
-        loadinter  = setInterval(function (){
+        this.interLoadData();
+        this.loadinter  = setInterval(function (){
               _this.interLoadData();
-              }, 5000);
+              }, 10000);
         }
     }
 </script>
