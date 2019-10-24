@@ -224,7 +224,7 @@ export default {
                             params: {
                                 ctrl:'DialPadDao',
                                 action: "MatchUserAndGroup",
-                                 txtDialPad:this.inputnum
+                                 txtDialPad:_this.inputnum
                             }
                           }).then((res) => {
                               _this.data2 = res.data;
