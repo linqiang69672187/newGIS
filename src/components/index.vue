@@ -24,6 +24,7 @@
             </v-contextmenu>
       <div class="top" ><banner :isshowmini="isshowmini" @Bannerselectedchange='Bannerselectedchange'></banner></div>
        <div>
+           <div  id="map"></div>
            <Map  class="map" v-contextmenu:contextmenu move-type="0"></Map>
            <MapToolbox @fullscreen="fullscreen"></MapToolbox>
            <!-- <Callbox :class="{hidedmenu}"></Callbox> 地图上呼叫按钮-->
@@ -56,14 +57,15 @@ export default {
            hidedmenu:false,
            dmenuszie: '260px !important', 
            lmenuitems: [
-                        {label:'操作窗口',icon:'gps_fixed',name:'oper_window'},
-                        {label:'GPS上报',icon:'history',name:'gps_report'},
-                        {label:'GPS上拉',icon:'navigation',name:'gps_pull'},
-                        {label:'短信',icon:'vpn_lock',name:'sms'},
-                        {label:'操作日志',icon:'vpn_lock',name:'oper_log'},
-                        {label:'动态重组',icon:'vpn_lock',name:'dynamic_reconfiguration'},
-          ],
-          isshowmini:false            
+                        {label:'操作窗口',icon:'gps_fixed',name:'hjmb'},
+                        {label:'GPS上报',icon:'history',name:'gpslist'},
+                        {label:'GPS上拉',icon:'navigation',name:'GPSPullList'},
+                        {label:'短信',icon:'vpn_lock',name:'sms_sjx'},
+                        {label:'操作日志',icon:'vpn_lock',name:'operationlog'},
+                        {label:'动态重组',icon:'vpn_lock',name:'dtczrestlt'},
+        ],
+          isshowmini:false,
+                      
        }
     },
    mounted(){
@@ -122,29 +124,29 @@ export default {
         Bannerselectedchange:function(val){
          
            switch (val){
-               case "edits":
-                   openwindows("edits");
+               case "options":
+                   openwindows("options");
                    break;
                 case "servicemanager":
                     this.lmenuitems.splice(0);
                     this.lmenuitems.push( 
-                            {label:'GPS上报统计',icon:'person',name:'gps_statistics'},
-                            {label:'单键报备统计',icon:'tap_and_play',name:'report_statistics'},
-                            {label:'人员设备管理',icon:'supervisor_account',name:'users_statistics'},
-                            {label:'GPS数据管理',icon:'account_balance',name:'gps_manager'},
-                            {label:'预案管理',icon:'account_balance',name:'plan_manager'},
-                            {label:'实时警力',icon:'account_balance',name:'realtime_polices'},
+                            {label:'GPS上报统计',icon:'person',name:'Lang_gpstj'},
+                            {label:'单键报备统计',icon:'tap_and_play',name:'Lang_djbbtj '},
+                            {label:'人员设备管理',icon:'supervisor_account',name:'Lang_UserDeviceManage'},
+                            {label:'GPS数据管理',icon:'account_balance',name:'Lang_GPSDataManage'},
+                            {label:'预案管理',icon:'account_balance',name:'Lang_emergency'},
+                            {label:'实时警力',icon:'account_balance',name:'Lang_RealTimePoliceStrength'},
                           );
                  break;
                default:
                    this.lmenuitems.splice(0);
                    this.lmenuitems.push( 
-                            {label:'操作窗口',icon:'gps_fixed',name:'oper_window'},
-                            {label:'GPS上报',icon:'history',name:'gps_report'},
-                            {label:'GPS上拉',icon:'navigation',name:'gps_pull'},
-                            {label:'短信',icon:'vpn_lock',name:'sms'},
-                            {label:'操作日志',icon:'vpn_lock',name:'oper_log'},
-                            {label:'动态重组',icon:'vpn_lock',name:'dynamic_reconfiguration'},
+                            {label:'操作窗口',icon:'gps_fixed',name:'hjmb'},
+                            {label:'GPS上报',icon:'history',name:'gpslist'},
+                            {label:'GPS上拉',icon:'navigation',name:'GPSPullList'},
+                            {label:'短信',icon:'vpn_lock',name:'sms_sjx'},
+                            {label:'操作日志',icon:'vpn_lock',name:'operationlog'},
+                            {label:'动态重组',icon:'vpn_lock',name:'dtczrestlt'},
                          );  
                    break;             
            }   
@@ -167,7 +169,7 @@ export default {
 }
 </script>
 <style scoped>
-  .map {
+  #map {
         position: absolute;
         left: 0;
         top: 0;

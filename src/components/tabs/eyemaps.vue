@@ -1,43 +1,30 @@
 <template>
     <div   class="row">
         <ul>
-            <li> 
-             <Map move-type="1"></Map>
+            <li  v-for="item in lockitems" :key="item.issi"> 
+             <Map :lockdevice="item"></Map>
+              
             </li>
-            <li> 
-             <Map move-type="2"></Map>
-            </li>
-            <li> 
-             <Map move-type="3"></Map>
-            </li>
-            <li> 
-             <Map move-type="4"></Map>
-            </li>
-            <li> 
-             <Map move-type="5"></Map>
-            </li>
-            <li> 
-             <Map move-type="6"></Map>
-            </li>
-            <li> 
-             <Map></Map>
-            </li>
+            
         </ul>
     </div>
 </template>
 <script>
-import Map from "@/components/map"
+import Map from "@/components/control/eDagMap"
 
 export default {
-        data () {
-                return {
-                          
+    data () {
+             return {
+                        lockitems:[],//锁定的设备
                     }
         },
     mounted(){
-
+        this.updatelockitems();
         },
-    methods:{     
+    methods:{  
+            updatelockitems(){
+                this.lockitems =  useprameters.lockids;
+            },   
         },
     components: {
       Map
@@ -62,10 +49,12 @@ export default {
     height:220px;
     display: inline-block;
     white-space: nowrap; 
+    margin-right: 5px;
 }
 li>div{
     height: 220px;
 }
+
 </style>
 <style >
 .vjs-big-play-button{

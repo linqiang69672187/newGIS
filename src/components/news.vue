@@ -1,5 +1,5 @@
 <template>
-    <div>Hello vue{{news}},{{points}}
+    <div>{{lockid}}Hello vue{{news}},{{points}}
         <Button  @click="increase(5)"  >点击{{say_hi('lq')}}</Button><Button  type="primary">dbc{{say_hi()}}</Button><Button  type="success">dbc{{myname2()}}</Button>
         <Table width="550" border :columns="columns2" :data="data3"></Table>
         <QRCode>
@@ -125,7 +125,10 @@ export default {
     computed:{
         points:function(){
             return store.getters.get_points
-        }
+        },
+          lockid:function(){
+            return store.getters.get_id
+        },
             
         
     },

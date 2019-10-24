@@ -1,5 +1,5 @@
 <template>
-<div :style="backgroundDiv"  class="row">
+<div :style="backgroundDiv" @click="updatedata"  class="row">
     <div id="onlinechar"></div>
     <div  class="middle"> 
         <div id="gauguchar"></div>
@@ -17,6 +17,7 @@
 </template>
 <script>
 //import Table from "@/components/control/tables"
+import Vue from 'vue';
 import { setTimeout } from 'timers';
   export default {
         data () {
@@ -24,23 +25,55 @@ import { setTimeout } from 'timers';
                      loading:true, 
                      backgroundDiv: {
                             backgroundImage: 'url(' + require('@/assets/images/tabs_table_bg.jpg') + ')'
-                    } ,                        
+                    } ,
+                    updateecharbar:null,
+                    updategaugeindex:null, 
+                    updatedynamicline:null,
+                    loadinter:null,                       
                 }
         },
         components:{
          //Table
         },
         methods: {
+           updatedata(){
+             this.updatedynamicline('111');
+             this.updategaugeindex('111')
+             this.updateecharbar('122');
+           },
+           interLoadData(){
+              Vue.axios.get('app/data/Json/hangzhou.json', {
+                            params: {
+                                ctrl:'DialPadDao',
+                                action: "MatchUserAndGroup",
+                                 txtDialPad:this.inputnum
+                            }
+                          }).then((res) => {
+                          console.info(res);
+                          }).catch((err) => {
+                            console.log(err)
+                           
+                   })
+
+           },
+
            
         },
         created(){
     
         },
+        destroyed() {
+         clearInterval(loadinter);
+        },
         mounted() {
-        this.$chart.dynamicline('onlinechar');
-        this.$chart.gaugeindex('gauguchar');
-        this.$chart.echarbar('onlinechartable');
-       
+          
+        this.updatedynamicline = this.$chart.dynamicline('onlinechar');
+        this.updategaugeindex = this.$chart.gaugeindex('gauguchar');
+        this.updateecharbar = this.$chart.echarbar('onlinechartable');
+        let _this=this;
+        loadinter  = setInterval(function (){
+              _this.interLoadData();
+              }, 5000);
         }
     }
 </script>

@@ -1,5 +1,5 @@
 <template>
-<div :style="backgroundDiv"  class="row" >
+<div :style="backgroundDiv"  class="row" @keypress.space="PTT" @keyup="releasePTT">
 <ul>
     <li>
         <div class="dialpane">
@@ -7,12 +7,12 @@
                  <ul> 
                    <li class="inputli">
                              <AutoComplete
-                                v-model="inputnum"
+                                v-model.lazy.trim="inputnum"
                                 @on-search="handleSearch2"
                                 placeholder="输入组号/个号/姓名"
                                 :transfer='transfer'
                                  class="input"
-                                 placement="top"
+                                 placement="top"                            
                                 style="width:200px">
                                 <Option v-for="item in data2" :value="item.issi" :key="item.issi">
                                     <div>
@@ -92,12 +92,16 @@
                 </div>
                 <div class="buttons">
                     <ul>
-                        <li v-if="showsingalcall" @click="startSC()"><div v-ripple="'rgba(255, 255, 255, 0.35)'" ><i class="material-icons">person</i><span>全双功</span></div></li>
+                        <li v-show="showsingalcall" @click="startDC()"><div ><i class="material-icons">person</i><span>全双功</span></div></li>
                        
-                        <li v-if="showsingalcall"><div v-ripple="'rgba(255, 255, 255, 0.35)'"><i class="material-icons">mic</i><span>半双功</span></div></li>
+                        <li v-if="showsingalcall" @mouseup="SCEASEDPTT()" @mousedown="StartSCall()"><div ><i class="material-icons">mic</i><span>半双功</span></div></li>
                         
-                        <li v-if="showgroupcall"><div v-ripple="'rgba(255, 255, 255, 0.35)'"><i class="material-icons">group</i><span>组&nbsp;&nbsp;&nbsp;呼</span></div></li>                       
-                       
+                        <li v-if="showgroupcall" @mouseup="GCEASEDPTT()" @mousedown="startGCall()"><div ><i class="material-icons">group</i><span>组&nbsp;&nbsp;&nbsp;呼</span></div></li>                       
+                        
+                        <li v-if="iscalling" @click="endcall"><div class="endcall"><i class="material-icons">call_end</i><span>结&nbsp;&nbsp;&nbsp;束</span></div></li>
+                        
+                        <li  @mouseup="releasePTT" @mousedown="PTT" v-if="isptt"><div class="Ptt"><i class="material-icons">flash_on</i><span>P&nbsp;&nbsp;T&nbsp;&nbsp;T</span></div></li>
+
                     </ul>
                 </div>   
               
@@ -112,61 +116,37 @@
        <TabPane tab="commonplane" label="通话中"> 
             <div>
                 <ul class="callcomonul">
+                 <li v-for="(item,key) in calling" :key="key">
+                    <callbuttons  @btnclick="btnclk"   :button-type="item.type" :button-name="item.name.substr(0,5)" :button-number="item.issi"></callbuttons> 
+                 </li>
                 </ul>
             </div>
         </TabPane>
         <TabPane tab="commonplane" label="常用组"> 
             <div>
                 <ul class="callcomonul">
-                   
-                    <li> <callbuttons  @btnclick="btnclk"   button-type="group" button-name="TG1" button-number="89999999"></callbuttons> </li>
-                    <li> <callbuttons  @btnclick="btnclk"  button-type="group" button-name="TG2" button-number="89999997"></callbuttons> </li>
-                    <li> <callbuttons  @btnclick="btnclk"  button-type="group" button-name="TG2" button-number="89999996"></callbuttons> </li>
-                    <li> <callbuttons  @btnclick="btnclk"  button-type="group" button-name="TG2" button-number="89999995"></callbuttons> </li>
-                    <li> <callbuttons  @btnclick="btnclk"  button-type="group" button-name="TG2" button-number="89999994"></callbuttons> </li>
-                    <li> <callbuttons  @btnclick="btnclk"  button-type="group" button-name="TG2" button-number="89999993"></callbuttons> </li>
-                    <li> <callbuttons  @btnclick="btnclk"  button-type="group" button-name="TG2" button-number="89999991"></callbuttons> </li>
-                    <li> <callbuttons  @btnclick="btnclk"  button-type="group" button-name="TG2" button-number="81999995"></callbuttons> </li>             
-
+                   <li v-for="(item,key) in groups" :key="key">
+                    <callbuttons  @btnclick="btnclk"   button-type="group" :button-name="item.name.substr(0,5)" :button-number="item.issi"></callbuttons> 
+                   </li>                   
                 </ul>
             </div>
         </TabPane>
         <TabPane tab="commonplane" label="常用个号">
             <div >
                    <ul class="callcomonul">
-                   
-                    <li> <callbuttons  @btnclick="btnclk"   v-ripple="'rgba(255, 255, 255, 0.35)'" button-type="person" button-name="张警官" button-number="24001"></callbuttons> </li>
-                    <li> <callbuttons  @btnclick="btnclk"  button-type="person" button-name="朱警官" button-number="24002"></callbuttons> </li>
-                    <li> <callbuttons  @btnclick="btnclk"  button-type="person" button-name="张警官" button-number="24003"></callbuttons> </li>
-                    <li> <callbuttons  @btnclick="btnclk"  button-type="person" button-name="周警官" button-number="24004"></callbuttons> </li>
-                    <li> <callbuttons  @btnclick="btnclk"  button-type="person" button-name="李警官" button-number="24005"></callbuttons> </li>
-                    <li> <callbuttons  @btnclick="btnclk"  button-type="person" button-name="林警官" button-number="24006"></callbuttons> </li>
-                    <li> <callbuttons  @btnclick="btnclk"  button-type="person" button-name="杨警官" button-number="24007"></callbuttons> </li>
-                    <li> <callbuttons  @btnclick="btnclk"  button-type="person" button-name="肖警官" button-number="24008"></callbuttons> </li>             
-                </ul>
+                    <li v-for="(item,key) in users" :key="key">
+                        <callbuttons  @btnclick="btnclk"   button-type="person" :button-name="item.name.substr(0,5)" :button-number="item.issi"></callbuttons> 
+                    </li> 
+                   </ul>
             </div>
         </TabPane>
         <TabPane tab="commonplane" label="最近联系">
             <div>
                  <ul class="callcomonul">
-                   
-                    <li> <callbuttons  @btnclick="btnclk"  button-type="person" button-name="张警官" button-number="24001"></callbuttons> </li>
-                    <li> <callbuttons  @btnclick="btnclk"  button-type="person" button-name="肖警官" button-number="24008"></callbuttons> </li>             
-                    <li> <callbuttons  @btnclick="btnclk"  button-type="group" button-name="TG1" button-number="89999999"></callbuttons> </li>
-                    <li> <callbuttons  @btnclick="btnclk"  button-type="group" button-name="TG2" button-number="89999997"></callbuttons> </li>
-                    <li> <callbuttons  @btnclick="btnclk"  button-type="group" button-name="TG2" button-number="89999996"></callbuttons> </li>
-                    <li> <callbuttons  @btnclick="btnclk"  button-type="group" button-name="TG2" button-number="89999995"></callbuttons> </li>
-                    <li> <callbuttons  @btnclick="btnclk"  button-type="person" button-name="朱警官" button-number="24002"></callbuttons> </li>
-                    <li> <callbuttons  @btnclick="btnclk"  button-type="person" button-name="张警官" button-number="24003"></callbuttons> </li>
-                    <li> <callbuttons  @btnclick="btnclk"  button-type="person" button-name="周警官" button-number="24004"></callbuttons> </li>
-                    <li> <callbuttons  @btnclick="btnclk"  button-type="person" button-name="李警官" button-number="24005"></callbuttons> </li>
-                    <li> <callbuttons  @btnclick="btnclk"  button-type="person" button-name="林警官" button-number="24006"></callbuttons> </li>
-                    <li> <callbuttons  @btnclick="btnclk"  button-type="person" button-name="杨警官" button-number="24007"></callbuttons> </li>
-                    <li> <callbuttons  @btnclick="btnclk"  button-type="group" button-name="TG2" button-number="89999994"></callbuttons> </li>
-                    <li> <callbuttons  @btnclick="btnclk"  button-type="group" button-name="TG2" button-number="89999993"></callbuttons> </li>
-                    <li> <callbuttons  @btnclick="btnclk"  button-type="group" button-name="TG2" button-number="89999991"></callbuttons> </li>
-                    <li> <callbuttons  @btnclick="btnclk"  button-type="group" button-name="TG2" button-number="81999995"></callbuttons> </li>              
-                </ul>
+                  <li v-for="(item,key) in contacts" :key="key">
+                    <callbuttons  @btnclick="btnclk"   :button-type="item.type" :button-name="item.name.substr(0,5)" :button-number="item.issi"></callbuttons> 
+                 </li> 
+                 </ul>
 
             </div>
         </TabPane>
@@ -179,6 +159,7 @@
 </div>
 </template>
 <script>
+import Vue from 'vue'
 import Ripple from 'vue-ripple-directive'
 import { Divider ,TabPane,Tabs,AutoComplete,Option  } from 'iview';
 import callbuttons from '@/components/button/callbuttons';
@@ -197,24 +178,31 @@ export default {
       return {
       inputnum:'',
       buttonspress:0,
-      showgroupcall:true,
+      showgroupcall:true, //显示组呼
       transfer:false,
-      showsingalcall:true, 
+      showsingalcall:true, //显示单呼
       showthetab:false,
       IsEncrypt:0,  //是否加密
       msg:'',
-      data2: [],
+      data2: [], //联想中的号码
       fadeinanimation:false,
       backgroundDiv: {
                             backgroundImage: 'url(' + require('@/assets/images/tabs_table_bg.jpg') + ')'
-                    } ,  
+                    }, 
+      calling:[],
+      users:[],
+      groups:[],
+      contacts:[],
+      iscalling:false,
+      isptt:false, 
       }
   
   }
   ,
  mounted(){
       var _this = this; 
-      window.vue_dialplate =this;    
+      window.vue_dialplate =this; 
+      
       this.$el.getElementsByClassName("ivu-input")[0].onkeydown = function(e) {   
              
          _this.keypress(e);
@@ -223,38 +211,48 @@ export default {
              
          _this.keyup(e);
         };
+        this.initgroupandusers();//初始化常用组、个、最近联系人  
     },
   computed:{
 
   },
   methods:{
        handleSearch2 (value) {
-                 if (value.indexOf('2')==0){
-                    this.data2 = [
-                                {'type':'person','issi':'24001','name':'张警官'},
-                                {'type':'group','issi':'822889','name':'TG1'}
-                                ]
-                                return;
-                 }
-                 if (value.indexOf('t')==0){
-                    this.data2 = [ 
-                                {'type':'group','issi':'822889','name':'TG1'}
-                                ]
-                                return;
-                 }
-                if (value.indexOf('张')==0){
-                    this.data2 = [ 
-                                 {'type':'person','issi':'24001','name':'张警官'},
-                                ]
-                                return;
-                 }
-                this.data2 = []
-               
+                this.data2 = [];
+                var _this =this;
+                  Vue.axios.post('/Handlers/MVCEasy.ashx', {
+                            params: {
+                                ctrl:'DialPadDao',
+                                action: "MatchUserAndGroup",
+                                 txtDialPad:this.inputnum
+                            }
+                          }).then((res) => {
+                              _this.data2 = res.data;
+                          }).catch((err) => {
+                            console.log(err)
+                           
+                          })
             },
+      initgroupandusers(){
+                this.data2 = [];
+                var _this =this;
+                  Vue.axios.post('/Handlers/MVCEasy.ashx', {
+                            params: {
+                                ctrl: "DialPadDao",
+                                action: "GetFrequentData"
+                            }
+                          }).then((res) => {                  
+                            _this.users = res.data.commonUser;
+                            _this.groups = res.data.commonGroup;
+                            _this.contacts = res.data.latelyUserAndGroup;
+                          }).catch((err) => {
+                            console.log(err)
+                           
+                          })
+      },
       keypress(event){
-          console.info(event.code);
-          this.showgroupcall = true;//后续优化，传值判断后，是否显示按钮
-          this.showsingalcall=true;
+         // this.showgroupcall = true;//后续优化，传值判断后，是否显示按钮
+         // this.showsingalcall=true;
           this.buttonspress =event.code;
       },
       keyup(event){
@@ -276,23 +274,20 @@ export default {
                  this.showsingalcall=true;
               break;
 
-          }
-         
-          
-         
+          }                       
       },
       numbtnclick(el){
            this.inputnum +=el.target.innerText;
            this.$el.getElementsByClassName("ivu-input-default")[0].focus();
-           this.showgroupcall = true;//后续优化，传值判断后，是否显示按钮
-          this.showsingalcall=true;
+           //this.showgroupcall = true;//后续优化，传值判断后，是否显示按钮
+           //this.showsingalcall=true;
       },
       backbtnclick(el){
            var n = this.inputnum.length;
            this.inputnum= this.inputnum.slice(0,n-1);
            this.$el.getElementsByClassName("ivu-input-default")[0].focus();
-           this.showgroupcall = true;//后续优化，传值判断后，是否显示按钮
-          this.showsingalcall=true;
+          //this.showgroupcall = true;//后续优化，传值判断后，是否显示按钮
+          //this.showsingalcall=true;
       },
       sendparentvalue(val){  
          // this.inputnum='';
@@ -311,17 +306,174 @@ export default {
       hidetab(){
           this.showthetab=false;
       },
-      startSC () { 
+      startDC () { //开始全双工单呼
+           let scactionX = document.getElementById("SCactionX");
+           scactionX.StartDCall(this.inputnum,this.IsEncrypt);
+      },
+     startGCall() {   //开始组呼
+           let scactionX = document.getElementById("SCactionX");
+           scactionX.StartGCall(this.inputnum,this.IsEncrypt);
+      },
+      GCEASEDPTT(){//组呼释放授权
+            let scactionX = document.getElementById("SCactionX");
+            scactionX.GCEASEDPTT(this.inputnum);
+      },
+     StartSCall() { //开始半双工单呼
            let scactionX = document.getElementById("SCactionX");
            scactionX.StartSCall(this.inputnum,this.IsEncrypt);
       },
+     SCEASEDPTT(){//半双工单呼释放授权
+            let scactionX = document.getElementById("SCactionX");
+            scactionX.SCEASEDPTT(this.inputnum);
+      },
+      releasePTT(){
+        let scactionX = document.getElementById("SCactionX");
+        this.calling.forEach(item=>{
+                            if(item.issi==this.inputnum){
+                            switch (item.eventtype){
+                                case "00":  
+                                        scactionX.SCEASEDPTT(this.inputnum); 
+                                    break;
+                                    case "10":
+                                        scactionX.GCEASEDPTT(this.inputnum);
+                                    break;
+                            }
+                            return;
+                            }
+                        })
+      },
+      PTT(){
+          let scactionX = document.getElementById("SCactionX");
+         
+          this.calling.forEach(item=>{
+                            if(item.issi==this.inputnum){
+                                 console.info(item);
+                            switch (item.eventtype){
+                                case "00":  
+                                        scactionX.StartSCall(this.inputnum,this.IsEncrypt); 
+                                    break;
+                                    case "10":
+                                        scactionX.StartGCall(this.inputnum,this.IsEncrypt);
+                                    break;
+                            }
+                            return;
+                            }
+                        })
+      },
+      endcall(){//结束呼叫
+            let scactionX = document.getElementById("SCactionX");
+            this.calling.forEach(item=>{
+                            if(item.issi==this.inputnum){
+                               switch (item.eventtype){
+                                   case "00":  
+                                        scactionX.ENDSCall(this.inputnum); 
+                                       break;
+                                    case "01":
+                                        scactionX.EndDCall(this.inputnum);
+                                       break;
+                                    case "10":
+                                        scactionX.ENDGCall(this.inputnum);
+                                       break;
+                               }
+                            return;
+                            }
+                        })
+          
+      }, 
+      inputnumchange(){
+          console.info(this.inputnum);
+      },
       CallMsg(issi,eventtype,msg,gssi,hookmethodsel){
          console.info(issi+','+eventtype+','+msg+','+gssi+','+hookmethodsel);
-         this.showmsg(msg);
+         if (eventtype=='10'){  //组呼
+              switch (msg){
+                    case "CC_CONNECT":
+                    case "CC_CONNECTACK":               
+                        let gssi_in=false;
+                        this.calling.forEach(item=>{
+                            if(item.issi==gssi){
+                                gssi_in=true;
+                            return;
+                            }
+                        })
+                        if (!gssi_in){ 
+                            this.calling.push(
+                                {issi:gssi,eventtype:eventtype,type:'group',iscalling:true,name:'张警官'},
+                            ); 
+                            this.showgroupcall=false;
+                            this.showsingalcall=false;
+                            this.iscalling=true;
+                            this.isptt=true;
+                        }
+                        break;
+                    case "CC_RELEASE":
+                        this.calling.forEach((item,index)=>{
+                            if(item.issi==gssi){
+                                this.calling.splice(index,1);
+                            return;
+                            }
+                        });
+                        if (gssi==this.inputnum){
+                            this.showgroupcall=true;
+                            this.showsingalcall=false;
+                            this.iscalling=false;
+                            this.isptt=false;
+                        } 
+                        break;
+
+                }
+         }
+         else{
+                switch (msg){
+                    case "CC_CONNECT":
+                    case "CC_CONNECTACK":
+                    case "CC_ALERT":
+                    case "CC_CALLPROCEEDING":    
+                        let issi_in=false;
+                        this.calling.forEach(item=>{
+                            if(item.issi==issi){
+                                issi_in=true;
+                            return;
+                            }
+                        })
+                        if (!issi_in){ 
+                            this.calling.push( 
+                                {issi:issi,eventtype:eventtype,type:'person',iscalling:true,name:'张警官'},
+                            )
+                            this.showgroupcall=false;
+                            this.showsingalcall=false;
+                            this.iscalling=true;
+                           
+                            if (eventtype=="00"){
+                                 this.isptt=true;
+                            }else{
+                                 this.isptt=false;
+                            }
+                        }
+                        break;
+                    case "CC_RELEASE":
+                        this.calling.forEach((item,index)=>{
+                            if(item.issi==issi){
+                                this.calling.splice(index,1);
+                            return;
+                            }
+                        })
+                        if (issi==this.inputnum){
+                            this.showgroupcall=false;
+                            this.showsingalcall=true;
+                            this.iscalling=false;
+                            this.isptt=false;
+                        }   
+
+                        break;
+
+                }
+            }       
+         this.showmsg(issi,eventtype,msg,gssi,hookmethodsel);
       },
-      showmsg(msg){
+      showmsg(issi,eventtype,msg,gssi,hookmethodsel){
         clearTimeout(msgtimetick);
-                this.msg=msg;
+                this.msg=issi+msg;
                 this.fadeinanimation=true;
                 let _this = this;
                 msgtimetick =  setTimeout(() => {
@@ -329,7 +481,70 @@ export default {
                     _this.msg='';            
                 }, 3000);
       } 
-  }
+  },
+  watch:{
+      inputnum:function(newval,oldval){
+   
+        let retrunnow=false;
+        this.calling.forEach(item=>{   //查询正在通话中是否存在
+                            if(item.issi==this.inputnum){
+                               switch (item.eventtype){
+                                   case "00":  //正在单呼半双工
+                                        this.showgroupcall=false;
+                                        this.showsingalcall=false;
+                                        this.iscalling=true;
+                                        this.isptt=true;
+                                       break;
+                                    case "01"://正在单呼全双工
+                                        this.showgroupcall=false;
+                                        this.showsingalcall=false;
+                                        this.iscalling=true;
+                                        this.isptt=false;
+                                       break;
+                                    case "10"://正在组呼
+                                        this.showgroupcall=false;
+                                        this.showsingalcall=false;
+                                        this.iscalling=false;
+                                        this.isptt=false;
+                                       break;
+                               }
+                               retrunnow=true;
+                            return;
+                            }
+                        });
+        if (retrunnow) retun;
+        
+        this.data2.forEach(item=>{   //查询正在通话中是否存在
+                            if(item.issi==this.inputnum){
+                               switch (item.type){
+                                   case "group":  //组号
+                                        this.showgroupcall=true;
+                                        this.showsingalcall=false;
+                                        this.iscalling=false;
+                                        this.isptt=false;
+                                       break;
+                                    case "person"://个人
+                                        this.showgroupcall=false;
+                                        this.showsingalcall=true;
+                                        this.iscalling=false;
+                                        this.isptt=false;
+                                       break;
+                               }
+                               retrunnow=true;
+                            return;
+                            }
+                        });
+
+        if (retrunnow) retun;
+
+        this.showgroupcall=true;
+        this.showsingalcall=true;
+        this.iscalling=false;
+        this.isptt=false;
+       
+      }, 
+     
+   }
 }
 </script>
 
@@ -511,7 +726,12 @@ cursor: pointer;
 .ivu-select-item {
     width: 100%;
 }
+.endcall{
+    background-color: #ed4014 !important;
+}
+.Ptt{
 
+}
 </style>
 <style>
 .dialtabs .ivu-tabs-nav{

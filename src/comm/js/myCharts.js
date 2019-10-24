@@ -222,8 +222,7 @@ const install = function(Vue) {
                         this.chart.setOption(option);
                         let that =this;
                         app.count = 11;
-                      
-                        setInterval(function (){
+                        let updatedata = function (data){
                             let axisData = (new Date()).toLocaleTimeString().replace(/^\D*/,'');
                         
                             var data0 = option.series[0].data;
@@ -240,7 +239,8 @@ const install = function(Vue) {
                             option.xAxis[0].data.shift();
                             option.xAxis[0].data.push(axisData);  
                             that.chart.setOption(option);
-                        }, 5000);
+                        }
+                       return updatedata;
                     },
                     drawmap:function(id){ 
                         this.chart = echarts.init(document.getElementById(id));
@@ -398,138 +398,192 @@ const install = function(Vue) {
 
                         this.chart.setOption(option);
                         let _this =this;
-                        setInterval(function (){
+                        let updatedata = function (){
                             let val = parseFloat(60)+parseFloat((Math.random() * 20));
                             option.series[0].data[0].value = val.toFixed(2);
                             _this.chart.setOption(option,true);
-                        },5000)
-
+                        }
+                        return updatedata;
                     },
                     echarbar:function(id){
                         this.chart = echarts.init(document.getElementById(id));
                         this.chart.clear();
                         
                         let option = {
-                            tooltip: {
-                                trigger: 'axis',
-                                axisPointer: {
-                                    type: 'cross',
-                                    crossStyle: {
-                                        color: '#999'
-                                    },
-                                    label:{
-                                        backgroundColor:'#000'
+                            baseOption:{
+                                timeline: {
+                                  
+                                    axisType: 'category',
+                                    
+                                    autoPlay: true,
+                                  
+                                    playInterval: 5000,
+                                    bottom:-5,
+                                    data: ['1','2'],
+                                    label: null,
+                                    padding:0,
+                                    controlStyle:{
+                                        showPrevBtn:false,
+                                        showNextBtn:false,
+                                        color:'#fff',
+                                        borderColor:'#B4FF0B',
                                     }
                                 },
-                             
-                            },
-                            grid:{x:40,y:35,x2:40,y2:35},
-                            toolbox: {
-                                show: false,
-                            },
-                            legend: {
-                                data:['在线数量','在线时长'],
-                                textStyle:{
-                                    color:'#fff',
-                                   
-                                }
-                            },
-                            xAxis: [
-                                {
-                                    type: 'category',
-                                    data: ['滨江','上城','下城','萧山','拱墅','江干','钱江新区'],
+                                tooltip: {
+                                    trigger: 'axis',
                                     axisPointer: {
-                                        type: 'shadow'
-                                    },
-                                    axisLine:{
-                                        lineStyle:{
-                                            color:'#fff'
-                                        } 
-                                     },
-                                }
-                            ],
-                            yAxis: [
-                                {
-                                    type: 'value',
-                                    name: '设备数量(个)',
-                                    min: 0,
-                            
-                               
-                                    splitLine: {
-                                        show: false
-                                    },
-                                    axisLabel: {
-                                        formatter: '{value} 个'
-                                    },
-                                    axisLabel:{
-                                        color:'#fff'
-                                    },
-                                    nameTextStyle:{
-                                        color:'#fff'
-                                    },
-                                    axisLine:{
-                                        lineStyle:{
-                                            color:'#fff'
-                                        } 
-                                     }
-
-                                },
-                                {
-                                    type: 'value',
-                                    name: '在线时长(小时)',
-                                    min: 0,
-                                                                
-                                    splitLine: {
-                                        show: false
-                                    },
-                                    axisLabel: {
-                                        formatter: '{value} '
-                                    },
-                                    nameTextStyle:{
-                                        color:'#fff'
-                                    },
-                                    axisLine:{
-                                        lineStyle:{
-                                            color:'#fff'
-                                        } 
-                                     }
-                                }
-                            ],
-                            series: [
-                                {
-                                    name:'在线数量',
-                                    type:'bar',
-                                    itemStyle: {
-                                        color:  'rgb(43, 129, 190)',
-                                        barBorderRadius:[5, 5, 0, 0],
-
-                                    },
-                                    data:[12, 4, 7, 8, 5, 7,15],
-                                    markPoint : {
-                                        data : [
-                                           
-                                            {type : 'min', name: '最小值'}
-                                        ]
-                                        
-                                    },
-                                },
-                                {
-                                    name:'在线时长',
-                                    type:'bar',
-                                    itemStyle: {
-                                        color:'rgb(180, 255, 11)',
-                                        barBorderRadius:[5, 5, 0, 0],
+                                        type: 'cross',
+                                        crossStyle: {
+                                            color: '#999'
+                                        },
+                                        label:{
+                                            backgroundColor:'#000'
+                                        }
                                     },
                                  
-                                    yAxisIndex: 1,
-                                    data:[2.6, 5.9, 9.0, 26.4, 18.7, 20.7,17]
-                                }
+                                },
+                                grid:{x:40,y:35,x2:40,y2:55},
+                                toolbox: {
+                                    show: false,
+                                },
+                                legend: {
+                                    data:['在线数量','在线时长'],
+                                    textStyle:{
+                                        color:'#fff',
+                                       
+                                    }
+                                },
+                                xAxis: [
+                                    {
+                                        type: 'category',
+                                      
+                                        axisPointer: {
+                                            type: 'shadow'
+                                        },
+                                        axisLine:{
+                                            lineStyle:{
+                                                color:'#fff'
+                                            } 
+                                         },
+                                    }
+                                ],
+                                yAxis: [
+                                    {
+                                        type: 'value',
+                                        name: '设备数量(个)',
+                                        min: 0,
+                                
+                                   
+                                        splitLine: {
+                                            show: false
+                                        },
+                                        axisLabel: {
+                                            formatter: '{value} 个'
+                                        },
+                                        axisLabel:{
+                                            color:'#fff'
+                                        },
+                                        nameTextStyle:{
+                                            color:'#fff'
+                                        },
+                                        axisLine:{
+                                            lineStyle:{
+                                                color:'#fff'
+                                            } 
+                                         }
+    
+                                    },
+                                    {
+                                        type: 'value',
+                                        name: '在线时长(小时)',
+                                        min: 0,
+                                                                    
+                                        splitLine: {
+                                            show: false
+                                        },
+                                        axisLabel: {
+                                            formatter: '{value} '
+                                        },
+                                        nameTextStyle:{
+                                            color:'#fff'
+                                        },
+                                        axisLine:{
+                                            lineStyle:{
+                                                color:'#fff'
+                                            } 
+                                         }
+                                    }
+                                ],
+                                series: [
+                                    {
+                                        name:'在线数量',
+                                        type:'bar',
+                                        itemStyle: {
+                                            color:  'rgb(43, 129, 190)',
+                                            barBorderRadius:[5, 5, 0, 0],
+    
+                                        },
+                                       // data:[12, 4, 7, 8, 5, 7,15],
+                                        markPoint : {
+                                            data : [
+                                               
+                                                {type : 'min', name: '最小值'}
+                                            ]
+                                            
+                                        },
+                                    },
+                                    {
+                                        name:'在线时长',
+                                        type:'bar',
+                                        itemStyle: {
+                                            color:'rgb(180, 255, 11)',
+                                            barBorderRadius:[5, 5, 0, 0],
+                                        },
+                                     
+                                        yAxisIndex: 1,
+                                        //data:[2.6, 5.9, 9.0, 26.4, 18.7, 20.7,17]
+                                    }
+                                ]
+                            },
+                            options: [
+                                {
+                                    series: [
+                                        {
+                                          data:[2, 4, 7, 8, 5, 7,15],
+                                            
+                                        },
+                                        {
+                                          data:[28, 5.9, 9.0, 26.4, 18.7, 20.7,17]
+                                        }
+                                    ]
+                                    ,
+                                    xAxis: [
+                                        {
+                                            data: ['滨江','上城','下城','萧山','拱墅','江干','钱江新区'],
+                                        }
+                                    ],  
+                                },
+                                {
+                                    series: [
+                                        {
+                                          data:[12, 4, 7, 8, 5, 7,15],
+                                            
+                                        },
+                                        {
+                                          data:[6, 9, 3, 6.4, 8.7, 10,17]
+                                        }
+                                    ],
+                                    xAxis: [
+                                        {
+                                            data: ['滨2江','临安','建德','萧山','拱墅','江干','钱江新区'],
+                                        }
+                                    ], 
+                                },
                             ]
                         };
                         this.chart.setOption(option);
                         let that =this;
-                                         
-                        setInterval(function (){              
+                        let updatedata = function(data){
                             var data0 = option.series[0].data;
                             var data1 = option.series[1].data;
                             
@@ -553,11 +607,13 @@ const install = function(Vue) {
                            // option.xAxis[0].data.shift();
                            // option.xAxis[0].data.push(axisData);  
                             that.chart.setOption(option);
-                        }, 5000);
-
+                         };
+                                      
+                      
+                        return updatedata;
                     }
                   
-
+                      
                 }
             }
         }

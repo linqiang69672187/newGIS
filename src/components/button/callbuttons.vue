@@ -1,7 +1,7 @@
 <template>
 <div v-ripple="'rgba(255, 255, 255, 0.35)'" @click="btnclick" :class="buttonType" class="comonul">
     <ul >
-        <li><div><i class="material-icons" >{{buttonType}}</i><span>{{buttonName}}</span></div></li>
+        <li><div><i class="material-icons" >{{buttonType}}</i><span >{{buttonName}}</span></div></li>
         <li><Divider /></li>
         <li><span>{{buttonNumber}}</span></li>
     </ul>                

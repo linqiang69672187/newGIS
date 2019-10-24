@@ -11,7 +11,7 @@
   
     </Tabs>
     </div>
-     <div class="navcationx"><i  class="fas fa-angle-double-right"></i></div>
+     <div class="navcationx"></div>
 </div>
 
 </template>
