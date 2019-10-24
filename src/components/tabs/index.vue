@@ -43,11 +43,11 @@ import { setTimeout } from 'timers';
            },
            interLoadData(){
              let _this = this;
-              Vue.axios.get('app/data/Json/hongkong.json', {
+              Vue.axios.get('/Handlers/MVCEasy.ashx', {
                             params: {
                                 ctrl:'DialPadDao',
-                                action: "MatchUserAndGroup",
-                                 txtDialPad:this.inputnum
+                                action: "GetTerminalOnlineInfo",
+                               
                             }
                           }).then((res) => {
                           //console.info(res);

@@ -29,12 +29,7 @@ export default {
         },
     components: {Map},
     watch:{
-            lockitems:function(newval,oldval){
-                    console.info(newval);
-                    console.info(oldval);
-                   
-            }, 
-         deep:true
+           
         },
     computed: {
        
