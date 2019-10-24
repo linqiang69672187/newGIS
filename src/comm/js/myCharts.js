@@ -500,7 +500,7 @@ const install = function(Vue) {
                             if (count<2){
                                 option.baseOption.timeline.show=false;
                                 option.baseOption.grid={x:40,y:35,x2:40,y2:35}
-                                console.info(count);
+                               
                             }
                             else{
                                 option.baseOption.timeline.show=true;
