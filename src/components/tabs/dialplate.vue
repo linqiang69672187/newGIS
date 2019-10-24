@@ -245,6 +245,7 @@ export default {
                             _this.users = res.data.commonUser;
                             _this.groups = res.data.commonGroup;
                             _this.contacts = res.data.latelyUserAndGroup;
+                            console.info(res);
                           }).catch((err) => {
                             console.log(err)
                            

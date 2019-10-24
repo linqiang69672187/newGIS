@@ -51,6 +51,7 @@ import { setTimeout } from 'timers';
                             }
                           }).then((res) => {
                           //console.info(res);
+                          
                           _this.praseData(res.data); 
                           }).catch((err) => {
                           console.log(err)
