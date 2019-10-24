@@ -1,5 +1,5 @@
 <template>
-<div :style="backgroundDiv" @click="updatedata"  class="row">
+<div :style="backgroundDiv"  class="row">
     <div id="onlinechar"></div>
     <div  class="middle"> 
         <div id="gauguchar"></div>
@@ -59,8 +59,19 @@ import { setTimeout } from 'timers';
 
            },
           praseData(data){
+          
+           
+           let onlinetime=0;
+           let onlinecount=0;
+           let deviececount=0;
+           data.forEach((item)=>{   
+                        onlinetime+=parseInt(item.onlineTime);
+                        onlinecount+=parseInt(item.onlineTerminal);
+                        deviececount+=parseInt(item.allTerminal);    
+                    });
+           this.updatedynamicline(onlinetime,onlinecount);
+           this.updategaugeindex(onlinecount,deviececount);
            this.updateecharbar(data);
-
           },
            
         },

@@ -35,28 +35,8 @@ const install = function(Vue) {
                     },
                     dynamicline:function(id){
                         this.chart = echarts.init(document.getElementById(id));
-                        this.chart.clear();
-                        
-                        function randomData() {
-                            now = new Date(+now + oneDay);
-                            value = value + Math.random() * 21 - 10;
-                            return {
-                                name: now.toString(),
-                                value: [
-                                    [now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'),
-                                    Math.round(value)
-                                ]
-                            }
-                        }
-                        
-                        var data = [];
-                        var now = +new Date(1997, 9, 3);
-                        var oneDay = 24 * 3600 * 1000;
-                        var value = Math.random() * 1000;
-                        for (var i = 0; i < 1000; i++) {
-                            data.push(randomData());
-                        }
-                       let  option = {
+                        this.chart.clear();                                          
+                        let  option = {
                             title: {
                                 text: '',
                                 subtext: ''
@@ -65,14 +45,18 @@ const install = function(Vue) {
                                 trigger: 'axis',
                                 axisPointer: {
                                     type: 'cross',
-                                    label: {
-                                        backgroundColor: '#283b56'
+                                    crossStyle: {
+                                        color: '#999'
+                                    },
+                                    label:{
+                                        backgroundColor:'#000'
                                     }
-                                }
+                                },
+                             
                             },
                             grid:{x:40,y:60,x2:40,y2:30},
                             legend: {
-                                data:['在线数量', '在线时长'],
+                                data:['在线时长','在线数量' ],
                                 textStyle:{
                                     color:'#fff'
                                 }
@@ -86,36 +70,16 @@ const install = function(Vue) {
                                 {
                                     type: 'category',
                                   
-                                    axisLine:{
-                                        show: false
+                                    axisPointer: {
+                                        type: 'shadow'
                                     },
-                                   
+                                    data:['00:00:00'],
                                     axisLine:{
-                                       lineStyle:{
-                                           color:'#fff'
-                                       } 
-                                    },
-                                    boundaryGap: false,
-                                    data: (function (){
-                                        var now = new Date();
-                                        var res = [];
-                                        var len = 20;
-                                        while (len--) {
-                                            res.unshift(now.toLocaleTimeString().replace(/^\D*/,''));
-                                            now = new Date(now - 2000);
-                                        }
-                                        return res;
-                                    })()
-                                },
-                                {
-                                    type: 'category',
-                                  
-                                    axisLine:{
-                                        show: false
-                                    },
-                                    boundaryGap: false,
-                                   
-                                },
+                                        lineStyle:{
+                                            color:'#fff'
+                                        } 
+                                     },
+                                }
                             ],
                             yAxis: [
                                 {
@@ -127,7 +91,7 @@ const install = function(Vue) {
                                     axisLabel:{
                                         color:'#fff'
                                     },
-                                    name: '设备数量(个)',
+                                    name: '在线时长(H)',
                                     max: 30,
                                     nameTextStyle:{
                                         color:'#fff'
@@ -143,7 +107,7 @@ const install = function(Vue) {
                                 {
                                     type: 'value',
                                     scale: true,
-                                    name: '在线时长(小时)',
+                                    name: '在线数量(个)',
                                     nameTextStyle:{
                                         color:'#fff'
                                     },
@@ -166,8 +130,28 @@ const install = function(Vue) {
                                 {
                                     name:'在线时长',
                                     type:'line',
-                                    xAxisIndex: 1,
+                                  
                                     smooth:true, 
+                                    
+                                    itemStyle: {
+                                        color: 'rgb(43, 129, 190)'
+                                    },
+                                    areaStyle: {
+                                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                            offset: 0,
+                                            color: 'rgb(4, 38, 87)'
+                                        }, {
+                                            offset: 1,
+                                            color: 'rgb(237, 46, 96)'
+                                        }])
+                                    },
+                                
+                                    data:[0]
+                                },
+                                {
+                                    name:'在线数量',
+                                    type:'line',
+                                    smooth:false,
                                     itemStyle: {
                                         color: 'rgb(180, 255, 11)'
                                     },
@@ -181,62 +165,23 @@ const install = function(Vue) {
                                         }])
                                     },
                                     yAxisIndex: 1,
-                                    data:(function (){
-                                        var res = [];
-                                        let len = 20;
-                                        while (len >= 0) {
-                                            res.push(100+Math.round(Math.random())-len);
-                                            len--;
-                                        }
-                                        return res;
-                                    })()
-                                },
-                                {
-                                    name:'在线数量',
-                                    type:'line',
-                                    smooth:false, 
-                                    itemStyle: {
-                                        color: 'rgb(43, 129, 190)'
-                                    },
-                                    areaStyle: {
-                                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                                            offset: 0,
-                                            color: 'rgb(4, 38, 87)'
-                                        }, {
-                                            offset: 1,
-                                            color: 'rgb(237, 46, 96)'
-                                        }])
-                                    },
-                                    data:(function (){
-                                        var res = [];
-                                        let len = 0;
-                                        while (len < 20) {
-                                            res.push((Math.random()*10 + 5).toFixed(1) - 0);
-                                            len++;
-                                        }
-                                        return res;
-                                    })()
+                                    data:[0]
                                 }
                             ]
                         };
                         this.chart.setOption(option);
                         let that =this;
-                        app.count = 11;
-                        let updatedata = function (data){
-                            let axisData = (new Date()).toLocaleTimeString().replace(/^\D*/,'');
-                        
+                        let updatedata = function (onlinetime,onlinecount){
+                            let axisData = (new Date()).toLocaleTimeString().replace(/^\D*/,'');                        
                             var data0 = option.series[0].data;
-                            var data1 = option.series[1].data;
-                            data0.shift();
-                            var val =data0[data0.length-1]+Math.round(Math.random());
-                            if (val>200){
-                                val=80;
-                            }
-                            data0.push(val);
-                            data1.shift();
-                            data1.push((Math.random() * 10 + 5).toFixed(1) - 0);
-                        
-                            option.xAxis[0].data.shift();
+                            var data1 = option.series[1].data;  
+                            if (data0.length>30){
+                                option.xAxis[0].data.shift();
+                                option.series[0].data.shift();
+                                option.series[1].data.shift();
+                            }            
+                            data0.push((onlinetime/3600).toFixed(2));                         
+                            data1.push(onlinecount);                       
                             option.xAxis[0].data.push(axisData);  
                             that.chart.setOption(option);
                         }
@@ -330,7 +275,7 @@ const install = function(Vue) {
                                     name: '在线指标',
                                     type: 'gauge',
                                     detail: {formatter:'{value}%'},
-                                    data: [{value: 50, name: '在线率'}],
+                                    data: [{value: 0, name: '在线率'}],
                                     axisLine: {            // 坐标轴线
                                         lineStyle: {       // 属性lineStyle控制线条样式
                                             color: [[0.09, 'lime'],[0.82, '#1e90ff'],[1, '#ff4500']],
@@ -398,9 +343,9 @@ const install = function(Vue) {
 
                         this.chart.setOption(option);
                         let _this =this;
-                        let updatedata = function (){
-                            let val = parseFloat(60)+parseFloat((Math.random() * 20));
-                            option.series[0].data[0].value = val.toFixed(2);
+                        let updatedata = function (onlinecount,deviececount){
+                            let val = (onlinecount*100/deviececount).toFixed(2);
+                            option.series[0].data[0].value = val;
                             _this.chart.setOption(option,true);
                         }
                         return updatedata;
@@ -447,7 +392,7 @@ const install = function(Vue) {
                                     show: false,
                                 },
                                 legend: {
-                                    data:['在线数量','在线时长'],
+                                    data:['在线时长','在线数量'],
                                     textStyle:{
                                         color:'#fff',
                                        
@@ -470,7 +415,7 @@ const install = function(Vue) {
                                 yAxis: [
                                     {
                                         type: 'value',
-                                        name: '设备数量(个)',
+                                        name: '在线时长(H)',
                                         min: 0,
                                 
                                    
@@ -478,7 +423,7 @@ const install = function(Vue) {
                                             show: false
                                         },
                                         axisLabel: {
-                                            formatter: '{value} 个'
+                                            formatter: '{value} 小时'
                                         },
                                         axisLabel:{
                                             color:'#fff'
@@ -495,7 +440,7 @@ const install = function(Vue) {
                                     },
                                     {
                                         type: 'value',
-                                        name: '在线时长(小时)',
+                                        name: '在线数量(个)',
                                         min: 0,
                                                                     
                                         splitLine: {
@@ -516,7 +461,7 @@ const install = function(Vue) {
                                 ],
                                 series: [
                                     {
-                                        name:'在线数量',
+                                        name:'在线时长',
                                         type:'bar',
                                         itemStyle: {
                                             color:  'rgb(43, 129, 190)',
@@ -533,7 +478,7 @@ const install = function(Vue) {
                                         },
                                     },
                                     {
-                                        name:'在线时长',
+                                        name:'在线数量',
                                         type:'bar',
                                         itemStyle: {
                                             color:'rgb(180, 255, 11)',
@@ -550,8 +495,17 @@ const install = function(Vue) {
                         this.chart.setOption(option);
                         let that =this;
                         let updatedata = function(data){
-                            let count =  Math.ceil(data.length / 7);
-                        
+                            let count =  Math.ceil(data.length / 7); 
+
+                            if (count<2){
+                                option.baseOption.timeline.show=false;
+                                option.baseOption.grid={x:40,y:35,x2:40,y2:35}
+                                console.info(count);
+                            }
+                            else{
+                                option.baseOption.timeline.show=true;
+                                option.baseOption.grid={x:40,y:35,x2:40,y2:55}
+                            }                     
                             option.baseOption.timeline.data.length=0;
                             option.options.length=0;
                             for (let i = 0; i < count; i++) { 
@@ -565,7 +519,6 @@ const install = function(Vue) {
                                     dataonlinecount.push(data[i*7+ndata].onlineTerminal);
                                     dataxAxis.push(data[i*7+ndata].entityName)
                                 }
-                              
                                 let series =[];
                                 series.push({data:dataonlinetime});   
                                 series.push({data:dataonlinecount});   
@@ -573,11 +526,6 @@ const install = function(Vue) {
                                 xAxis.push({data:dataxAxis});
                                 option.options.push({series:series,xAxis:xAxis});
                              }
-
-
-                          
-                           // option.xAxis[0].data.shift();
-                           // option.xAxis[0].data.push(axisData);  
                             that.chart.setOption(option);
                          };
                                       
