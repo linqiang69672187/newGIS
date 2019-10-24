@@ -16,6 +16,7 @@ export default {
     data () {
              return {
                         lockitems:[],//锁定的设备
+                        
                     }
         },
     mounted(){
@@ -26,9 +27,18 @@ export default {
                 this.lockitems =  useprameters.lockids;
             },   
         },
-    components: {
-      Map
-         }
+    components: {Map},
+    watch:{
+            lockitems:function(newval,oldval){
+                    console.info(newval);
+                    console.info(oldval);
+                   
+            }, 
+         deep:true
+        },
+    computed: {
+       
+    },
     }
 
 

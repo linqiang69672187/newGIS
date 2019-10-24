@@ -76,7 +76,7 @@ import { setTimeout } from 'timers';
            
         },
         created(){
-    
+          
         },
         destroyed() {
          clearInterval(this.loadinter);

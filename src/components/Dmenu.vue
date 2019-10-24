@@ -3,12 +3,11 @@
    <div  class="controlmenu" :class="{rationicon}"><ul :class="{downrowshow}" @click="leave" ><li ><i class="fas fa-sort-down" ></i></li><li></li><li><i class="fas fa-sort-down" ></i></li></ul></div>
   
     <div >
-    <Tabs class='tabs' @on-click='tabclick' v-model='tabname' name='plane' type='card' closable @on-tab-remove='handleTabRemove'>
-        <TabPane  tab="plane"  name="实时状况" label="实时状况" class="tabpane" v-if="tab0" icon="ios-stats"><tabindex></tabindex></TabPane>
-        <!-- <TabPane  tab="plane" name="GPS控制" class="tabpane" label="GPS控制" v-if="tab1" icon="ios-key"><GPScontrol></GPScontrol></TabPane> -->
-        <TabPane  tab="plane"  name="锁定跟踪" class="tabpane"  label="锁定跟踪" v-if="tab2" icon="ios-lock"><eyemaps></eyemaps></TabPane>
-        <TabPane  tab="plane" name="拨号键盘"   class="tabpane"  label="拨号键盘" v-if="tab4" icon="ios-apps"><dialplate ref="dail"></dialplate></TabPane>
-  
+    <Tabs class='tabs' @on-click='tabclick' v-model='tabname' name='plane'   @on-tab-remove='handleTabRemove' type='card'  >
+        <TabPane  tab="plane"  name="实时状况" label="实时状况" class="tabpane" icon="ios-stats"><tabindex></tabindex></TabPane>
+        <!-- <TabPane  tab="plane" name="GPS控制" class="tabpane" label="GPS控制"  icon="ios-key"><GPScontrol></GPScontrol></TabPane> -->
+        <TabPane  tab="plane" name="拨号键盘"   class="tabpane"  label="拨号键盘"  icon="ios-apps"><dialplate ref="dail"></dialplate></TabPane>
+        <TabPane  tab="plane" closable name="锁定跟踪" class="tabpane"  label="锁定跟踪" v-if="showlockTab" icon="ios-lock"><eyemaps></eyemaps></TabPane>
     </Tabs>
     </div>
      <div class="navcationx"></div>
@@ -26,11 +25,7 @@ import GPScontrol from "@/components/tabs/GPScontrol"
     export default {
         data () {
                 return {
-                        tab0: true,
-                        tab1: true,
-                        tab2: true,
-                        tab3: true,
-                        tab4: true,
+                        showlockTab:false,
                         show: false,
                         showdmenu:true,
                         rationicon:true,
@@ -50,7 +45,16 @@ import GPScontrol from "@/components/tabs/GPScontrol"
         },
         methods: {
               handleTabRemove (name) {
-                this['tab' + name] = false;
+                switch (name) {
+                    case '锁定跟踪':
+                        
+                        this.showlockTab=false;
+                       
+                        break;
+                
+                    default:
+                        break;
+                }
             },
             leave(el){ 
                 this.showdmenu=!this.showdmenu;
@@ -64,8 +68,15 @@ import GPScontrol from "@/components/tabs/GPScontrol"
                  this.$emit("listenchange",this.showdmenu);  
             },
             changeshowtab(key,tabs){
+                console.info(tabs);
+                switch (tabs) {
+                    case '锁定跟踪':
+                        this.showlockTab=true;
+                        break;
                 
-               
+                    default:
+                        break;
+                }
                 this.showdmenu=true;
                 this.rationicon=true;
                 this.$emit("listenchange",this.showdmenu); 

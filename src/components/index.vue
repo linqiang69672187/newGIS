@@ -70,7 +70,7 @@ export default {
     },
    mounted(){
       var _this = this;  
-    
+      window.vue_index= this;
       document.onkeydown = function(e) {            
          if(document.activeElement.nodeName!='INPUT'){
              switch(window.event.key)
@@ -86,6 +86,9 @@ export default {
                  case "8": 
                  case "9": 
                    _this.$refs.dmenu.changeshowtab(window.event.key,'拨号键盘');
+                    break;
+                case "l":
+                   _this.$refs.dmenu.changeshowtab('','锁定跟踪');
                     break;
                 default:
                     break;

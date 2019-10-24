@@ -27,6 +27,12 @@ let noticemod;
                            desc: nodesc ? '' : msg
                             });
                
+            },
+            error:function(title,msg){
+                Notice.error({
+                           title: title,
+                           desc: msg
+                            });
             }
         }
     }
