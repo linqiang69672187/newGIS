@@ -794,7 +794,7 @@ transform:rotate(315deg);
     background-color: rgba(30,144,255,0.8);
     height: 24px;
     float: left;
-    width: 300px;
+    width: 100%;
     z-index: 1;
  
     line-height: 24px;
