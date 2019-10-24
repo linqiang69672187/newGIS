@@ -239,7 +239,8 @@ export default {
                   Vue.axios.post('/Handlers/MVCEasy.ashx', {
                             params: {
                                 ctrl: "DialPadDao",
-                                action: "GetFrequentData"
+                                action: "GetFrequentData",
+                                txtDialPad: '100100'
                             }
                           }).then((res) => {                  
                             _this.users = res.data.commonUser;
