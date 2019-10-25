@@ -81,7 +81,8 @@ export default {
          this.cleardom();
       },
       select_rangle(){
-         boxSelection();//调用原来框选 
+        let loadevent = LoadEvents();
+         loadevent();//调用原来框选 
          this.cleardom();
       }
       ,

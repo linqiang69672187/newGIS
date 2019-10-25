@@ -33,7 +33,10 @@ function projectScreen(id,lon,lat){
 console.info(id);
 
 }
-function boxSelection(){
-    console.info("boxSelection");
+function LoadEvents(){
+        function boxSelection(){
+            console.info("boxSelection");
+        }
+        return boxSelection;
 }
 //useprameters.lockids.splice(0, 1, {issi:'24001',lon:'120.1727667529',lat:'30.2166735631',name:'张1警官',userid:'1'});
