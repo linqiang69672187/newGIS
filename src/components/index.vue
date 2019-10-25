@@ -1,6 +1,8 @@
 <template>
     <div id="main">
+       <!--
         <OCX></OCX>
+         
          <v-contextmenu ref="contextmenu" >
             <v-contextmenu-item @click="handleClick('拨号盘')">拨号盘</v-contextmenu-item>
             <v-contextmenu-item @click="handleClick">实时状况</v-contextmenu-item>
@@ -22,7 +24,8 @@
                 <v-contextmenu-item :auto-hide="false">不自动关闭2</v-contextmenu-item>
             </v-contextmenu-submenu>
             </v-contextmenu>
-      <div class="top" ><banner :isshowmini="isshowmini" @Bannerselectedchange='Bannerselectedchange'></banner></div>
+        -->
+      <div class="top" ><banner ref="banner" :isshowmini="isshowmini" @Bannerselectedchange='Bannerselectedchange'></banner></div>
        <div>
            <div  id="map"></div>
            <!--<Map  class="map" v-contextmenu:contextmenu move-type="0"></Map>
@@ -64,7 +67,7 @@ export default {
                         {label:'操作日志',icon:'vpn_lock',name:'operationlog'},
                         {label:'动态重组',icon:'vpn_lock',name:'dtczrestlt'},
         ],
-          isshowmini:false,
+        isshowmini:false,
                       
        }
     },

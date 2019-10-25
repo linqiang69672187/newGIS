@@ -1,7 +1,10 @@
 <template>
   <fab :actions="fabActions"
        @daiplate="daiplate"
-       @alertMe="alert"
+       @av_timer="av_timer"
+       @basestation="basestation"
+       @lock="lock"
+       @select_rangle="select_rangle"
        main-tooltip="点击展开"	
      	
   ></fab>
@@ -21,37 +24,35 @@ export default {
           position: 'top-right',
           fabActions: [
               {
-                  name: 'cache',
-                  icon: 'add',
+                  name: 'av_timer',
+                  icon: 'av_timer',
                   color:'#164B77',
-                  tooltip:'添加功能'
+                  tooltip:'实时状况'
               },
-              {
-                  name: 'cache',
-                  icon: 'screen_lock_landscape',
-                  tooltip:'锁屏',
-                   color:'#cccccc',
-              },
-              {
-                  name: 'alertMe',
-                  icon: 'search',
-                  tooltip:'搜索',
-                   color:'#999999',
-
-              }
-              ,
               {
                   name: 'daiplate',
                   icon: 'dialpad',
                   tooltip:'拨号盘',
                    color:'#FE9900',
+              },
+              {
+                  name: 'basestation',
+                  icon: 'subject',
+                  tooltip:'基站统计',
+                   color:'#999999',
               }
               ,
               {
-                  name: 'alertMe',
+                  name: 'lock',
+                  icon: 'screen_lock_landscape',
+                  tooltip:'锁定跟踪',
+                   color:'#cccccc',
+              }, 
+              {
+                  name: 'select_rangle',
                   icon: 'select_all',
                   tooltip:'框选',
-                   color:'#E54C3B',
+                  color:'#E54C3B',
               }
           ]
       }
@@ -60,10 +61,28 @@ export default {
       daiplate(){
           this.$emit("daiplate");
           this.cleardom();
-         
       },
       alert(){
-          alert('Clicked on alert icon');
+      // @av_timer="av_timer"
+      // @basestation="basestation"
+      // @lock="lock"
+      // @select_rangle="select_rangle"
+      },
+      av_timer(){
+        window.vue_index.$refs.dmenu.changeshowtab('','实时状况');
+         this.cleardom();
+      },
+      basestation(){
+        window.vue_index.$refs.dmenu.changeshowtab('','基站统计');
+         this.cleardom();
+      },
+      lock(){
+        window.vue_index.$refs.dmenu.changeshowtab('','锁定跟踪');
+         this.cleardom();
+      },
+      select_rangle(){
+         boxSelection();//调用原来框选 
+         this.cleardom();
       }
       ,
       cleardom(){

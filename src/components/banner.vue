@@ -17,17 +17,18 @@
       <div>
           <ul>
               <li><a>
-                
-                <Badge  :count="2">
+                <!--
+                <Badge  :count="0">
                   <i class="fas fa-phone"></i>
                 </Badge>
-            
+                -->
                 </a></li>
-                <li><a>
-                <Badge  :count="3">
+                 
+                <li @click="view_sms"><a>
+                <Badge  :count="new_smscount">
                   <i class="fas fa-envelope"></i>
                 </Badge></a></li>
-              <li><a><div>张警官</div></a></li>
+              <li><a><div>{{username}}</div></a></li>
           </ul>
       </div>
       <div class="changewindows">{{servertime}}</div>
@@ -51,7 +52,9 @@ export default {
           {name:'exit',label:'结束系统',icon:'fa-door-open'},
         ],
         selectitem:'dispatchFunction',
-        date:new Date(1499996760000),    
+        new_smscount:0,
+        username:'admin',
+        date: new Date(1571984937504),
       }
     },
     props: ['isshowmini'],
@@ -70,11 +73,24 @@ export default {
         var crtTime = new Date(value);
         return dateFtt("yyyy-MM-dd hh:mm",crtTime);
       },
+      view_sms:function(){
+         openwindows('sms_sjx');
+         this.new_smscount=0;
+      },
+      newsmsIn:function(issi,smstype,msg,id,isconsume){
+          if (smstype=="0"){
+          this.new_smscount+=1;
+          }
+      },
+      updateuseprameters(){
+        this.username = useprameters.usename;
+        this.date = new Date(parseInt(useprameters.servertime));
+      },
     },
     mounted(){
       let _this = this; // 声明一个变量指向Vue实例this，保证作用域一致
       this.timer = setInterval(() => {
-      _this.date = new Date( _this.date).getTime()+1000; // 修改数据date
+      _this.date = new Date( _this.date).getTime()+60000; // 修改数据date
       _this.date =  new Date(_this.date);
       
      }, 60000)
@@ -87,7 +103,8 @@ export default {
     ,computed:{
       servertime: function () {
           return this.dateFtt("yyyy-MM-dd hh:mm",this.date);
-      }
+      },
+     
     }
   }
 </script>

@@ -5,6 +5,9 @@ function REGMsg(msg, dispName){
 function CallMsg(issi,eventtype,msg,gssi,hookmethodsel){
     window.vue_dialplate.CallMsg(issi,eventtype,msg,gssi,hookmethodsel);
 }
+function SMSMsg(issi,smstype,msg,id, isconsume){
+    window.vue_index.$refs.banner.newsmsIn(issi,smstype,msg,id, isconsume);
+}
 function openwindows(windowstr){
     alert(windowstr);
     console.info(windowstr);
@@ -18,6 +21,8 @@ useprameters.PGIS_Center_lo="120.1727667529";
 useprameters.PGIS_Center_la="30.2286735631";
 useprameters.GISTYPE="tianditu";
 useprameters.name = "zhej";
+useprameters.usename = "LQ";
+useprameters.servertime = "1571984937504";
 useprameters.lockids=[
    // {issi:'24001',lon:'120.1727667529',lat:'30.2186735631',name:'张警官',userid:'1'},
    // {issi:'24002',lon:'120.1525667529',lat:'30.2186735631',name:'林警官',userid:'3'},
@@ -27,5 +32,8 @@ useprameters.lockid='2'
 function projectScreen(id,lon,lat){
 console.info(id);
 
+}
+function boxSelection(){
+    console.info("boxSelection");
 }
 //useprameters.lockids.splice(0, 1, {issi:'24001',lon:'120.1727667529',lat:'30.2166735631',name:'张1警官',userid:'1'});

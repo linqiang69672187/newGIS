@@ -4,9 +4,10 @@
   
     <div >
     <Tabs class='tabs' @on-click='tabclick' v-model='tabname' name='plane'   @on-tab-remove='handleTabRemove' type='card'  >
-        <TabPane  tab="plane"  name="实时状况" label="实时状况" class="tabpane" icon="ios-stats"><tabindex></tabindex></TabPane>
+        <TabPane  tab="plane"  name="实时状况" label="实时状况" class="tabpane" icon="ios-speedometer"><tabindex></tabindex></TabPane>
         <!-- <TabPane  tab="plane" name="GPS控制" class="tabpane" label="GPS控制"  icon="ios-key"><GPScontrol></GPScontrol></TabPane> -->
         <TabPane  tab="plane" name="拨号键盘"   class="tabpane"  label="拨号键盘"  icon="ios-apps"><dialplate ref="dail"></dialplate></TabPane>
+        <TabPane  tab="plane" name="基站统计"   class="tabpane"  label="基站统计"  icon="ios-stats"><basestationchart></basestationchart></TabPane>
         <TabPane  tab="plane" closable name="锁定跟踪" class="tabpane"  label="锁定跟踪" v-if="showlockTab" icon="ios-lock"><eyemaps></eyemaps></TabPane>
     </Tabs>
     </div>
@@ -21,6 +22,7 @@ import videos from "@/components/tabs/videplayer"
 import eyemaps from "@/components/tabs/eyemaps"
 import dialplate from "@/components/tabs/dialplate"
 import GPScontrol from "@/components/tabs/GPScontrol"
+import basestationchart from "@/components/tabs/basestationchart"
 
     export default {
         data () {
@@ -41,7 +43,8 @@ import GPScontrol from "@/components/tabs/GPScontrol"
           videos,
           eyemaps,
           dialplate,
-          GPScontrol
+          GPScontrol,
+          basestationchart
         },
         methods: {
               handleTabRemove (name) {
