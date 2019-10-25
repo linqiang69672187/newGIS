@@ -18,6 +18,13 @@ module.exports = {
             '^/app':''
         }
       },
+      '/Handlers':{
+        target:'http://10.8.59.251:9099/Handlers',
+        changeOrigin:true,
+        pathRewrite:{
+            '^/Handlers':''
+        }
+      },
       '/baidu':{
         target:'http://127.0.0.1:8081/baidu',
         changeOrigin:true,

@@ -194,7 +194,8 @@ export default {
       groups:[],
       contacts:[],
       iscalling:false,
-      isptt:false, 
+      isptt:false,
+      selectissi:{}, 
       }
   
   }
@@ -220,14 +221,16 @@ export default {
        handleSearch2 (value) {
                 this.data2 = [];
                 var _this =this;
-                  Vue.axios.post('/Handlers/MVCEasy.ashx', {
+                  Vue.axios.get('/Handlers/MVCEasy.ashx', {
                             params: {
                                 ctrl:'DialPadDao',
                                 action: "MatchUserAndGroup",
                                  txtDialPad:_this.inputnum
                             }
                           }).then((res) => {
+                              if (res.data!=''){
                               _this.data2 = res.data;
+                              }
                           }).catch((err) => {
                             console.log(err)
                            
@@ -236,18 +239,17 @@ export default {
       initgroupandusers(){
                 this.data2 = [];
                 var _this =this;
-                  Vue.axios.post('/Handlers/MVCEasy.ashx', {
+                  Vue.axios.get('/app/data/json/hongkong.json', {//'/app/data/json/hongkong.json','/Handlers/MVCEasy.ashx'
                             params: {
                                 ctrl: "DialPadDao",
                                 action: "GetFrequentData",
-                                txtDialPad: '100100'
+                              
                             }
                           }).then((res) => {                  
                             _this.users = res.data.commonUser;
                             _this.groups = res.data.commonGroup;
                             _this.contacts = res.data.latelyUserAndGroup;
-                            console.info("/Handlers/MVCEasy.ashx:"+res);
-                            console.info(res);
+
                           }).catch((err) => {
                             console.log(err)
                            
@@ -263,6 +265,9 @@ export default {
       },
       btnclk(type,name,issi){
           this.inputnum =issi;
+          this.selectissi.name=name;
+          this.selectissi.type=type;
+          this.selectissi.issi=issi;
           switch(type){
               case "group":
                 this.showgroupcall = true;
@@ -487,50 +492,68 @@ export default {
   },
   watch:{
       inputnum:function(newval,oldval){
-   
+          let _this = this;
+         if (this.selectissi.type){
+            switch (this.selectissi.type){
+                            case "group":  //组号
+                                this.showgroupcall=true;
+                                this.showsingalcall=false;
+                                this.iscalling=false;
+                                this.isptt=false;
+                                break;
+                            case "person"://个人
+                                this.showgroupcall=false;
+                                this.showsingalcall=true;
+                                this.iscalling=false;
+                                this.isptt=false;
+                                break;
+                        }
+               this.selectissi={};
+               return;       
+           }
         let retrunnow=false;
         this.calling.forEach(item=>{   //查询正在通话中是否存在
-                            if(item.issi==this.inputnum){
+                            if(item.issi==_this.inputnum){
                                switch (item.eventtype){
                                    case "00":  //正在单呼半双工
-                                        this.showgroupcall=false;
-                                        this.showsingalcall=false;
-                                        this.iscalling=true;
-                                        this.isptt=true;
+                                        _this.showgroupcall=false;
+                                        _this.showsingalcall=false;
+                                        _this.iscalling=true;
+                                        _this.isptt=true;
                                        break;
                                     case "01"://正在单呼全双工
-                                        this.showgroupcall=false;
-                                        this.showsingalcall=false;
-                                        this.iscalling=true;
-                                        this.isptt=false;
+                                        _this.showgroupcall=false;
+                                        _this.showsingalcall=false;
+                                        _this.iscalling=true;
+                                        _this.isptt=false;
                                        break;
                                     case "10"://正在组呼
-                                        this.showgroupcall=false;
-                                        this.showsingalcall=false;
-                                        this.iscalling=false;
-                                        this.isptt=false;
+                                        _this.showgroupcall=false;
+                                        _this.showsingalcall=false;
+                                        _this.iscalling=false;
+                                        _this.isptt=false;
                                        break;
                                }
                                retrunnow=true;
                             return;
                             }
                         });
-        if (retrunnow) retun;
-        
-        this.data2.forEach(item=>{   //查询正在通话中是否存在
-                            if(item.issi==this.inputnum){
+        if (retrunnow) return;
+        console.info(this);
+        this.data2.forEach(item=>{   //查询数据库里是否存在
+                            if(item.issi==_this.inputnum){
                                switch (item.type){
                                    case "group":  //组号
-                                        this.showgroupcall=true;
-                                        this.showsingalcall=false;
-                                        this.iscalling=false;
-                                        this.isptt=false;
+                                        _this.showgroupcall=true;
+                                        _this.showsingalcall=false;
+                                        _this.iscalling=false;
+                                        _this.isptt=false;
                                        break;
                                     case "person"://个人
-                                        this.showgroupcall=false;
-                                        this.showsingalcall=true;
-                                        this.iscalling=false;
-                                        this.isptt=false;
+                                        _this.showgroupcall=false;
+                                        _this.showsingalcall=true;
+                                        _this.iscalling=false;
+                                        _this.isptt=false;
                                        break;
                                }
                                retrunnow=true;
@@ -538,7 +561,7 @@ export default {
                             }
                         });
 
-        if (retrunnow) retun;
+        if (retrunnow) return;
 
         this.showgroupcall=true;
         this.showsingalcall=true;

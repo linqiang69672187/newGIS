@@ -58,10 +58,26 @@ export default {
   },
   methods:{
       daiplate(){
-          this.$emit("daiplate");  
+          this.$emit("daiplate");
+          this.cleardom();
+         
       },
       alert(){
           alert('Clicked on alert icon');
+      }
+      ,
+      cleardom(){
+            try{
+            if (window.navigator.userAgent.indexOf("MSIE")>=1){
+            let dom =document.getElementsByClassName("tooltip");     
+              for (let i = 0; i < dom.length-1; i++) {
+                if(dom[i])
+                dom[i].parentNode.removeChild(dom[i]);
+              
+              } 
+            }
+          }
+          catch(e){}
       }
   }
 }
@@ -79,5 +95,8 @@ export default {
     margin-top: -17px !important;
     margin-left: -17px !important;
   }
+}
+[aria-hidden=false]{
+  display: none;
 }
 </style>
