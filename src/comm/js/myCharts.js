@@ -531,7 +531,150 @@ const install = function(Vue) {
                                       
                       
                         return updatedata;
-                    }
+                    },
+                    Basestationecharbar:function(id){
+                        this.chart = echarts.init(document.getElementById(id));
+                        this.chart.clear();
+                        
+                        let option = {
+                            baseOption:{
+                                timeline: {
+                                  
+                                    axisType: 'category',
+                                    
+                                    autoPlay: true,
+                                  
+                                    playInterval: 5000,
+                                    bottom:-5,
+                                    data: ['1','2'],
+                                    label: null,
+                                    padding:0,
+                                    controlStyle:{
+                                        showPrevBtn:false,
+                                        showNextBtn:false,
+                                        color:'#fff',
+                                        borderColor:'#B4FF0B',
+                                    }
+                                },
+                                tooltip: {
+                                    trigger: 'axis',
+                                    axisPointer: {
+                                        type: 'cross',
+                                        crossStyle: {
+                                            color: '#999'
+                                        },
+                                        label:{
+                                            backgroundColor:'#000'
+                                        }
+                                    },
+                                 
+                                },
+                                grid:{x:40,y:35,x2:40,y2:55},
+                                toolbox: {
+                                    show: false,
+                                },
+                                legend: {
+                                    data:['在线数量'],
+                                    textStyle:{
+                                        color:'#fff',
+                                       
+                                    }
+                                },
+                                xAxis: [
+                                    {
+                                        type: 'category',
+                                      
+                                        axisPointer: {
+                                            type: 'shadow'
+                                        },
+                                        axisLine:{
+                                            lineStyle:{
+                                                color:'#fff'
+                                            } 
+                                         },
+                                    }
+                                ],
+                                yAxis: [                                   
+                                    {
+                                        type: 'value',
+                                        name: '在线数量(个)',
+                                        min: 0,
+                                                                    
+                                        splitLine: {
+                                            show: false
+                                        },
+                                        axisLabel: {
+                                            formatter: '{value} '
+                                        },
+                                        nameTextStyle:{
+                                            color:'#fff'
+                                        },
+                                        axisLine:{
+                                            lineStyle:{
+                                                color:'#fff'
+                                            } 
+                                         }
+                                    }
+                                ],
+                                series: [
+                                    {
+                                        name:'在线数量',
+                                        type:'bar',
+                                        itemStyle: {
+                                            color:  'rgb(43, 129, 190)',
+                                            barBorderRadius:[5, 5, 0, 0],
+    
+                                        },
+                                       // data:[12, 4, 7, 8, 5, 7,15],
+                                        markPoint : {
+                                            data : [
+                                               
+                                                {type : 'min', name: '最小值'}
+                                            ]
+                                            
+                                        },
+                                    }
+                                ]
+                            },
+                            options: []
+                        };
+                        this.chart.setOption(option);
+                        let that =this;
+                        let updatedata = function(data){
+                            let count =  Math.ceil(data.length / 20); 
+
+                            if (count<2){
+                                option.baseOption.timeline.show=false;
+                                option.baseOption.grid={x:40,y:35,x2:40,y2:35}
+                               
+                            }
+                            else{
+                                option.baseOption.timeline.show=true;
+                                option.baseOption.grid={x:40,y:35,x2:40,y2:55}
+                            }                     
+                            option.baseOption.timeline.data.length=0;
+                            option.options.length=0;
+                            for (let i = 0; i < count; i++) { 
+                                option.baseOption.timeline.data.push(i+1);
+                                let dataonlinecount=[];
+                                let dataxAxis=[];
+                                for (let ndata = 0; ndata <7; ndata++) { 
+                                    if (i*7+ndata>=data.length) break;
+                                    dataonlinecount.push(data[i*7+ndata].onlineTerminal);
+                                    dataxAxis.push(data[i*7+ndata].entityName)
+                                }
+                                let series =[];
+                                series.push({data:dataonlinecount});   
+                                let xAxis=[];
+                                xAxis.push({data:dataxAxis});
+                                option.options.push({series:series,xAxis:xAxis});
+                             }
+                            that.chart.setOption(option);
+                         };
+                                      
+                      
+                        return updatedata;
+                    },
                   
                       
                 }

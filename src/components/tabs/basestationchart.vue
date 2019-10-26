@@ -65,7 +65,7 @@ import { setTimeout } from 'timers';
         mounted() {
           
     
-        this.updateecharbar = this.$chart.echarbar('Basestationchart');
+        this.updateecharbar = this.$chart.Basestationecharbar('Basestationchart');
         let _this=this;
         this.interLoadData();
         this.loadinter  = setInterval(function (){
