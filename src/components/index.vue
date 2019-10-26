@@ -63,9 +63,9 @@ export default {
                         {label:'操作窗口',icon:'gps_fixed',name:'hjmb'},
                         {label:'GPS上报',icon:'history',name:'gpslist'},
                         {label:'GPS上拉',icon:'navigation',name:'GPSPullList'},
-                        {label:'短信',icon:'vpn_lock',name:'sms_sjx'},
-                        {label:'操作日志',icon:'vpn_lock',name:'operationlog'},
-                        {label:'动态重组',icon:'vpn_lock',name:'dtczrestlt'},
+                        {label:'短信',icon:'mail_outline',name:'sms_sjx'},
+                        {label:'操作日志',icon:'event_note',name:'operationlog'},
+                        {label:'动态重组',icon:'group_add',name:'dtczrestlt'},
         ],
         isshowmini:false,
                       
@@ -136,12 +136,12 @@ export default {
                 case "servicemanager":
                     this.lmenuitems.splice(0);
                     this.lmenuitems.push( 
-                            {label:'GPS上报统计',icon:'person',name:'Lang_gpstj'},
-                            {label:'单键报备统计',icon:'tap_and_play',name:'Lang_djbbtj '},
+                            {label:'GPS上报统计',icon:'insert_chart',name:'Lang_gpstj'},
+                            {label:'单键报备统计',icon:'equalizer',name:'Lang_djbbtj '},
                             {label:'人员设备管理',icon:'supervisor_account',name:'Lang_UserDeviceManage'},
-                            {label:'GPS数据管理',icon:'account_balance',name:'Lang_GPSDataManage'},
-                            {label:'预案管理',icon:'account_balance',name:'Lang_emergency'},
-                            {label:'实时警力',icon:'account_balance',name:'Lang_RealTimePoliceStrength'},
+                            {label:'GPS数据管理',icon:'assignment',name:'Lang_GPSDataManage'},
+                            {label:'预案管理',icon:'build',name:'Lang_emergency'},
+                            {label:'实时警力',icon:'alarm_add',name:'Lang_RealTimePoliceStrength'},
                           );
                  break;
                default:
@@ -150,9 +150,9 @@ export default {
                             {label:'操作窗口',icon:'gps_fixed',name:'hjmb'},
                             {label:'GPS上报',icon:'history',name:'gpslist'},
                             {label:'GPS上拉',icon:'navigation',name:'GPSPullList'},
-                            {label:'短信',icon:'vpn_lock',name:'sms_sjx'},
-                            {label:'操作日志',icon:'vpn_lock',name:'operationlog'},
-                            {label:'动态重组',icon:'vpn_lock',name:'dtczrestlt'},
+                            {label:'短信',icon:'mail_outline',name:'sms_sjx'},
+                            {label:'操作日志',icon:'event_note',name:'operationlog'},
+                            {label:'动态重组',icon:'group_add',name:'dtczrestlt'},
                          );  
                    break;             
            }   
