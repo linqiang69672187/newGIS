@@ -641,7 +641,7 @@ const install = function(Vue) {
                         this.chart.setOption(option);
                         let that =this;
                         let updatedata = function(data){
-                            let count =  Math.ceil(data.length / 20); 
+                            let count =  Math.ceil(data.length / 30); 
 
                             if (count<2){
                                 option.baseOption.timeline.show=false;
@@ -658,10 +658,10 @@ const install = function(Vue) {
                                 option.baseOption.timeline.data.push(i+1);
                                 let dataonlinecount=[];
                                 let dataxAxis=[];
-                                for (let ndata = 0; ndata <7; ndata++) { 
-                                    if (i*7+ndata>=data.length) break;
-                                    dataonlinecount.push(data[i*7+ndata].onlineTerminal);
-                                    dataxAxis.push(data[i*7+ndata].entityName)
+                                for (let ndata = 0; ndata <30; ndata++) { 
+                                    if (i*30+ndata>=data.length) break;
+                                    dataonlinecount.push(data[i*30+ndata].onlineTerminal);
+                                    dataxAxis.push(data[i*30+ndata].entityName)
                                 }
                                 let series =[];
                                 series.push({data:dataonlinecount});   
