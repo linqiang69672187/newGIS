@@ -28,8 +28,9 @@
       <div class="top" ><banner ref="banner" :isshowmini="isshowmini" @Bannerselectedchange='Bannerselectedchange'></banner></div>
        <div>
            <div  id="map"></div>
-           <!--<Map  class="map" v-contextmenu:contextmenu move-type="0"></Map>
            <MapToolbox @fullscreen="fullscreen"></MapToolbox>
+           <!--<Map  class="map" v-contextmenu:contextmenu move-type="0"></Map>
+          
             <Callbox :class="{hidedmenu}"></Callbox> 地图上呼叫按钮-->
            <notice ref="notice"></notice>
            <LeftToolbox @daiplate="cldaiplate" :style="{bottom:dmenuszie}"></LeftToolbox>
