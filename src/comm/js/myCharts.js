@@ -661,7 +661,7 @@ const install = function(Vue) {
                                 for (let ndata = 0; ndata <30; ndata++) { 
                                     if (i*30+ndata>=data.length) break;
                                     dataonlinecount.push(data[i*30+ndata].onlineTerminal);
-                                    dataxAxis.push(data[i*30+ndata].entityName)
+                                    dataxAxis.push(data[i*30+ndata].BsName)
                                 }
                                 let series =[];
                                 series.push({data:dataonlinecount});   

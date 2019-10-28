@@ -81,7 +81,7 @@ export default {
          this.cleardom();
       },
       select_rangle(){
-        let loadevent = LoadEvents();
+        let loadevent = LoadEvents("olBoxSelection");
          loadevent();//调用原来框选 
          this.cleardom();
       }

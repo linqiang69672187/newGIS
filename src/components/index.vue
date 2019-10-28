@@ -129,10 +129,13 @@ export default {
             alert(text);
         },
         Bannerselectedchange:function(val){
-         
+         console.info(val);
            switch (val){
+               case "exit":
+                   loginout();//调用原系统退出
+                   break;
                case "options":
-                   openwindows("options");
+                   openwindows("options");//调用原系统
                    break;
                 case "servicemanager":
                     this.lmenuitems.splice(0);
