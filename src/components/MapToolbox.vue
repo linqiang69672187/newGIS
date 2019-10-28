@@ -247,8 +247,8 @@ export default {
        border-radius: 3px;
        font-size: 14px;
        color: #515a6e;
-      line-height: 22px;
-      margin-top: 5px;
+       line-height: 22px;
+       margin-top: 5px;
     }
 </style>
 <style >
