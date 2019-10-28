@@ -50,3 +50,25 @@ function LoadEvents(){
 //useprameters.lockids.splice(0, 1, {issi:'24001',lon:'120.1727667529',lat:'30.2166735631',name:'张1警官',userid:'1'});
 
 //window.vue_index.$refs.banner.updateuseprameters();已准备好参数可以更新界面了
+
+/*
+[‎2019/‎10/‎28 16:13] 张谦: 
+<% 
+                     if (ConfigurationManager.AppSettings["SystemType"].ToString() == "2") 
+                     { 
+                                 %>eTRA GIS_HELP_SEA/help.html<% 
+                     } 
+                     else if (ConfigurationManager.AppSettings["defaultLanguage"].ToString() == "zh-CN") 
+                     { 
+                                %>eTRA GIS_HELP/help.html<% 
+                                
+                     } 
+                     else 
+                     { 
+                            %>eTRA GIS_HELP_En/help.html<% 
+                     } 
+           
+                    
+                    %>
+
+*/
