@@ -1,6 +1,6 @@
 <template>
 <div class="tree">
-    <Tree :data="data3" :load-data="loadData" show-checkbox></Tree>
+    <Tree :data="data3" @on-select-change="selectchange"	 :load-data="loadData" show-checkbox></Tree>
 </div>
 </template>
 <script>
@@ -12,13 +12,11 @@ import { Tree  } from 'iview';
                     {
                         title: '杭州市公安局',
                         loading: false,
-                        children: []
-                    },
-                     {
-                        title: '杭州市公安局',
-                        loading: false,
-                        children: []
+                        children: [],
+                        checked:true,
+                        id:0,
                     }
+                     
                 ]
             }
         },
@@ -32,15 +30,21 @@ import { Tree  } from 'iview';
                         {
                             title: 'XX公安局',
                             loading: false,
-                            children: []
-                        },
+                            children: [],
+                            id:1,
+                            type:'entity',  //entity,
+                          },
                         {
                             title: '朱警官',
-                         
+                            id:2,
                         }
                     ];
                     callback(data);
                 }, 1000);
+            },
+            selectchange(array,item){
+                console.info(array);
+                console.info(item);
             }
         }
     }

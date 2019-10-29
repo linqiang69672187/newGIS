@@ -1,8 +1,7 @@
 <template>
     <div id="main">
-       <!--
+      <!--
         <OCX></OCX>
-         
          <v-contextmenu ref="contextmenu" >
             <v-contextmenu-item @click="handleClick('拨号盘')">拨号盘</v-contextmenu-item>
             <v-contextmenu-item @click="handleClick">实时状况</v-contextmenu-item>
@@ -38,7 +37,7 @@
        <div>
       
            <div class="left" :class="{hidedmenu}"><Lmenu  ref="lmenu"  :items='lmenuitems'></Lmenu></div>
-           <div class="bottom"><Dmenu ref="dmenu"  @listenchange="listenchangeDmenu"></Dmenu></div>
+           <div class="bottom"><Dmenu ref="dmenu" :ocxRegStatus="ocxRegStatus"  @listenchange="listenchangeDmenu"></Dmenu></div>
        </div>
       
     </div>
@@ -69,7 +68,7 @@ export default {
                         {label:'动态重组',icon:'group_add',name:'dtczrestlt'},
         ],
         isshowmini:false,
-                      
+        ocxRegStatus:false,             
        }
     },
    mounted(){
@@ -173,6 +172,22 @@ export default {
             this.$refs.lmenu.exitfullscreen(); 
             }
            
+        },
+        regmsg:function(msg,dispName){
+            switch (msg) {
+                case "REG_SUCCESS":
+                case "“LINK_SUCCESS":    
+                    this.ocxRegStatus=true;
+            
+                    break;
+                case "REG_FAIL":
+                case "LINK_DISCONNECT":   
+                      this.ocxRegStatus=false;
+             
+                    break;
+                default:
+                    break;
+            }
         }
        
     }

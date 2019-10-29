@@ -6,7 +6,7 @@
     <Tabs class='tabs' @on-click='tabclick' v-model='tabname' name='plane'   @on-tab-remove='handleTabRemove' type='card'  >
         <TabPane  tab="plane"  name="实时状况" label="实时状况" class="tabpane" icon="ios-speedometer"><tabindex></tabindex></TabPane>
         <!-- <TabPane  tab="plane" name="GPS控制" class="tabpane" label="GPS控制"  icon="ios-key"><GPScontrol></GPScontrol></TabPane> -->
-        <TabPane  tab="plane" name="拨号键盘"   class="tabpane"  label="拨号键盘"  icon="ios-apps"><dialplate ref="dail"></dialplate></TabPane>
+        <TabPane    tab="plane" name="拨号键盘"   class="tabpane"  label="拨号键盘"  icon="ios-apps"><dialplate :ocxRegStatus="ocxRegStatus" ref="dail"></dialplate></TabPane>
         <TabPane  tab="plane" name="基站统计"   class="tabpane"  label="基站统计"  icon="ios-stats"><basestationchart></basestationchart></TabPane>
         <TabPane  tab="plane" closable name="锁定跟踪" class="tabpane"  label="锁定跟踪" v-if="showlockTab" icon="ios-lock"><eyemaps></eyemaps></TabPane>
     </Tabs>
@@ -33,7 +33,8 @@ import basestationchart from "@/components/tabs/basestationchart"
                         rationicon:true,
                         tabname:'实时状况',
                         dailval:'',
-                        downrowshow:false
+                        downrowshow:false,
+                        
                     }
         },
         components:{
@@ -46,6 +47,7 @@ import basestationchart from "@/components/tabs/basestationchart"
           GPScontrol,
           basestationchart
         },
+        props:['ocxRegStatus'],
         methods: {
               handleTabRemove (name) {
                 switch (name) {
@@ -103,8 +105,12 @@ import basestationchart from "@/components/tabs/basestationchart"
         created(){
         },
         mounted() {
+            
        },
+       computed:{
        
+     
+    }
        
     }
 </script>

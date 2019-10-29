@@ -1,5 +1,5 @@
 <template>
-<div :style="backgroundDiv"  class="row" @keypress.space="PTT" @keyup="releasePTT">
+<div  :style="backgroundDiv"  class="row" @keypress.space="PTT" @keyup="releasePTT">
 <ul>
     <li>
         <div class="dialpane">
@@ -156,6 +156,7 @@
        </div>
     </li>
 </ul>
+<div :class="[this.ocxRegStatus==true?'ocxRegStatus':'']" class="shadediv"></div>
 </div>
 </template>
 <script>
@@ -195,10 +196,13 @@ export default {
       contacts:[],
       iscalling:false,
       isptt:false,
-      selectissi:{}, 
+      selectissi:{},
+      
       }
   
   }
+  ,
+  props:['ocxRegStatus']
   ,
  mounted(){
       var _this = this; 
@@ -213,6 +217,7 @@ export default {
          _this.keyup(e);
         };
         this.initgroupandusers();//初始化常用组、个、最近联系人  
+        console.info(this.ocxRegStatus);
     },
   computed:{
 
@@ -815,5 +820,18 @@ margin-right: 0px !important;
  .dialpane .ivu-select-dropdown{
     margin-left: 5px ;
     margin-top: 6px;
+}
+.shadediv{
+    position: relative;
+    left: 0;
+    top: 0;
+    background-color: rgba(255,255,255,.3);
+    width: 100%;
+    height: 100%;
+
+    line-height: 200px;
+}
+.ocxRegStatus{
+    display: none;
 }
 </style>

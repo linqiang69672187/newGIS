@@ -1,6 +1,8 @@
 function REGMsg(msg, dispName){ 
               console.info(msg+'|'+dispName);
-              window.vue_notice.regmsg(false,msg,dispName);
+              //window.vue_notice.info(title,msg);
+              //window.vue_notice.error(title,msg);
+              window.vue_index.regmsg(msg,dispName);
 }          
 function CallMsg(issi,eventtype,msg,gssi,hookmethodsel){
     window.vue_dialplate.CallMsg(issi,eventtype,msg,gssi,hookmethodsel);

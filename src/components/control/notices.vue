@@ -33,7 +33,14 @@ let noticemod;
                            title: title,
                            desc: msg
                             });
-            }
+            },
+            info:function (title,msg) {
+              Notice.info({
+                           title: title,
+                           desc: nodesc ? '' : msg
+                            });
+               
+            },
         }
     }
 </script>
