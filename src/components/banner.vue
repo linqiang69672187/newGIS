@@ -11,7 +11,10 @@
       <div class="menu" :class="[isshowmini?'animated bounceOutRight':'',isshowmini==false?'animated bounceInRight':'']">
       <div>
           <ul>
-              <li v-for="(item,key) in items" @click="menuclk(item.name)" :key="key" :class="[(item.name==selectitem)?'selectitem':'']"><a :href="[item.name=='help'?helpurl:'']" target="_blank"><i class="fas " :class="item.icon"></i><div>{{item.label}}</div></a></li>
+              <li v-for="(item,key) in items" @click="menuclk(item.name)" :key="key" :class="[(item.name==selectitem)?'selectitem':'']">
+                <a v-if="item.name=='help'" :href="[item.name=='help'?helpurl:'']" target="_blank" ><i class="fas " :class="item.icon"></i><div>{{item.label}}</div></a>
+                <a v-else><i class="fas " :class="item.icon"></i><div>{{item.label}}</div></a>
+              </li>
           </ul>
       </div>
       <div>
