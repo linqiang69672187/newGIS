@@ -45,9 +45,7 @@ import { Tree  } from 'iview';
                 
             },
             selectchange(array,item){
-              
-                let treeNode={entityId:item.id,objType:item.type,name:title};
-                
+                let treeNode={entityId:item.id,objType:item.type,name:title};  
                 console.info(treeNode);
                 onClick(null,"treeDemo",treeNode)
             },
@@ -57,8 +55,7 @@ import { Tree  } from 'iview';
                    for (let n = 0; n <array[i].children.length; n++){
                        let index =this.checkparent(array,array[i].children[n]); //检查父节点是否已经选中，如果已经包含则该节点排除
                        array.splice(index,1); 
-                   }
-                   
+                   }       
                  }
                   console.info(array);
             },
