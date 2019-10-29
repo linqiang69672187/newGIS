@@ -52,12 +52,10 @@ import { Tree  } from 'iview';
                 onClick(null,"treeDemo",treeNode)
             },
             checkchange(array,item){
-               
                 console.info(array);
-   
                  for (let i = array.length-1; i >=0; i--){
                    for (let n = 0; n <array[i].children.length; n++){
-                       let index =this.checkparent(array,array[i].children[n]);
+                       let index =this.checkparent(array,array[i].children[n]); //检查父节点是否已经选中，如果已经包含则该节点排除
                        array.splice(index,1); 
                    }
                    
@@ -65,8 +63,7 @@ import { Tree  } from 'iview';
                   console.info(array);
             },
            checkparent(array,item){
-            
-                 for (let i = 0; i <array.length; i++){
+            for (let i = 0; i <array.length; i++){
                    if (array[i].nodeKey==item.nodeKey) return i;
                  }
                  return -1;
