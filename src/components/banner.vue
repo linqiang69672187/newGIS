@@ -11,7 +11,7 @@
       <div class="menu" :class="[isshowmini?'animated bounceOutRight':'',isshowmini==false?'animated bounceInRight':'']">
       <div>
           <ul>
-              <li v-for="(item,key) in items" @click="menuclk(item.name)" :key="key" :class="[(item.name==selectitem)?'selectitem':'']"><a><i class="fas " :class="item.icon"></i><div>{{item.label}}</div></a></li>
+              <li v-for="(item,key) in items" @click="menuclk(item.name)" :key="key" :class="[(item.name==selectitem)?'selectitem':'']"><a :href="[item.name=='help'?helpurl:'']" target="_blank"><i class="fas " :class="item.icon"></i><div>{{item.label}}</div></a></li>
           </ul>
       </div>
       <div>
@@ -55,6 +55,7 @@ export default {
         new_smscount:0,
         username:'admin',
         date: new Date(1571984937504),
+        helpurl:'eTRA GIS_HELP/help.html',
       }
     },
     props: ['isshowmini'],
@@ -85,6 +86,17 @@ export default {
       updateuseprameters(){
         this.username = useprameters.usename;
         this.date = new Date(parseInt(useprameters.servertime));
+        if (useprameters.SystemType=="2"){
+          this.helpurl = "eTRA GIS_HELP_SEA/help.html";
+        }
+        else{
+          if (useprameters.defaultLanguage=="zh-CN"){
+             this.helpurl = "eTRA GIS_HELP/help.html";
+          }
+          else{
+            this.helpurl = "eTRA GIS_HELP_En/help.html";
+          }
+        }
       },
     },
     mounted(){
@@ -131,7 +143,7 @@ html,body{
 .changewindows{
   position: absolute;
   top: 0;
-  right: 5px;
+  right: 0px;
   width:155px;
   height: 22px;
   font-size: 16px;

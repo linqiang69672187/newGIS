@@ -146,6 +146,8 @@ export default {
                             {label:'实时警力',icon:'alarm_add',name:'Lang_RealTimePoliceStrength'},
                           );
                  break;
+            case "help":
+                         break;
                default:
                    this.lmenuitems.splice(0);
                    this.lmenuitems.push( 
@@ -187,6 +189,9 @@ export default {
                 default:
                     break;
             }
+        },
+        init:function(){
+            this.$refs.banner.updateuseprameters();
         }
        
     }

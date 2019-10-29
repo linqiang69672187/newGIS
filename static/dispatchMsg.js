@@ -52,6 +52,7 @@ function LoadEvents(){
 //useprameters.lockids.splice(0, 1, {issi:'24001',lon:'120.1727667529',lat:'30.2166735631',name:'张1警官',userid:'1'});
 
 //window.vue_index.$refs.banner.updateuseprameters();已准备好参数可以更新界面了
+//window.vue_index.init();
 
 /*
 [‎2019/‎10/‎28 16:13] 张谦: 
@@ -74,3 +75,8 @@ function LoadEvents(){
                     %>
 
 */
+
+function onClick(e, treeId, treeNode) { 
+
+
+}

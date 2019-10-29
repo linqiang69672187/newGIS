@@ -1,9 +1,10 @@
 <template>
 <div class="tree">
-    <Tree :data="data3" @on-select-change="selectchange"	 :load-data="loadData" show-checkbox></Tree>
+    <Tree :data="data3" @on-select-change="selectchange" @on-check-change="checkchange"	 :load-data="loadData" show-checkbox></Tree>
 </div>
 </template>
 <script>
+import Vue from 'vue';
 import { Tree  } from 'iview';
     export default {
         data () {
@@ -25,27 +26,53 @@ import { Tree  } from 'iview';
         },
         methods: {
             loadData (item, callback) {
-                setTimeout(() => {
-                    const data = [
-                        {
-                            title: 'XX公安局',
-                            loading: false,
-                            children: [],
-                            id:1,
-                            type:'entity',  //entity,
-                          },
-                        {
-                            title: '朱警官',
-                            id:2,
-                        }
-                    ];
-                    callback(data);
-                }, 1000);
+                 console.info(item);
+                  Vue.axios.get('/app/data/json/tree.json', {
+                            params: {
+                                ctrl:'DialPadDao',
+                                action: "MatchUserAndGroup",
+                               
+                            }
+                          }).then((res) => {
+                              if (res.data!=''){
+                             
+                              callback(res.data);
+                              }
+                          }).catch((err) => {
+                            console.log(err)
+                           
+                          });
+                
             },
             selectchange(array,item){
+              
+                let treeNode={entityId:item.id,objType:item.type,name:title};
+                
+                console.info(treeNode);
+                onClick(null,"treeDemo",treeNode)
+            },
+            checkchange(array,item){
+               
                 console.info(array);
-                console.info(item);
-            }
+   
+                 for (let i = array.length-1; i >=0; i--){
+                   for (let n = 0; n <array[i].children.length; n++){
+                       let index =this.checkparent(array,array[i].children[n]);
+                       array.splice(index,1); 
+                   }
+                   
+                 }
+                  console.info(array);
+            },
+           checkparent(array,item){
+            
+                 for (let i = 0; i <array.length; i++){
+                   if (array[i].nodeKey==item.nodeKey) return i;
+                 }
+                 return -1;
+
+           }
+
         }
     }
 </script>
