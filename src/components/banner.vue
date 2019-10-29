@@ -69,7 +69,16 @@ export default {
     },
     methods:{
       menuclk:function(val){
-        if (val==this.selectitem)return;
+     
+        switch (val) {
+          case "dispatchFunction":
+          case "servicemanager":
+            if (val==this.selectitem)return;
+            break;
+        
+          default:
+            break;
+        }
         this.selectitem=val;
         this.$emit('Bannerselectedchange',val);
       },
