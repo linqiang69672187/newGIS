@@ -58,6 +58,24 @@ import { Tree  } from 'iview';
                    }       
                  }
                   console.info(array);
+                  let zhishuString="";
+                  let entityString="";
+                  let typeString="";
+                  for (let i = array.length-1; i >=0; i--){
+                      switch (array[i].type) {
+                          case "zhishuuser":
+                             zhishuString+=array[i].id+',';
+                              break;
+                          case "usertype":
+                              typeString+=array[i].entityid+":"+array[i].id+';';
+                              break;  
+                          default:
+                              entityString+=array[i].id+',';
+                              break;
+                      }
+                 }
+                 let returnString =zhishuString+"/"+entityString+"/"+typeString;
+                 console.info(returnString);
             },
            checkparent(array,item){
             for (let i = 0; i <array.length; i++){
