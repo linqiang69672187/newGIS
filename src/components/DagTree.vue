@@ -30,8 +30,7 @@ import { Tree  } from 'iview';
                   Vue.axios.get('/app/data/json/tree.json', {
                             params: {
                                 ctrl:'DialPadDao',
-                                action: "MatchUserAndGroup",
-                               
+                                action: "MatchUserAndGroup",  
                             }
                           }).then((res) => {
                               if (res.data!=''){
@@ -46,8 +45,19 @@ import { Tree  } from 'iview';
             },
             selectchange(array,item){
                 let treeNode={entityId:item.id,objType:item.type,name:title};  
-                console.info(treeNode);
-                onClick(null,"treeDemo",treeNode)
+                displaypolicelistsdiv();//调用原来方法
+                window.frames['policelists'].Displayprocessbar();//调用原来方法
+                switch(treeNode.objType){
+                    case "entity":
+                    case "zhishuuser":
+                      window.frames['policelists'].createpolicetable_ajax(treeNode.objType, treeNode.entityId, "");
+                        break;
+                    case "usertype":
+                       window.frames['policelists'].createpolicetable_ajax(treeNode.objType, treeNode.name, treeNode.entityId);  
+                        break;
+                    default:
+                        break;
+                }
             },
             checkchange(array,item){
                 console.info(array);
@@ -75,7 +85,8 @@ import { Tree  } from 'iview';
                       }
                  }
                  let returnString =zhishuString+"/"+entityString+"/"+typeString;
-                 console.info(returnString);
+                 checkedEntity = returnString;//全局赋值单位选择，赋值原有全局属性值
+                 ReLoadUser();//刷新地图人员，调用原有方法
             },
            checkparent(array,item){
             for (let i = 0; i <array.length; i++){
