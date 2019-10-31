@@ -180,7 +180,7 @@ const install = function(Vue) {
                                 option.series[0].data.shift();
                                 option.series[1].data.shift();
                             }            
-                            data0.push((onlinetime/3600).toFixed(2));                         
+                            data0.push((onlinetime));                         
                             data1.push(onlinecount);                       
                             option.xAxis[0].data.push(axisData);  
                             that.chart.setOption(option);
@@ -515,7 +515,7 @@ const install = function(Vue) {
                                 let dataxAxis=[];
                                 for (let ndata = 0; ndata <7; ndata++) { 
                                     if (i*7+ndata>=data.length) break;
-                                    dataonlinetime.push((data[i*7+ndata].onlineTime/3600).toFixed(2));
+                                    dataonlinetime.push((data[i*7+ndata].onlineTime));
                                     dataonlinecount.push(data[i*7+ndata].onlineTerminal);
                                     dataxAxis.push(data[i*7+ndata].entityName)
                                 }

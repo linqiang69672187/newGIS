@@ -37,7 +37,7 @@ let noticemod;
             info:function (title,msg) {
               Notice.info({
                            title: title,
-                           desc: nodesc ? '' : msg
+                           desc:  msg
                             });
                
             },
