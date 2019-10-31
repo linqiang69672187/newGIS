@@ -19,7 +19,7 @@ import animate from 'animate.css'
 import materialIcons from 'material-design-icons/iconfont/material-icons.css'
 import contentmenu from 'v-contextmenu'
 import 'v-contextmenu/dist/index.css'
-
+import loading from 'vue-nice-loading'
 
 
 fontawesome.library.add(solid)
@@ -29,7 +29,7 @@ fontawesome.library.add(brands)
 Vue.use(contentmenu)
 Vue.use(myCharts)
 Vue.use(VueAxios, axios)
-
+Vue.use(loading)
 
 Vue.config.productionTip = false
 

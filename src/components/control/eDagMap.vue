@@ -35,7 +35,7 @@ let noticemod;
 export default {
     mounted(){
         this.initMap();
-       
+        
     },
     mixins:[math,],
     data: function () {
@@ -57,7 +57,8 @@ export default {
             }
         },
     destroyed(){ 
-         clearInterval(noticemod);  
+         clearInterval(noticemod); 
+         if(this.linkmap)store.dispatch(UPDATE,''); //如果该设备投屏，解锁后清空投屏ID
         },
     
       computed: {
@@ -90,7 +91,8 @@ export default {
    methods:{
        changelinkmap(){
            if (this.linkmap==true){
-             store.dispatch(UPDATE,'');  
+             store.dispatch(UPDATE,'');
+             onMove();//地图移动
            }else{
            store.dispatch(UPDATE,this.lockdevice.userid); 
             }
@@ -115,7 +117,7 @@ export default {
             this.maxLevel = useprameters.maxLevel;//最大几层
             this.minLevel = useprameters.minLevel;//最小几层
             this.currentLevel = useprameters.maxLevel-2;//显示第几层
-
+            
             switch (this.gistype) {
                 case "tianditu":
                     this.getWebGIS();

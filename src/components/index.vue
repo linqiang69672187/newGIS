@@ -36,7 +36,7 @@
        <div>
       
            <div class="left" :class="{hidedmenu}"><Lmenu  ref="lmenu"  :items='lmenuitems'></Lmenu></div>
-           <div class="bottom"><Dmenu ref="dmenu" :ocxRegStatus="ocxRegStatus"  @listenchange="listenchangeDmenu"></Dmenu></div>
+           <div class="bottom"><Dmenu ref="dmenu" :ocxRegStatus="ocxRegStatus" @downloadover="downloadover"  @listenchange="listenchangeDmenu"></Dmenu></div>
        </div>
       
     </div>
@@ -113,6 +113,21 @@ export default {
         OCX,
     },
     methods:{
+        downloadover:function(type,msg){
+            
+             switch(type){
+                 case "error":
+                      this.$refs.notice.error(type,msg);
+                     break;
+                 case "success":
+                     this.$refs.notice.info(type,msg);
+                     break;
+                 default:
+                     break;
+             }
+            
+
+             },
         increase:function(val){
         },
         listenchangeDmenu:function(isshow){

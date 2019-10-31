@@ -1,5 +1,5 @@
 <template>
-<div :style="backgroundDiv"  class="row">
+<div :style="backgroundDiv" id="realstatustab"  class="row">
     <div id="onlinechar"></div>
     <div  class="middle"> 
         <div id="gauguchar"></div>
@@ -12,11 +12,24 @@
       
 
     </div>
-       
+
+     <div class="exportExcel"  >
+      <span><Tooltip   :content="exporttext" placement="bottom"> 
+       <i @click="toloadExcel" class="material-icons">move_to_inbox</i>
+       </Tooltip>
+      </span>
+      <span>
+      <Tooltip   content="下载EXCEL" placement="bottom"> 
+       <a  :href="excelHerf" v-show="excelHerf!=''" target="_blank"> <i class="material-icons">link</i></a>
+      </Tooltip>
+      </span>
+     </div>  
+    
 </div>
 </template>
 <script>
 //import Table from "@/components/control/tables"
+import {Tooltip} from 'iview';
 import Vue from 'vue';
 import { setTimeout } from 'timers';
   export default {
@@ -29,11 +42,16 @@ import { setTimeout } from 'timers';
                     updateecharbar:null,
                     updategaugeindex:null, 
                     updatedynamicline:null,
-                    loadinter:null,                       
+                    loadinter:null,
+                   
+                    loadingvue:null,  
+                    exporttext:'生成EXCEL',
+                    excelHerf:'',                     
                 }
         },
         components:{
          //Table
+         Tooltip
         },
         methods: {
            updatedata(){
@@ -43,7 +61,8 @@ import { setTimeout } from 'timers';
            },
            interLoadData(){
              let _this = this;
-              Vue.axios.get('/Handlers/MVCEasy.ashx', {  //--/app/data/json/devcie.json-/Handlers/MVCEasy.ashx
+
+             Vue.axios.get('/Handlers/MVCEasy.ashx', {  //--/app/data/json/devcie.json-/Handlers/MVCEasy.ashx
                             params: {
                                 ctrl:'DialPadDao',
                                 action: "GetTerminalOnlineInfo",
@@ -74,7 +93,35 @@ import { setTimeout } from 'timers';
            this.updategaugeindex(onlinecount,deviececount);
            this.updateecharbar(data);
           },
-           
+          toloadExcel(){
+          
+             this.loadingvue = this.$loading({
+              text: 'loading',
+              target: '#realstatustab'
+            });
+            let _this=this;
+            this.excelHerf='';
+            Vue.axios.get('/Handlers/ExportExcel.ashx', {  //--/app/data/json/exportEntityGPSreport.json-/Handlers/MVCEasy.ashx
+                            params: {
+                                ctrl:'entityGPS',
+                            }
+                          }).then((res) => {
+                               
+                          _this.loadingvue.close();
+                          if(res.data==""){
+                             _this.$emit("downloadover",'error','生成EXCEL失败'); 
+                          }else{
+                              _this.$emit("downloadover",'success','生成EXCEL成功'); 
+                          }
+                          _this.excelHerf=res.data;
+                          _this.exporttext="重新生成EXCEL";
+                          }).catch((err) => {
+                           
+                             _this.loadingvue.close();
+                           //window.vue_notice.err('error',err);
+                            _this.$emit("downloadover",'err','生成EXCEL失败');
+                   })
+          }
         },
         created(){
           
@@ -174,6 +221,21 @@ import { setTimeout } from 'timers';
     transform: rotate(360deg);
   }
 }
+.exportExcel{
+  right: 100px;
+  color: #fff;
+  width: 60px;
+  height: 40px;
+  position:absolute;
+  line-height: 40px;
+  font-size: 22px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+.exportExcel a{
+  color: #fff;
+}
+
 </style>
 <style >
 
