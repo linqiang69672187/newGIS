@@ -30,10 +30,12 @@ import {getTopLeft} from 'ol/extent';
 import {Circle as CircleStyle, Fill, Stroke, Style,Text} from 'ol/style.js';
 import { debug } from 'util';
 import Overlay from 'ol/Overlay.js';
+import proj4 from 'proj4';
 
 let noticemod;
 export default {
     mounted(){
+    
         this.initMap();
         
     },
@@ -109,6 +111,7 @@ export default {
                 }
        },
         initMap() {
+           
             let streetMapLayer; 
             this.gistype =  useprameters.GISTYPE.toLowerCase();
             this.option = this.createBaseMapParameter(this.gistype);
@@ -216,6 +219,7 @@ export default {
                 case "google":
                     var lon = useprameters.PGIS_Center_lo;//中心点
                     var lat = useprameters.PGIS_Center_la;//中心点
+                    console.info(this.CoordinateBiasedAlgorithm);
                     var projection = this.CoordinateBiasedAlgorithm.createGoogleProjection("GoogleBiased", [parseFloat(this.lon), parseFloat(this.lat)]);//创建谷歌偏移的坐标系
 
                     parm.projection = projection;
@@ -413,6 +417,7 @@ export default {
         },
          //创建动态纠偏坐标系的谷歌街景图
         getGoogleBiased(){
+            console.info("2");
             var count=1;
             let that=this;
             var streetMapSource = new sourceXYZ({
@@ -422,7 +427,8 @@ export default {
                 tileLoadFunction: function (imageTile, src) {
                     var view = that.map.getView();
                     var mapExtent = view.calculateExtent(that.map.getSize());
-                    var center = ol.extent.getCenter(mapExtent)
+                    var center = ol.extent.getCenter(mapExtent);
+  
                     var projection = that.CoordinateBiasedAlgorithm.createGoogleProjection("GoogleBiased" + count, center);
                     streetMapSource.projection_ = projection;
                     imageTile.getImage().src = src;
@@ -609,6 +615,7 @@ export default {
         },
 
         creatCoordinateBiasedAlgorithm(){
+            let _this=this;
             this.CoordinateBiasedAlgorithm = {
                     PI : 3.14159265358979324,
                     outOfChina : function (lat, lon) {//是否在中国之外
@@ -620,7 +627,7 @@ export default {
                     },
                     wgs84_gcj02 : {
                         transform:function(wgs_coordinate){//wgs84坐标转换到gcj02（中国标准的谷歌坐标系）
-                            if (CoordinateBiasedAlgorithm.outOfChina(wgs_coordinate[1], wgs_coordinate[0]))
+                            if (_this.CoordinateBiasedAlgorithm.outOfChina(wgs_coordinate[1], wgs_coordinate[0]))
                                 return wgs_coordinate;
 
                             var d = this.delta(wgs_coordinate[1], wgs_coordinate[0]);
@@ -629,7 +636,7 @@ export default {
                         delta: function (lat, lon) {
                             var a = 6378245.0; //  a: 卫星椭球坐标投影到平面地图坐标系的投影因子。
                             var ee = 0.00669342162296594323; //  ee: 椭球的偏心率。
-                            var pi = CoordinateBiasedAlgorithm.PI;
+                            var pi = _this.CoordinateBiasedAlgorithm.PI;
                             var dLat = this.transformLat(lon - 105.0, lat - 35.0);
                             var dLon = this.transformLon(lon - 105.0, lat - 35.0);
                             var radLat = lat / 180.0 * pi;
@@ -641,7 +648,7 @@ export default {
                             return { 'lat': dLat, 'lon': dLon };
                         },
                         transformLat: function (x, y) {//转换纬度
-                            var pi = CoordinateBiasedAlgorithm.PI;
+                            var pi = _this.CoordinateBiasedAlgorithm.PI;
                             var ret = -100.0 + 2.0 * x + 3.0 * y + 0.2 * y * y + 0.1 * x * y + 0.2 * Math.sqrt(Math.abs(x));
                             ret += (20.0 * Math.sin(6.0 * x * pi) + 20.0 * Math.sin(2.0 * x * pi)) * 2.0 / 3.0;
                             ret += (20.0 * Math.sin(y * pi) + 40.0 * Math.sin(y / 3.0 * pi)) * 2.0 / 3.0;
@@ -649,7 +656,7 @@ export default {
                             return ret;
                         },
                         transformLon: function (x, y) {//转换经度
-                            var pi = CoordinateBiasedAlgorithm.PI;
+                            var pi = _this.CoordinateBiasedAlgorithm.PI;
                             var ret = 300.0 + x + 2.0 * y + 0.1 * x * x + 0.1 * x * y + 0.1 * Math.sqrt(Math.abs(x));
                             ret += (20.0 * Math.sin(6.0 * x * pi) + 20.0 * Math.sin(2.0 * x * pi)) * 2.0 / 3.0;
                             ret += (20.0 * Math.sin(x * pi) + 40.0 * Math.sin(x / 3.0 * pi)) * 2.0 / 3.0;
@@ -659,13 +666,13 @@ export default {
                     },
                     gcj02_bd09 : {
                         transform: function (gcj_coordinate) {
-                            if (CoordinateBiasedAlgorithm.outOfChina(gcj_coordinate[1], gcj_coordinate[0]))
+                            if (_this.CoordinateBiasedAlgorithm.outOfChina(gcj_coordinate[1], gcj_coordinate[0]))
                                 return gcj_coordinate;
                             var d = this.delta(gcj_coordinate[1], gcj_coordinate[0]);
                             return [d.lon, d.lat];
                         },
                         delta: function (lat, lon) {
-                            var x_PI = parent.CoordinateBiasedAlgorithm.PI * 3000 / 180;
+                            var x_PI = parent._this.CoordinateBiasedAlgorithm.PI * 3000 / 180;
                             var z = Math.sqrt(lon * lon + lat * lat) + 0.00002 * Math.sin(lat * x_PI);
                             var theta = Math.atan2(lat, lon) + 0.000003 * Math.cos(lon * x_PI);
                             var bd_lon = z * Math.cos(theta) + 0.0065;
@@ -674,6 +681,7 @@ export default {
                         }
                     },
                     createGoogleProjection: function (name, coordinate) {//创建谷歌偏移地图的自定义坐标系
+             
                         if ((coordinate[0] > 180 || coordinate[0] < -180) && (coordinate[1] > 85.06 || coordinate[1] < -85.06)) {
                             coordinate = proj4("EPSG:3857", "EPSG:4326", coordinate);
                         }
