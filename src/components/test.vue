@@ -1,20 +1,11 @@
 <template>
-   <AutoComplete
-        v-model="value2"
-        @on-search="handleSearch2"
-        placeholder="input here"
-        :transfer='transfer'
-        clearable=true
-        style="width:200px">
-        <Option v-for="item in data2" :value="item.issi" :key="item">
-            <div>
-                <span><i class="material-icons" >{{item.type}}</i></span> <span> {{ item.issi }}({{ item.name }})</span>
-            </div>           
-        </Option>
-    </AutoComplete>
+  <div>
+ <button id="button">button</button><br>
+    <ul id="container"></ul>  
+  </div>
 </template>
 <script>
-import { AutoComplete,Option  } from 'iview';
+
     export default {
         data () {
             return {
@@ -23,20 +14,35 @@ import { AutoComplete,Option  } from 'iview';
                    data2: []
             }
         },
+        mounted(){
+          this.handleSearch2();
+        },
         components:{
-            AutoComplete,Option
+           
         },
         methods: {
-             handleSearch2 (value) {
-                 if (value.indexOf('2')>=0){
-                    this.data2 = [
-                                {'type':'person','issi':'24001','name':'张警官'},
-                                {'type':'group','issi':'822889','name':'TG1'}
-                                ]
-                 }else{
-               
-                                  this.data2 = []
-                }
+             handleSearch2 () {
+                 document.getElementById("button").addEventListener("click", function() {
+                    // 记录任务开始时间
+                    let now = Date.now();
+                    // 插入一万条数据
+                    const total = 10000;
+                    // 获取容器
+                    let ul = document.getElementById("container");
+                    // 将数据插入容器中
+                    
+                    for (let i = 0; i < total; i++) {
+                        let li = document.createElement("li");
+                        li.innerText = ~~(Math.random() * total);
+                        ul.appendChild(li);
+                    }
+                    
+                    setTimeout(() => {
+                        console.log("总运行时间：", Date.now() - now);
+                    }, 0);
+                    console.log("JS运行时间：", Date.now() - now);
+                    });
+
             }
         }
     }
