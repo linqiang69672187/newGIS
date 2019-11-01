@@ -35,7 +35,7 @@ import proj4 from 'proj4';
 let noticemod;
 export default {
     mounted(){
-    
+        this.creatCoordinateBiasedAlgorithm();
         this.initMap();
         
     },
@@ -114,12 +114,13 @@ export default {
            
             let streetMapLayer; 
             this.gistype =  useprameters.GISTYPE.toLowerCase();
-            this.option = this.createBaseMapParameter(this.gistype);
             this.lo = useprameters.PGIS_Center_lo;//中心点
             this.la = useprameters.PGIS_Center_la;//中心点
             this.maxLevel = useprameters.maxLevel;//最大几层
             this.minLevel = useprameters.minLevel;//最小几层
             this.currentLevel = useprameters.maxLevel-2;//显示第几层
+            this.option = this.createBaseMapParameter(this.gistype);
+
             
             switch (this.gistype) {
                 case "tianditu":
@@ -217,10 +218,9 @@ export default {
                     parm.tilegrid = tilegrid;
                     break;
                 case "google":
-                    var lon = useprameters.PGIS_Center_lo;//中心点
-                    var lat = useprameters.PGIS_Center_la;//中心点
+                  
                     console.info(this.CoordinateBiasedAlgorithm);
-                    var projection = this.CoordinateBiasedAlgorithm.createGoogleProjection("GoogleBiased", [parseFloat(this.lon), parseFloat(this.lat)]);//创建谷歌偏移的坐标系
+                    var projection = this.CoordinateBiasedAlgorithm.createGoogleProjection("GoogleBiased", [parseFloat(this.lo), parseFloat(this.la)]);//创建谷歌偏移的坐标系
 
                     parm.projection = projection;
                     break;
@@ -255,9 +255,8 @@ export default {
                     parm.projection = projection;
                     break;
                 case "baidu":
-                    var lon = useprameters.PGIS_Center_lo;//中心点
-                    var lat = useprameters.PGIS_Center_la;//中心点
-                    var biased = this.CoordinateBiasedAlgorithm.getBaiduBiased([parseFloat(this.lon), parseFloat(this.lat)]);//计算百度偏移的距离
+              
+                    var biased = this.CoordinateBiasedAlgorithm.getBaiduBiased([parseFloat(this.lo), parseFloat(this.la)]);//计算百度偏移的距离
 
                     var resolutions = [];
                     var matrixIds = [];
@@ -446,12 +445,13 @@ export default {
             });
             var view = new View({
                 projection: projection,
-                center: ol.proj.fromLonLat([parseFloat(this.lo), parseFloat(this.la)]),
+                center: fromLonLat([parseFloat(this.lo), parseFloat(this.la)]),
                 zoom: parseInt(this.currentLevel),
                 minZoom: parseInt(this.minLevel),
                 maxZoom: parseInt(this.maxLevel),
             });
             this.layer = streetMapLayer;
+            this.mapview= view;
         },
          //创建动态纠偏的百度街景图
         getBaiduBiased(){
@@ -501,7 +501,7 @@ export default {
             });
             var view = new View({
                 projection: projection,
-                center: ol.proj.fromLonLat([parseFloat(this.lo), parseFloat(this.la)]),
+                center: fromLonLat([parseFloat(this.lo), parseFloat(this.la)]),
                 zoom: parseInt(this.currentLevel),
                 minZoom: parseInt(this.minLevel),
                 maxZoom: parseInt(this.maxLevel),
@@ -694,7 +694,7 @@ export default {
                         var offsety = coordinate_gcj_proj[1] - coordinate_wgs_proj[1];
 
                         proj4.defs(name, "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=" + offsetx + " +y_0=" + offsety + " +k=1.0 +units=m +nadgrids=@null +wktext +no_defs");
-                        var projection = new ol.proj.Projection({
+                        var projection = new Projection({
                             code: name,
                             extent: [-20037508.342789244, -20037508.342789244, 20037508.342789244, 20037508.342789244]
                         });
@@ -714,7 +714,7 @@ export default {
                         var offsety = coordinate_gcj_proj[1] - coordinate_wgs_proj[1];
 
                         proj4.defs(name, "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=" + offsetx + " +y_0=" + offsety + " +k=1.0 +units=m +nadgrids=@null +wktext +no_defs");
-                        var projection = new ol.proj.Projection({
+                        var projection = new Projection({
                             code: name,
                             extent: [-20037508.342789244, -20037508.342789244, 20037508.342789244, 20037508.342789244]
                         });
@@ -738,6 +738,7 @@ export default {
                         return [offsetx, offsety];
                     }
              }
+             console.info('ok');
         },
 
 

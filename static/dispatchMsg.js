@@ -30,7 +30,7 @@ useprameters.SystemType ="1";
 useprameters.lockids=[
    {issi:'24001',lon:'120.1727667529',lat:'30.2186735631',name:'张警官',userid:'1'},
     {issi:'24002',lon:'120.1525667529',lat:'30.2186735631',name:'林警官',userid:'3'},
-    {issi:'24003',lon:'120.1725667529',lat:'30.2266735631',name:'朱警官',userid:'2'},
+    {issi:'24003',lon:'120.1725667529',lat:'30.2266735631',name:'朱警官',userid:'2'}
 ]
 useprameters.lockid='2'
 function projectScreen(id,lon,lat){
