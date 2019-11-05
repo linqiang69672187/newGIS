@@ -11,7 +11,7 @@ import { Tree  } from 'iview';
             return {
                 data3: [
                     {
-                        title: '杭州市公安局',
+                        title: '待加载单位',
                         loading: false,
                         children: [],
                         checked:true,
@@ -21,20 +21,24 @@ import { Tree  } from 'iview';
                 ]
             }
         },
+        mounted(){
+            this.initEntity();
+        },
         components:{
           Tree
         },
         methods: {
             loadData (item, callback) {
                  console.info(item);
-                  Vue.axios.get('/app/data/json/tree.json', {
+                  Vue.axios.get('/Handlers/MVCEasy.ashx', {
                             params: {
                                 ctrl:'DialPadDao',
-                                action: "MatchUserAndGroup",  
+                                action: "GetTreeChildrenNode",
+                                entity:item.entityid,
+                                type:item.type  
                             }
                           }).then((res) => {
-                              if (res.data!=''){
-                             
+                              if (res.data!=''){                            
                               callback(res.data);
                               }
                           }).catch((err) => {
@@ -94,6 +98,24 @@ import { Tree  } from 'iview';
                  }
                  return -1;
 
+           },
+           initEntity(){
+               let _this=this;
+               Vue.axios.get('/Handlers/MVCEasy.ashx', {
+                            params: {
+                                ctrl:'DialPadDao',
+                                action: "GetTreeChildrenNode",
+                                entity:"",
+                                type:"entity"  
+                            }
+                          }).then((res) => {
+                              if (res.data!=''){                            
+                              _this.data3=res.data;
+                              }
+                          }).catch((err) => {
+                            console.log(err)
+                           
+                          });
            }
 
         }
