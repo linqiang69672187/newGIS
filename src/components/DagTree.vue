@@ -30,15 +30,19 @@ import { Tree  } from 'iview';
         methods: {
             loadData (item, callback) {
                  console.info(item);
+                 let type=item.type;
+                 let entity=item.entityid;
                   Vue.axios.get('/Handlers/MVCEasy.ashx', {
                             params: {
                                 ctrl:'DialPadDao',
                                 action: "GetTreeChildrenNode",
-                                entity:item.entityid,
-                                type:item.type  
+                                entityid:entity,
+                                type:type  
                             }
                           }).then((res) => {
-                              if (res.data!=''){                            
+                                debugger;  
+                              if (res.data!=''){  
+                                                        
                               callback(res.data);
                               }
                           }).catch((err) => {
@@ -105,11 +109,12 @@ import { Tree  } from 'iview';
                             params: {
                                 ctrl:'DialPadDao',
                                 action: "GetTreeChildrenNode",
-                                entity:"",
+                                entityid:"",
                                 type:"entity"  
                             }
                           }).then((res) => {
-                              if (res.data!=''){                            
+                              if (res.data!=''){  
+                                  debugger;                          
                               _this.data3=res.data;
                               }
                           }).catch((err) => {
