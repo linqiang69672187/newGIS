@@ -6,7 +6,7 @@
             您好，这里是插槽
         </QRCode>
         <div id="main"></div>
-        <Map></Map>
+  
        
     </div>
 
@@ -15,7 +15,7 @@
 import store from "@/vuex/store"
 import {INCREASE} from '@/vuex/modul_types'
 import { Button, Table } from 'iview';
-import Map from "@/components/map.vue"
+
 import conmonjs from "@/mixin/common_hi"
 import annother from "@/mixin/annother"
 import QRCode from "@/components/QRCode.vue"
@@ -135,7 +135,7 @@ export default {
     components:{
         Button,
         Table,
-        Map,
+    
         QRCode
     },
     methods:{

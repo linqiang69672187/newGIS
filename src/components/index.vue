@@ -43,7 +43,7 @@
 </template>
 <script>
 import banner from "@/components/banner"
-import Map from "@/components/map"
+
 import Lmenu from "@/components/Lmenu"
 import Dmenu from "@/components/Dmenu"
 import MapToolbox from "@/components/MapToolbox"
@@ -103,7 +103,7 @@ export default {
     },
     components:{
         banner,
-        Map,
+    
         Lmenu,
         Dmenu,
         MapToolbox,

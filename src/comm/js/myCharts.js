@@ -353,14 +353,14 @@ const install = function(Vue) {
                     echarbar:function(id){
                         this.chart = echarts.init(document.getElementById(id));
                         this.chart.clear();
-                        
+                        let autoPlay =true;
                         let option = {
                             baseOption:{
                                 timeline: {
                                   
                                     axisType: 'category',
                                     
-                                    autoPlay: true,
+                                    autoPlay: autoPlay,
                                   
                                     playInterval: 5000,
                                     bottom:-5,
@@ -507,9 +507,11 @@ const install = function(Vue) {
                                 option.baseOption.grid={x:40,y:35,x2:40,y2:55}
                             }                     
                             option.baseOption.timeline.data.length=0;
+                          
                             option.options.length=0;
                             for (let i = 0; i < count; i++) { 
                                 option.baseOption.timeline.data.push(i+1);
+                             
                                 let dataonlinetime=[];
                                 let dataonlinecount=[];
                                 let dataxAxis=[];
@@ -526,9 +528,12 @@ const install = function(Vue) {
                                 xAxis.push({data:dataxAxis});
                                 option.options.push({series:series,xAxis:xAxis});
                              }
+                            option.baseOption.timeline.autoPlay = that.autoPlay;
                             that.chart.setOption(option);
                          };
-                                      
+                        this.chart.on('timelinePlayChanged', function(param){
+                            that.autoPlay = param.playState;
+                         });             
                       
                         return updatedata;
                     },

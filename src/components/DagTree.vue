@@ -11,7 +11,7 @@ import { Tree  } from 'iview';
             return {
                 data3: [
                     {
-                        title: '杭州市公安局',
+                        title: '待加载单位',
                         loading: false,
                         children: [],
                         checked:true,
@@ -21,20 +21,29 @@ import { Tree  } from 'iview';
                 ]
             }
         },
+        mounted(){
+            this.initEntity();
+        },
         components:{
           Tree
         },
         methods: {
             loadData (item, callback) {
                  console.info(item);
-                  Vue.axios.get('/app/data/json/tree.json', {
+                 let type=item.type;
+                 let entity=item.entityid;
+                  Vue.axios.get('/Handlers/MVCEasy.ashx', {
                             params: {
                                 ctrl:'DialPadDao',
-                                action: "MatchUserAndGroup",  
+                                action: "GetTreeChildrenNode",
+                                entityId:entity,
+                                type:type,
+                                gettime:new Date().getTime()  
                             }
                           }).then((res) => {
-                              if (res.data!=''){
-                             
+                                debugger;  
+                              if (res.data!=''){  
+                                                        
                               callback(res.data);
                               }
                           }).catch((err) => {
@@ -44,15 +53,21 @@ import { Tree  } from 'iview';
                 
             },
             selectchange(array,item){
-                let treeNode={entityId:item.id,objType:item.type,name:title};  
+                let treeNode={entityId:item.id,objType:item.type,name:item.title};  
+              
                 displaypolicelistsdiv();//调用原来方法
                 window.frames['policelists'].Displayprocessbar();//调用原来方法
                 switch(treeNode.objType){
                     case "entity":
+                       window.frames['policelists'].getpolices(treeNode.name, treeNode.entityId); 
+                       window.frames['policelists'].createpolicetable_ajax(treeNode.objType, treeNode.entityId, "");
+                         break;
                     case "zhishuuser":
-                      window.frames['policelists'].createpolicetable_ajax(treeNode.objType, treeNode.entityId, "");
+                    window.frames['policelists'].getpolices(treeNode.name, ""); 
+                    window.frames['policelists'].createpolicetable_ajax(treeNode.objType, treeNode.entityId, "");
                         break;
                     case "usertype":
+                       window.frames['policelists'].getpolices(treeNode.name, treeNode.entityId); 
                        window.frames['policelists'].createpolicetable_ajax(treeNode.objType, treeNode.name, treeNode.entityId);  
                         break;
                     default:
@@ -94,6 +109,25 @@ import { Tree  } from 'iview';
                  }
                  return -1;
 
+           },
+           initEntity(){
+               let _this=this;
+               Vue.axios.get('/Handlers/MVCEasy.ashx', {
+                            params: {
+                                ctrl:'DialPadDao',
+                                action: "GetTreeChildrenNode",
+                                entityId:"",
+                                type:"entity"  
+                            }
+                          }).then((res) => {
+                              if (res.data!=''){  
+                                  debugger;                          
+                              _this.data3=res.data;
+                              }
+                          }).catch((err) => {
+                            console.log(err)
+                           
+                          });
            }
 
         }
@@ -108,7 +142,6 @@ import { Tree  } from 'iview';
     color: #000;
     height: calc(100% - 30px);
     overflow: auto;
-    z-index: 999;
     position: relative;
 }
 

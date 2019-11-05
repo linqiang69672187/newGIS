@@ -15,20 +15,21 @@ function openwindows(windowstr){
     console.info(windowstr);
 }
 var useprameters={};
-useprameters.Emapurl="http://10.8.59.251:8082/";
+useprameters.Emapurl="http://10.8.59.251:8081/";
 useprameters.maptype ="png";
 useprameters.maxLevel=16;
 useprameters.minLevel=7;
+useprameters.currentLevel=8;  //currentLevel
 useprameters.PGIS_Center_lo="120.1727667529";
 useprameters.PGIS_Center_la="30.2286735631";
-useprameters.GISTYPE="google"; //tianditu
+useprameters.GISTYPE="tianditu"; //tianditu,google
 useprameters.name = "zhej";
 useprameters.usename = "LQ";
 useprameters.servertime = "1571984937504";
 useprameters.defaultLanguage="zh-CN";
 useprameters.SystemType ="1";
 useprameters.lockids=[
-   {issi:'24001',lon:'120.1727667529',lat:'30.2186735631',name:'张警官',userid:'1'},
+   {issi:'24001',lon:'120.1504666',lat:'30.1817166',name:'张警官',userid:'1'},
     {issi:'24002',lon:'120.1525667529',lat:'30.2186735631',name:'林警官',userid:'3'},
     {issi:'24003',lon:'120.1725667529',lat:'30.2266735631',name:'朱警官',userid:'2'}
 ]
@@ -79,4 +80,7 @@ function LoadEvents(){
 function onClick(e, treeId, treeNode) { 
 
 
+}
+function displaypolicelistsdiv(){
+    console.info("displaypolicelistsdiv");
 }

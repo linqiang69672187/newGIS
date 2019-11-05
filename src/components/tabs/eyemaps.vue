@@ -1,5 +1,5 @@
 <template>
-    <div   class="row">
+    <div :style="backgroundDiv"  class="row">
         <ul>
             <li  v-for="item in lockitems" :key="item.issi"> 
              <Map :lockdevice="item"></Map>
@@ -16,6 +16,9 @@ export default {
     data () {
              return {
                         lockitems:[],//锁定的设备
+                         backgroundDiv: {
+                            backgroundImage: 'url(' + require('@/assets/images/tabs_table_bg2.png') + ')'
+                             },
                         
                     }
         },
