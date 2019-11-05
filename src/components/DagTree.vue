@@ -36,7 +36,7 @@ import { Tree  } from 'iview';
                             params: {
                                 ctrl:'DialPadDao',
                                 action: "GetTreeChildrenNode",
-                                entityid:entity,
+                                entityId:entity,
                                 type:type  
                             }
                           }).then((res) => {
@@ -52,15 +52,21 @@ import { Tree  } from 'iview';
                 
             },
             selectchange(array,item){
-                let treeNode={entityId:item.id,objType:item.type,name:title};  
+                let treeNode={entityId:item.id,objType:item.type,name:item.title};  
+              
                 displaypolicelistsdiv();//调用原来方法
                 window.frames['policelists'].Displayprocessbar();//调用原来方法
                 switch(treeNode.objType){
                     case "entity":
+                       window.frames['policelists'].getpolices(treeNode.name, treeNode.entityId); 
+                       window.frames['policelists'].createpolicetable_ajax(treeNode.objType, treeNode.entityId, "");
+                         break;
                     case "zhishuuser":
-                      window.frames['policelists'].createpolicetable_ajax(treeNode.objType, treeNode.entityId, "");
+                    window.frames['policelists'].getpolices(treeNode.name, ""); 
+                    window.frames['policelists'].createpolicetable_ajax(treeNode.objType, treeNode.entityId, "");
                         break;
                     case "usertype":
+                       window.frames['policelists'].getpolices(treeNode.name, treeNode.entityId); 
                        window.frames['policelists'].createpolicetable_ajax(treeNode.objType, treeNode.name, treeNode.entityId);  
                         break;
                     default:
@@ -109,7 +115,7 @@ import { Tree  } from 'iview';
                             params: {
                                 ctrl:'DialPadDao',
                                 action: "GetTreeChildrenNode",
-                                entityid:"",
+                                entityId:"",
                                 type:"entity"  
                             }
                           }).then((res) => {

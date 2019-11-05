@@ -81,3 +81,6 @@ function onClick(e, treeId, treeNode) {
 
 
 }
+function displaypolicelistsdiv(){
+    console.info("displaypolicelistsdiv");
+}
