@@ -37,7 +37,8 @@ import { Tree  } from 'iview';
                                 ctrl:'DialPadDao',
                                 action: "GetTreeChildrenNode",
                                 entityId:entity,
-                                type:type  
+                                type:type,
+                                gettime:new Date().getTime()  
                             }
                           }).then((res) => {
                                 debugger;  
@@ -141,7 +142,6 @@ import { Tree  } from 'iview';
     color: #000;
     height: calc(100% - 30px);
     overflow: auto;
-    z-index: 999;
     position: relative;
 }
 
