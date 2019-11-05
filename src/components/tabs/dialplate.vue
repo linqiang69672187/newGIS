@@ -9,7 +9,7 @@
                              <AutoComplete
                                 v-model.lazy.trim="inputnum"
                                 @on-search="handleSearch2"
-                                placeholder="输入组号/个号/姓名"
+                                :placeholder="language.placeholder"
                                 :transfer='transfer'
                                  class="input"
                                  placement="top"                            
@@ -187,9 +187,7 @@ export default {
       msg:'',
       data2: [], //联想中的号码
       fadeinanimation:false,
-      backgroundDiv: {
-                            backgroundImage: 'url(' + require('@/assets/images/tabs_table_bg.jpg') + ')'
-                    }, 
+      backgroundDiv: {backgroundImage: 'url(' + require('@/assets/images/tabs_table_bg.jpg') + ')'}, 
       calling:[],
       users:[],
       groups:[],
@@ -197,7 +195,9 @@ export default {
       iscalling:false,
       isptt:false,
       selectissi:{},
-      
+      language:{
+          placeholder:'输入组号/个号/姓名',
+      }
       }
   
   }
@@ -244,7 +244,7 @@ export default {
       initgroupandusers(){
                 this.data2 = [];
                 var _this =this;
-                  Vue.axios.get('/app/data/json/hongkong.json', {//'/app/data/json/hongkong.json','/Handlers/MVCEasy.ashx'
+                  Vue.axios.get('/Handlers/MVCEasy.ashx', {//'/app/data/json/hongkong.json','/Handlers/MVCEasy.ashx'
                             params: {
                                 ctrl: "DialPadDao",
                                 action: "GetFrequentData",
