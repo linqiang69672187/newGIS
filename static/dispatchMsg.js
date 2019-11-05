@@ -15,14 +15,14 @@ function openwindows(windowstr){
     console.info(windowstr);
 }
 var useprameters={};
-useprameters.Emapurl="http://10.8.59.251:8082/";
+useprameters.Emapurl="http://10.8.59.251:8081/";
 useprameters.maptype ="png";
 useprameters.maxLevel=16;
 useprameters.minLevel=7;
 useprameters.currentLevel=8;  //currentLevel
 useprameters.PGIS_Center_lo="120.1727667529";
 useprameters.PGIS_Center_la="30.2286735631";
-useprameters.GISTYPE="google"; //tianditu,google
+useprameters.GISTYPE="tianditu"; //tianditu,google
 useprameters.name = "zhej";
 useprameters.usename = "LQ";
 useprameters.servertime = "1571984937504";

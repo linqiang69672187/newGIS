@@ -42,7 +42,7 @@ import Table from "@/components/control/tables"
                 loading:false,
                 sDate: ['2019-09-16', '2019-09-17'],
                 backgroundDiv: {
-                            backgroundImage: 'url(' + require('@/assets/images/tabs_table_bg.jpg') + ')'
+                            backgroundImage: 'url(' + require('@/assets/images/tabs_table_bg2.jpg') + ')'
                     } ,  
                 data: [{
                     value: 'jiangsu',
