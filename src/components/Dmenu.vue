@@ -4,11 +4,11 @@
   
     <div >
     <Tabs class='tabs' @on-click='tabclick' v-model='tabname' name='plane'   @on-tab-remove='handleTabRemove' type='card'  >
-        <TabPane  tab="plane"  name="实时状况" label="实时状况" class="tabpane" icon="ios-speedometer"><tabindex @downloadover="downloadover"></tabindex></TabPane>
+        <TabPane  tab="plane"  name="realtime" :label="language.realtimelabel" class="tabpane" icon="ios-speedometer"><tabindex @downloadover="downloadover"></tabindex></TabPane>
         <!-- <TabPane  tab="plane" name="GPS控制" class="tabpane" label="GPS控制"  icon="ios-key"><GPScontrol></GPScontrol></TabPane> -->
-        <TabPane    tab="plane" name="拨号键盘"   class="tabpane"  label="拨号键盘"  icon="ios-apps"><dialplate :ocxRegStatus="ocxRegStatus" ref="dail"></dialplate></TabPane>
-        <TabPane  tab="plane" name="基站统计"   class="tabpane"  label="基站统计"  icon="ios-stats"><basestationchart></basestationchart></TabPane>
-        <TabPane  tab="plane" closable name="锁定跟踪" class="tabpane"  label="锁定跟踪" v-if="showlockTab" icon="ios-lock"><eyemaps></eyemaps></TabPane>
+        <TabPane    tab="plane" name="dialplate"   class="tabpane"  :label="language.dailplatelabel"  icon="ios-apps"><dialplate :ocxRegStatus="ocxRegStatus" ref="dail"></dialplate></TabPane>
+        <TabPane  tab="plane" name="basestationchart"   class="tabpane"  :label="language.bastationlabel"  icon="ios-stats"><basestationchart></basestationchart></TabPane>
+        <TabPane  tab="plane" closable name="eyemaps" class="tabpane"  :label="language.eyemapslabel" v-if="showlockTab" icon="ios-lock"><eyemaps></eyemaps></TabPane>
     </Tabs>
     </div>
      <div class="navcationx"></div>
@@ -30,11 +30,16 @@ import basestationchart from "@/components/tabs/basestationchart"
                         showlockTab:false,
                         show: false,
                         showdmenu:true,
-                        rationicon:true,
-                        tabname:'实时状况',
+                        rationicon:true,                      
                         dailval:'',
                         downrowshow:false,
-                        
+                        tabname:'realtime',
+                        language:{
+                            realtimelabel:'实时状况',
+                            dailplatelabel:'拨号盘',
+                            bastationlabel:'基站统计',
+                            eyemapslabel:'锁定跟踪'    
+                        }
                     }
         },
         components:{
@@ -55,7 +60,7 @@ import basestationchart from "@/components/tabs/basestationchart"
               },
               handleTabRemove (name) {
                 switch (name) {
-                    case '锁定跟踪':
+                    case 'eyemaps':
                         
                         this.showlockTab=false;
                        
@@ -79,7 +84,7 @@ import basestationchart from "@/components/tabs/basestationchart"
             changeshowtab(key,tabs){
                 console.info(tabs);
                 switch (tabs) {
-                    case '锁定跟踪':
+                    case 'eyemaps':
                         this.showlockTab=true;
                         break;
                 
@@ -98,7 +103,7 @@ import basestationchart from "@/components/tabs/basestationchart"
                
             },
             tabclick(){
-                if (this.tabname=="拨号键盘"){
+                if (this.tabname=="dialplate"){
                 this.$refs.dail.sendparentvalue('');
                 return;
                 }

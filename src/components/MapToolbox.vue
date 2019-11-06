@@ -2,44 +2,44 @@
 <div class="toolboxdiv">
     <div class="toolbox " :class="{toolboxzindex:toolzindex}" >
         <ul>
-            <li><a id="ol-ranging" @click="showdistance" ><Tooltip content="测量" placement="bottom"> <div><i class="fas fa-ruler"></i></div></Tooltip></a></li>
+            <li><a id="ol-ranging" @click="showdistance" ><Tooltip :content="language.measure" placement="bottom"> <div><i class="fas fa-ruler"></i></div></Tooltip></a></li>
             <li><a>
                 <Poptip trigger="click" width="120"  placement="bottom">
-                     <Tooltip content="图层控制" placement="bottom"><div><i class="fas fa-map"></i></div></Tooltip>
+                     <Tooltip :content="language.layercontrol" placement="bottom"><div><i class="fas fa-map"></i></div></Tooltip>
                      <div class="api" slot="content">
                          <div>
-                             图层控制
+                             {{language.layercontrol}}
                          </div>
                         <ul>
                             <li> 
                                  <div>
-                                    <div class="left">基 站：</div> 
+                                    <div class="left">{{language.basestation}}：</div> 
                                     <div class="right">
                                     <i-switch  @on-change="BSchange" v-model="basestationStatus"   size="large">
-                                        <span slot="open">开启</span>
-                                        <span slot="close">关闭</span>
+                                        <span slot="open">{{language.open}}</span>
+                                        <span slot="close">{{language.close}}</span>
                                     </i-switch>
                                     </div>
                                  </div>
                             </li>
                             <li>
                                  <div>
-                                    <div class="left">单 位：</div> 
+                                    <div class="left">{{language.entity}}：</div> 
                                     <div class="right">
                                     <i-switch @on-change="Entitychange"  v-model="entityStatus"  size="large">
-                                        <span slot="open">开启</span>
-                                        <span slot="close">关闭</span>
+                                        <span slot="open">{{language.open}}</span>
+                                        <span slot="close">{{language.close}}</span>
                                     </i-switch>
                                  </div>
                                  </div>
                             </li>
                             <li>
                                 <div>
-                                 <div class="left">用 户：</div> 
+                                 <div class="left">{{language.user}}：</div> 
                                     <div class="right">
                                     <i-switch  @on-change="Userchange"  v-model="userStatus"  size="large">
-                                        <span slot="open">开启</span>
-                                        <span slot="close">关闭</span>
+                                        <span slot="open">{{language.open}}</span>
+                                        <span slot="close">{{language.close}}</span>
                                     </i-switch>
                                     </div>
                                 </div>
@@ -48,9 +48,9 @@
                      </div>
                 </Poptip >
             </a></li>
-            <li><a @click="fullscreen"><Tooltip content="全屏" :class="[isshowmini?'hide':'']" placement="bottom"> <div><i class="fas fa-window-maximize"></i></div></Tooltip><Tooltip content="恢复" placement="bottom" :class="[isshowmini?'':'hide']"> <div><i class="fas fa-window-minimize"></i></div></Tooltip></a></li>
-            <li><a @click="zoomOut"><Tooltip content="缩小" placement="bottom"> <div><i class="fas fa-search-minus"></i></div></Tooltip></a></li>
-            <li><a @click="zoomIn"><Tooltip content="放大" placement="bottom"> <div><i class="fas fa-search-plus"></i></div></Tooltip></a></li>           
+            <li><a @click="fullscreen"><Tooltip :content="language.fullscreen" :class="[isshowmini?'hide':'']" placement="bottom"> <div><i class="fas fa-window-maximize"></i></div></Tooltip><Tooltip :content="language.reback" placement="bottom" :class="[isshowmini?'':'hide']"> <div><i class="fas fa-window-minimize"></i></div></Tooltip></a></li>
+            <li><a @click="zoomOut"><Tooltip :content="language.zoomOut" placement="bottom"> <div><i class="fas fa-search-minus"></i></div></Tooltip></a></li>
+            <li><a @click="zoomIn"><Tooltip :content="language.zoomIn" placement="bottom"> <div><i class="fas fa-search-plus"></i></div></Tooltip></a></li>           
         </ul>
     </div>
     <transition name='slide-fade' v-on:before-enter="beforeEnter"  >
@@ -61,7 +61,7 @@
                 <li>
                     <a id="BoxSelection-type1">
                          
-                            <Tooltip content="距离" placement="bottom"> 
+                            <Tooltip :content="language.distance" placement="bottom"> 
                             <div><i class="fas fa-map-pin"></i></div>
                             </Tooltip>
                          
@@ -71,7 +71,7 @@
 
                 <li><a id="BoxSelection-type2">
                    
-                        <Tooltip content="面积" placement="bottom"> 
+                        <Tooltip :content="language.area" placement="bottom"> 
                         <div><i class="fas fa-object-ungroup"></i></div>
                         </Tooltip>
                   
@@ -89,6 +89,31 @@ import { Switch } from 'iview'
 Vue.component('i-switch', Switch)
 import {Tooltip,Poptip,Checkbox } from 'iview'
 export default {
+     data(){
+       return{ 
+           show: false ,
+           toolzindex:false,
+           isshowmini:false,
+           basestationStatus:true,
+           entityStatus:true,
+           userStatus:true,
+           language:{
+               measure:'测量',
+               layercontrol:'图层控制',
+               basestation:'基 站',
+               open:'开启',
+               close:'关闭',
+               entity:'单 位',
+               user:'用 户',
+               fullscreen:'全屏',
+               reback:'恢复',
+               zoomOut:'缩小',
+               zoomIn:'放大',
+               distance:'距离',
+               area:'面积' 
+           }           
+       }
+    },
     mounted(){
     },
     methods:{
@@ -130,16 +155,7 @@ export default {
            Switch,
            Checkbox
          },
-   data(){
-       return{ 
-           show: false ,
-           toolzindex:false,
-           isshowmini:false,
-           basestationStatus:true,
-           entityStatus:true,
-           userStatus:true,           
-       }
-    },
+  
 }
 </script>
 <style scoped>

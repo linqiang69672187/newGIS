@@ -5,7 +5,7 @@
        @basestation="basestation"
        @lock="lock"
        @select_rangle="select_rangle"
-       main-tooltip="点击展开"	
+       :main-tooltip="language. main_tooltip"	
      	
   ></fab>
 
@@ -54,7 +54,10 @@ export default {
                   tooltip:'框选',
                   color:'#E54C3B',
               }
-          ]
+          ],
+          language:{
+            main_tooltip:'点击展开'
+          }
       }
   },
   methods:{
@@ -69,15 +72,15 @@ export default {
       // @select_rangle="select_rangle"
       },
       av_timer(){
-        window.vue_index.$refs.dmenu.changeshowtab('','实时状况');
+        window.vue_index.$refs.dmenu.changeshowtab('','realtime');
          this.cleardom();
       },
       basestation(){
-        window.vue_index.$refs.dmenu.changeshowtab('','基站统计');
+        window.vue_index.$refs.dmenu.changeshowtab('','basestationchart');
          this.cleardom();
       },
       lock(){
-        window.vue_index.$refs.dmenu.changeshowtab('','锁定跟踪');
+        window.vue_index.$refs.dmenu.changeshowtab('','eyemaps');
          this.cleardom();
       },
       select_rangle(){

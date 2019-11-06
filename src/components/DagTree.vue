@@ -11,7 +11,7 @@ import { Tree  } from 'iview';
             return {
                 data3: [
                     {
-                        title: '待加载单位',
+                        title: 'loading',
                         loading: false,
                         children: [],
                         checked:true,

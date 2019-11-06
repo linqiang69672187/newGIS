@@ -23,7 +23,7 @@ let noticemod;
         methods: {
             regmsg:function (nodesc,msg,dispatchname) {
               Notice.info({
-                           title: '注册信息',
+                           title: 'Reg',
                            desc: nodesc ? '' : msg
                             });
                

@@ -19,7 +19,7 @@
        </Tooltip>
       </span>
       <span>
-      <Tooltip   content="下载EXCEL" placement="bottom"> 
+      <Tooltip   content="download" placement="bottom"> 
        <a  :href="excelHerf" v-show="excelHerf!=''" target="_blank"> <i class="material-icons">link</i></a>
       </Tooltip>
       </span>
@@ -46,7 +46,11 @@ import { setTimeout } from 'timers';
                    
                     loadingvue:null,  
                     exporttext:'生成EXCEL',
-                    excelHerf:'',                     
+                    excelHerf:'', 
+                    language:{
+                     excelfail:'生成EXCEL失败',
+                     excelsuccess:'生成EXCEL成功'
+                    }                    
                 }
         },
         components:{
@@ -109,17 +113,17 @@ import { setTimeout } from 'timers';
                                
                           _this.loadingvue.close();
                           if(res.data==""){
-                             _this.$emit("downloadover",'error','生成EXCEL失败'); 
+                             _this.$emit("downloadover",'error',_this.language.excelfail);                  
                           }else{
-                              _this.$emit("downloadover",'success','生成EXCEL成功'); 
+                              _this.$emit("downloadover",'success',_this.language.excelsuccess); 
                           }
                           _this.excelHerf=res.data;
-                          _this.exporttext="重新生成EXCEL";
+                          //_this.exporttext="重新生成EXCEL";
                           }).catch((err) => {
-                           
+                           console.info(err);
                              _this.loadingvue.close();
                            //window.vue_notice.err('error',err);
-                            _this.$emit("downloadover",'err','生成EXCEL失败');
+                           _this.$emit("downloadover",'error',_this.language.excelfail); 
                    })
           }
         },

@@ -87,10 +87,10 @@ export default {
                  case "7": 
                  case "8": 
                  case "9": 
-                   _this.$refs.dmenu.changeshowtab(window.event.key,'拨号键盘');
+                   _this.$refs.dmenu.changeshowtab(window.event.key,'dialplate');
                     break;
                 case "l":
-                   _this.$refs.dmenu.changeshowtab('','锁定跟踪');
+                   _this.$refs.dmenu.changeshowtab('','eyemaps');
                     break;
                 default:
                     break;
@@ -136,7 +136,7 @@ export default {
           // console.info(isshow+this.dmenuszie)
         },
         cldaiplate:function(){  
-              this.$refs.dmenu.changeshowtab('','拨号键盘');
+              this.$refs.dmenu.changeshowtab('','dialplate');
         },
         handleClick:function(text){
             alert(text);

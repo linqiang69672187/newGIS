@@ -20,7 +20,6 @@
                                     </div>           
                                 </Option>
                             </AutoComplete>
-                      <!-- <input v-model='inputnum' maxlength='15' class="input" placeholder="输入组号/个号/姓名"  />  -->
                        </li>
                    <li> <i @mousedown="buttonspress='Backspace'"  @click="backbtnclick"     @mouseleave="buttonspress=''" @mouseup="buttonspress=''" :class="buttonspress=='Backspace'?'backspacespress':''"  class="material-icons">backspace</i></li>
                 </ul>
@@ -92,15 +91,15 @@
                 </div>
                 <div class="buttons">
                     <ul>
-                        <li v-show="showsingalcall" @click="startDC()"><div ><i class="material-icons">person</i><span>全双功</span></div></li>
+                        <li v-show="showsingalcall" @click="startDC()"><div ><i class="material-icons">person</i><span>{{language.ACK_DUPLEX}}</span></div></li>
                        
-                        <li v-if="showsingalcall" @mouseup="SCEASEDPTT()" @mousedown="StartSCall()"><div ><i class="material-icons">mic</i><span>半双功</span></div></li>
+                        <li v-if="showsingalcall" @mouseup="SCEASEDPTT()" @mousedown="StartSCall()"><div ><i class="material-icons">mic</i><span>{{language.HALFDUPLEX}}</span></div></li>
                         
-                        <li v-if="showgroupcall" @mouseup="GCEASEDPTT()" @mousedown="startGCall()"><div ><i class="material-icons">group</i><span>组&nbsp;&nbsp;&nbsp;呼</span></div></li>                       
+                        <li v-if="showgroupcall" @mouseup="GCEASEDPTT()" @mousedown="startGCall()"><div ><i class="material-icons">group</i><span v-html="language.groupcall"></span></div></li>                       
                         
-                        <li v-if="iscalling" @click="endcall"><div class="endcall"><i class="material-icons">call_end</i><span>结&nbsp;&nbsp;&nbsp;束</span></div></li>
+                        <li v-if="iscalling" @click="endcall"><div class="endcall"><i class="material-icons">call_end</i><span v-html="language.call_end"></span></div></li>
                         
-                        <li  @mouseup="releasePTT" @mousedown="PTT" v-if="isptt"><div class="Ptt"><i class="material-icons">flash_on</i><span>P&nbsp;&nbsp;T&nbsp;&nbsp;T</span></div></li>
+                        <li  @mouseup="releasePTT" @mousedown="PTT" v-if="isptt"><div class="Ptt"><i class="material-icons">flash_on</i><span v-html="language.PTT"></span></div></li>
 
                     </ul>
                 </div>   
@@ -113,7 +112,7 @@
     <li>
        <div class="dialtabs">
        <Tabs name="commonplane" type="line" >
-       <TabPane tab="commonplane" label="通话中"> 
+       <TabPane tab="commonplane" :label="language.calling"> 
             <div>
                 <ul class="callcomonul">
                  <li v-for="(item,key) in calling" :key="key">
@@ -122,7 +121,7 @@
                 </ul>
             </div>
         </TabPane>
-        <TabPane tab="commonplane" label="常用组"> 
+        <TabPane tab="commonplane" :label="language.usegroup"> 
             <div>
                 <ul class="callcomonul">
                    <li v-for="(item,key) in groups" :key="key">
@@ -131,7 +130,7 @@
                 </ul>
             </div>
         </TabPane>
-        <TabPane tab="commonplane" label="常用个号">
+        <TabPane tab="commonplane" :label="language.usedevice">
             <div >
                    <ul class="callcomonul">
                     <li v-for="(item,key) in users" :key="key">
@@ -140,7 +139,7 @@
                    </ul>
             </div>
         </TabPane>
-        <TabPane tab="commonplane" label="最近联系">
+        <TabPane tab="commonplane" :label="language.contacts">
             <div>
                  <ul class="callcomonul">
                   <li v-for="(item,key) in contacts" :key="key">
@@ -197,6 +196,16 @@ export default {
       selectissi:{},
       language:{
           placeholder:'输入组号/个号/姓名',
+          ACK_DUPLEX:'全双工',
+          HALFDUPLEX:'半双工',
+          groupcall:'组&nbsp;&nbsp;&nbsp;呼',
+          call_end:'结&nbsp;&nbsp;&nbsp;束',
+          PTT:'P&nbsp;&nbsp;T&nbsp;&nbsp;T',
+          calling:'通话中',
+          usegroup:'常用组号',
+          usedevice:'常用个号',
+          contacts:'最近联系'
+
       }
       }
   

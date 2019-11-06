@@ -2,10 +2,10 @@
   <div class="row" :class="[{rowwidth},showtree?'wide':'']">
     <div :class="{lmenuicon}"> <ul>
             <li  @click="showtree=!showtree" :class="{ismenufaded,showtree}">
-             <Tooltip :disabled="!minimenu"  content="用户列表" placement="right"> 
+             <Tooltip :disabled="!minimenu"  :content="language.uselist" placement="right"> 
                 <a > <i class="material-icons ">format_list_bulleted</i>
                 <transition  @after-leave="afterfade" @before-enter="afterendfade" name="fade">
-                <div v-if="!minimenu">用户列表</div>
+                <div v-if="!minimenu">{{language.uselist}}</div>
                 </transition>
                 </a>
             </Tooltip>
@@ -23,7 +23,7 @@
         </ul>
     </div>
     <div id="lmenu_2"  v-if="showtree" >
-         <div>用户列表</div>
+         <div>{{language.uselist}}</div>
          <div><DagTree></DagTree></div>
     </div>
     <div  class="controlLmenu" :class="{lmenuicon}"><div @click="minimenu=!minimenu" :class="{rotationIcon}"><i class="fas fa-arrow-circle-left"></i></div></div>
@@ -44,7 +44,10 @@ export default {
         rowwidth:false,
         rotationIcon:false,
         showtree:false,
-        listnewchange:false
+        listnewchange:false,
+        language:{
+          uselist:'用户列表'
+        }
       }
     },
   

@@ -4,8 +4,8 @@
       <div class="logo">
         <div>LDS2000</div>
         <div><ul>
-            <li>单兵和车辆定位</li>
-            <li>指挥调度系统</li>
+            <li>{{language.bannerlab1}}</li>
+            <li>{{language.bannerlab2}}</li>
         </ul></div>
         </div>
       <div class="menu" :class="[isshowmini?'animated bounceOutRight':'',isshowmini==false?'animated bounceInRight':'']">
@@ -59,6 +59,10 @@ export default {
         username:'admin',
         date: new Date(1571984937504),
         helpurl:'eTRA GIS_HELP/help.html',
+        language:{
+          bannerlab1:'单兵和车辆定位',
+          bannerlab2:'指挥调度系统',
+        }
       }
     },
     props: ['isshowmini'],
