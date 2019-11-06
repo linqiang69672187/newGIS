@@ -75,14 +75,14 @@ import { Tree  } from 'iview';
                 }
             },
             checkchange(array,item){
-                console.info(array);
                  for (let i = array.length-1; i >=0; i--){
+                    if(!array[i].children) continue;
                    for (let n = 0; n <array[i].children.length; n++){
                        let index =this.checkparent(array,array[i].children[n]); //检查父节点是否已经选中，如果已经包含则该节点排除
                        array.splice(index,1); 
                    }       
                  }
-                  console.info(array);
+           
                   let zhishuString="";
                   let entityString="";
                   let typeString="";

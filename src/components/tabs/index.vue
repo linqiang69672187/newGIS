@@ -70,7 +70,7 @@ import { setTimeout } from 'timers';
                             params: {
                                 ctrl:'DialPadDao',
                                 action: "GetTerminalOnlineInfo",
-                               
+                                times:new Date().getTime(),
                             }
                           }).then((res) => {
                           //console.info(res);
@@ -108,9 +108,10 @@ import { setTimeout } from 'timers';
             Vue.axios.get('/Handlers/ExportExcel.ashx', {  //--/app/data/json/exportEntityGPSreport.json-/Handlers/MVCEasy.ashx
                             params: {
                                 ctrl:'entityGPS',
+                                times:new Date().getTime(),
                             }
                           }).then((res) => {
-                               
+                           console.info(res);
                           _this.loadingvue.close();
                           if(res.data==""){
                              _this.$emit("downloadover",'error',_this.language.excelfail);                  
