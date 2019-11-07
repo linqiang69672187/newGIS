@@ -114,13 +114,28 @@ export default {
           }
         }
       },
+      setlanguage(){
+         this.items.splice(0);
+         let ddgn= GetTextByName("Schedulingfunction");
+         let qwgl =  GetTextByName("Lang_qwgl");
+         let settings =   GetTextByName("Parametersetting");
+         let help =  GetTextByName("help");
+         let exit =  GetTextByName("loginout");
+
+         this.items.push(
+          {name:'dispatchFunction',label:ddgn,icon:'fa-headphones'},
+          {name:'servicemanager',label:qwgl,icon:'fa-address-card'},
+          {name:'options',label:settings,icon:'fa-cogs'},
+          {name:'help',label:help,icon:'fa-question-circle'},
+          {name:'exit',label:exit,icon:'fa-door-open'});
+
+       },
     },
     mounted(){
       let _this = this; // 声明一个变量指向Vue实例this，保证作用域一致
       this.timer = setInterval(() => {
       _this.date = new Date( _this.date).getTime()+60000; // 修改数据date
-      _this.date =  new Date(_this.date);
-      
+      _this.date =  new Date(_this.date);  
      }, 60000)
     },
     beforeDestroy() {

@@ -51,28 +51,44 @@ import Callbox from "@/components/control/CallBox"
 import notice from "@/components/control/notices"
 import LeftToolbox from "@/components/control/LeftToolbox"
 import OCX from "@/components/OCX"
-
+import languageset from '@/mixin/languageset'
 
 export default {
     data(){
        return{
            hidedmenu:false,
            dmenuszie: '260px !important', 
-           lmenuitems: [
-                        {label:'操作窗口',icon:'gps_fixed',name:'hjmb'},
+           lmenuitems:[],
+           lmenuitems1:[
+                         {label:'操作窗口',icon:'gps_fixed',name:'hjmb'},
                         {label:'GPS上报',icon:'history',name:'gpslist'},
                         {label:'GPS上拉',icon:'navigation',name:'GPSPullList'},
                         {label:'短信',icon:'mail_outline',name:'sms_sjx'},
                         {label:'操作日志',icon:'event_note',name:'operationlog'},
                         {label:'动态重组',icon:'group_add',name:'dtczrestlt'},
-        ],
+          ],
+            lmenuitems2:[
+                    {label:'GPS上报统计',icon:'insert_chart',name:'Lang_gpstj'},
+                    {label:'单键报备统计',icon:'equalizer',name:'Lang_djbbtj '},
+                            {label:'人员设备管理',icon:'supervisor_account',name:'Lang_UserDeviceManage'},
+                            {label:'GPS数据管理',icon:'assignment',name:'Lang_GPSDataManage'},
+                            {label:'预案管理',icon:'build',name:'Lang_emergency'},
+                            {label:'实时警力',icon:'alarm_add',name:'Lang_RealTimePoliceStrength'}
+            ],
+              
         isshowmini:false,
         ocxRegStatus:false,             
        }
     },
+   mixins:[languageset,],
    mounted(){
       var _this = this;  
       window.vue_index= this;
+      
+        for (let i = 0; i < this.lmenuitems1.length; i++) { 
+          _this.lmenuitems.push(_this.lmenuitems1[i]) 
+         };                
+                        
       document.onkeydown = function(e) {            
          if(document.activeElement.nodeName!='INPUT'){
              switch(window.event.key)
@@ -100,6 +116,7 @@ export default {
         };
     },
     computed:{
+      
     },
     components:{
         banner,
@@ -152,27 +169,18 @@ export default {
                    break;
                 case "servicemanager":
                     this.lmenuitems.splice(0);
-                    this.lmenuitems.push( 
-                            {label:'GPS上报统计',icon:'insert_chart',name:'Lang_gpstj'},
-                            {label:'单键报备统计',icon:'equalizer',name:'Lang_djbbtj '},
-                            {label:'人员设备管理',icon:'supervisor_account',name:'Lang_UserDeviceManage'},
-                            {label:'GPS数据管理',icon:'assignment',name:'Lang_GPSDataManage'},
-                            {label:'预案管理',icon:'build',name:'Lang_emergency'},
-                            {label:'实时警力',icon:'alarm_add',name:'Lang_RealTimePoliceStrength'},
-                          );
+                    for (let i = 0; i < this.lmenuitems1.length; i++) { 
+                    this.lmenuitems.push(this.lmenuitems2[i]) 
+                    };      
                  break;
             case "help":
                          break;
                default:
                    this.lmenuitems.splice(0);
-                   this.lmenuitems.push( 
-                            {label:'操作窗口',icon:'gps_fixed',name:'hjmb'},
-                            {label:'GPS上报',icon:'history',name:'gpslist'},
-                            {label:'GPS上拉',icon:'navigation',name:'GPSPullList'},
-                            {label:'短信',icon:'mail_outline',name:'sms_sjx'},
-                            {label:'操作日志',icon:'event_note',name:'operationlog'},
-                            {label:'动态重组',icon:'group_add',name:'dtczrestlt'},
-                         );  
+                     for (let i = 0; i < this.lmenuitems1.length; i++) { 
+                    this.lmenuitems.push(this.lmenuitems1[i]) 
+                    };    
+                            
                    break;             
            }   
         },
@@ -205,8 +213,55 @@ export default {
                     break;
             }
         },
+        setlanguage(){
+             this.lmenuitems.splice(0);
+             this.lmenuitems1.splice(0);
+             this.lmenuitems2.splice(0);
+
+             let czck=GetTextByName("Lang_Callpanel");//操作窗口
+             let gpssb = GetTextByName("Lang_GPS_Control");//GPS上报Lang_GPS_Control
+             let gpssl = GetTextByName("Lang_GPS_Pull");
+             let SMS = GetTextByName("SMS");
+             let czrz = GetTextByName("operLog_Menu");
+             let dtcz = GetTextByName("Lang_DTCZ");
+
+             let gpssbtj = GetTextByName("Lang_gpstj");
+             let djbbtj = GetTextByName("Lang_djbbtj");
+             let rysbgl = GetTextByName("Lang_UserDeviceManage");
+             let gpssjgl = GetTextByName("Lang_GPSDataManage");  
+             let yagl = GetTextByName("Lang_emergency"); 
+             let ssjl = GetTextByName("Lang_RealTimePoliceStrength"); 
+
+             this.lmenuitems1.push(
+                 {label:czck,icon:'gps_fixed',name:'hjmb'},
+                 {label:gpssb,icon:'history',name:'gpslist'},
+                 {label:gpssl,icon:'navigation',name:'GPSPullList'},
+                 {label:SMS,icon:'mail_outline',name:'sms_sjx'},
+                 {label:czrz,icon:'event_note',name:'operationlog'},
+                 {label:dtcz,icon:'group_add',name:'dtczrestlt'});
+
+             this.lmenuitems.push({label:czck,icon:'gps_fixed',name:'hjmb'},
+                 {label:gpssb,icon:'history',name:'gpslist'},
+                 {label:gpssl,icon:'navigation',name:'GPSPullList'},
+                 {label:SMS,icon:'mail_outline',name:'sms_sjx'},
+                 {label:czrz,icon:'event_note',name:'operationlog'},
+                 {label:dtcz,icon:'group_add',name:'dtczrestlt'});
+
+             this.lmenuitems2.push(
+                {label:gpssbtj,icon:'insert_chart',name:'Lang_gpstj'},
+                {label:djbbtj,icon:'equalizer',name:'Lang_djbbtj '},
+                {label:rysbgl,icon:'supervisor_account',name:'Lang_UserDeviceManage'},
+                {label:gpssjgl,icon:'assignment',name:'Lang_GPSDataManage'},
+                {label:yagl,icon:'build',name:'Lang_emergency'},
+                {label:ssjl,icon:'alarm_add',name:'Lang_RealTimePoliceStrength'});
+
+
+        },
         init:function(){
             this.$refs.banner.updateuseprameters();
+            if (this.get_language()!='zh-CN'){
+                this.setlanguage();
+            }
         }
        
     }
