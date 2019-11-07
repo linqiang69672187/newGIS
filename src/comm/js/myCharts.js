@@ -515,7 +515,10 @@ const install = function(Vue) {
                             },
                             options: []
                         };
+
                         this.chart.setOption(option);
+                        console.info("autoplay");
+                        console.info(option);
                         let that =this;
                         let updatedata = function(data,tonlinetime,tonlinecount){
                             if(tonlinetime){
