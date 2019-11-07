@@ -128,7 +128,10 @@ export default {
           {name:'options',label:settings,icon:'fa-cogs'},
           {name:'help',label:help,icon:'fa-question-circle'},
           {name:'exit',label:exit,icon:'fa-door-open'});
-
+          this.language={
+          bannerlab1:'',
+          bannerlab2:'',
+        }
        },
     },
     mounted(){
@@ -173,7 +176,7 @@ html,body{
 
 .changewindows{
   position: absolute;
-  top: 0;
+  top: 3px;
   right: 0px;
   width:155px;
   height: 22px;
@@ -229,7 +232,7 @@ background-color: #164B77;
 .row>div:nth-child(2)>div:nth-child(2) {
     float: right;
     width:150px;
-    margin-top: -62px;
+    margin-top: -65px;
 }
 ul {
   list-style-type: none;

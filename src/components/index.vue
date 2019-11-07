@@ -266,6 +266,7 @@ export default {
                 this.$refs.dmenu.setlanguage();
                 this.$refs.maptoolbox.setlanguage();
                 this.$refs.leftToolbox.setlanguage();
+                this.$refs.lmenu.setlanguage();
             }
         }
        

@@ -83,6 +83,11 @@ export default {
     },
     openwindows:function(windowstr){
       openwindows(windowstr);
+    },
+    setlanguage(){
+      this.language={
+          uselist:GetTextByName('use')
+        }
     }
   },
   watch:{
