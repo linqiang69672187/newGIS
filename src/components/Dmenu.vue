@@ -4,10 +4,10 @@
   
     <div >
     <Tabs class='tabs' @on-click='tabclick' v-model='tabname' name='plane'   @on-tab-remove='handleTabRemove' type='card'  >
-        <TabPane  tab="plane"  name="realtime" :label="language.realtimelabel" class="tabpane" icon="ios-speedometer"><tabindex @downloadover="downloadover"></tabindex></TabPane>
+        <TabPane  tab="plane"  name="realtime" :label="language.realtimelabel" class="tabpane" icon="ios-speedometer"><tabindex ref="tabindex" @downloadover="downloadover"></tabindex></TabPane>
         <!-- <TabPane  tab="plane" name="GPS控制" class="tabpane" label="GPS控制"  icon="ios-key"><GPScontrol></GPScontrol></TabPane> -->
-        <TabPane    tab="plane" name="dialplate"   class="tabpane"  :label="language.dailplatelabel"  icon="ios-apps"><dialplate :ocxRegStatus="ocxRegStatus" ref="dail"></dialplate></TabPane>
-        <TabPane  tab="plane" name="basestationchart"   class="tabpane"  :label="language.bastationlabel"  icon="ios-stats"><basestationchart></basestationchart></TabPane>
+        <TabPane    tab="plane" name="dialplate"   class="tabpane"  :label="language.dailplatelabel"  icon="ios-apps"><dialplate   :ocxRegStatus="ocxRegStatus" ref="dail"></dialplate></TabPane>
+        <TabPane  tab="plane" name="basestationchart"   class="tabpane"  :label="language.bastationlabel"  icon="ios-stats"><basestationchart ref="basestationchart"></basestationchart></TabPane>
         <TabPane  tab="plane" closable name="eyemaps" class="tabpane"  :label="language.eyemapslabel" v-if="showlockTab" icon="ios-lock"><eyemaps></eyemaps></TabPane>
     </Tabs>
     </div>
@@ -108,8 +108,17 @@ import basestationchart from "@/components/tabs/basestationchart"
                 return;
                 }
                 this.$refs.dail.hidetab();
-            }
-           
+            },
+            setlanguage(){
+                this.language.realtimelabel = GetTextByName("Lang_realTimeDisplay");//Lang_realTimeDisplay
+                this.language.dailplatelabel = GetTextByName("Module1");
+                this.language.bastationlabel= GetTextByName("OperateLogIdentityDeviceType0");
+                this.language.eyemapslabel = GetTextByName("Lang_lockingFunction");
+
+                this.$refs.dail.setlanguage();
+                this.$refs.tabindex.setlanguage();
+                 this.$refs.basestationchart.setlanguage();
+           }
         },
         created(){
         },

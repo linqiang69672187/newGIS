@@ -55,6 +55,13 @@ import { setTimeout } from 'timers';
 
            this.updateecharbar(data);
           },
+
+         setlanguage(){
+
+             let onlinecount = GetTextByName('onlinecount');
+             this.updateecharbar(0,onlinecount); 
+
+        }
            
         },
         created(){

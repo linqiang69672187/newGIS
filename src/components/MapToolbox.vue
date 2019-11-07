@@ -4,7 +4,7 @@
         <ul>
             <li><a id="ol-ranging" @click="showdistance" ><Tooltip :content="language.measure" placement="bottom"> <div><i class="fas fa-ruler"></i></div></Tooltip></a></li>
             <li><a>
-                <Poptip trigger="click" width="120"  placement="bottom">
+                <Poptip trigger="click" width="180"  placement="bottom">
                      <Tooltip :content="language.layercontrol" placement="bottom"><div><i class="fas fa-map"></i></div></Tooltip>
                      <div class="api" slot="content">
                          <div>
@@ -148,7 +148,25 @@ export default {
         zoomIn:function(){
             let loadevent = LoadEvents("zoomIn");
             loadevent();//调用原来放大
-        } 
+        },
+        setlanguage(){
+            this.language={
+               measure:GetTextByName("Distancemeasurement"),
+               layercontrol:GetTextByName("Parametersetting"),
+               basestation:GetTextByName("OperateLogIdentityDeviceType0"),
+               open:GetTextByName("Single_Open"),
+               close:GetTextByName("Closebtn"),
+               entity:GetTextByName("Unit"),
+               user:GetTextByName("use"),
+               fullscreen:GetTextByName("fullScreen"),
+               reback:GetTextByName("Lang_Recover"),
+               zoomOut:GetTextByName("ZoomOut"),
+               zoomIn:GetTextByName("ZoomIn"),
+               distance:GetTextByName("MeasureBar_distancetooltip"),
+               area:GetTextByName("MeasureBar_surfacetooltip") 
+           }  
+
+         } 
     },  
     components:{
            Tooltip,

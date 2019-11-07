@@ -27,11 +27,11 @@
       <div class="top" ><banner ref="banner" :isshowmini="isshowmini" @Bannerselectedchange='Bannerselectedchange'></banner></div>
        <div>
            <div  id="map"></div>
-           <MapToolbox @fullscreen="fullscreen"></MapToolbox>
+           <MapToolbox ref="maptoolbox" @fullscreen="fullscreen"></MapToolbox>
            <!--<Map  class="map" v-contextmenu:contextmenu move-type="0"></Map>
             <Callbox :class="{hidedmenu}"></Callbox> 地图上呼叫按钮-->
            <notice ref="notice"></notice>
-           <LeftToolbox @daiplate="cldaiplate" :style="{bottom:dmenuszie}"></LeftToolbox>
+           <LeftToolbox ref="leftToolbox" @daiplate="cldaiplate" :style="{bottom:dmenuszie}"></LeftToolbox>
        </div>
        <div>
       
@@ -259,8 +259,13 @@ export default {
         },
         init:function(){
             this.$refs.banner.updateuseprameters();
+
             if (this.get_language()!='zh-CN'){
                 this.setlanguage();
+                this.$refs.banner.setlanguage();
+                this.$refs.dmenu.setlanguage();
+                this.$refs.maptoolbox.setlanguage();
+                this.$refs.leftToolbox.setlanguage();
             }
         }
        

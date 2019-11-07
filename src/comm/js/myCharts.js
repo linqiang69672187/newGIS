@@ -169,9 +169,22 @@ const install = function(Vue) {
                                 }
                             ]
                         };
+                        console.info(option);
                         this.chart.setOption(option);
+                      
                         let that =this;
-                        let updatedata = function (onlinetime,onlinecount){
+                        let updatedata = function (onlinetime,onlinecount,tonlinetime,tonlinecount){
+                         
+                           if(tonlinetime){
+                            option.legend.data.splice(0);
+                            option.legend.data.push(tonlinetime);
+                            option.legend.data.push(tonlinecount);
+                            option.series[0].name=tonlinetime;
+                            option.series[1].name=tonlinecount;
+                            option.yAxis[0].name=tonlinetime+"(H)";
+                            option.yAxis[1].name=tonlinecount+"(n)";
+                           }
+                           else{
                             let axisData = (new Date()).toLocaleTimeString().replace(/^\D*/,'');                        
                             var data0 = option.series[0].data;
                             var data1 = option.series[1].data;  
@@ -183,7 +196,10 @@ const install = function(Vue) {
                             data0.push((onlinetime));                         
                             data1.push(onlinecount);                       
                             option.xAxis[0].data.push(axisData);  
-                            that.chart.setOption(option);
+                          
+                          }
+                          that.chart.setOption(option);
+                          console.info(option);
                         }
                        return updatedata;
                     },
@@ -343,9 +359,16 @@ const install = function(Vue) {
 
                         this.chart.setOption(option);
                         let _this =this;
-                        let updatedata = function (onlinecount,deviececount){
+                        let updatedata = function (onlinecount,deviececount,zxzb_label,zxl_label){
+                            if (zxzb_label){
+                                option.series[0].name=zxzb_label;
+                                option.series[0].data[0].name=zxl_label;
+                            }
+                            else{
                             let val = (onlinecount*100/deviececount).toFixed(2);
                             option.series[0].data[0].value = val;
+                            
+                            }
                             _this.chart.setOption(option,true);
                         }
                         return updatedata;
@@ -423,7 +446,7 @@ const install = function(Vue) {
                                             show: false
                                         },
                                         axisLabel: {
-                                            formatter: '{value} 小时'
+                                            formatter: '{value} H'
                                         },
                                         axisLabel:{
                                             color:'#fff'
@@ -472,7 +495,7 @@ const install = function(Vue) {
                                         markPoint : {
                                             data : [
                                                
-                                                {type : 'min', name: '最小值'}
+                                                {type : 'min', name: 'min'}
                                             ]
                                             
                                         },
@@ -494,7 +517,18 @@ const install = function(Vue) {
                         };
                         this.chart.setOption(option);
                         let that =this;
-                        let updatedata = function(data){
+                        let updatedata = function(data,tonlinetime,tonlinecount){
+                            if(tonlinetime){
+                                option.baseOption.legend.data.splice(0);
+                                option.baseOption.legend.data.push(tonlinetime);
+                                option.baseOption.legend.data.push(tonlinecount);
+                                option.baseOption.series[0].name=tonlinetime;
+                                option.baseOption.series[1].name=tonlinecount;
+                                option.baseOption.yAxis[0].name=tonlinetime+"(H)";
+                                option.baseOption.yAxis[1].name=tonlinecount+"(n)";
+                                that.chart.setOption(option);
+                                return;
+                            }
                             let count =  Math.ceil(data.length / 7); 
 
                             if (count<2){
@@ -634,7 +668,7 @@ const install = function(Vue) {
                                         markPoint : {
                                             data : [
                                                
-                                                {type : 'min', name: '最小值'}
+                                                {type : 'min', name: 'min'}
                                             ]
                                             
                                         },
@@ -645,7 +679,15 @@ const install = function(Vue) {
                         };
                         this.chart.setOption(option);
                         let that =this;
-                        let updatedata = function(data){
+                        let updatedata = function(datadata,tonlinecount){
+                            if(tonlinecount){
+                                option.baseOption.legend.data.splice(0);
+                                option.baseOption.legend.data.push(tonlinecount);
+                                option.baseOption.series[0].name=tonlinecount;
+                                option.baseOption.yAxis[0].name=tonlinecount+"(n)";
+                                that.chart.setOption(option);
+                                return;
+                            }
                             let count =  Math.ceil(data.length / 30); 
 
                             if (count<2){

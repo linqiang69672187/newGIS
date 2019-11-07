@@ -126,7 +126,19 @@ import { setTimeout } from 'timers';
                            //window.vue_notice.err('error',err);
                            _this.$emit("downloadover",'error',_this.language.excelfail); 
                    })
-          }
+          },
+          setlanguage(){
+             this.exporttext=GetTextByName('Lang_ExportToExcel');
+             this.language={ excelfail:GetTextByName('Operationfails'),excelsuccess:GetTextByName('OperationSuccessful')};
+             let onlinetime = GetTextByName('onlinetime');
+             let onlinecount = GetTextByName('onlinecount');
+             this.updatedynamicline(0,0,onlinetime,onlinecount); 
+
+             let zxzb = GetTextByName('Lang_online');
+             let zxl = GetTextByName('onlinepercentage');
+             this.updategaugeindex(0,0,zxzb,zxl);
+             this.updateecharbar(0,onlinetime,onlinecount);
+           },
         },
         created(){
           
@@ -139,6 +151,7 @@ import { setTimeout } from 'timers';
         this.updatedynamicline = this.$chart.dynamicline('onlinechar');
         this.updategaugeindex = this.$chart.gaugeindex('gauguchar');
         this.updateecharbar = this.$chart.echarbar('onlinechartable');
+    
         let _this=this;
         this.interLoadData();
         this.loadinter  = setInterval(function (){

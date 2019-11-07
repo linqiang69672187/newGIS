@@ -101,6 +101,43 @@ export default {
             }
           }
           catch(e){}
+      },
+      setlanguage(){
+          this.language.main_tooltip=GetTextByName("OpenCluster");
+          this.fabActions.splice(0);
+          this.fabActions.push(
+            {
+                  name: 'av_timer',
+                  icon: 'av_timer',
+                  color:'#164B77',
+                  tooltip: GetTextByName("Lang_realTimeDisplay")
+              },
+              {
+                  name: 'daiplate',
+                  icon: 'dialpad',
+                  tooltip:GetTextByName("Module1"),
+                   color:'#FE9900',
+              },
+              {
+                  name: 'basestation',
+                  icon: 'subject',
+                  tooltip:GetTextByName("OperateLogIdentityDeviceType0"),
+                   color:'#999999',
+              }
+              ,
+              {
+                  name: 'lock',
+                  icon: 'screen_lock_landscape',
+                  tooltip: GetTextByName("Lang_lockingFunction"),
+                   color:'#cccccc',
+              }, 
+              {
+                  name: 'select_rangle',
+                  icon: 'select_all',
+                  tooltip:GetTextByName("Selectionof"),
+                  color:'#E54C3B',
+              }
+          )
       }
   }
 }

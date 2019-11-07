@@ -91,13 +91,32 @@
                 </div>
                 <div class="buttons">
                     <ul>
-                        <li v-show="showsingalcall" @click="startDC()"><div ><i class="material-icons">person</i><span>{{language.ACK_DUPLEX}}</span></div></li>
+                        <li v-show="showsingalcall" @click="startDC()">
+                            <div >
+                            <div><i class="material-icons">person</i></div>
+                            <div>{{language.ACK_DUPLEX}}</div>
+                            </div>
+                        </li>
                        
-                        <li v-if="showsingalcall" @mouseup="SCEASEDPTT()" @mousedown="StartSCall()"><div ><i class="material-icons">mic</i><span>{{language.HALFDUPLEX}}</span></div></li>
+                        <li v-if="showsingalcall" @mouseup="SCEASEDPTT()" @mousedown="StartSCall()">
+                            <div >
+                                      <div >
+                            <i class="material-icons">mic</i>
+                                      </div>
+                            <div>{{language.HALFDUPLEX}}</div>
+                            </div>
+                            </li>
                         
-                        <li v-if="showgroupcall" @mouseup="GCEASEDPTT()" @mousedown="startGCall()"><div ><i class="material-icons">group</i><span v-html="language.groupcall"></span></div></li>                       
+                        <li v-if="showgroupcall" @mouseup="GCEASEDPTT()" @mousedown="startGCall()"><div >
+                            <div > <i class="material-icons">group</i></div>
+                            <div v-html="language.groupcall"></div>
+                            </div></li>                       
                         
-                        <li v-if="iscalling" @click="endcall"><div class="endcall"><i class="material-icons">call_end</i><span v-html="language.call_end"></span></div></li>
+                        <li v-if="iscalling" @click="endcall">
+                            <div class="endcall">
+                                <div > <i class="material-icons">call_end</i></div>
+                            <div v-html="language.call_end"></div>
+                        </div></li>
                         
                         <li  @mouseup="releasePTT" @mousedown="PTT" v-if="isptt"><div class="Ptt"><i class="material-icons">flash_on</i><span v-html="language.PTT"></span></div></li>
 
@@ -502,7 +521,23 @@ export default {
                     _this.fadeinanimation=false;   
                     _this.msg='';            
                 }, 3000);
-      } 
+      },
+     setlanguage(){
+        this.language={
+          placeholder:GetTextByName("Lang_please_input_ISSI_number"),
+          ACK_DUPLEX:GetTextByName("vuetellmode"),
+          HALFDUPLEX:GetTextByName("vuepttmode"),
+          groupcall:GetTextByName('vuegroupmode'),
+          call_end:GetTextByName('TOend'),
+          PTT:GetTextByName('CC_INTERRUPT'),
+          calling:GetTextByName('InCalling'),
+          usegroup:GetTextByName('groupbz'),
+          usedevice:GetTextByName('Lang_FrequentContactsManage'),
+          contacts:GetTextByName('Called')
+
+      }
+
+       },
   },
   watch:{
       inputnum:function(newval,oldval){
@@ -685,7 +720,7 @@ height: 100%;
     display: block;
 
 }
-.buttons div{
+.buttons>ul>li>div{
 width: 90px;;
 background-color: #2B81BE;
 height: 50px;
@@ -694,18 +729,25 @@ margin-top: -35px;
 border-radius: 10px;
 cursor: pointer;
 }
-.buttons i{
-    margin-top: 5px;
+.buttons>ul>li>div>div:nth-child(1){
+    width: 30px;
     float: left;
-    margin-left: 5px;
-    font-size: 34px;
+    height: 50px;
+    line-height: 50px;
 }
-.buttons span{
- margin-top: 15px;
- float: right;
- margin-right: 5px;
-  font-size: 14px;
+.buttons>ul>li>div>div:nth-child(2){
+    width: 70px;
+    float: right;
+    font-size: 14px;
+    height: 50px;
+    line-height: 50px;
+    margin-left:-10px;
 }
+ .buttons>ul>li>div>div i{
+    margin-top:10px;
+    font-size: 30px;
+}
+
 
 .ivu-divider-vertical{
     height: 80%;
