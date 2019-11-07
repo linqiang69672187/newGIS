@@ -253,6 +253,12 @@ width: 280px;
   .rotationIcon .fa-arrow-circle-left{
     
   }
+  a:hover{
+    color:burlywood;
+  }
+  a:active{
+     opacity: 0.3;  
+  }
 </style>
 <style >
 .left .ivu-tooltip-popper{

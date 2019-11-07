@@ -118,7 +118,7 @@ import { setTimeout } from 'timers';
                           }else{
                               _this.$emit("downloadover",'success',_this.language.excelsuccess); 
                           }
-                          _this.excelHerf=res.data;
+                          _this.excelHerf="userfiles/"+res.data;
                           //_this.exporttext="重新生成EXCEL";
                           }).catch((err) => {
                            console.info(err);
