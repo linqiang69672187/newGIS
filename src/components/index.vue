@@ -60,24 +60,28 @@ export default {
            dmenuszie: '260px !important', 
            lmenuitems:[],
            lmenuitems1:[
-                         {label:'操作窗口',icon:'gps_fixed',name:'hjmb'},
-                        {label:'GPS上报',icon:'history',name:'gpslist'},
-                        {label:'GPS上拉',icon:'navigation',name:'GPSPullList'},
-                        {label:'短信',icon:'mail_outline',name:'sms_sjx'},
-                        {label:'操作日志',icon:'event_note',name:'operationlog'},
-                        {label:'动态重组',icon:'group_add',name:'dtczrestlt'},
-          ],
+                        {label:'操作窗口',icon:'gps_fixed',name:'hjmb',enable:true},
+                        {label:'GPS上报',icon:'history',name:'gpslist',enable:true},
+                        {label:'GPS上拉',icon:'navigation',name:'GPSPullList',enable:true},
+                        {label:'短信',icon:'mail_outline',name:'sms_sjx',enable:true},
+                        {label:'操作日志',icon:'event_note',name:'operationlog',enable:true},
+                        {label:'动态重组',icon:'group_add',name:'dtczrestlt',enable:true},
+            ],
             lmenuitems2:[
-                    {label:'GPS上报统计',icon:'insert_chart',name:'Lang_gpstj'},
-                    {label:'单键报备统计',icon:'equalizer',name:'Lang_djbbtj '},
-                            {label:'人员设备管理',icon:'supervisor_account',name:'Lang_UserDeviceManage'},
-                            {label:'GPS数据管理',icon:'assignment',name:'Lang_GPSDataManage'},
-                            {label:'预案管理',icon:'build',name:'Lang_emergency'},
-                            {label:'实时警力',icon:'alarm_add',name:'Lang_RealTimePoliceStrength'}
+                        {label:'GPS上报统计',icon:'insert_chart',name:'Lang_gpstj',enable:true},
+                        {label:'单键报备统计',icon:'equalizer',name:'Lang_djbbtj',enable:true},
+                        {label:'人员设备管理',icon:'supervisor_account',name:'Lang_UserDeviceManage',enable:true},
+                        {label:'GPS数据管理',icon:'assignment',name:'Lang_GPSDataManage',enable:true},
+                        {label:'预案管理',icon:'build',name:'Lang_emergency',enable:true},
+                        {label:'实时警力',icon:'alarm_add',name:'Lang_RealTimePoliceStrength',enable:true}
             ],
               
         isshowmini:false,
-        ocxRegStatus:false,             
+        ocxRegStatus:false, 
+        DTCZEnable:true,   //动态重组权限
+        SMSEnable:true,    //短信权限
+        PullUp_ControlEnable:true, //GPS上拉权限
+        GPS_ControlEnable:true,    //GPS上报权限        
        }
     },
    mixins:[languageset,],
@@ -213,6 +217,25 @@ export default {
                     break;
             }
         },
+        updateuseprameters(){
+            if (useprameters.DTCZEnable=='0'){  //动态重组
+            this.$set(this.lmenuitems1[5], 'enable', false);
+            this.DTCZEnable=false;
+            }
+
+            if (useprameters.GPS_ControlEnable=='0'){  //GPS上报
+            this.$set(this.lmenuitems1[1], 'enable', false);
+            this.GPS_ControlEnable=false;
+            }
+            if (useprameters.PullUp_ControlEnable=='0'){  //GPS上拉
+            this.$set(this.lmenuitems1[2], 'enable', false);
+            this.PullUp_ControlEnable=false;
+            }
+            if (useprameters.SMSEnable=='0'){  //短信 
+            this.$set(this.lmenuitems1[3], 'enable', false);
+            this.SMSEnable=false;
+            } 
+         },
         setlanguage(){
              this.lmenuitems.splice(0);
              this.lmenuitems1.splice(0);
@@ -232,33 +255,37 @@ export default {
              let yagl = GetTextByName("Lang_emergency"); 
              let ssjl = GetTextByName("Lang_RealTimePoliceStrength"); 
 
+                // DTCZEnable:true,   //动态重组权限
+                // SMSEnable:true,    //短信权限
+                // PullUp_ControlEnable:true, //GPS上拉权限
+                // GPS_ControlEnable:true,    //GPS上报权限  
              this.lmenuitems1.push(
-                 {label:czck,icon:'gps_fixed',name:'hjmb'},
-                 {label:gpssb,icon:'history',name:'gpslist'},
-                 {label:gpssl,icon:'navigation',name:'GPSPullList'},
-                 {label:SMS,icon:'mail_outline',name:'sms_sjx'},
-                 {label:czrz,icon:'event_note',name:'operationlog'},
-                 {label:dtcz,icon:'group_add',name:'dtczrestlt'});
+                 {label:czck,icon:'gps_fixed',name:'hjmb',enable:true},
+                 {label:gpssb,icon:'history',name:'gpslist',enable:this.GPS_ControlEnable},
+                 {label:gpssl,icon:'navigation',name:'GPSPullList',enable:this.PullUp_ControlEnable},
+                 {label:SMS,icon:'mail_outline',name:'sms_sjx',enable:this.SMSEnable},
+                 {label:czrz,icon:'event_note',name:'operationlog',enable:true},
+                 {label:dtcz,icon:'group_add',name:'dtczrestlt',enable:this.DTCZEnable});
 
-             this.lmenuitems.push({label:czck,icon:'gps_fixed',name:'hjmb'},
-                 {label:gpssb,icon:'history',name:'gpslist'},
-                 {label:gpssl,icon:'navigation',name:'GPSPullList'},
-                 {label:SMS,icon:'mail_outline',name:'sms_sjx'},
-                 {label:czrz,icon:'event_note',name:'operationlog'},
-                 {label:dtcz,icon:'group_add',name:'dtczrestlt'});
+             this.lmenuitems.push(
+                 {label:czck,icon:'gps_fixed',name:'hjmb',enable:true},
+                 {label:gpssb,icon:'history',name:'gpslist',enable:this.GPS_ControlEnable},
+                 {label:gpssl,icon:'navigation',name:'GPSPullList',enable:this.PullUp_ControlEnable},
+                 {label:SMS,icon:'mail_outline',name:'sms_sjx',enable:this.SMSEnable},
+                 {label:czrz,icon:'event_note',name:'operationlog',enable:true},
+                 {label:dtcz,icon:'group_add',name:'dtczrestlt',enable:this.DTCZEnable});
 
              this.lmenuitems2.push(
-                {label:gpssbtj,icon:'insert_chart',name:'Lang_gpstj'},
-                {label:djbbtj,icon:'equalizer',name:'Lang_djbbtj '},
-                {label:rysbgl,icon:'supervisor_account',name:'Lang_UserDeviceManage'},
-                {label:gpssjgl,icon:'assignment',name:'Lang_GPSDataManage'},
-                {label:yagl,icon:'build',name:'Lang_emergency'},
-                {label:ssjl,icon:'alarm_add',name:'Lang_RealTimePoliceStrength'});
+                {label:gpssbtj,icon:'insert_chart',name:'Lang_gpstj',enable:true},
+                {label:djbbtj,icon:'equalizer',name:'Lang_djbbtj',enable:true},
+                {label:rysbgl,icon:'supervisor_account',name:'Lang_UserDeviceManage',enable:true},
+                {label:gpssjgl,icon:'assignment',name:'Lang_GPSDataManage',enable:true},
+                {label:yagl,icon:'build',name:'Lang_emergency',enable:true},
+                {label:ssjl,icon:'alarm_add',name:'Lang_RealTimePoliceStrength',enable:true});
 
 
         },
         init:function(){
-            debugger;
             this.$refs.banner.updateuseprameters();
 
             if (this.get_language()!='zh-CN'){

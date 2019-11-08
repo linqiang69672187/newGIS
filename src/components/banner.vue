@@ -65,7 +65,8 @@ export default {
           bannerlab1:'单兵和车辆定位',
           bannerlab2:'指挥调度系统',
         },
-        SMSEnable:true
+        SMSEnable:true,
+        DSSEnable:true
       }
     },
     props: ['isshowmini'],
@@ -108,6 +109,7 @@ export default {
         
         if (useprameters.DSSEnable=='0'){  //隐藏辅助决策
           this.$set(this.items[1], 'enable', false);
+          this.DSSEnable=false;
         }
         if (useprameters.SMSEnable=='0'){
           this.SMSEnable=false
@@ -133,11 +135,11 @@ export default {
          let exit =  GetTextByName("loginout");
 
          this.items.push(
-          {name:'dispatchFunction',label:ddgn,icon:'fa-headphones'},
-          {name:'servicemanager',label:qwgl,icon:'fa-address-card'},
-          {name:'options',label:settings,icon:'fa-cogs'},
-          {name:'help',label:help,icon:'fa-question-circle'},
-          {name:'exit',label:exit,icon:'fa-door-open'});
+          {name:'dispatchFunction',label:ddgn,icon:'fa-headphones',enable:true},
+          {name:'servicemanager',label:qwgl,icon:'fa-address-card',enable: this.DSSEnable},
+          {name:'options',label:settings,icon:'fa-cogs',enable:true},
+          {name:'help',label:help,icon:'fa-question-circle',enable:true},
+          {name:'exit',label:exit,icon:'fa-door-open',enable:true});
           this.language={
           bannerlab1:'',
           bannerlab2:'',
