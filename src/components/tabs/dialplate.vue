@@ -224,8 +224,43 @@ export default {
           usegroup:'常用组号',
           usedevice:'常用个号',
           contacts:'最近联系'
+      },
+    call_Msg:{
+        CC_CALLPROCEEDING:'呼叫正在处理中',
+        CC_ALERT:'对方在振铃中',
+        CC_CONNECT:'对方已接听',
+        CC_RELEASE:'对方挂断',
+        CC_GRANTED:'获取授权',
+        CC_INTERRUPT:'发射权被抢占',
+        CC_CEASED:'发射权已释放',
+        CC_CONNECTACK:'呼叫已连接',
+        CC_CALLREQUEST:'有呼叫请求进入',
+        CC_TIMEOUT:'呼叫超时',
+        CC_END:'呼叫结束',
+        CC_USER_REQUESET_DISCONNECT:'用户请求断开',
+        CC_CALLED_PARTY_BUSY:'被叫方正忙',
+        CC_CALLED_PARTY_NOT_RECHABLE:'被叫方无法到达',
+        CC_CALLED_PARTY_NOT_SUPPORT_ENCRYPTION:'被叫方不支持加密',
+        CC_CONGESTION_IN_INFRASTRUCTURE:'系统拥塞',
+        CC_NOT_ALLOWED_TRAFFIC_CASE:'不准许传输',
+        CC_REQUESTED_SERVICE_NOT_AVAILABLE:'所请求服务未可用',
+        CC_PREEMPTIVE_USE_OF_RESOURCE:'被抢占',
+        CC_INVALID_CALL_IDENTIFIER:'有缺陷的请求',
+        CC_CALL_REJECTED_BY_THE_CALLED_PARTY:'被叫方拒绝请求',
+        CC_NO_IDLE_CC_ENTITY:'系统忙',
+        CC_EXPIRY_OF_TIMER:'超时',
+        CC_SwMI_REQUESTED_DISCONNECTION:'交换中心请求断开',
+        CC_ACKNOWLEDGED_SERVICE_NOT_COMPLETED:'服务未完成',
+        CC_UNKNOWN_TETRA_IDENTITY:'未知TETRA号码',
+        CC_SS_SPECIFIC_DISCCONNECTION:'补充业务请求断开',
+        CC_UNKONWN_EXTERNAL_SUBSCRIBER_IDENTITY:'未知的外部号码',
+        CC_CALL_RESTORATION_OF_THE_OTHER_USER_FAILED:'呼叫恢复',
+        CC_CALLED_PARTY_REQUIRES_ENCRYPTION:'被叫方请求加密',
+        CC_CHANNEL_CREATE_FAILED:'信道创建失败',
+        CC_RADIO_USER_NO_EXIST:'无线用户不存在'
+    }
 
-      }
+
       }
   
   }
@@ -425,7 +460,7 @@ export default {
           console.info(this.inputnum);
       },
       CallMsg(issi,eventtype,msg,gssi,hookmethodsel){
-         console.info(issi+','+eventtype+','+msg+','+gssi+','+hookmethodsel);
+         //console.info(issi+','+eventtype+','+msg+','+gssi+','+hookmethodsel);
          if (eventtype=='10'){  //组呼
               switch (msg){
                     case "CC_CONNECT":
@@ -514,7 +549,8 @@ export default {
       },
       showmsg(issi,eventtype,msg,gssi,hookmethodsel){
         clearTimeout(msgtimetick);
-                this.msg=issi+msg;
+              
+                this.msg=issi+'_'+this.call_Msg[msg];
                 this.fadeinanimation=true;
                 let _this = this;
                 msgtimetick =  setTimeout(() => {
@@ -533,11 +569,15 @@ export default {
           calling:GetTextByName('InCalling'),
           usegroup:GetTextByName('groupbz'),
           usedevice:GetTextByName('Lang_FrequentContactsManage'),
-          contacts:GetTextByName('Called')
-
+          contacts:GetTextByName('Called')}
+         
+        for(let key  in this.call_Msg){
+            this.call_Msg[key] = GetTextByName(key)
+           
+        }
       }
 
-       },
+
   },
   watch:{
       inputnum:function(newval,oldval){
