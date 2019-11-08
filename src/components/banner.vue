@@ -11,9 +11,11 @@
       <div class="menu" :class="[isshowmini?'animated bounceOutRight':'',isshowmini==false?'animated bounceInRight':'']">
       <div>
           <ul>
-              <li v-for="(item,key) in items" @click="menuclk(item.name)" :key="key" :class="[(item.name==selectitem)?'selectitem':'']">
+              <li v-for="(item,key) in items" v-show="item.enable" @click="menuclk(item.name)" :key="key" :class="[(item.name==selectitem)?'selectitem':'']">
+             
                 <a v-if="item.name=='help'" :href="[item.name=='help'?helpurl:'']" target="_blank" ><i class="fas " :class="item.icon"></i><div>{{item.label}}</div></a>
                 <a v-else><i class="fas " :class="item.icon"></i><div>{{item.label}}</div></a>
+
               </li>
           </ul>
       </div>
@@ -28,7 +30,7 @@
                 </a></li>
                  
                 <li @click="view_sms"><a>
-                <Badge  :count="new_smscount">
+                <Badge  v-if="SMSEnable"  :count="new_smscount">
                   <i class="fas fa-envelope"></i>
                 </Badge></a></li>
               <li><a><div>{{username}}</div></a></li>
@@ -48,11 +50,11 @@ export default {
     data () {
       return {  
         items:[
-          {name:'dispatchFunction',label:'调度功能',icon:'fa-headphones'},
-          {name:'servicemanager',label:'勤务管理',icon:'fa-address-card'},
-          {name:'options',label:'参数设置',icon:'fa-cogs'},
-          {name:'help',label:'帮助',icon:'fa-question-circle'},
-          {name:'exit',label:'结束系统',icon:'fa-door-open'},
+          {name:'dispatchFunction',label:'调度功能',icon:'fa-headphones',enable:true},
+          {name:'servicemanager',label:'勤务管理',icon:'fa-address-card',enable:true},
+          {name:'options',label:'参数设置',icon:'fa-cogs',enable:true},
+          {name:'help',label:'帮助',icon:'fa-question-circle',enable:true},
+          {name:'exit',label:'结束系统',icon:'fa-door-open',enable:true},
         ],
         selectitem:'dispatchFunction',
         new_smscount:0,
@@ -62,7 +64,8 @@ export default {
         language:{
           bannerlab1:'单兵和车辆定位',
           bannerlab2:'指挥调度系统',
-        }
+        },
+        SMSEnable:true
       }
     },
     props: ['isshowmini'],
@@ -102,6 +105,13 @@ export default {
       updateuseprameters(){
         this.username = useprameters.usename;
         this.date = new Date(parseInt(useprameters.servertime));
+        
+        if (useprameters.DSSEnable=='0'){  //隐藏辅助决策
+          this.$set(this.items[1], 'enable', false);
+        }
+        if (useprameters.SMSEnable=='0'){
+          this.SMSEnable=false
+        }
         if (useprameters.SystemType=="2"){
           this.helpurl = "eTRA GIS_HELP_SEA/help.html";
         }
@@ -140,6 +150,7 @@ export default {
       _this.date = new Date( _this.date).getTime()+60000; // 修改数据date
       _this.date =  new Date(_this.date);  
      }, 60000)
+    
     },
     beforeDestroy() {
       if (this.timer) {

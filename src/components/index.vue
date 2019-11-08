@@ -258,6 +258,7 @@ export default {
 
         },
         init:function(){
+            debugger;
             this.$refs.banner.updateuseprameters();
 
             if (this.get_language()!='zh-CN'){

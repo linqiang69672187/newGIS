@@ -28,6 +28,14 @@ useprameters.usename = "LQ";
 useprameters.servertime = "1571984937504";
 useprameters.defaultLanguage="zh-CN";
 useprameters.SystemType ="1";
+
+useprameters.DTCZEnable = "0"; //动态重组是否启用 
+useprameters.SMSEnable = "1"                                       //个短消息是否启用
+useprameters.PullUp_ControlEnable = "1";                                //周期性上拉是否启用 
+useprameters.GPS_ControlEnable = "0";                                 //GPS控制是否启用 
+useprameters.DSSEnable = "0";                           //勤务管理
+
+useprameters.PrivateCallEnable = "1"; 
 useprameters.lockids=[
    {issi:'24001',lon:'120.1504666',lat:'30.1817166',name:'张警官',userid:'1'},
     {issi:'24002',lon:'120.1525667529',lat:'30.2186735631',name:'林警官',userid:'3'},
@@ -38,6 +46,7 @@ function projectScreen(id,lon,lat){
 console.info(id);
 
 }
+
 function LoadEvents(){
         function boxSelection(){
             console.info("boxSelection");
