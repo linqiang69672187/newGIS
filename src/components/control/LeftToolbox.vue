@@ -138,6 +138,11 @@ export default {
                   color:'#E54C3B',
               }
           )
+      },
+      updateuseprameters(){
+        if (useprameters.PrivateCallEnable=='0'){
+          this.fabActions.splice(1,1);
+        }
       }
   }
 }

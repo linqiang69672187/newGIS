@@ -10,7 +10,7 @@
                 </a>
             </Tooltip>
             </li>
-             <li  v-for="(item,key) in items" :key="key"  :class="[ismenufaded,listnewchange?'animated lightSpeedIn':'']">
+             <li  v-for="(item,key) in items" v-show="item.enable" :key="key"  :class="[ismenufaded,listnewchange?'animated lightSpeedIn':'']">
              <Tooltip :disabled="!minimenu"  :content="item.label" placement="right"> 
                 <a @click="openwindows(item.name)">
                   <i class="material-icons">{{item.icon}}</i>

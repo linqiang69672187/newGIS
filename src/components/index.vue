@@ -282,12 +282,12 @@ export default {
                 {label:gpssjgl,icon:'assignment',name:'Lang_GPSDataManage',enable:true},
                 {label:yagl,icon:'build',name:'Lang_emergency',enable:true},
                 {label:ssjl,icon:'alarm_add',name:'Lang_RealTimePoliceStrength',enable:true});
-
-
         },
         init:function(){
             this.$refs.banner.updateuseprameters();
-
+            this.$refs.dmenu.updateuseprameters();
+            this.$refs.leftToolbox.updateuseprameters();
+            this.updateuseprameters();
             if (this.get_language()!='zh-CN'){
                 this.setlanguage();
                 this.$refs.banner.setlanguage();

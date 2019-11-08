@@ -6,7 +6,7 @@
     <Tabs class='tabs' @on-click='tabclick' v-model='tabname' name='plane'   @on-tab-remove='handleTabRemove' type='card'  >
         <TabPane  tab="plane"  name="realtime" :label="language.realtimelabel" class="tabpane" icon="ios-speedometer"><tabindex ref="tabindex" @downloadover="downloadover"></tabindex></TabPane>
         <!-- <TabPane  tab="plane" name="GPS控制" class="tabpane" label="GPS控制"  icon="ios-key"><GPScontrol></GPScontrol></TabPane> -->
-        <TabPane    tab="plane" name="dialplate"   class="tabpane"  :label="language.dailplatelabel"  icon="ios-apps"><dialplate   :ocxRegStatus="ocxRegStatus" ref="dail"></dialplate></TabPane>
+        <TabPane v-if="PrivateCallEnable"    tab="plane" name="dialplate"   class="tabpane"  :label="language.dailplatelabel"  icon="ios-apps"><dialplate   :ocxRegStatus="ocxRegStatus" ref="dail"></dialplate></TabPane>
         <TabPane  tab="plane" name="basestationchart"   class="tabpane"  :label="language.bastationlabel"  icon="ios-stats"><basestationchart ref="basestationchart"></basestationchart></TabPane>
         <TabPane  tab="plane" closable name="eyemaps" class="tabpane"  :label="language.eyemapslabel" v-if="showlockTab" icon="ios-lock"><eyemaps></eyemaps></TabPane>
     </Tabs>
@@ -39,7 +39,8 @@ import basestationchart from "@/components/tabs/basestationchart"
                             dailplatelabel:'拨号盘',
                             bastationlabel:'基站统计',
                             eyemapslabel:'锁定跟踪'    
-                        }
+                        },
+                        PrivateCallEnable:true,
                     }
         },
         components:{
@@ -118,7 +119,14 @@ import basestationchart from "@/components/tabs/basestationchart"
                 this.$refs.dail.setlanguage();
                 this.$refs.tabindex.setlanguage();
                  this.$refs.basestationchart.setlanguage();
-           }
+           },
+           updateuseprameters(){
+                if(useprameters.PrivateCallEnable=='0'){
+                    this.PrivateCallEnable=false;
+                }
+
+            }
+
         },
         created(){
         },
