@@ -376,14 +376,14 @@ const install = function(Vue) {
                     echarbar:function(id){
                         this.chart = echarts.init(document.getElementById(id));
                         this.chart.clear();
-                        let autoPlay =true;
+                        let autoPlayvalue =true;
                         let option = {
                             baseOption:{
                                 timeline: {
                                   
                                     axisType: 'category',
                                     
-                                    autoPlay: autoPlay,
+                                    autoPlay: true,
                                   
                                     playInterval: 5000,
                                     bottom:-5,
@@ -517,8 +517,7 @@ const install = function(Vue) {
                         };
 
                         this.chart.setOption(option);
-                        console.info("autoplay");
-                        console.info(option);
+                    
                         let that =this;
                         let updatedata = function(data,tonlinetime,tonlinecount){
                             if(tonlinetime){
@@ -529,6 +528,7 @@ const install = function(Vue) {
                                 option.baseOption.series[1].name=tonlinecount;
                                 option.baseOption.yAxis[0].name=tonlinetime+"(H)";
                                 option.baseOption.yAxis[1].name=tonlinecount+"(n)";
+                                option.baseOption.timeline.autoPlay=that.autoPlayvalue;
                                 that.chart.setOption(option);
                                 return;
                             }
@@ -565,11 +565,13 @@ const install = function(Vue) {
                                 xAxis.push({data:dataxAxis});
                                 option.options.push({series:series,xAxis:xAxis});
                              }
-                            option.baseOption.timeline.autoPlay = that.autoPlay;
+                 
+                     
+                            option.baseOption.timeline.autoPlay = autoPlayvalue;
                             that.chart.setOption(option);
                          };
                         this.chart.on('timelinePlayChanged', function(param){
-                            that.autoPlay = param.playState;
+                            autoPlayvalue = param.playState;
                          });             
                       
                         return updatedata;
