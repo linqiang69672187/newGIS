@@ -182,8 +182,8 @@ export default {
         display: none;
     }
     .toolboxdiv{
-        height: 400px;
-        width: 500px;
+        height: 36px;
+        width: 210px;
     }
     .computedistance{
         height: 36px;
@@ -195,7 +195,7 @@ export default {
         line-height: 36px;
         position:absolute;
         top:0px;
-        left: 85px;
+        left: -60px;
         z-index: 2;
     }
     .toolbox{
@@ -205,7 +205,6 @@ export default {
         border-radius: 18px;
         font-size: 18px;
         line-height: 36px;
-        left: 145px;
         position:absolute;
         z-index: 3;
     }

@@ -344,7 +344,7 @@ export default {
   }
   .toolboxdiv{
       position: absolute;
-      right: -100px;
+      right: 10px;
       top: 70px;
       
   }
