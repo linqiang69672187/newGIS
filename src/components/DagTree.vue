@@ -76,52 +76,46 @@ import { Tree  } from 'iview';
                         break;
                 }
             },
-            checkchange(array,item){
-                console.info(array);
-                console.info(item);
-                 if (item.checked==true){  //选中
-                    switch (item.type){
-                           case "zhishuuser":
-                              this.uncheckedEnitity.forEach(function(thisitem, index, arr) {
-                                    if(thisitem=item.id) {
-                                        arr.splice(index, 1);
-                                    }
-                                });
+            checkchange(array,yitem){
+                console.info(this.data3);
+
+                for (let i = this.data3.length-1; i >=0; i--){
+                    let item =this.data3[i];
+                    if (item.checked)continue;  //选中的情况       
+                      switch (item.type) {
+                          case "zhishuuser":
+                              if (this.uncheckedEnitity.indexOf(item.id)<0){
+                               this.uncheckedEnitity.push(item.id);
+                              }
                               break;
                           case "usertype":
-                               this.uncheckedtype.forEach(function(thisitem, index, arr) {
-                                    if(thisitem==item.entityid+":"+item.id) {
-                                        arr.splice(index, 1);
-                                    }
-                                });
-                          // this.uncheckedtype.replace(item.entityid+":"+item.id+";","")
+                             if (this.uncheckedEnitity.indexOf(item.id)<0){
+                               this.uncheckedtype.push(item.entityid+':'+array[i].id);
+                              }
                               break;  
                           default:
-                           this.uncheckedEnitity=this.uncheckedEnitity.filter(function(thisitem){
-                               return item.child.indexOf(thisitem)<0;
-                           })
-                              break;
-                    }
-                    
-                 } 
-                 else   //去选中
-                 {
-                     switch (item.type){
-                           case "zhishuuser":
-                             this.uncheckedEnitity.push(parseInt(item.id));
-                              break;
-                          case "usertype":
-                               this.uncheckedtype.push(item.entityid+":"+item.id);                       
-                              break;  
-                          default:
-                              this.uncheckedEnitity=this.uncheckedEnitity.concat(item.child);
+                            if(!item.indeterminate){  //确定非选中
+                                 //this.uncheckedEnitity = this.uncheckedEnitity.concat(JSON.parse(item.child));
+                                 let _this =this;
+                                 console.info(item.child)
+                                 JSON.parse(item.child).forEach((thisitem)=> {
+                                     if (_this.uncheckedEnitity.indexOf(thisitem.id)<0){
+                                        _this.uncheckedEnitity.push(thisitem.id);
+                                     }
+                                 })
+                            }
+                            else{  //未选中，且未确定
+                                this.checkchildren(item.children)
+                            }
+                              
                             break;
-                    }
+                      }
+             
 
-                 }  
+                } 
+      
+                
 
-                console.info(this.uncheckedEnitity);
-                console.info(this.uncheckedtype);
                 let returnval='/';
                 this.uncheckedEnitity.forEach(function(thisitem) {
                            returnval+=thisitem+',';   
@@ -130,7 +124,11 @@ import { Tree  } from 'iview';
                 this.uncheckedtype.forEach(function(thisitem) {
                            returnval+=thisitem+';';   
                      });
-                uncheckedEnitity=returnval;
+             
+              //  uncheckedEnitity=returnval;  //全局变量赋值
+           
+           // console.info("选中修改");
+           // console.info(returnval);
 
                 //以下是原有发送选中的方法
                 //  for (let i = array.length-1; i >=0; i--){
@@ -159,8 +157,12 @@ import { Tree  } from 'iview';
                 //  }
                 //  let returnString =zhishuString+"/"+entityString+"/"+typeString;
                  //checkedEntity = returnString;//全局赋值单位选择，赋值原有全局属性值
-                 ReLoadUser();//刷新地图人员，调用原有方法
+               //  ReLoadUser();//刷新地图人员，调用原有方法
             },
+           checkchildren(children){
+              
+
+           },
            checkparent(array,item){
             for (let i = 0; i <array.length; i++){
                    if (array[i].nodeKey==item.nodeKey) return i;

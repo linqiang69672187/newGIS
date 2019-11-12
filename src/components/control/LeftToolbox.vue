@@ -27,31 +27,31 @@ export default {
                   name: 'av_timer',
                   icon: 'av_timer',
                   color:'#164B77',
-                  tooltip:'实时状况'
+                  tooltip:'实时状况 (r)'
               },
               {
                   name: 'daiplate',
                   icon: 'dialpad',
-                  tooltip:'拨号盘',
-                   color:'#FE9900',
+                  tooltip:'拨号盘 (0-9)',
+                  color:'#FE9900',
               },
               {
                   name: 'basestation',
                   icon: 'subject',
-                  tooltip:'基站统计',
+                  tooltip:'基站统计 (b)',
                    color:'#999999',
               }
               ,
               {
                   name: 'lock',
                   icon: 'screen_lock_landscape',
-                  tooltip:'锁定跟踪',
+                  tooltip:'锁定跟踪 (l)',
                    color:'#cccccc',
               }, 
               {
                   name: 'select_rangle',
                   icon: 'select_all',
-                  tooltip:'框选',
+                  tooltip:'框选 (s)',
                   color:'#E54C3B',
               }
           ],
@@ -110,31 +110,31 @@ export default {
                   name: 'av_timer',
                   icon: 'av_timer',
                   color:'#164B77',
-                  tooltip: GetTextByName("Lang_realTimeDisplay")
+                  tooltip: GetTextByName("Lang_realTimeDisplay")+" (r)"
               },
               {
                   name: 'daiplate',
                   icon: 'dialpad',
-                  tooltip:GetTextByName("Module1"),
+                  tooltip:GetTextByName("Module1")+" (0-9)",
                    color:'#FE9900',
               },
               {
                   name: 'basestation',
                   icon: 'subject',
-                  tooltip:GetTextByName("OperateLogIdentityDeviceType0"),
+                  tooltip:GetTextByName("OperateLogIdentityDeviceType0")+" (b)",
                    color:'#999999',
               }
               ,
               {
                   name: 'lock',
                   icon: 'screen_lock_landscape',
-                  tooltip: GetTextByName("Lang_lockingFunction"),
+                  tooltip: GetTextByName("Lang_lockingFunction")+" (l)",
                    color:'#cccccc',
               }, 
               {
                   name: 'select_rangle',
                   icon: 'select_all',
-                  tooltip:GetTextByName("Selectionof"),
+                  tooltip:GetTextByName("Selectionof")+" (s)",
                   color:'#E54C3B',
               }
           )
@@ -153,6 +153,7 @@ export default {
   bottom: 260px !important;
   right: 30px !important;
 }
+
 </style>
 <style>
 @media screen and(-ms-high-contrast:active),(-ms-high-contrast:none){
@@ -164,4 +165,5 @@ export default {
 [aria-hidden=false]{
   display: none;
 }
+
 </style>

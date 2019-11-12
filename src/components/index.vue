@@ -112,6 +112,15 @@ export default {
                 case "l":
                    _this.$refs.dmenu.changeshowtab('','eyemaps');
                     break;
+                case "r":
+                   _this.$refs.dmenu.changeshowtab('','realtime');
+                    break; 
+                case "b":
+                 _this.$refs.dmenu.changeshowtab('','basestationchart');
+                    break;  
+                case "s":
+                 _this.$refs.leftToolbox.select_rangle();
+                    break;         
                 default:
                     break;
              }         
