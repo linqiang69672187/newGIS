@@ -118,7 +118,11 @@
                             <div v-html="language.call_end"></div>
                         </div></li>
                         
-                        <li  @mouseup="releasePTT" @mousedown="PTT" v-if="isptt"><div class="Ptt"><i class="material-icons">flash_on</i><span v-html="language.PTT"></span></div></li>
+                        <li  @mouseup="releasePTT" @mousedown="PTT" v-if="isptt">
+                            <div class="Ptt">
+                                <div><i class="material-icons">flash_on</i></div>
+                                <div v-html="language.PTT"></div>
+                            </div></li>
 
                     </ul>
                 </div>   
@@ -135,7 +139,7 @@
             <div>
                 <ul class="callcomonul">
                  <li v-for="(item,key) in calling" :key="key">
-                    <callbuttons  @btnclick="btnclk"   :button-type="item.type" :button-name="item.name.substr(0,5)" :button-number="item.issi"></callbuttons> 
+                    <callbuttons  @btnclick="btnclk"   :button-type="item.type" :button-name="item.name" :button-number="item.issi"></callbuttons> 
                  </li>
                 </ul>
             </div>
@@ -144,7 +148,7 @@
             <div>
                 <ul class="callcomonul">
                    <li v-for="(item,key) in groups" :key="key">
-                    <callbuttons  @btnclick="btnclk"   button-type="group" :button-name="item.name.substr(0,5)" :button-number="item.issi"></callbuttons> 
+                    <callbuttons  @btnclick="btnclk"   button-type="group" :button-name="item.name" :button-number="item.issi"></callbuttons> 
                    </li>                   
                 </ul>
             </div>
@@ -153,7 +157,7 @@
             <div >
                    <ul class="callcomonul">
                     <li v-for="(item,key) in users" :key="key">
-                        <callbuttons  @btnclick="btnclk"   button-type="person" :button-name="item.name.substr(0,5)" :button-number="item.issi"></callbuttons> 
+                        <callbuttons  @btnclick="btnclk"   button-type="person" :button-name="item.name" :button-number="item.issi"></callbuttons> 
                     </li> 
                    </ul>
             </div>
@@ -162,7 +166,7 @@
             <div>
                  <ul class="callcomonul">
                   <li v-for="(item,key) in contacts" :key="key">
-                    <callbuttons  @btnclick="btnclk"   :button-type="item.type" :button-name="item.name.substr(0,5)" :button-number="item.issi"></callbuttons> 
+                    <callbuttons  @btnclick="btnclk"   :button-type="item.type" :button-name="item.name" :button-number="item.issi"></callbuttons> 
                  </li> 
                  </ul>
 

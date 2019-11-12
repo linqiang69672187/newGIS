@@ -88,4 +88,11 @@ margin: 0 auto;
 margin-left: 5px;
  font-size:20px;
 }
+span{
+    width: 70px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: right;
+}
 </style>
