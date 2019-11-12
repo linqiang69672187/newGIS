@@ -82,7 +82,7 @@ export default {
         projectScreen(store.getters.get_id,this.lockdevice.lon,this.lockdevice.lat);  //通知主地图移动     
        },
        closemap(){
-             useprameters.lockids.forEach((item,index)=>{   //查询正在通话中是否存在
+             useprameters.lockids.forEach((item,index)=>{   
                             if(item.userid==this.lockdevice.userid){
                                 useprameters.lockids.splice(index,1); 
                             }
