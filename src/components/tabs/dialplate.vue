@@ -329,7 +329,9 @@ export default {
                                 temptime:new Date().getTime(),
                             }
                           }).then((res) => {      
-                                  
+                            _this.users.splice(0);
+                            _this.groups.splice(0); 
+                            _this.contacts.splice(0);    
                             _this.users = res.data.commonUser;
                             _this.groups = res.data.commonGroup;
                             _this.contacts = res.data.latelyUserAndGroup;
