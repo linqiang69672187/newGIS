@@ -90,6 +90,7 @@ margin-left: 5px;
 }
 span{
     width: 70px;
+    height: 24px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

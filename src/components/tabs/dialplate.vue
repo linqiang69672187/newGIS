@@ -328,7 +328,8 @@ export default {
                                 action: "GetFrequentData",
                                 temptime:new Date().getTime(),
                             }
-                          }).then((res) => {                  
+                          }).then((res) => {      
+                                  
                             _this.users = res.data.commonUser;
                             _this.groups = res.data.commonGroup;
                             _this.contacts = res.data.latelyUserAndGroup;
