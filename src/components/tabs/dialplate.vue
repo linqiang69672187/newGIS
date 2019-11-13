@@ -14,8 +14,8 @@
                                  class="input"
                                  placement="top"                            
                                 style="width:200px">
-                                <Option v-for="item in data2" :value="item.issi" :key="item.issi">
-                                    <div>
+                                <Option v-for="item in data2"  :value="item.issi" :key="item.issi">
+                                    <div @click="dailclick(item)" >
                                         <span><i class="material-icons" >{{item.type}}</i></span> <span> {{ item.issi }}({{ item.name }})</span>
                                     </div>           
                                 </Option>
@@ -217,6 +217,7 @@ export default {
       iscalling:false,
       isptt:false,
       selectissi:{},
+      tempcallitem:{},
       language:{
           placeholder:'输入组号/个号/姓名',
           ACK_DUPLEX:'全双工',
@@ -284,12 +285,16 @@ export default {
          _this.keyup(e);
         };
         this.initgroupandusers();//初始化常用组、个、最近联系人  
-        console.info(this.ocxRegStatus);
+        //console.info(this.ocxRegStatus);
     },
   computed:{
 
   },
   methods:{
+     dailclick(item){
+   
+         this.tempcallitem=item;
+       },
        handleSearch2 (value) {
                 this.data2 = [];
                 var _this =this;
@@ -427,7 +432,7 @@ export default {
          
           this.calling.forEach(item=>{
                             if(item.issi==this.inputnum){
-                                 console.info(item);
+                                // console.info(item);
                             switch (item.eventtype){
                                 case "00":  
                                         scactionX.StartSCall(this.inputnum,this.IsEncrypt); 
@@ -461,10 +466,11 @@ export default {
           
       }, 
       inputnumchange(){
-          console.info(this.inputnum);
+         // console.info(this.inputnum);
       },
       CallMsg(issi,eventtype,msg,gssi,hookmethodsel){
          //console.info(issi+','+eventtype+','+msg+','+gssi+','+hookmethodsel);
+
          if (eventtype=='10'){  //组呼
               switch (msg){
                     case "CC_CONNECT":
@@ -477,8 +483,9 @@ export default {
                             }
                         })
                         if (!gssi_in){ 
+                            let name =(gssi==this.tempcallitem.issi)?this.tempcallitem.name:gssi;                          
                             this.calling.push(
-                                {issi:gssi,eventtype:eventtype,type:'group',iscalling:true,name:'张警官'},
+                                {issi:gssi,eventtype:eventtype,type:'group',iscalling:true,name:name},
                             ); 
                             this.showgroupcall=false;
                             this.showsingalcall=false;
@@ -517,8 +524,9 @@ export default {
                             }
                         })
                         if (!issi_in){ 
+                            let name =(issi==this.tempcallitem.issi)?this.tempcallitem.name:issi;  
                             this.calling.push( 
-                                {issi:issi,eventtype:eventtype,type:'person',iscalling:true,name:'张警官'},
+                                {issi:issi,eventtype:eventtype,type:'person',iscalling:true,name:name},
                             )
                             this.showgroupcall=false;
                             this.showsingalcall=false;
@@ -632,7 +640,7 @@ export default {
                             }
                         });
         if (retrunnow) return;
-        console.info(this);
+       // console.info(this);
         this.data2.forEach(item=>{   //查询数据库里是否存在
                             if(item.issi==_this.inputnum){
                                switch (item.type){
