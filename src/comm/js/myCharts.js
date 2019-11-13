@@ -684,7 +684,7 @@ const install = function(Vue) {
                         };
                         this.chart.setOption(option);
                         let that =this;
-                        let updatedata = function(datadata,tonlinecount){
+                        let updatedata = function(data,tonlinecount){
                             if(tonlinecount){
                                 option.baseOption.legend.data.splice(0);
                                 option.baseOption.legend.data.push(tonlinecount);

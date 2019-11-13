@@ -31,7 +31,7 @@ import { setTimeout } from 'timers';
            
            interLoadData(){
              let _this = this;
-              Vue.axios.get('/Handlers/MVCEasy.ashx', {
+              Vue.axios.get('/Handlers/MVCEasy.ashx', { // ，/app/data/json/OnlineTerminalCountGroupByBS.json，/Handlers/MVCEasy.ashx，
                             params: {
                                 ctrl:'DialPadDao',
                                 action: "OnlineTerminalCountGroupByBS",
