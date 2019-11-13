@@ -218,6 +218,7 @@ export default {
       isptt:false,
       selectissi:{},
       tempcallitem:{},
+      inter:null,
       language:{
           placeholder:'输入组号/个号/姓名',
           ACK_DUPLEX:'全双工',
@@ -286,7 +287,13 @@ export default {
         };
         this.initgroupandusers();//初始化常用组、个、最近联系人  
         //console.info(this.ocxRegStatus);
+        this.inter=setInterval(function (){   //5分钟同步一次常用和最近联系人
+              _this.initgroupandusers();
+            }, 300000);
     },
+    beforeDestroy(){
+      clearInterval(this.inter);
+  },
   computed:{
 
   },
@@ -314,13 +321,12 @@ export default {
                           })
             },
       initgroupandusers(){
-                this.data2 = [];
                 var _this =this;
                   Vue.axios.get('/Handlers/MVCEasy.ashx', {//'/app/data/json/hongkong.json','/Handlers/MVCEasy.ashx'
                             params: {
                                 ctrl: "DialPadDao",
                                 action: "GetFrequentData",
-                              
+                                temptime:new Date().getTime(),
                             }
                           }).then((res) => {                  
                             _this.users = res.data.commonUser;
@@ -376,13 +382,10 @@ export default {
       },
       sendparentvalue(val){  
          // this.inputnum='';
-          var _this = this;
-         
+          var _this = this; 
           setTimeout(() => {
               _this.$el.getElementsByClassName("ivu-input-default")[0].focus();
-              _this.showthetab=true;
-             
-               
+              _this.showthetab=true;          
           }, 500);
       },
       clearval(){
@@ -500,12 +503,14 @@ export default {
                             return;
                             }
                         });
+                        
                         if (gssi==this.inputnum){
                             this.showgroupcall=true;
                             this.showsingalcall=false;
                             this.iscalling=false;
                             this.isptt=false;
                         } 
+                          
                         break;
 
                 }
