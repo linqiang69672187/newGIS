@@ -35,7 +35,7 @@ import { Tree  } from 'iview';
                  console.info(item);
                  let type=item.type;
                  let entity=item.entityid;
-                  Vue.axios.get('/app/data/json/tree.json', { //'/app/data/json/tree.json','/Handlers/MVCEasy.ashx'
+                  Vue.axios.get('/Handlers/MVCEasy.ashx', { //'/app/data/json/tree.json','/Handlers/MVCEasy.ashx'
                             params: {
                                 ctrl:'DialPadDao',
                                 action: "GetTreeChildrenNode",
@@ -77,8 +77,11 @@ import { Tree  } from 'iview';
                 }
             },
             checkchange(array,yitem){
-               this.checkchildren(this.data3);
+                this.uncheckedEnitity.splice(0);
+                this.uncheckedtype.splice(0)
+                this.checkchildren(this.data3);
                 let returnval='/';
+                console.info(this.uncheckedEnitity);
                 this.uncheckedEnitity.forEach(function(thisitem) {
                            returnval+=thisitem+',';   
                      });
@@ -87,8 +90,9 @@ import { Tree  } from 'iview';
                            returnval+=thisitem+';';   
                      }); 
             uncheckedEnitity=returnval;  //全局变量赋值
-           // console.info("选中修改");
-           // console.info(returnval);
+
+
+            console.info(returnval);
                 //以下是原有发送选中的方法
                 //  for (let i = array.length-1; i >=0; i--){
                 //     if(!array[i].children) continue;
@@ -118,26 +122,34 @@ import { Tree  } from 'iview';
                 ReLoadUser();//刷新地图人员，调用原有方法
             },
            checkchildren(children){
+           
               for (let i = children.length-1; i >=0; i--){
                     let item =children[i];
                     if (item.checked)continue;  //选中的情况       
                       switch (item.type) {
                           case "zhishuuser":
+                         if(!item.indeterminate){  //确定非选中
                               if (this.uncheckedEnitity.indexOf(item.id)<0){
                                this.uncheckedEnitity.push(item.id);
                               }
+                              }
+                              else{
+                                  this.checkchildren(item.children)  
+                              }
                               break;
                           case "usertype":
-                             if (this.uncheckedEnitity.indexOf(item.id)<0){
-                               this.uncheckedtype.push(item.entityid+':'+array[i].id);
+                 
+                             if (this.uncheckedEnitity.indexOf(item.entityid)<0){
+                               this.uncheckedtype.push(item.entityid+':'+item.id);
                               }
                               break;  
                           default:
                             if(!item.indeterminate){  //确定非选中
                                  let _this =this;
+                        
                                  JSON.parse(item.child).forEach((thisitem)=> {
-                                     if (_this.uncheckedEnitity.indexOf(thisitem.id)<0){
-                                        _this.uncheckedEnitity.push(thisitem.id);
+                                     if (_this.uncheckedEnitity.indexOf(thisitem)<0){
+                                        _this.uncheckedEnitity.push(thisitem);
                                      }
                                  })
                             }
@@ -160,7 +172,7 @@ import { Tree  } from 'iview';
            },
            initEntity(){
                let _this=this;
-               Vue.axios.get('/app/data/json/tree.json', { //'/app/data/json/tree.json','/Handlers/MVCEasy.ashx'
+               Vue.axios.get('/Handlers/MVCEasy.ashx', { //'/app/data/json/tree.json','/Handlers/MVCEasy.ashx'
                             params: {
                                 ctrl:'DialPadDao',
                                 action: "GetTreeChildrenNode",
