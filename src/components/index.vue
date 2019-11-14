@@ -1,8 +1,7 @@
 <template>
     <div id="main">
- 
+      <!--
         <OCX></OCX>
-             <!--
          <v-contextmenu ref="contextmenu" >
             <v-contextmenu-item @click="handleClick('拨号盘')">拨号盘</v-contextmenu-item>
             <v-contextmenu-item @click="handleClick">实时状况</v-contextmenu-item>
@@ -51,7 +50,7 @@ import MapToolbox from "@/components/MapToolbox"
 import Callbox from "@/components/control/CallBox"
 import notice from "@/components/control/notices"
 import LeftToolbox from "@/components/control/LeftToolbox"
-import OCX from "@/components/OCX"
+//import OCX from "@/components/OCX"
 import languageset from '@/mixin/languageset'
 
 export default {
@@ -78,7 +77,7 @@ export default {
             ],
               
         isshowmini:false,
-        ocxRegStatus:true, 
+        ocxRegStatus:false, 
         DTCZEnable:true,   //动态重组权限
         SMSEnable:true,    //短信权限
         PullUp_ControlEnable:true, //GPS上拉权限
@@ -88,7 +87,10 @@ export default {
     },
    mixins:[languageset,],
    created(){
-       //   this.loadingvue = this.$loading({text: 'loading', });
+          this.loadingvue = this.$loading({
+              text: 'loading',
+            
+            });
    },
    mounted(){
       var _this = this;  
@@ -138,7 +140,7 @@ export default {
     },
     components:{
         banner,
-        OCX,
+    
         Lmenu,
         Dmenu,
         MapToolbox,
@@ -302,7 +304,6 @@ export default {
             this.$refs.leftToolbox.updateuseprameters();
             this.updateuseprameters();
             this.loadingvue.close();
-            
             if (this.get_language()!='zh-CN'){
                 this.setlanguage();
                 this.$refs.banner.setlanguage();
