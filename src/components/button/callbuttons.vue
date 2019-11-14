@@ -1,5 +1,5 @@
 <template>
-<div v-ripple="'rgba(255, 255, 255, 0.35)'" @click="btnclick" :class="buttonType" class="comonul">
+<div v-ripple="'rgba(255, 255, 255, 0.35)'" @mouseleave="clearRipple" @click="btnclick" :class="buttonType" class="comonul">
     <ul >
         <li><div><i class="material-icons" >{{buttonType}}</i><span >{{buttonName}}</span></div></li>
         <li><Divider /></li>
@@ -24,12 +24,25 @@ export default {
           fabActions: ''
       }
   },
+  destroyed(){
+      let ripple =document.body.getElementsByClassName("ripple");
+          if (ripple.length>0){
+              document.body.removeChild(ripple[0]);
+          }
+  },
   methods:{
       cache(){
           console.log('Cache Cleared');
       },
       btnclick(){
          this.$emit("btnclick",this.buttonType,this.buttonName,this.buttonNumber);
+      },
+      clearRipple(){
+         
+          let ripple =document.body.getElementsByClassName("ripple");
+          if (ripple.length>0){
+              document.body.removeChild(ripple[0]);
+          }
       }
   }
 }

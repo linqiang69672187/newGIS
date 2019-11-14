@@ -92,14 +92,14 @@
                 <div class="buttons">
                     <ul>
                         <li v-show="showsingalcall" @click="startDC()">
-                            <div >
+                            <div  v-ripple="'rgba(255, 255, 255, 0.35)'">
                             <div><i class="material-icons">person</i></div>
                             <div>{{language.ACK_DUPLEX}}</div>
                             </div>
                         </li>
                        
                         <li v-if="showsingalcall" @mouseup="SCEASEDPTT()" @mousedown="StartSCall()">
-                            <div >
+                            <div  v-ripple="'rgba(255, 255, 255, 0.35)'">
                                       <div >
                             <i class="material-icons">mic</i>
                                       </div>
@@ -108,18 +108,18 @@
                             </li>
                         
                         <li v-if="showgroupcall" @mouseup="GCEASEDPTT()" @mousedown="startGCall()"><div >
-                            <div > <i class="material-icons">group</i></div>
+                            <div  v-ripple="'rgba(255, 255, 255, 0.35)'"> <i class="material-icons">group</i></div>
                             <div v-html="language.groupcall"></div>
                             </div></li>                       
                         
                         <li v-if="iscalling" @click="endcall">
-                            <div class="endcall">
+                            <div class="endcall"  v-ripple="'rgba(255, 255, 255, 0.35)'">
                                 <div > <i class="material-icons">call_end</i></div>
                             <div v-html="language.call_end"></div>
                         </div></li>
                         
                         <li  @mouseup="releasePTT" @mousedown="PTT" v-if="isptt">
-                            <div class="Ptt">
+                            <div class="Ptt"  v-ripple="'rgba(255, 255, 255, 0.35)'">
                                 <div><i class="material-icons">flash_on</i></div>
                                 <div v-html="language.PTT"></div>
                             </div></li>
@@ -322,7 +322,7 @@ export default {
             },
       initgroupandusers(){
                 var _this =this;
-                  Vue.axios.get('/Handlers/MVCEasy.ashx', {//'/app/data/json/hongkong.json','/Handlers/MVCEasy.ashx'
+                  Vue.axios.get('/app/data/json/hongkong.json', {//'/app/data/json/hongkong.json','/Handlers/MVCEasy.ashx'
                             params: {
                                 ctrl: "DialPadDao",
                                 action: "GetFrequentData",
@@ -350,18 +350,15 @@ export default {
           this.buttonspress = 0;
       },
       btnclk(type,name,issi){
+      
           this.inputnum =issi;
           this.selectissi.name=name;
           this.selectissi.type=type;
           this.selectissi.issi=issi;
           switch(type){
-              case "group":
-                this.showgroupcall = true;
-                this.showsingalcall=false;
-              break;
+              case "group":               
               case "person":
-                 this.showgroupcall = false;
-                 this.showsingalcall=true;
+
               break;
               default:
                  this.showgroupcall = true;
@@ -475,7 +472,7 @@ export default {
          // console.info(this.inputnum);
       },
       CallMsg(issi,eventtype,msg,gssi,hookmethodsel){
-         //console.info(issi+','+eventtype+','+msg+','+gssi+','+hookmethodsel);
+         console.info(issi+','+eventtype+','+msg+','+gssi+','+hookmethodsel);
 
          if (eventtype=='10'){  //组呼
               switch (msg){
@@ -602,25 +599,10 @@ export default {
   watch:{
       inputnum:function(newval,oldval){
           let _this = this;
-         if (this.selectissi.type){
-            switch (this.selectissi.type){
-                            case "group":  //组号
-                                this.showgroupcall=true;
-                                this.showsingalcall=false;
-                                this.iscalling=false;
-                                this.isptt=false;
-                                break;
-                            case "person"://个人
-                                this.showgroupcall=false;
-                                this.showsingalcall=true;
-                                this.iscalling=false;
-                                this.isptt=false;
-                                break;
-                        }
-               this.selectissi={};
-               return;       
-           }
+        
         let retrunnow=false;
+        console.info(this.calling);
+        console.info(_this.inputnum);
         this.calling.forEach(item=>{   //查询正在通话中是否存在
                             if(item.issi==_this.inputnum){
                                switch (item.eventtype){
@@ -639,8 +621,8 @@ export default {
                                     case "10"://正在组呼
                                         _this.showgroupcall=false;
                                         _this.showsingalcall=false;
-                                        _this.iscalling=false;
-                                        _this.isptt=false;
+                                        _this.iscalling=true;
+                                        _this.isptt=true;
                                        break;
                                }
                                retrunnow=true;
@@ -671,8 +653,26 @@ export default {
                         });
 
         if (retrunnow) return;
+        if (this.selectissi.type){  //选中明确是组或个
+            switch (this.selectissi.type){
+                            case "group":  //组号
+                                this.showgroupcall=true;
+                                this.showsingalcall=false;
+                                this.iscalling=false;
+                                this.isptt=false;
+                                break;
+                            case "person"://个人
+                                this.showgroupcall=false;
+                                this.showsingalcall=true;
+                                this.iscalling=false;
+                                this.isptt=false;
+                                break;
+                        }
+               this.selectissi={};
+               return;       
+           }
 
-        this.showgroupcall=true;
+        this.showgroupcall=true;    //最后不知道是组个
         this.showsingalcall=true;
         this.iscalling=false;
         this.isptt=false;
