@@ -50,7 +50,7 @@ import MapToolbox from "@/components/MapToolbox"
 import Callbox from "@/components/control/CallBox"
 import notice from "@/components/control/notices"
 import LeftToolbox from "@/components/control/LeftToolbox"
-import OCX from "@/components/OCX"
+//import OCX from "@/components/OCX"
 import languageset from '@/mixin/languageset'
 
 export default {
@@ -81,10 +81,17 @@ export default {
         DTCZEnable:true,   //动态重组权限
         SMSEnable:true,    //短信权限
         PullUp_ControlEnable:true, //GPS上拉权限
-        GPS_ControlEnable:true,    //GPS上报权限        
+        GPS_ControlEnable:true,    //GPS上报权限
+        loadingvue:null,       
        }
     },
    mixins:[languageset,],
+   created(){
+          this.loadingvue = this.$loading({
+              text: 'loading',
+            
+            });
+   },
    mounted(){
       var _this = this;  
       window.vue_index= this;
@@ -140,7 +147,6 @@ export default {
         Callbox,
         notice,
         LeftToolbox,
-        OCX,
     },
     methods:{
         downloadover:function(type,msg){
@@ -297,6 +303,8 @@ export default {
             this.$refs.dmenu.updateuseprameters();
             this.$refs.leftToolbox.updateuseprameters();
             this.updateuseprameters();
+            this.loadingvue.close();
+            
             if (this.get_language()!='zh-CN'){
                 this.setlanguage();
                 this.$refs.banner.setlanguage();
