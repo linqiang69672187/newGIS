@@ -35,10 +35,10 @@ import basestationchart from "@/components/tabs/basestationchart"
                         downrowshow:false,
                         tabname:'realtime',
                         language:{
-                            realtimelabel:'实时状况',
-                            dailplatelabel:'拨号盘',
-                            bastationlabel:'基站统计',
-                            eyemapslabel:'锁定跟踪'    
+                            realtimelabel:'实时状况(r)',
+                            dailplatelabel:'拨号盘(0-9)',
+                            bastationlabel:'基站统计(b)',
+                            eyemapslabel:'锁定跟踪(l)'    
                         },
                         PrivateCallEnable:true,
                     }
@@ -83,7 +83,9 @@ import basestationchart from "@/components/tabs/basestationchart"
                  this.$emit("listenchange",this.showdmenu);  
             },
             changeshowtab(key,tabs){
-                console.info(tabs);
+              if(!this.PrivateCallEnable&&tabs=="dialplate"){
+                  return;//无权限
+              }
                 switch (tabs) {
                     case 'eyemaps':
                         this.showlockTab=true;

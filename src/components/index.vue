@@ -114,7 +114,9 @@ export default {
                  case "7": 
                  case "8": 
                  case "9": 
+               
                    _this.$refs.dmenu.changeshowtab(window.event.key,'dialplate');
+                 
                     break;
                 case "l":
                    _this.$refs.dmenu.changeshowtab('','eyemaps');

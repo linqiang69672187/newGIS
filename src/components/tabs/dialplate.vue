@@ -322,7 +322,7 @@ export default {
             },
       initgroupandusers(){
                 var _this =this;
-                  Vue.axios.get('/app/data/json/hongkong.json', {//'/app/data/json/hongkong.json','/Handlers/MVCEasy.ashx'
+                  Vue.axios.get('/Handlers/MVCEasy.ashx', {//'/app/data/json/hongkong.json','/Handlers/MVCEasy.ashx'
                             params: {
                                 ctrl: "DialPadDao",
                                 action: "GetFrequentData",

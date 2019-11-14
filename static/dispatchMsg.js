@@ -93,3 +93,6 @@ function onClick(e, treeId, treeNode) {
 function displaypolicelistsdiv(){
     console.info("displaypolicelistsdiv");
 }
+setTimeout(function(){
+    window.vue_index.init();
+},3000)
