@@ -7,7 +7,7 @@
                  <ul> 
                    <li class="inputli">
                              <AutoComplete
-                                v-model.lazy.trim="inputnum"
+                                v-model="inputnum"
                                 @on-search="handleSearch2"
                                 :placeholder="language.placeholder"
                                 :transfer='transfer'
@@ -202,7 +202,7 @@ export default {
       inputnum:'',
       buttonspress:0,
       showgroupcall:true, //显示组呼
-      transfer:false,
+      transfer:true,
       showsingalcall:true, //显示单呼
       showthetab:false,
       IsEncrypt:0,  //是否加密
@@ -277,8 +277,7 @@ export default {
       var _this = this; 
       window.vue_dialplate =this; 
       
-      this.$el.getElementsByClassName("ivu-input")[0].onkeydown = function(e) {   
-             
+      this.$el.getElementsByClassName("ivu-input")[0].onkeydown = function(e) {           
          _this.keypress(e);
         };
       this.$el.getElementsByClassName("ivu-input")[0].onkeyup = function(e) {   
@@ -944,5 +943,11 @@ margin-right: 0px !important;
 }
 .ocxRegStatus{
     display: none;
+}
+body .ivu-modal .ivu-select-dropdown{
+  position: fixed !important;
+}
+body .ivu-select-item{
+        padding: 3px 10px !important;
 }
 </style>
