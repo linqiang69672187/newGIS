@@ -199,7 +199,7 @@ const install = function(Vue) {
                           
                           }
                           that.chart.setOption(option);
-                          console.info(option);
+                         // console.info(option);
                         }
                        return updatedata;
                     },

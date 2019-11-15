@@ -264,6 +264,9 @@ width: 280px;
   a:active{
      opacity: 0.3;  
   }
+  .ivu-tooltip-rel div {
+   line-height: 15px;
+  }
 </style>
 <style >
 .left .ivu-tooltip-popper{

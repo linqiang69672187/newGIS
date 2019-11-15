@@ -77,6 +77,7 @@ import { Tree  } from 'iview';
                 }
             },
             checkchange(array,yitem){
+                console.info(this.data3);
                 this.uncheckedEnitity.splice(0);
                 this.uncheckedtype.splice(0)
                 this.checkchildren(this.data3);
