@@ -133,6 +133,7 @@
         width: 100%;
         height: 100%;
         font-size: 14px;
+        overflow-y: auto;
     }
     #myCanvas{
         left: 0;
