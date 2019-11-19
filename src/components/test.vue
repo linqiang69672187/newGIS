@@ -1,12 +1,13 @@
 <template>
   <div id="scalet">
-      <canvas id="myCanvas" height="300px" width="800px"></canvas>
+      <canvas @click="startcompute" id="myCanvas" height="300px" width="800px"></canvas>
       <div style="display:none">
         <img ref="conf1" src="@/assets/images/BaseStation.png">
         <img ref="conf2" src="@/assets/images/BaseStation.png">
         <img ref="conf3" src="@/assets/images/BaseStation.png">
         <img ref="conf4" src="@/assets/images/local_dw.png">
      </div>
+     
   </div>
 </template>
 <script>
@@ -14,13 +15,15 @@
     export default {
         data () {
             return {
-                   x1:400,
-                   y1:200,
+                   x1:400,   //第一个基站
+                   y1:100,
                    d1:80,
-                   x2:170,
+
+                   x2:170,  //第二个基站
                    y2:150,
                    d2:70,
-                   x3:220,
+
+                   x3:220,  //第三个基站
                    y3:220,
                    d3:70,
              
@@ -29,11 +32,8 @@
         mounted(){
             console.info(this.trilateration);
              this.initcanvas();
-             let _this =this;
-             setInterval(function (){
-                _this.d1+=10;
-              _this.initcanvas();
-              }, 1000);
+           
+             
         },
         components:{  
         },
@@ -50,7 +50,9 @@
                 let img1 = this.$refs.conf1
                 ctx.drawImage(img1, this.x1-15,this.y1-39)
                 
-
+                ctx.moveTo(this.x1,this.y1); 
+                ctx.lineTo(this.trilateration.x,this.trilateration.y);   
+                ctx.stroke(); 
 
                 ctx.beginPath();
                 ctx.arc(this.x2,this.y2,this.d2,0, Math.PI * 2, false);
@@ -58,19 +60,32 @@
 
                 let img2= this.$refs.conf2
                 ctx.drawImage(img2, this.x2-15,this.y2-39);
-              
+
+                ctx.moveTo(this.x2,this.y2); 
+                ctx.lineTo(this.trilateration.x,this.trilateration.y);   
+                ctx.stroke(); 
+
+
 
                 ctx.beginPath();
                 ctx.arc(this.x3,this.y3,this.d3,0, Math.PI * 2, false);
                 ctx.stroke();
                 let img3 = this.$refs.conf3
                 ctx.drawImage(img3, this.x3-15,this.y3-39);
-             
-
+            
                 let img = this.$refs.conf4
                 ctx.drawImage(img, this.trilateration.x-15,this.trilateration.y-32);
+
+                ctx.moveTo(this.x3,this.y3); 
+                ctx.lineTo(this.trilateration.x,this.trilateration.y);   
+                ctx.stroke(); 
+
                 
 
+          },
+          startcompute(){
+              this.d1+=5;
+              this.initcanvas();
           }
            
         },
@@ -102,9 +117,10 @@
     #scalet{
         width: 100%;
         height: 100%;
+        margin-top: 20px;
     }
     #myCanvas{
         left: 0;
-        top: 0;
+        top: 0px;
     }
 </style>
