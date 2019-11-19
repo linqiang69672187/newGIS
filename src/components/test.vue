@@ -1,7 +1,12 @@
 <template>
-  <div>
- <button id="button">button</button><br>
-    <ul id="container"></ul>  
+  <div id="scalet">
+      <canvas id="myCanvas" height="300px" width="800px"></canvas>
+      <div style="display:none">
+        <img ref="conf1" src="@/assets/images/BaseStation.png">
+        <img ref="conf2" src="@/assets/images/BaseStation.png">
+        <img ref="conf3" src="@/assets/images/BaseStation.png">
+        <img ref="conf4" src="@/assets/images/local_dw.png">
+     </div>
   </div>
 </template>
 <script>
@@ -9,86 +14,97 @@
     export default {
         data () {
             return {
-                   value2: '',
-                   transfer:false,
-                   data2: []
+                   x1:400,
+                   y1:200,
+                   d1:80,
+                   x2:170,
+                   y2:150,
+                   d2:70,
+                   x3:220,
+                   y3:220,
+                   d3:70,
+             
             }
         },
         mounted(){
-          this.handleSearch2();
+            console.info(this.trilateration);
+             this.initcanvas();
+             let _this =this;
+             setInterval(function (){
+                _this.d1+=10;
+              _this.initcanvas();
+              }, 1000);
         },
-        components:{
-           
+        components:{  
         },
         methods: {
-             handleSearch2 () {
-                 document.getElementById("button").addEventListener("click", function() {
-                    // 记录任务开始时间
-                    let now = Date.now();
-                    // 插入一万条数据
-                    const total = 10000;
-                    // 获取容器
-                    let ul = document.getElementById("container");
-                    // 将数据插入容器中
-                    
-                    for (let i = 0; i < total; i++) {
-                        let li = document.createElement("li");
-                        li.innerText = ~~(Math.random() * total);
-                        ul.appendChild(li);
-                    }
-                    
-                    setTimeout(() => {
-                        console.log("总运行时间：", Date.now() - now);
-                    }, 0);
-                    console.log("JS运行时间：", Date.now() - now);
-                    });
+          initcanvas(){
+          
+              var c=document.getElementById("myCanvas");
+              var ctx=c.getContext("2d");
+                  c.height=c.height;        
 
+                ctx.beginPath();
+                ctx.arc(this.x1,this.y1,this.d1,0, Math.PI * 2, false);
+                ctx.stroke();
+                let img1 = this.$refs.conf1
+                ctx.drawImage(img1, this.x1-15,this.y1-39)
+                
+
+
+                ctx.beginPath();
+                ctx.arc(this.x2,this.y2,this.d2,0, Math.PI * 2, false);
+                ctx.stroke();
+
+                let img2= this.$refs.conf2
+                ctx.drawImage(img2, this.x2-15,this.y2-39);
+              
+
+                ctx.beginPath();
+                ctx.arc(this.x3,this.y3,this.d3,0, Math.PI * 2, false);
+                ctx.stroke();
+                let img3 = this.$refs.conf3
+                ctx.drawImage(img3, this.x3-15,this.y3-39);
+             
+
+                let img = this.$refs.conf4
+                ctx.drawImage(img, this.trilateration.x-15,this.trilateration.y-32);
+                
+
+          }
+           
+        },
+        computed:{
+            trilateration(){
+                let x=0,y=0;
+                 let a11 = 2*(this.x1-this.x3);
+                 let a12 = 2*(this.y1-this.y3);
+                 let b1=Math.pow(this.x1,2)-Math.pow(this.x3,2) +Math.pow(this.y1,2)-Math.pow(this.y3,2) +Math.pow(this.d3,2)-Math.pow(this.d1,2);
+                 let a21 = 2*(this.x2-this.x3);
+                 let a22 = 2*(this.y2-this.y3);
+                 let b2 = Math.pow(this.x2,2)-Math.pow(this.x3,2) +Math.pow(this.y2,2)-Math.pow(this.y3,2) +Math.pow(this.d3,2)-Math.pow(this.d2,2);
+                     x=(b1*a22-a12*b2)/(a11*a22-a12*a21);
+                     y=(a11*b2-b1*a21)/(a11*a22-a12*a21);
+                return {'x':x,'y':y};
             }
         }
     }
 </script>
 <style scoped>
-.ivu-select-item div span:nth-child(1){
-    float: left;
-    width: 20px;
-    margin-top: -5px;
-    margin-left: -15px;
-}
-
-.ivu-select-item div span:nth-child(2){
-      margin-left: 10px;
-   
-}
-.ivu-select-item{
-    text-align: left;
-    font-size: 14px !important;
-}
-</style>
-<style >
- .demo-auto-complete-item{
-        padding: 4px 0;
-        border-bottom: 1px solid #F6F6F6;
+   *{
+            margin: 0;
+            padding:0;
+			}
+			canvas{
+				/*background: black;*/
+				border: 2px solid #999 ;
+	}
+    #scalet{
+        width: 100%;
+        height: 100%;
     }
-    .demo-auto-complete-group{
-        font-size: 12px;
-        padding: 4px 6px;
-    }
-    .demo-auto-complete-group span{
-        color: #666;
-        font-weight: bold;
-    }
-    .demo-auto-complete-group a{
-        float: right;
-    }
-    .demo-auto-complete-count{
-        float: right;
-        color: #999;
-    }
-    .demo-auto-complete-more{
-        display: block;
-        margin: 0 auto;
-        padding: 4px;
-        text-align: center;
-        font-size: 12px;
+    #myCanvas{
+        left: 0;
+        top: 0;
     }
 </style>

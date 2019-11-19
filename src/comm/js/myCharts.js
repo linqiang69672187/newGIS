@@ -33,6 +33,59 @@ const install = function(Vue) {
 
                         this.chart.setOption(optionData);
                     },
+                    scatter:function(id,x1,y1,x2,y2,x3,y3){
+                        this.chart = echarts.init(document.getElementById(id));
+                        this.chart.clear();
+                        const  option = {
+                            xAxis: {},
+                            yAxis: {},
+                            series: [{
+                                symbolSize: 30,
+                                data: [
+                                    [x1, y1],
+                                    [x2, y2],
+                                    [x3, y3],              
+                                ],
+                                type: 'scatter',
+                                itemStyle: {
+                                    normal: {
+                                        shadowBlur: 10,
+                                        shadowColor: 'rgba(25, 100, 150, 0.5)',
+                                        shadowOffsetY: 5,
+                                        color: new echarts.graphic.RadialGradient(0.4, 0.3, 1, [{
+                                            offset: 0,
+                                            color: 'rgb(129, 227, 238)'
+                                        }, {
+                                            offset: 1,
+                                            color: 'rgb(25, 183, 207)'
+                                        }])
+                                    }
+                                }
+                            },
+                            {
+                                symbolSize: 5,
+                                data: [
+                                    [0, 0],     
+                                  
+                                ],
+                                type: 'scatter'
+                            }
+                                
+                        ]
+                        };
+                        this.chart.setOption(option);
+                        let that =this;
+                        let updatedata = function(d1,d2,d3,trilateration){
+                            option.series[1].data.pop();
+                            option.series[1].data.push([trilateration.x,trilateration.y])
+
+                            that.chart.setOption(option);
+                         };
+                                      
+                      
+                        return updatedata;
+
+                    },
                     dynamicline:function(id){
                         this.chart = echarts.init(document.getElementById(id));
                         this.chart.clear();                                          
