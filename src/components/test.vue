@@ -1,11 +1,11 @@
 <template>
   <div id="scalet">
-      <canvas @click="startcompute" id="myCanvas" height="300px" width="800px"></canvas>
+      <div>(x:{{(x1/20).toFixed(2)}},y:{{(y1/20).toFixed(2)}},距离:{{(d1/20).toFixed(2)}})，(x:{{(x2/20).toFixed(2)}},y:{{(y2/20).toFixed(2)}},距离:{{(d2/20).toFixed(2)}})，(x:{{(x3/20).toFixed(2)}},y:{{(y3/20).toFixed(2)}},距离:{{(d3/20).toFixed(2)}})</div>
+     <div class="distanc">计算结果---x:{{(trilateration.x/20).toFixed(2)}},y:{{(trilateration.y/20).toFixed(2)}}</div>
+      <canvas @click="startcompute" id="myCanvas" height="940px" width="1020px"></canvas>
       <div style="display:none">
         <img ref="conf1" src="@/assets/images/BaseStation.png">
-        <img ref="conf2" src="@/assets/images/BaseStation.png">
-        <img ref="conf3" src="@/assets/images/BaseStation.png">
-        <img ref="conf4" src="@/assets/images/local_dw.png">
+        <img ref="conf" src="@/assets/images/local_dw.png">
      </div>
      
   </div>
@@ -14,17 +14,17 @@
 
     export default {
         data () {
-            return {
+            return {//47米，51米  ,20倍放大1:20
                    x1:400,   //第一个基站
-                   y1:100,
+                   y1:200,
                    d1:80,
 
                    x2:170,  //第二个基站
-                   y2:150,
+                   y2:250,
                    d2:70,
 
                    x3:220,  //第三个基站
-                   y3:220,
+                   y3:320,
                    d3:70,
              
             }
@@ -42,7 +42,18 @@
           
               var c=document.getElementById("myCanvas");
               var ctx=c.getContext("2d");
-                  c.height=c.height;        
+                  c.height=c.height;  
+                  
+                ctx.fillText("0,0", 0, 10); 
+                for (let i=1;i<11;i++){
+                    ctx.fillText(i*5+"米", i*100, 10); 
+                    ctx.fillText(i*5+"米", 0, 100*i);   
+                } 
+               
+
+                  
+                
+
 
                 ctx.beginPath();
                 ctx.arc(this.x1,this.y1,this.d1,0, Math.PI * 2, false);
@@ -50,32 +61,36 @@
                 let img1 = this.$refs.conf1
                 ctx.drawImage(img1, this.x1-15,this.y1-39)
                 
-                ctx.moveTo(this.x1,this.y1); 
-                ctx.lineTo(this.trilateration.x,this.trilateration.y);   
-                ctx.stroke(); 
+                
+             
 
                 ctx.beginPath();
                 ctx.arc(this.x2,this.y2,this.d2,0, Math.PI * 2, false);
                 ctx.stroke();
 
-                let img2= this.$refs.conf2
-                ctx.drawImage(img2, this.x2-15,this.y2-39);
+                ctx.drawImage(img1, this.x2-15,this.y2-39);
 
-                ctx.moveTo(this.x2,this.y2); 
-                ctx.lineTo(this.trilateration.x,this.trilateration.y);   
-                ctx.stroke(); 
-
+             
 
 
                 ctx.beginPath();
                 ctx.arc(this.x3,this.y3,this.d3,0, Math.PI * 2, false);
                 ctx.stroke();
-                let img3 = this.$refs.conf3
-                ctx.drawImage(img3, this.x3-15,this.y3-39);
+           
+                ctx.drawImage(img1, this.x3-15,this.y3-39);
             
-                let img = this.$refs.conf4
+                let img = this.$refs.conf
                 ctx.drawImage(img, this.trilateration.x-15,this.trilateration.y-32);
 
+               
+                ctx.moveTo(this.x1,this.y1); 
+                ctx.lineTo(this.trilateration.x,this.trilateration.y);   
+                ctx.stroke(); 
+                   
+                ctx.moveTo(this.x2,this.y2); 
+                ctx.lineTo(this.trilateration.x,this.trilateration.y);   
+                ctx.stroke(); 
+    
                 ctx.moveTo(this.x3,this.y3); 
                 ctx.lineTo(this.trilateration.x,this.trilateration.y);   
                 ctx.stroke(); 
@@ -117,10 +132,11 @@
     #scalet{
         width: 100%;
         height: 100%;
-        margin-top: 20px;
+        font-size: 14px;
     }
     #myCanvas{
         left: 0;
         top: 0px;
     }
+   
 </style>
