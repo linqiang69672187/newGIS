@@ -52,8 +52,8 @@ Vue.component('i-switch', Switch)
  
               var ctx=c.getContext("2d");
               var ctxline=c.getContext("2d");
-   
                   c.height=c.height;  
+                  
                   ctx.fillStyle='#000';
                   ctx.fillRect(0,0,1020,940);
 
