@@ -1,11 +1,11 @@
 <template>
   <div id="scalet">
-      <div>(x:{{(x1/20).toFixed(2)}},y:{{(y1/20).toFixed(2)}},距离:{{(d1/20).toFixed(2)}})，(x:{{(x2/20).toFixed(2)}},y:{{(y2/20).toFixed(2)}},距离:{{(d2/20).toFixed(2)}})，(x:{{(x3/20).toFixed(2)}},y:{{(y3/20).toFixed(2)}},距离:{{(d3/20).toFixed(2)}})</div>
      <div class="distanc">计算结果---x:{{(trilateration.x/20).toFixed(2)}},y:{{(trilateration.y/20).toFixed(2)}}</div>
       <canvas @click="startcompute" id="myCanvas" height="940px" width="1020px"></canvas>
       <div style="display:none">
         <img ref="conf1" src="@/assets/images/BaseStation.png">
         <img ref="conf" src="@/assets/images/local_dw.png">
+        <img ref="conf2" src="@/assets/images/north.png">
      </div>
      
   </div>
@@ -16,7 +16,7 @@
         data () {
             return {//47米，51米  ,20倍放大1:20
                    x1:400,   //第一个基站
-                   y1:200,
+                   y1:120,
                    d1:80,
 
                    x2:170,  //第二个基站
@@ -42,8 +42,26 @@
           
               var c=document.getElementById("myCanvas");
               var ctx=c.getContext("2d");
+              var ctxline=c.getContext("2d");
                   c.height=c.height;  
                   
+                let img2 = this.$refs.conf2
+                 ctx.drawImage(img2, 800,0)
+
+
+                 ctxline.moveTo(this.x1,this.y1); 
+                ctxline.lineTo(this.trilateration.x,this.trilateration.y);   
+                ctxline.stroke(); 
+              
+                ctxline.strokeStyle="blue"; 
+                ctxline.moveTo(this.x2,this.y2); 
+                ctxline.lineTo(this.trilateration.x,this.trilateration.y);   
+                ctxline.stroke(); 
+    
+                ctxline.moveTo(this.x3,this.y3); 
+                ctxline.lineTo(this.trilateration.x,this.trilateration.y);   
+                ctxline.stroke(); 
+
                 ctx.fillText("0,0", 0, 10); 
                 for (let i=1;i<11;i++){
                     ctx.fillText(i*5+"米", i*100, 10); 
@@ -54,14 +72,15 @@
                   
                 
 
-
+                ctx.strokeStyle="#000"; 
                 ctx.beginPath();
                 ctx.arc(this.x1,this.y1,this.d1,0, Math.PI * 2, false);
                 ctx.stroke();
                 let img1 = this.$refs.conf1
+
                 ctx.drawImage(img1, this.x1-15,this.y1-39)
-                
-                
+                ctx.fillText("X:"+(this.x1/20).toFixed(2)+',Y:'+(this.y1/20).toFixed(2), this.x1-25,this.y1+20); 
+
              
 
                 ctx.beginPath();
@@ -69,37 +88,46 @@
                 ctx.stroke();
 
                 ctx.drawImage(img1, this.x2-15,this.y2-39);
+                ctx.fillText("X:"+(this.x2/20).toFixed(2)+',Y:'+(this.y2/20).toFixed(2), this.x2-25,this.y2+20); 
+                
 
-             
+         
 
-
+               
                 ctx.beginPath();
                 ctx.arc(this.x3,this.y3,this.d3,0, Math.PI * 2, false);
                 ctx.stroke();
-           
+                
                 ctx.drawImage(img1, this.x3-15,this.y3-39);
+                ctx.fillText("X:"+(this.x3/20).toFixed(2)+',Y:'+(this.y3/20).toFixed(2), this.x3-25,this.y3+20); 
+                
+
+
             
                 let img = this.$refs.conf
                 ctx.drawImage(img, this.trilateration.x-15,this.trilateration.y-32);
+                ctx.stroke(); 
+
+
 
                
-                ctx.moveTo(this.x1,this.y1); 
-                ctx.lineTo(this.trilateration.x,this.trilateration.y);   
-                ctx.stroke(); 
-                   
-                ctx.moveTo(this.x2,this.y2); 
-                ctx.lineTo(this.trilateration.x,this.trilateration.y);   
-                ctx.stroke(); 
-    
-                ctx.moveTo(this.x3,this.y3); 
-                ctx.lineTo(this.trilateration.x,this.trilateration.y);   
-                ctx.stroke(); 
 
                 
+
+
+                ctx.font = "14px bold 黑体";
+                ctx.fillStyle = "blue";
+                ctx.fillText("距离:"+(this.d1/20).toFixed(2), (this.x1+this.trilateration.x)/2,(this.y1+this.trilateration.y)/2); 
+                ctx.fillText("距离:"+(this.d2/20).toFixed(2), (this.x2+this.trilateration.x)/2,(this.y2+this.trilateration.y)/2); 
+                ctx.fillText("距离:"+(this.d3/20).toFixed(2), (this.x3+this.trilateration.x)/2,(this.y3+this.trilateration.y)/2); 
+
+             
 
           },
           startcompute(){
               this.d1+=5;
+              this.y1+=10;
+              this.x2+=10;  
               this.initcanvas();
           }
            
