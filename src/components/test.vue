@@ -58,7 +58,8 @@ Vue.component('i-switch', Switch)
                   ctx.fillRect(0,0,1020,940);
 
 
-                  ctx.strokeStyle="#fff";    
+                  ctx.strokeStyle="#fff"; 
+           
                  for (let i=1;i<11;i++){
             
                     ctx.moveTo(i*100,0); 
@@ -66,9 +67,10 @@ Vue.component('i-switch', Switch)
                     ctx.moveTo(0,i*100); 
                     ctx.lineTo(1020,i*100); 
                     
-                    ctx.stroke(); 
+                  
                 } 
-
+                  ctx.stroke(); 
+               
 
 
                 let img2 = this.$refs.conf2
