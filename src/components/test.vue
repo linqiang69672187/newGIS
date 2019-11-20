@@ -1,6 +1,9 @@
 <template>
   <div id="scalet">
-     <div class="distanc">计算结果---x:{{(trilateration.x/20).toFixed(2)}},y:{{(trilateration.y/20).toFixed(2)}}</div>
+     <div class="distanc"><i-switch   @on-change="initcanvas" v-model="userStatus"  size="large">
+                                        <span slot="open">开启参考线</span>
+                                        <span slot="close">关闭参考线</span>
+                                    </i-switch>计算结果---x:{{(trilateration.x/20).toFixed(2)}},y:{{(trilateration.y/20).toFixed(2)}}</div>
       <canvas @click="startcompute" id="myCanvas" height="940px" width="1020px"></canvas>
       <div style="display:none">
         <img ref="conf1" src="@/assets/images/BaseStation.png">
@@ -11,7 +14,9 @@
   </div>
 </template>
 <script>
-
+import Vue from 'vue'
+import { Switch } from 'iview'
+Vue.component('i-switch', Switch)
     export default {
         data () {
             return {//47米，51米  ,20倍放大1:20
@@ -26,6 +31,7 @@
                    x3:220,  //第三个基站
                    y3:320,
                    d3:70,
+                   userStatus:true,
              
             }
         },
@@ -35,25 +41,69 @@
            
              
         },
-        components:{  
-        },
+         components:{
+           Switch,
+
+         },
         methods: {
           initcanvas(){
           
               var c=document.getElementById("myCanvas");
+ 
               var ctx=c.getContext("2d");
               var ctxline=c.getContext("2d");
+   
                   c.height=c.height;  
-                  
+                  ctx.fillStyle='#000';
+                  ctx.fillRect(0,0,1020,940);
+
+
+                   ctx.strokeStyle="#fff";    
+                 for (let i=1;i<11;i++){
+            
+                    ctx.moveTo(i*100,0); 
+                    ctx.lineTo(i*100,940); 
+                    ctx.moveTo(0,i*100); 
+                    ctx.lineTo(1020,i*100); 
+                    
+                    ctx.stroke(); 
+                } 
+
+
+
                 let img2 = this.$refs.conf2
-                 ctx.drawImage(img2, 800,0)
+                ctx.drawImage(img2, 800,0)
 
 
-                 ctxline.moveTo(this.x1,this.y1); 
+
+                ctx.fillStyle='#fff';
+
+                ctx.fillText("0,0", 0, 10); 
+                for (let i=1;i<11;i++){
+                    ctx.fillText(i*5+"米", i*100, 10); 
+                    ctx.fillText(i*5+"米", 0, 100*i); 
+               
+                } 
+               
+
+                  
+                
+
+              
+                let img1 = this.$refs.conf1
+
+                ctx.drawImage(img1, this.x1-15,this.y1-39)
+                ctx.fillText("X:"+(this.x1/20).toFixed(2)+',Y:'+(this.y1/20).toFixed(2), this.x1-25,this.y1+20); 
+
+             
+                if (this.userStatus){
+                    
+
+                ctxline.moveTo(this.x1,this.y1); 
                 ctxline.lineTo(this.trilateration.x,this.trilateration.y);   
                 ctxline.stroke(); 
               
-                ctxline.strokeStyle="blue"; 
+            
                 ctxline.moveTo(this.x2,this.y2); 
                 ctxline.lineTo(this.trilateration.x,this.trilateration.y);   
                 ctxline.stroke(); 
@@ -62,65 +112,40 @@
                 ctxline.lineTo(this.trilateration.x,this.trilateration.y);   
                 ctxline.stroke(); 
 
-                ctx.fillText("0,0", 0, 10); 
-                for (let i=1;i<11;i++){
-                    ctx.fillText(i*5+"米", i*100, 10); 
-                    ctx.fillText(i*5+"米", 0, 100*i);   
-                } 
-               
-
-                  
-                
-
-                ctx.strokeStyle="#000"; 
+                ctx.strokeStyle="#fff"; 
                 ctx.beginPath();
                 ctx.arc(this.x1,this.y1,this.d1,0, Math.PI * 2, false);
                 ctx.stroke();
-                let img1 = this.$refs.conf1
-
-                ctx.drawImage(img1, this.x1-15,this.y1-39)
-                ctx.fillText("X:"+(this.x1/20).toFixed(2)+',Y:'+(this.y1/20).toFixed(2), this.x1-25,this.y1+20); 
-
-             
-
                 ctx.beginPath();
                 ctx.arc(this.x2,this.y2,this.d2,0, Math.PI * 2, false);
-                ctx.stroke();
-
-                ctx.drawImage(img1, this.x2-15,this.y2-39);
-                ctx.fillText("X:"+(this.x2/20).toFixed(2)+',Y:'+(this.y2/20).toFixed(2), this.x2-25,this.y2+20); 
-                
-
-         
-
-               
+                ctx.stroke();      
                 ctx.beginPath();
                 ctx.arc(this.x3,this.y3,this.d3,0, Math.PI * 2, false);
                 ctx.stroke();
+
+             }
+               
+
+                 ctx.drawImage(img1, this.x2-15,this.y2-39);
+                ctx.fillText("X:"+(this.x2/20).toFixed(2)+',Y:'+(this.y2/20).toFixed(2), this.x2-25,this.y2+20); 
                 
+
                 ctx.drawImage(img1, this.x3-15,this.y3-39);
                 ctx.fillText("X:"+(this.x3/20).toFixed(2)+',Y:'+(this.y3/20).toFixed(2), this.x3-25,this.y3+20); 
                 
-
+             
 
             
                 let img = this.$refs.conf
                 ctx.drawImage(img, this.trilateration.x-15,this.trilateration.y-32);
                 ctx.stroke(); 
-
-
-
-               
-
-                
-
-
+             if (this.userStatus){
                 ctx.font = "14px bold 黑体";
-                ctx.fillStyle = "blue";
+                ctx.fillStyle = "#fff";
                 ctx.fillText("距离:"+(this.d1/20).toFixed(2), (this.x1+this.trilateration.x)/2,(this.y1+this.trilateration.y)/2); 
                 ctx.fillText("距离:"+(this.d2/20).toFixed(2), (this.x2+this.trilateration.x)/2,(this.y2+this.trilateration.y)/2); 
                 ctx.fillText("距离:"+(this.d3/20).toFixed(2), (this.x3+this.trilateration.x)/2,(this.y3+this.trilateration.y)/2); 
-
+                }
              
 
           },
