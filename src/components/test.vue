@@ -1,8 +1,8 @@
 <template>
   <div id="scalet">
      <div class="distanc"><i-switch   @on-change="initcanvas" v-model="userStatus"  size="large">
-                                        <span slot="open">开启参考线</span>
-                                        <span slot="close">关闭参考线</span>
+                                        <span slot="open">开启</span>
+                                        <span slot="close">关闭</span>
                                     </i-switch>计算结果---x:{{(trilateration.x/20).toFixed(2)}},y:{{(trilateration.y/20).toFixed(2)}}</div>
       <canvas @click="startcompute" id="myCanvas" height="940px" width="1020px"></canvas>
       <div style="display:none">
@@ -58,7 +58,7 @@ Vue.component('i-switch', Switch)
                   ctx.fillRect(0,0,1020,940);
 
 
-                   ctx.strokeStyle="#fff";    
+                  ctx.strokeStyle="#fff";    
                  for (let i=1;i<11;i++){
             
                     ctx.moveTo(i*100,0); 
@@ -126,7 +126,7 @@ Vue.component('i-switch', Switch)
              }
                
 
-                 ctx.drawImage(img1, this.x2-15,this.y2-39);
+                ctx.drawImage(img1, this.x2-15,this.y2-39);
                 ctx.fillText("X:"+(this.x2/20).toFixed(2)+',Y:'+(this.y2/20).toFixed(2), this.x2-25,this.y2+20); 
                 
 
@@ -137,7 +137,7 @@ Vue.component('i-switch', Switch)
 
             
                 let img = this.$refs.conf
-                ctx.drawImage(img, this.trilateration.x-15,this.trilateration.y-32);
+                ctx.drawImage(img, this.trilateration.x-32,this.trilateration.y-64);
                 ctx.stroke(); 
              if (this.userStatus){
                 ctx.font = "14px bold 黑体";
@@ -151,8 +151,7 @@ Vue.component('i-switch', Switch)
           },
           startcompute(){
               this.d1+=5;
-              this.y1+=10;
-              this.x2+=10;  
+            
               this.initcanvas();
           }
            
