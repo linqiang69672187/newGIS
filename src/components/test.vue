@@ -1,10 +1,14 @@
 <template>
   <div id="scalet">
-     <div class="distanc"><i-switch   @on-change="initcanvas" v-model="userStatus"  size="large">
+     <div v-if="showline" class="distanc">比例：1:20<br/> 是否开启参考线<i-switch   @on-change="initcanvas" v-model="userStatus"  size="large">
                                         <span slot="open">开启</span>
                                         <span slot="close">关闭</span>
-                                    </i-switch>计算结果---x:{{(trilateration.x/20).toFixed(2)}},y:{{(trilateration.y/20).toFixed(2)}}</div>
-      <canvas @click="startcompute" id="myCanvas" height="940px" width="1020px"></canvas>
+                                    </i-switch><br/> 坐标位置计算结果-x:{{(trilateration.x/20).toFixed(2)}},y:{{(trilateration.y/20).toFixed(2)}}</div> 
+     
+
+      
+      <canvas @click="startcompute" id="myCanvas" height="940px" width="1020px">
+      </canvas>
       <div style="display:none">
         <img ref="conf1" src="@/assets/images/BaseStation.png">
         <img ref="conf" src="@/assets/images/local_dw.png">
@@ -17,33 +21,41 @@
 import Vue from 'vue'
 import { Switch } from 'iview'
 Vue.component('i-switch', Switch)
+
     export default {
         data () {
             return {//47米，51米  ,20倍放大1:20
                    x1:400,   //第一个基站
                    y1:120,
-                   d1:80,
+                   d1:0,
 
                    x2:170,  //第二个基站
                    y2:250,
-                   d2:70,
+                   d2:0,
 
                    x3:220,  //第三个基站
                    y3:320,
-                   d3:70,
+                   d3:0,
                    userStatus:true,
+                   inter:null,
+                   showline:true,
              
             }
         },
         mounted(){
+            let _this = this;
             console.info(this.trilateration);
-             this.initcanvas();
-           
+            this.initcanvas();
+           this.inter = setInterval(() => {
+               _this.interLoadData();
+           }, 1000);
              
+        },
+        destroyed(){
+            clearInterval(this.inter);
         },
          components:{
            Switch,
-
          },
         methods: {
           initcanvas(){
@@ -53,7 +65,7 @@ Vue.component('i-switch', Switch)
               var ctx=c.getContext("2d");
               var ctxline=c.getContext("2d");
                   c.height=c.height;  
-                  
+
                   ctx.fillStyle='#000';
                   ctx.fillRect(0,0,1020,940);
 
@@ -71,10 +83,10 @@ Vue.component('i-switch', Switch)
                 } 
                   ctx.stroke(); 
                
-
-
-                let img2 = this.$refs.conf2
+                let img2 = this.$refs.conf2    
                 ctx.drawImage(img2, 800,0)
+                
+               
 
 
 
@@ -152,15 +164,33 @@ Vue.component('i-switch', Switch)
 
           },
           startcompute(){
-              this.d1+=5;
+              this.showline=!this.showline;
             
-              this.initcanvas();
-          }
+          },
+         interLoadData(){
+             let _this = this;
+              Vue.axios.get('/app/data/json/Indoor_position.json', { // ，/app/data/json/Indoor_position.json，/Handlers/Indoor_position.ashx，
+                            params: {
+                                times:new Date().getTime(),
+                            }
+                          }).then((res) => {
+ 
+                             _this.d1 =parseFloat(res.data[0].distance)*20;
+                             _this.d2 =parseFloat(res.data[1].distance)*20;
+                             _this.d3 =parseFloat(res.data[2].distance)*20; 
+                             _this.initcanvas();
+
+                          }).catch((err) => {
+                          console.log(err)
+                           
+                   })
+
+           },
            
         },
         computed:{
             trilateration(){
-                let x=0,y=0;
+                 let x=0,y=0;
                  let a11 = 2*(this.x1-this.x3);
                  let a12 = 2*(this.y1-this.y3);
                  let b1=Math.pow(this.x1,2)-Math.pow(this.x3,2) +Math.pow(this.y1,2)-Math.pow(this.y3,2) +Math.pow(this.d3,2)-Math.pow(this.d1,2);
@@ -188,10 +218,21 @@ Vue.component('i-switch', Switch)
         height: 100%;
         font-size: 14px;
         overflow-y: auto;
+        text-align: left;
+        background-color: black;
     }
     #myCanvas{
         left: 0;
         top: 0px;
+    }
+    .distanc{
+        text-align: left;
+        margin-left: 10px;
+        position: absolute;
+        right:10px;
+        bottom:  10px;
+        color: #fff;
+    
     }
    
 </style>
