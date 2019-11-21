@@ -36,9 +36,9 @@ Vue.component('i-switch', Switch)
                    x3:220,  //第三个基站
                    y3:320,
                    d3:0,
-                   userStatus:true,
+                   userStatus:false,
                    inter:null,
-                   showline:true,
+                   showline:false,
              
             }
         },
@@ -84,7 +84,7 @@ Vue.component('i-switch', Switch)
                   ctx.stroke(); 
                
                 let img2 = this.$refs.conf2    
-                ctx.drawImage(img2, 750,0)
+                ctx.drawImage(img2, 0,0)
                 
                
 
