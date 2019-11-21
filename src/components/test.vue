@@ -84,7 +84,7 @@ Vue.component('i-switch', Switch)
                   ctx.stroke(); 
                
                 let img2 = this.$refs.conf2    
-                ctx.drawImage(img2, 800,0)
+                ctx.drawImage(img2, 750,0)
                 
                
 
@@ -169,7 +169,7 @@ Vue.component('i-switch', Switch)
           },
          interLoadData(){
              let _this = this;
-              Vue.axios.get('/app/data/json/Indoor_position.json', { // ，/app/data/json/Indoor_position.json，/Handlers/Indoor_position.ashx，
+              Vue.axios.get('/Handlers/Indoor_position.ashx', { // ，/app/data/json/Indoor_position.json，/Handlers/Indoor_position.ashx，
                             params: {
                                 times:new Date().getTime(),
                             }
@@ -211,7 +211,7 @@ Vue.component('i-switch', Switch)
 			}
 			canvas{
 				/*background: black;*/
-				border: 2px solid #999 ;
+				border: 1px solid #999 ;
 	}
     #scalet{
         width: 100%;
@@ -227,10 +227,9 @@ Vue.component('i-switch', Switch)
     }
     .distanc{
         text-align: left;
-        margin-left: 10px;
         position: absolute;
-        right:10px;
-        bottom:  10px;
+        right:30px;
+        bottom:  20px;
         color: #fff;
     
     }
