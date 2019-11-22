@@ -1,9 +1,16 @@
 <template>
   <div id="scalet">
-     <div v-if="showline" class="distanc">比例：1:20<br/> 是否开启参考线<i-switch   @on-change="initcanvas" v-model="userStatus"  size="large">
-                                        <span slot="open">开启</span>
-                                        <span slot="close">关闭</span>
-                                    </i-switch><br/> 坐标位置计算结果-x:{{(trilateration.x/20).toFixed(2)}},y:{{(trilateration.y/20).toFixed(2)}}</div> 
+     <div v-if="showline" class="distanc">
+         比例尺：1:20<br/>  定位:
+         <i-switch   @on-change="initcanvas" v-model="openlocal"  size="large">
+          <span slot="open">开启</span>
+          <span slot="close">关闭</span>
+        </i-switch><br/>参考线:
+         <i-switch   @on-change="initcanvas" v-model="userStatus"  size="large">
+          <span slot="open">开启</span>
+          <span slot="close">关闭</span>
+        </i-switch><br/>
+        坐标:({{(trilateration.x/20).toFixed(2)}},{{(trilateration.y/20).toFixed(2)}})</div> 
      
 
       
@@ -39,6 +46,7 @@ Vue.component('i-switch', Switch)
                    userStatus:false,
                    inter:null,
                    showline:false,
+                   openlocal:false,
              
             }
         },
@@ -151,7 +159,9 @@ Vue.component('i-switch', Switch)
 
             
                 let img = this.$refs.conf
+                if(this.openlocal){
                 ctx.drawImage(img, this.trilateration.x-32,this.trilateration.y-64);
+                }
                 ctx.stroke(); 
              if (this.userStatus){
                 ctx.font = "14px bold 黑体";
@@ -175,9 +185,9 @@ Vue.component('i-switch', Switch)
                             }
                           }).then((res) => {
  
-                             _this.d1 =parseFloat(res.data[0].distance)*20;
-                             _this.d2 =parseFloat(res.data[1].distance)*20;
-                             _this.d3 =parseFloat(res.data[2].distance)*20; 
+                             _this.d1 = parseFloat(res.data[0].distance)*20;
+                             _this.d2 = parseFloat(res.data[1].distance)*20;
+                             _this.d3 = parseFloat(res.data[2].distance)*20; 
                              _this.initcanvas();
 
                           }).catch((err) => {
@@ -232,6 +242,9 @@ Vue.component('i-switch', Switch)
         bottom:  20px;
         color: #fff;
     
+    }
+    span{
+        margin-bottom: 5px;
     }
    
 </style>

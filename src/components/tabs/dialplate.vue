@@ -98,7 +98,7 @@
                             </div>
                         </li>
                        
-                        <li v-if="showsingalcall" @mouseup="SCEASEDPTT()" @mousedown="StartSCall()">
+                        <li v-show="showsingalcall" @mouseup="SCEASEDPTT()" @mousedown="StartSCall()">
                             <div  v-ripple="'rgba(255, 255, 255, 0.35)'">
                                       <div >
                             <i class="material-icons">mic</i>
@@ -107,18 +107,18 @@
                             </div>
                             </li>
                         
-                        <li v-if="showgroupcall" @mouseup="GCEASEDPTT()" @mousedown="startGCall()"><div >
+                        <li v-show="showgroupcall" @mouseup="GCEASEDPTT()" @mousedown="startGCall()"><div >
                             <div  v-ripple="'rgba(255, 255, 255, 0.35)'"> <i class="material-icons">group</i></div>
                             <div v-html="language.groupcall"></div>
                             </div></li>                       
                         
-                        <li v-if="iscalling" @click="endcall">
+                        <li v-show="iscalling" @click="endcall">
                             <div class="endcall"  v-ripple="'rgba(255, 255, 255, 0.35)'">
                                 <div > <i class="material-icons">call_end</i></div>
                             <div v-html="language.call_end"></div>
                         </div></li>
                         
-                        <li  @mouseup="releasePTT" @mousedown="PTT" v-if="isptt">
+                        <li v-show="isptt"  @mouseup="releasePTT" @mousedown="PTT" >
                             <div class="Ptt"  v-ripple="'rgba(255, 255, 255, 0.35)'">
                                 <div><i class="material-icons">flash_on</i></div>
                                 <div v-html="language.PTT"></div>
@@ -408,6 +408,7 @@ export default {
      StartSCall() { //开始半双工单呼
            let scactionX = document.getElementById("SCactionX");
            scactionX.StartSCall(this.inputnum,this.IsEncrypt);
+           console.info('开始半双工单呼');
       },
      SCEASEDPTT(){//半双工单呼释放授权
             let scactionX = document.getElementById("SCactionX");
@@ -542,6 +543,8 @@ export default {
                                  this.isptt=false;
                             }
                         }
+                        console.info(issi+','+eventtype+','+msg+','+gssi+','+hookmethodsel+'in'+issi_in);
+                        
                         break;
                     case "CC_RELEASE":
                         this.calling.forEach((item,index)=>{
