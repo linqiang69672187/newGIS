@@ -5,7 +5,19 @@
          <i-switch   @on-change="initcanvas" v-model="openlocal"  size="large">
           <span slot="open">开启</span>
           <span slot="close">关闭</span>
-        </i-switch><br/>参考线:
+          </i-switch>
+          <br/>
+          轨迹:
+         <i-switch   @on-change="initcanvas" v-model="historytrace"  size="large">
+          <span slot="open">开启</span>
+          <span slot="close">关闭</span>
+        </i-switch><Button @click="clearTrace" type="primary">清空轨迹</Button><br/>
+          坐标线:
+         <i-switch   @on-change="initcanvas" v-model="axois"  size="large">
+          <span slot="open">开启</span>
+          <span slot="close">关闭</span>
+        </i-switch><br/>
+        参考线:
          <i-switch   @on-change="initcanvas" v-model="userStatus"  size="large">
           <span slot="open">开启</span>
           <span slot="close">关闭</span>
@@ -20,13 +32,14 @@
         <img ref="conf1" src="@/assets/images/BaseStation.png">
         <img ref="conf" src="@/assets/images/local_dw.png">
         <img ref="conf2" src="@/assets/images/north.png">
+        
      </div>
      
   </div>
 </template>
 <script>
 import Vue from 'vue'
-import { Switch } from 'iview'
+import { Switch,Button } from 'iview'
 Vue.component('i-switch', Switch)
 
     export default {
@@ -47,7 +60,9 @@ Vue.component('i-switch', Switch)
                    inter:null,
                    showline:false,
                    openlocal:false,
-             
+                   historyposition:[],
+                   historytrace:false,
+                   axois:true,
             }
         },
         mounted(){
@@ -63,9 +78,12 @@ Vue.component('i-switch', Switch)
             clearInterval(this.inter);
         },
          components:{
-           Switch,
+           Switch,Button,
          },
         methods: {
+          clearTrace(){
+              this.historyposition.splice(0);
+          },
           initcanvas(){
           
               var c=document.getElementById("myCanvas");
@@ -79,18 +97,16 @@ Vue.component('i-switch', Switch)
 
 
                   ctx.strokeStyle="#fff"; 
-           
-                 for (let i=1;i<11;i++){
-            
-                    ctx.moveTo(i*100,0); 
-                    ctx.lineTo(i*100,940); 
-                    ctx.moveTo(0,i*100); 
-                    ctx.lineTo(1020,i*100); 
-                    
-                  
-                } 
-                  ctx.stroke(); 
-               
+                 if(this.axois){
+                    for (let i=1;i<11;i++){
+                
+                        ctx.moveTo(i*100,0); 
+                        ctx.lineTo(i*100,940); 
+                        ctx.moveTo(0,i*100); 
+                        ctx.lineTo(1020,i*100);    
+                    } 
+                    ctx.stroke(); 
+               }
                 let img2 = this.$refs.conf2    
                 ctx.drawImage(img2, 0,0)
                 
@@ -146,7 +162,8 @@ Vue.component('i-switch', Switch)
                 ctx.stroke();
 
              }
-               
+           
+
 
                 ctx.drawImage(img1, this.x2-15,this.y2-39);
                 ctx.fillText("X:"+(this.x2/20).toFixed(2)+',Y:'+(this.y2/20).toFixed(2), this.x2-25,this.y2+20); 
@@ -170,12 +187,20 @@ Vue.component('i-switch', Switch)
                 ctx.fillText("距离:"+(this.d2/20).toFixed(2), (this.x2+this.trilateration.x)/2,(this.y2+this.trilateration.y)/2); 
                 ctx.fillText("距离:"+(this.d3/20).toFixed(2), (this.x3+this.trilateration.x)/2,(this.y3+this.trilateration.y)/2); 
                 }
+             ctx.stroke();
+             
+              if (this.historyposition.length>0&&this.historytrace&&this.openlocal){
+               ctx.moveTo(this.historyposition[0][0],this.historyposition[0][1]); 
+                for (let i = 0; i < this.historyposition.length-1; i++) { 
+                    ctx.lineTo(this.historyposition[i+1][0],this.historyposition[i+1][1]);   
+                }
+              }
+            ctx.stroke();
              
 
           },
           startcompute(){
-              this.showline=!this.showline;
-            
+              this.showline=!this.showline;       
           },
          interLoadData(){
              let _this = this;
@@ -209,6 +234,7 @@ Vue.component('i-switch', Switch)
                  let b2 = Math.pow(this.x2,2)-Math.pow(this.x3,2) +Math.pow(this.y2,2)-Math.pow(this.y3,2) +Math.pow(this.d3,2)-Math.pow(this.d2,2);
                      x=(b1*a22-a12*b2)/(a11*a22-a12*a21);
                      y=(a11*b2-b1*a21)/(a11*a22-a12*a21);
+                this.historyposition.push([x,y]);
                 return {'x':x,'y':y};
             }
         }
@@ -246,5 +272,8 @@ Vue.component('i-switch', Switch)
     span{
         margin-bottom: 5px;
     }
-   
+   button{
+       margin-left: 5px;
+       padding: 3px;
+   }
 </style>
