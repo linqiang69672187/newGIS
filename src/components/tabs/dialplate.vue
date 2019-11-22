@@ -473,11 +473,12 @@ export default {
       },
       CallMsg(issi,eventtype,msg,gssi,hookmethodsel){
          console.info(issi+','+eventtype+','+msg+','+gssi+','+hookmethodsel);
-
+     
          if (eventtype=='10'){  //组呼
               switch (msg){
                     case "CC_CONNECT":
-                    case "CC_CONNECTACK":               
+                    case "CC_CONNECTACK": 
+                    if (gssi!=this.inputnum) return;             
                         let gssi_in=false;
                         this.calling.forEach(item=>{
                             if(item.issi==gssi){
@@ -520,7 +521,8 @@ export default {
                     case "CC_CONNECT":
                     case "CC_CONNECTACK":
                     case "CC_ALERT":
-                    case "CC_CALLPROCEEDING":    
+                    case "CC_CALLPROCEEDING": 
+                     if (issi!=this.inputnum) return;         
                         let issi_in=false;
                         this.calling.forEach(item=>{
                             if(item.issi==issi){
