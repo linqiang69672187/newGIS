@@ -17,7 +17,7 @@
           <span slot="open">开启</span>
           <span slot="close">关闭</span>
         </i-switch><br/>
-        参考线:
+        三边定位参考线:
          <i-switch   @on-change="initcanvas" v-model="userStatus"  size="large">
           <span slot="open">开启</span>
           <span slot="close">关闭</span>
@@ -47,15 +47,15 @@ Vue.component('i-switch', Switch)
             return {//47米，51米  ,20倍放大1:20
                    x1:400,   //第一个基站
                    y1:120,
-                   d1:0,
+                   d1:170,
 
                    x2:170,  //第二个基站
                    y2:250,
-                   d2:0,
+                   d2:100,
 
                    x3:220,  //第三个基站
                    y3:320,
-                   d3:0,
+                   d3:120,
                    userStatus:false,
                    inter:null,
                    showline:false,
