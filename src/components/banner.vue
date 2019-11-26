@@ -29,14 +29,17 @@
                 -->
                 </a></li>
                  
-                <li @click="view_sms"><a>
+                <li class="sms"  @click="view_sms">
+             
                 <Badge  v-if="SMSEnable"  :count="new_smscount">
-                  <i class="fas fa-envelope"></i>
-                </Badge></a></li>
+                  <a><i class="fas fa-envelope"></i></a>
+                </Badge>
+             
+                </li>
               <li><a><div>{{username}}</div></a></li>
           </ul>
       </div>
-      <div class="changewindows">{{servertime}}</div>
+      <div class="changewindows">{{language.serverlabel}}:{{servertime}}</div>
       </div>
     </div>
   <div class="trangle" @click="isshowmini=!isshowmini" :class="[isshowmini?'animated bounceInLeft':'',isshowmini==false?'animated bounceOutLeft':'']"></div>
@@ -64,9 +67,11 @@ export default {
         language:{
           bannerlab1:'单兵和车辆定位',
           bannerlab2:'指挥调度系统',
+          serverlabel:'服务器时间'
         },
         SMSEnable:true,
-        DSSEnable:true
+        DSSEnable:true,
+       
       }
     },
     props: ['isshowmini'],
@@ -133,7 +138,7 @@ export default {
          let settings =   GetTextByName("Parametersetting");
          let help =  GetTextByName("help");
          let exit =  GetTextByName("loginout");
-
+         let serverlabel =  GetTextByName("servertimeLabel");
          this.items.push(
           {name:'dispatchFunction',label:ddgn,icon:'fa-headphones',enable:true},
           {name:'servicemanager',label:qwgl,icon:'fa-address-card',enable: this.DSSEnable},
@@ -143,6 +148,7 @@ export default {
           this.language={
           bannerlab1:'',
           bannerlab2:'',
+          serverlabel:serverlabel
         }
        },
     },
@@ -190,8 +196,8 @@ html,body{
 .changewindows{
   position: absolute;
   top: 3px;
-  right: 0px;
-  width:155px;
+  right: 10px;
+
   height: 22px;
   font-size: 16px;
   line-height: 22px;
@@ -314,7 +320,11 @@ a {
 .logo div:nth-child(2) li:nth-child(2){
  letter-spacing:3px
 }
+.sms{
+  width: 60px !important;
+  z-index: 11 !important;
 
+}
 </style>
 <style>
 .banner .ivu-badge-count{

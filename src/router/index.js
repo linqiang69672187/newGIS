@@ -11,7 +11,7 @@ export default new Router({
     {
       path: '/',
       name: 'index',
-      component: test
+      component: index
     },
     {
       path: '/news',

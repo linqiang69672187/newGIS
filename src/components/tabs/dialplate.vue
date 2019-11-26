@@ -472,7 +472,7 @@ export default {
          // console.info(this.inputnum);
       },
       CallMsg(issi,eventtype,msg,gssi,hookmethodsel){
-         console.info(issi+','+eventtype+','+msg+','+gssi+','+hookmethodsel);
+       //  console.info(issi+','+eventtype+','+msg+','+gssi+','+hookmethodsel);
      
          if (eventtype=='10'){  //组呼
               switch (msg){
@@ -521,7 +521,7 @@ export default {
                     case "CC_CONNECT":
                     case "CC_CONNECTACK":
                     case "CC_ALERT":
-                    case "CC_CALLPROCEEDING": 
+                   // case "CC_CALLPROCEEDING": 
                      if (issi!=this.inputnum) return;         
                         let issi_in=false;
                         this.calling.forEach(item=>{
@@ -539,13 +539,14 @@ export default {
                             this.showsingalcall=false;
                             this.iscalling=true;
                            
-                            if (eventtype=="00"){
-                                 this.isptt=true;
-                            }else{
-                                 this.isptt=false;
-                            }
+                                if (eventtype=="00"){
+                                    this.isptt=true;
+                                }else{
+                                    this.isptt=false;
+                                }
+                            
                         }
-                        console.info(issi+','+eventtype+','+msg+','+gssi+','+hookmethodsel+'in'+issi_in);
+                       // console.info(issi+','+eventtype+','+msg+','+gssi+','+hookmethodsel+'in'+issi_in);
                         
                         break;
                     case "CC_RELEASE":

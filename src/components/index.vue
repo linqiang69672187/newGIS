@@ -1,8 +1,8 @@
 <template>
     <div id="main">
    
-        <OCX></OCX>
-           <!-- <v-contextmenu ref="contextmenu" >
+         <!-- <OCX></OCX>
+          <v-contextmenu ref="contextmenu" >
             <v-contextmenu-item @click="handleClick('拨号盘')">拨号盘</v-contextmenu-item>
             <v-contextmenu-item @click="handleClick">实时状况</v-contextmenu-item>
 
@@ -43,14 +43,14 @@
 </template>
 <script>
 import banner from "@/components/banner"
-
+import Vue from 'vue';
 import Lmenu from "@/components/Lmenu"
 import Dmenu from "@/components/Dmenu"
 import MapToolbox from "@/components/MapToolbox"
 import Callbox from "@/components/control/CallBox"
 import notice from "@/components/control/notices"
 import LeftToolbox from "@/components/control/LeftToolbox"
-import OCX from "@/components/OCX"
+//import OCX from "@/components/OCX"
 import languageset from '@/mixin/languageset'
 
 export default {
@@ -77,7 +77,7 @@ export default {
             ],
               
         isshowmini:false,
-        ocxRegStatus:true, 
+        ocxRegStatus:false, 
         DTCZEnable:true,   //动态重组权限
         SMSEnable:true,    //短信权限
         PullUp_ControlEnable:true, //GPS上拉权限
@@ -142,7 +142,7 @@ export default {
     },
     components:{
         banner,
-        OCX,
+     //   OCX,
         Lmenu,
         Dmenu,
         MapToolbox,
@@ -213,10 +213,10 @@ export default {
             }
             else
             {
-           this.$refs.dmenu.hide(true);
+            this.$refs.dmenu.hide(true);
             this.$refs.lmenu.exitfullscreen(); 
             }
-           
+          
         },
         regmsg:function(msg,dispName){
             switch (msg) {
@@ -315,6 +315,45 @@ export default {
                 this.$refs.lmenu.setlanguage();
             }
         }
+        ,  
+        updatelola(){
+      
+             if (!this.$refs.dmenu.showdmenu||this.$refs.dmenu.tabname!='eyemaps')return;
+             let issis ='';
+             for (let i=0;i<useprameters.lockids.length;i++){
+                 if (i>0){
+                     issis+=','+useprameters.lockids[i].issi;
+                 }else{
+                      issis+=useprameters.lockids[i].issi;
+                 }
+             };
+           
+            // console.info(issis)
+             if (issis=='')return;
+              Vue.axios.get('/WebGis/Service/getlolabyISSIs.ashx', { // ，/app/data/json/OnlineTerminalCountGroupByBS.json，/Handlers/MVCEasy.ashx，
+                            params: {
+                                issis:issis,
+                                temptime:new Date().getTime(),                              
+                            }
+                          }).then((res) => {
+                                  for (let n=0;i<useprameters.lockids.length;n++){
+                                       for (let i=0;i<res.data.length;i++){
+                                            if(useprameters.lockids[n].issi==res.data[i].issi){
+                                                useprameters.lockids[n].lat=res.data[i].la;
+                                                useprameters.lockids[n].lon=res.data[i].lo;
+                                                res.data.splice(i,1);
+                                                break;
+                                            }
+                                        }
+                                  }
+                       
+                         
+                          }).catch((err) => {
+                          console.log(err)
+                           
+                   })
+                    
+        } 
        
     }
 }

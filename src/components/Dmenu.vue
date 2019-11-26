@@ -120,7 +120,7 @@ import basestationchart from "@/components/tabs/basestationchart"
 
                 this.$refs.dail.setlanguage();
                 this.$refs.tabindex.setlanguage();
-                 this.$refs.basestationchart.setlanguage();
+                this.$refs.basestationchart.setlanguage();
            },
            updateuseprameters(){
                 if(useprameters.PrivateCallEnable=='0'){

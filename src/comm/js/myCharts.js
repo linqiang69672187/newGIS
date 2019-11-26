@@ -164,6 +164,7 @@ const install = function(Vue) {
                                     nameTextStyle:{
                                         color:'#fff'
                                     },
+                                    minInterval: 1, 
                                     axisLabel:{
                                         color:'#fff'
                                     },
@@ -518,7 +519,7 @@ const install = function(Vue) {
                                         type: 'value',
                                         name: '在线数量(个)',
                                         min: 0,
-                                                                    
+                                        minInterval: 1,                            
                                         splitLine: {
                                             show: false
                                         },
@@ -632,7 +633,7 @@ const install = function(Vue) {
                     Basestationecharbar:function(id){
                         this.chart = echarts.init(document.getElementById(id));
                         this.chart.clear();
-                        
+                        let autoPlayvalue =true;
                         let option = {
                             baseOption:{
                                 timeline: {
@@ -696,7 +697,7 @@ const install = function(Vue) {
                                         type: 'value',
                                         name: '在线数量(个)',
                                         min: 0,
-                                                                    
+                                        minInterval: 1,                           
                                         splitLine: {
                                             show: false
                                         },
@@ -743,6 +744,7 @@ const install = function(Vue) {
                                 option.baseOption.legend.data.push(tonlinecount);
                                 option.baseOption.series[0].name=tonlinecount;
                                 option.baseOption.yAxis[0].name=tonlinecount+"(n)";
+                                option.baseOption.timeline.autoPlay=that.autoPlayvalue;
                                 that.chart.setOption(option);
                                 return;
                             }
@@ -777,7 +779,9 @@ const install = function(Vue) {
                             that.chart.setOption(option);
                          };
                                       
-                      
+                         this.chart.on('timelinePlayChanged', function(param){
+                            autoPlayvalue = param.playState;
+                         });  
                         return updatedata;
                     },
                   

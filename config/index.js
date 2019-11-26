@@ -32,11 +32,11 @@ module.exports = {
             '^/baidu':''
         }
       },
-      '/video':{
-        target:'http://127.0.0.1:8081/video',
+      '/WebGis':{
+        target:'http://127.0.0.1:6508/WebGis',
         changeOrigin:true,
         pathRewrite:{
-            '^/video':''
+            '^/WebGis':''
         }
       },
     },

@@ -84,6 +84,7 @@ export default {
        closemap(){
              useprameters.lockids.forEach((item,index)=>{   
                             if(item.userid==this.lockdevice.userid){
+                                lockuser(this.lockdevice.userid, 0);
                                 useprameters.lockids.splice(index,1); 
                             }
                     });

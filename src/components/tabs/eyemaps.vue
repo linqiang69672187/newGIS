@@ -23,12 +23,13 @@ export default {
                     }
         },
     mounted(){
+
         this.updatelockitems();
         },
     methods:{  
             updatelockitems(){
                 this.lockitems =  useprameters.lockids;
-            },   
+            }
         },
     components: {Map},
     watch:{
