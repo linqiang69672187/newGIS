@@ -45,15 +45,15 @@ Vue.component('i-switch', Switch)
     export default {
         data () {
             return {//47米，51米  ,20倍放大1:20
-                   x1:0,   //第一个基站
+                   x1:0,   //第一个信标
                    y1:0,
                    d1:170,
 
-                   x2:0,  //第二个基站
+                   x2:0,  //第二个信标
                    y2:0,
                    d2:0,
 
-                   x3:0,  //第三个基站
+                   x3:0,  //第三个信标
                    y3:0,
                    d3:0,                  
                    Mark:[   //信标列表
@@ -203,6 +203,12 @@ Vue.component('i-switch', Switch)
               }
             ctx.stroke();
              
+               for (let i=0;i<this.Mark.length;i++){
+                    ctx.font = '38pt Arial'; //字体样式
+                    ctx.fillStyle = 'red'; //填充线样式
+                   ctx.fillText(this.Mark[i].markid, this.Mark[i].x,this.Mark[i].y); 
+                      
+                }
 
           },
           startcompute(){
