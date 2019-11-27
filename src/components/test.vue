@@ -183,7 +183,7 @@ Vue.component('i-switch', Switch)
             
                 let img = this.$refs.conf
                 if(this.openlocal){
-                ctx.drawImage(img, this.trilateration.x-32,this.trilateration.y-64);
+                ctx.drawImage(img, this.trilateration.x-12,this.trilateration.y-58);
                 }
                 ctx.stroke(); 
              if (this.userStatus){
