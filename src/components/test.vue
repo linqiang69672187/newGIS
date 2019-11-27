@@ -108,12 +108,12 @@ Vue.component('i-switch', Switch)
 
                   ctx.strokeStyle="#fff"; 
                  if(this.axois){
-                    for (let i=1;i<11;i++){
+                    for (let i=1;i<110;i++){
                 
-                        ctx.moveTo(i*100,0); 
-                        ctx.lineTo(i*100,940); 
-                        ctx.moveTo(0,i*100); 
-                        ctx.lineTo(1020,i*100);    
+                        ctx.moveTo(i*20,0); 
+                        ctx.lineTo(i*20,940); 
+                        ctx.moveTo(0,i*20); 
+                        ctx.lineTo(1020,i*20);    
                     } 
                     ctx.stroke(); 
                }
@@ -126,6 +126,7 @@ Vue.component('i-switch', Switch)
 
                 ctx.fillStyle='#fff';
 
+                ctx.strokeStyle="#333"; 
                 ctx.fillText("0,0", 0, 10); 
                 for (let i=1;i<11;i++){
                     ctx.fillText(i*5+"米", i*100, 10); 
