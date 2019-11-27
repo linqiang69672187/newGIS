@@ -94,6 +94,6 @@ function displaypolicelistsdiv(){
     console.info("displaypolicelistsdiv");
 }
 setTimeout(function(){
-    window.vue_index.init();
-    window.vue_index.updatelola();
+  //  window.vue_index.init();
+  //  window.vue_index.updatelola();
 },3000)

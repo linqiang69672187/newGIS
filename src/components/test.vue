@@ -45,17 +45,27 @@ Vue.component('i-switch', Switch)
     export default {
         data () {
             return {//47米，51米  ,20倍放大1:20
-                   x1:400,   //第一个基站
-                   y1:120,
+                   x1:0,   //第一个基站
+                   y1:0,
                    d1:170,
 
-                   x2:170,  //第二个基站
-                   y2:250,
-                   d2:100,
+                   x2:0,  //第二个基站
+                   y2:0,
+                   d2:0,
 
-                   x3:220,  //第三个基站
-                   y3:320,
-                   d3:120,
+                   x3:0,  //第三个基站
+                   y3:0,
+                   d3:0,                  
+                   Mark:[   //信标列表
+                       {markid:1,x:15.5*20,y:46*20},
+                       {markid:2,x:18*20,y:41*20},
+                       {markid:3,x:15.5*20,y:35*20},
+                       {markid:4,x:18*20,y:29*20},
+                       {markid:5,x:23*20,y:32*20},
+                       {markid:6,x:23*20,y:28*20},
+                   ], 
+
+
                    userStatus:false,
                    inter:null,
                    showline:false,
@@ -130,9 +140,12 @@ Vue.component('i-switch', Switch)
               
                 let img1 = this.$refs.conf1
 
-                ctx.drawImage(img1, this.x1-15,this.y1-39)
-                ctx.fillText("X:"+(this.x1/20).toFixed(2)+',Y:'+(this.y1/20).toFixed(2), this.x1-25,this.y1+20); 
-
+                for (let i=0;i<this.Mark.length;i++){
+                   ctx.drawImage(img1, this.Mark[i].x-15,this.Mark[i].y-39)
+                   ctx.fillText("X:"+(this.Mark[i].x/20).toFixed(2)+',Y:'+(this.Mark[i].y/20).toFixed(2), this.Mark[i].x-25,this.Mark[i].y+20); 
+                      
+                }
+               
              
                 if (this.userStatus){
                     
@@ -165,14 +178,6 @@ Vue.component('i-switch', Switch)
            
 
 
-                ctx.drawImage(img1, this.x2-15,this.y2-39);
-                ctx.fillText("X:"+(this.x2/20).toFixed(2)+',Y:'+(this.y2/20).toFixed(2), this.x2-25,this.y2+20); 
-                
-
-                ctx.drawImage(img1, this.x3-15,this.y3-39);
-                ctx.fillText("X:"+(this.x3/20).toFixed(2)+',Y:'+(this.y3/20).toFixed(2), this.x3-25,this.y3+20); 
-                
-             
 
             
                 let img = this.$refs.conf
@@ -209,10 +214,24 @@ Vue.component('i-switch', Switch)
                                 times:new Date().getTime(),
                             }
                           }).then((res) => {
- 
-                             _this.d1 = parseFloat(res.data[0].distance)*20;
-                             _this.d2 = parseFloat(res.data[1].distance)*20;
-                             _this.d3 = parseFloat(res.data[2].distance)*20; 
+                             for (let i=0;i<_this.Mark.length;i++){
+                                if (res.data[0].BsID==_this.Mark[i].markid){
+                                      _this.d1 = parseFloat(res.data[0].distance)*20;
+                                      _this.x1 = _this.Mark[i].x;
+                                      _this.y1 = _this.Mark[i].y;
+                                }
+                                 if (res.data[1].BsID==_this.Mark[i].markid){
+                                      _this.d2 = parseFloat(res.data[1].distance)*20;
+                                      _this.x2 = _this.Mark[i].x;
+                                      _this.y2 = _this.Mark[i].y;
+                                }
+
+                                if (res.data[2].BsID==_this.Mark[i].markid){
+                                      _this.d3 = parseFloat(res.data[2].distance)*20;
+                                      _this.x3 = _this.Mark[i].x;
+                                      _this.y3 = _this.Mark[i].y;
+                                }
+                             }  
                              _this.initcanvas();
 
                           }).catch((err) => {
