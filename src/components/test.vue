@@ -62,10 +62,8 @@ Vue.component('i-switch', Switch)
                        {markid:3,x:3.3*20,y:3.5*20},
                        {markid:4,x:24*20,y:2.5*20},
                        {markid:5,x:45*20,y:2.5*20},
-                       {markid:6,x:23*20,y:18*20}
+                       {markid:6,x:23*20,y:18*20},
                    ], 
-
-
                    userStatus:false,
                    inter:null,
                    showline:false,
