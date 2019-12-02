@@ -57,12 +57,12 @@ Vue.component('i-switch', Switch)
                    y3:0,
                    d3:0,                  
                    Mark:[   //信标列表
-                       {markid:1,x:15.5*20,y:46*20},
-                       {markid:2,x:18*20,y:41*20},
-                       {markid:3,x:15.5*20,y:35*20},
-                       {markid:4,x:18*20,y:29*20},
-                       {markid:5,x:23*20,y:32*20},
-                       {markid:6,x:23*20,y:28*20},
+                       {markid:1,x:3.3*20,y:46*20},
+                       {markid:2,x:3.3*20,y:27*20},
+                       {markid:3,x:3.3*20,y:3.5*20},
+                       {markid:4,x:24*20,y:2.5*20},
+                       {markid:5,x:45*20,y:2.5*20},
+                       {markid:6,x:23*20,y:18*20}
                    ], 
 
 
