@@ -47,7 +47,7 @@ Vue.component('i-switch', Switch)
             return {//47米，51米  ,20倍放大1:20
                    x1:0,   //第一个信标
                    y1:0,
-                   d1:170,
+                   d1:0,
 
                    x2:0,  //第二个信标
                    y2:0,
