@@ -57,6 +57,7 @@ import { setTimeout } from 'timers';
          //Table
          Tooltip
         },
+        props:['showdmenu','tabname'],
         methods: {
            updatedata(){
              this.updatedynamicline('111');
@@ -140,6 +141,12 @@ import { setTimeout } from 'timers';
              this.updateecharbar(0,onlinetime,onlinecount);
            },
         },
+         computed: {
+            interStatus: function () {
+                return this.showdmenu==true&&this.tabname=="realtime";
+            },
+          
+          },
         created(){
           
         },
@@ -156,8 +163,24 @@ import { setTimeout } from 'timers';
         this.interLoadData();
         this.loadinter  = setInterval(function (){
               _this.interLoadData();
+           
               }, 10000);
-        }
+        },
+        watch:{
+         interStatus:function(newval,oldval){
+           if (newval){
+              let _this=this;
+              this.interLoadData();
+              this.loadinter  = setInterval(function (){
+                    _this.interLoadData();
+           
+              }, 10000);
+           }
+           else{
+             clearInterval( this.loadinter);
+           }
+
+      }}
     }
 </script>
 <style scoped>

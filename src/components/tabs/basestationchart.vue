@@ -24,6 +24,13 @@ import { setTimeout } from 'timers';
                     loadinter:null,                       
                 }
         },
+        props:['showdmenu','tabname'],
+        computed: {
+            interStatus: function () {
+                return this.showdmenu==true&&this.tabname=="basestationchart";
+            },
+          
+          },
         components:{
          //Table
         },
@@ -71,15 +78,23 @@ import { setTimeout } from 'timers';
          clearInterval(this.loadinter);
         },
         mounted() {
-          
-    
         this.updateecharbar = this.$chart.Basestationecharbar('Basestationchart');
-        let _this=this;
-        this.interLoadData();
-        this.loadinter  = setInterval(function (){
-              _this.interLoadData();
+        }, 
+        watch:{
+         interStatus:function(newval,oldval){
+           if (newval){
+              let _this=this;
+              this.interLoadData();
+              this.loadinter  = setInterval(function (){
+                    _this.interLoadData();
+           
               }, 10000);
-        }
+           }
+           else{
+             clearInterval(this.loadinter);
+           }
+
+      }}
     }
 </script>
 <style scoped>

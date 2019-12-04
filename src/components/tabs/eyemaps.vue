@@ -2,7 +2,7 @@
     <div :style="backgroundDiv"  class="row">
         <ul>
             <li  v-for="item in lockitems" :key="item.issi"> 
-             <Map :lockdevice="item"></Map>
+             <Map :lockdevice="item" ></Map>
               
             </li>
             

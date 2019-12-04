@@ -93,7 +93,7 @@ function onClick(e, treeId, treeNode) {
 function displaypolicelistsdiv(){
     console.info("displaypolicelistsdiv");
 }
-setTimeout(function(){
-  //  window.vue_index.init();
-  //  window.vue_index.updatelola();
-},3000)
+// setTimeout(function(){
+//     window.vue_index.init();
+//     window.vue_index.updatelola();
+// },3000)
