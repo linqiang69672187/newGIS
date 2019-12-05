@@ -8,7 +8,7 @@
             <li>{{language.bannerlab2}}</li>
         </ul></div>
         </div>
-      <div class="menu" :class="[isshowmini?'animated bounceOutRight':'',isshowmini==false?'animated bounceInRight':'']">
+      <div class="vuemenu" :class="[isshowmini?'animated bounceOutRight':'',isshowmini==false?'animated bounceInRight':'']">
       <div>
           <ul>
               <li v-for="(item,key) in items" v-show="item.enable" @click="menuclk(item.name)" :key="key" :class="[(item.name==selectitem)?'selectitem':'']">
@@ -216,7 +216,7 @@ h1, h2 {
   
   color: #ffffff ;
 }
-.menu{
+.vuemenu{
 background-color: #164B77;
   height: 58px;
 }
