@@ -223,7 +223,7 @@ const install = function(Vue) {
                                 }
                             ]
                         };
-                        console.info(option);
+                       
                         this.chart.setOption(option);
                       
                         let that =this;
