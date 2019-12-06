@@ -71,7 +71,7 @@ import { setTimeout } from 'timers';
                             params: {
                                 ctrl:'DialPadDao',
                                 action: "GetTerminalOnlineInfo",
-                                times:new Date().getTime(),
+                               // times:new Date().getTime(),
                             }
                           }).then((res) => {
                           //console.info(res);

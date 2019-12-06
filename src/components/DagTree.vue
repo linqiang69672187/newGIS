@@ -1,5 +1,5 @@
 <template>
-<div class="tree">
+<div class="vuetree">
     <Tree :data="data3" @on-select-change="selectchange" @on-check-change="checkchange"	 :load-data="loadData" show-checkbox></Tree>
 </div>
 </template>
@@ -194,7 +194,7 @@ import { Tree  } from 'iview';
     }
 </script>
 <style scoped>
-.tree{
+.vuetree{
     margin: 0px;
     width: 200px;
     text-align: left;
