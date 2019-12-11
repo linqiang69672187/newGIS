@@ -67,11 +67,11 @@ import { setTimeout } from 'timers';
            interLoadData(){
              let _this = this;
 
-             Vue.axios.post('/Handlers/MVCEasy.ashx', {  //--/app/data/json/devcie.json-/Handlers/MVCEasy.ashx
+             Vue.axios.get('/Handlers/MVCEasy.ashx', {  //--/app/data/json/devcie.json-/Handlers/MVCEasy.ashx
                             params: {
                                 ctrl:'DialPadDao',
                                 action: "GetTerminalOnlineInfo",
-                               // times:new Date().getTime(),
+                                times:new Date().getTime(),
                             }
                           }).then((res) => {
                           //console.info(res);

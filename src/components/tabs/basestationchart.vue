@@ -42,7 +42,7 @@ import { setTimeout } from 'timers';
                             params: {
                                 ctrl:'DialPadDao',
                                 action: "OnlineTerminalCountGroupByBS",
-                               
+                                times:new Date().getTime(),
                             }
                           }).then((res) => {
                            
