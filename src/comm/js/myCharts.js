@@ -776,6 +776,7 @@ const install = function(Vue) {
                                 xAxis.push({data:dataxAxis});
                                 option.options.push({series:series,xAxis:xAxis});
                              }
+                             option.baseOption.timeline.autoPlay = autoPlayvalue;
                             that.chart.setOption(option);
                          };
                                       

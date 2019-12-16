@@ -336,7 +336,7 @@ export default {
                                 temptime:new Date().getTime(),                              
                             }
                           }).then((res) => {
-                                  for (let n=0;i<useprameters.lockids.length;n++){
+                                  for (let n=0;n<useprameters.lockids.length;n++){
                                        for (let i=0;i<res.data.length;i++){
                                             if(useprameters.lockids[n].issi==res.data[i].issi){
                                                 useprameters.lockids[n].lat=res.data[i].la;

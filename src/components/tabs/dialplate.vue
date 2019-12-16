@@ -134,8 +134,8 @@
     <li><Divider type="vertical" /></li>
     <li>
        <div class="dialtabs">
-       <Tabs name="commonplane" type="line" >
-       <TabPane tab="commonplane" :label="language.calling"> 
+       <Tabs   v-model='tabname'  name="commonplane" type="line" >
+       <TabPane tab="commonplane" name='calling' :label="language.calling"> 
             <div>
                 <ul class="callcomonul">
                  <li v-for="(item,key) in calling" :key="key">
@@ -144,7 +144,7 @@
                 </ul>
             </div>
         </TabPane>
-        <TabPane tab="commonplane" :label="language.usegroup"> 
+        <TabPane tab="commonplane"  name='usegroup'  :label="language.usegroup"> 
             <div>
                 <ul class="callcomonul">
                    <li v-for="(item,key) in groups" :key="key">
@@ -153,7 +153,7 @@
                 </ul>
             </div>
         </TabPane>
-        <TabPane tab="commonplane" :label="language.usedevice">
+        <TabPane tab="commonplane" name='usedevice'  :label="language.usedevice">
             <div >
                    <ul class="callcomonul">
                     <li v-for="(item,key) in users" :key="key">
@@ -162,7 +162,7 @@
                    </ul>
             </div>
         </TabPane>
-        <TabPane tab="commonplane" :label="language.contacts">
+        <TabPane tab="commonplane" name='contacts'  :label="language.contacts">
             <div>
                  <ul class="callcomonul">
                   <li v-for="(item,key) in contacts" :key="key">
@@ -216,6 +216,7 @@ export default {
       contacts:[],
       iscalling:false,
       isptt:false,
+      tabname:'calling',
       selectissi:{},
       tempcallitem:{},
       inter:null,
@@ -274,7 +275,7 @@ export default {
   props:['ocxRegStatus']
   ,
  mounted(){
-      var _this = this; 
+      let _this = this; 
       window.vue_dialplate =this; 
       
       this.$el.getElementsByClassName("ivu-input")[0].onkeydown = function(e) {           
@@ -286,12 +287,13 @@ export default {
         };
         this.initgroupandusers();//初始化常用组、个、最近联系人  
         //console.info(this.ocxRegStatus);
-        this.inter=setInterval(function (){   //5分钟同步一次常用和最近联系人
-              _this.initgroupandusers();
-            }, 300000);
+        //this.inter=setInterval(function (){   //5分钟同步一次常用和最近联系人
+        //     _this.initgroupandusers();
+        //  }, 300000);
     },
     beforeDestroy(){
-      clearInterval(this.inter);
+     // clearInterval(this.inter);
+    
   },
   computed:{
 
@@ -597,7 +599,8 @@ export default {
             this.call_Msg[key] = GetTextByName(key)
            
         }
-      }
+      },  
+      
 
 
   },
@@ -683,6 +686,10 @@ export default {
         this.isptt=false;
        
       }, 
+      tabname:function(newval,oldval){
+          if (newval==='contacts')
+                this.initgroupandusers();
+      },
      
    }
 }

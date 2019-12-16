@@ -74,7 +74,7 @@ import { setTimeout } from 'timers';
                                 times:new Date().getTime(),
                             }
                           }).then((res) => {
-                          //console.info(res);
+                          console.info(res);
                           
                           _this.praseData(res.data); 
                           }).catch((err) => {
@@ -86,14 +86,15 @@ import { setTimeout } from 'timers';
           praseData(data){
           
            
-           let onlinetime=0;
-           let onlinecount=0;
-           let deviececount=0;
-           data.forEach((item)=>{   
-                        onlinetime+=parseInt(item.onlineTime);
-                        onlinecount+=parseInt(item.onlineTerminal);
-                        deviececount+=parseInt(item.allTerminal);    
-                    });
+           let onlinetime=parseFloat(data[data.length-1].onlineTime);
+           let onlinecount=parseInt(data[data.length-1].onlineTerminal);
+           let deviececount=parseInt(data[data.length-1].allTerminal);
+          //  data.forEach((item)=>{   
+          //               onlinetime+=parseInt(item.onlineTime);
+          //               onlinecount+=parseInt(item.onlineTerminal);
+          //               deviececount+=parseInt(item.allTerminal);    
+          //           });
+
            this.updatedynamicline(onlinetime,onlinecount);
            this.updategaugeindex(onlinecount,deviececount);
            this.updateecharbar(data);
