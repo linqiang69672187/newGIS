@@ -71,7 +71,7 @@ export default {
                         {label:'GPS上报统计',icon:'insert_chart',name:'Lang_gpstj',enable:true},
                         {label:'单键报备统计',icon:'equalizer',name:'Lang_djbbtj',enable:true},
                         {label:'人员设备管理',icon:'supervisor_account',name:'Lang_UserDeviceManage',enable:true},
-                        {label:'GPS数据管理',icon:'assignment',name:'Lang_GPSDataManage',enable:true},
+                       // {label:'GPS数据管理',icon:'assignment',name:'Lang_GPSDataManage',enable:true},
                         {label:'预案管理',icon:'build',name:'Lang_emergency',enable:true},
                         {label:'实时警力',icon:'alarm_add',name:'Lang_RealTimePoliceStrength',enable:true}
             ],
@@ -190,7 +190,7 @@ export default {
                    break;
                 case "servicemanager":
                     this.lmenuitems.splice(0);
-                    for (let i = 0; i < this.lmenuitems1.length; i++) { 
+                    for (let i = 0; i < this.lmenuitems2.length; i++) { 
                     this.lmenuitems.push(this.lmenuitems2[i]) 
                     };      
                  break;
@@ -296,7 +296,7 @@ export default {
                 {label:gpssbtj,icon:'insert_chart',name:'Lang_gpstj',enable:true},
                 {label:djbbtj,icon:'equalizer',name:'Lang_djbbtj',enable:true},
                 {label:rysbgl,icon:'supervisor_account',name:'Lang_UserDeviceManage',enable:true},
-                {label:gpssjgl,icon:'assignment',name:'Lang_GPSDataManage',enable:true},
+             //   {label:gpssjgl,icon:'assignment',name:'Lang_GPSDataManage',enable:true},
                 {label:yagl,icon:'build',name:'Lang_emergency',enable:true},
                 {label:ssjl,icon:'alarm_add',name:'Lang_RealTimePoliceStrength',enable:true});
         },
