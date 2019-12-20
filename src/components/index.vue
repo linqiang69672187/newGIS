@@ -314,6 +314,7 @@ export default {
                 this.$refs.leftToolbox.setlanguage();
                 this.$refs.lmenu.setlanguage();
             }
+            console.info('耗时: '+(new Date()-profstart).toString());
         }
         ,  
         updatelola(){

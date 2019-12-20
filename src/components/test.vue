@@ -80,7 +80,15 @@ Vue.component('i-switch', Switch)
            this.inter = setInterval(() => {
                _this.interLoadData();
            }, 1000);
-             
+
+          if(typeof(Worker)!=="undefined")
+            {
+                console.info('ok')
+            }
+            else
+            {
+                console.info('ok Sorry! No Web Worker support..')
+            }
         },
         destroyed(){
             clearInterval(this.inter);

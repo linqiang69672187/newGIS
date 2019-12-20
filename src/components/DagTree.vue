@@ -203,6 +203,7 @@ import { Tree  } from 'iview';
     height: calc(100% - 30px);
     overflow: auto;
     position: relative;
+    z-index: 2;
 }
 
 </style>
