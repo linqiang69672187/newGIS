@@ -61,16 +61,16 @@ import { Tree  } from 'iview';
                 window.frames['policelists'].Displayprocessbar();//调用原来方法
                 switch(treeNode.objType){
                     case "entity":
-                       window.frames['policelists'].getpolices(treeNode.name, treeNode.entityId); 
-                       window.frames['policelists'].createpolicetable_ajax(treeNode.objType, treeNode.entityId, "");
+                        window.frames['policelists'].getpolices(treeNode.name, treeNode.entityId); 
+                        window.frames['policelists'].createpolicetable_ajax(treeNode.objType, treeNode.entityId, "");
                          break;
                     case "zhishuuser":
-                    window.frames['policelists'].getpolices(treeNode.name, ""); 
-                    window.frames['policelists'].createpolicetable_ajax(treeNode.objType, treeNode.entityId, "");
+                        window.frames['policelists'].getpolices(treeNode.name, ""); 
+                        window.frames['policelists'].createpolicetable_ajax(treeNode.objType, treeNode.entityId, "");
                         break;
                     case "usertype":
-                       window.frames['policelists'].getpolices(treeNode.name, treeNode.entityId); 
-                       window.frames['policelists'].createpolicetable_ajax(treeNode.objType, treeNode.name, item.entityid);  
+                        window.frames['policelists'].getpolices(treeNode.name, treeNode.entityId); 
+                        window.frames['policelists'].createpolicetable_ajax(treeNode.objType, treeNode.name, item.entityid);  
                         break;
                     default:
                         break;
