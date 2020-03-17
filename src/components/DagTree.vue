@@ -70,11 +70,12 @@ import { Tree  } from 'iview';
                         break;
                     case "usertype":
                        window.frames['policelists'].getpolices(treeNode.name, treeNode.entityId); 
-                       window.frames['policelists'].createpolicetable_ajax(treeNode.objType, treeNode.name, treeNode.entityId);  
+                       window.frames['policelists'].createpolicetable_ajax(treeNode.objType, treeNode.name, item.entityid);  
                         break;
                     default:
                         break;
                 }
+                console.info(item);
             },
             checkchange(array,yitem){
                 console.info(this.data3);
