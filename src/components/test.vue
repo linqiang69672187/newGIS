@@ -26,7 +26,7 @@
      
 
       
-      <canvas @click="startcompute" id="myCanvas" height="940px" width="1020px">
+      <canvas @click="startcompute" id="myCanvas" height="1200px" width="1200px">
       </canvas>
       <div style="display:none">
         <img ref="conf1" src="@/assets/images/BaseStation.png">
@@ -55,14 +55,16 @@ Vue.component('i-switch', Switch)
 
                    x3:0,  //第三个信标
                    y3:0,
-                   d3:0,                  
+                   d3:0,  
+                   x:0,
+                   y:0,                
                    Mark:[   //信标列表
-                       {markid:1,x:3.3*20,y:46*20},
-                       {markid:2,x:3.3*20,y:27*20},
-                       {markid:3,x:3.3*20,y:3.5*20},
-                       {markid:4,x:24*20,y:2.5*20},
-                       {markid:5,x:45*20,y:2.5*20},
-                       {markid:6,x:23*20,y:18*20},
+                       {markid:4,x:1*20,y:2*20},
+                       {markid:1,x:1*20,y:52*20},
+                       {markid:2,x:51*20,y:52*20},
+                       {markid:3,x:26*20,y:27*20},
+                       {markid:5,x:51*20,y:2*20},
+
                    ], 
                    userStatus:false,
                    inter:null,
@@ -109,17 +111,17 @@ Vue.component('i-switch', Switch)
                   c.height=c.height;  
 
                   ctx.fillStyle='#000';
-                  ctx.fillRect(0,0,1020,940);
+                  ctx.fillRect(0,0,1200,1200);
 
 
                   ctx.strokeStyle="#fff"; 
                  if(this.axois){
-                    for (let i=1;i<110;i++){
+                    for (let i=1;i<60;i++){
                 
                         ctx.moveTo(i*20,0); 
-                        ctx.lineTo(i*20,940); 
+                        ctx.lineTo(i*20,1200); 
                         ctx.moveTo(0,i*20); 
-                        ctx.lineTo(1020,i*20);    
+                        ctx.lineTo(1200,i*20);    
                     } 
                     ctx.stroke(); 
                }
@@ -134,7 +136,7 @@ Vue.component('i-switch', Switch)
 
                 ctx.strokeStyle="#333"; 
                 ctx.fillText("0,0", 0, 10); 
-                for (let i=1;i<11;i++){
+                for (let i=1;i<12;i++){
                     ctx.fillText(i*5+"米", i*100, 10); 
                     ctx.fillText(i*5+"米", 0, 100*i); 
                
@@ -227,24 +229,27 @@ Vue.component('i-switch', Switch)
                                 times:new Date().getTime(),
                             }
                           }).then((res) => {
-                             for (let i=0;i<_this.Mark.length;i++){
-                                if (res.data[0].BsID==_this.Mark[i].markid){
-                                      _this.d1 = parseFloat(res.data[0].distance)*20;
-                                      _this.x1 = _this.Mark[i].x;
-                                      _this.y1 = _this.Mark[i].y;
-                                }
-                                 if (res.data[1].BsID==_this.Mark[i].markid){
-                                      _this.d2 = parseFloat(res.data[1].distance)*20;
-                                      _this.x2 = _this.Mark[i].x;
-                                      _this.y2 = _this.Mark[i].y;
-                                }
+                              _this.x= (parseFloat(res.data[0].BsID)+1)*20;
+                              _this.y=(parseFloat(res.data[0].distance)+2)*20;
 
-                                if (res.data[2].BsID==_this.Mark[i].markid){
-                                      _this.d3 = parseFloat(res.data[2].distance)*20;
-                                      _this.x3 = _this.Mark[i].x;
-                                      _this.y3 = _this.Mark[i].y;
-                                }
-                             }  
+                            //  for (let i=0;i<_this.Mark.length;i++){
+                            //     if (res.data[0].BsID==_this.Mark[i].markid){
+                            //           _this.d1 = parseFloat(res.data[0].distance)*20;
+                            //           _this.x1 = _this.Mark[i].x;
+                            //           _this.y1 = _this.Mark[i].y;
+                            //     }
+                            //      if (res.data[1].BsID==_this.Mark[i].markid){
+                            //           _this.d2 = parseFloat(res.data[1].distance)*20;
+                            //           _this.x2 = _this.Mark[i].x;
+                            //           _this.y2 = _this.Mark[i].y;
+                            //     }
+
+                            //     if (res.data[2].BsID==_this.Mark[i].markid){
+                            //           _this.d3 = parseFloat(res.data[2].distance)*20;
+                            //           _this.x3 = _this.Mark[i].x;
+                            //           _this.y3 = _this.Mark[i].y;
+                            //     }
+                            //  }  
                              _this.initcanvas();
 
                           }).catch((err) => {
@@ -258,15 +263,18 @@ Vue.component('i-switch', Switch)
         computed:{
             trilateration(){
                  let x=0,y=0;
-                 let a11 = 2*(this.x1-this.x3);
-                 let a12 = 2*(this.y1-this.y3);
-                 let b1=Math.pow(this.x1,2)-Math.pow(this.x3,2) +Math.pow(this.y1,2)-Math.pow(this.y3,2) +Math.pow(this.d3,2)-Math.pow(this.d1,2);
-                 let a21 = 2*(this.x2-this.x3);
-                 let a22 = 2*(this.y2-this.y3);
-                 let b2 = Math.pow(this.x2,2)-Math.pow(this.x3,2) +Math.pow(this.y2,2)-Math.pow(this.y3,2) +Math.pow(this.d3,2)-Math.pow(this.d2,2);
-                     x=(b1*a22-a12*b2)/(a11*a22-a12*a21);
-                     y=(a11*b2-b1*a21)/(a11*a22-a12*a21);
-                this.historyposition.push([x,y]);
+                 x=this.x;
+                 y=this.y;
+
+                //  let a11 = 2*(this.x1-this.x3);
+                //  let a12 = 2*(this.y1-this.y3);
+                //  let b1=Math.pow(this.x1,2)-Math.pow(this.x3,2) +Math.pow(this.y1,2)-Math.pow(this.y3,2) +Math.pow(this.d3,2)-Math.pow(this.d1,2);
+                //  let a21 = 2*(this.x2-this.x3);
+                //  let a22 = 2*(this.y2-this.y3);
+                //  let b2 = Math.pow(this.x2,2)-Math.pow(this.x3,2) +Math.pow(this.y2,2)-Math.pow(this.y3,2) +Math.pow(this.d3,2)-Math.pow(this.d2,2);
+                //      x=(b1*a22-a12*b2)/(a11*a22-a12*a21);
+                //      y=(a11*b2-b1*a21)/(a11*a22-a12*a21);
+                // this.historyposition.push([x,y]);
                 return {'x':x,'y':y};
             }
         }
