@@ -171,7 +171,7 @@ const install = function(Vue) {
                                     splitLine: {
                                         show: false
                                     },
-                                    min: 80,
+                                    min: 0,
                                     boundaryGap: [0.2, 0.2],
                                     axisLine:{
                                        lineStyle:{
