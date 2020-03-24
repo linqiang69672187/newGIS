@@ -145,7 +145,7 @@ const install = function(Vue) {
                                         color:'#fff'
                                     },
                                     name: '在线时长(H)',
-                                    max: 30,
+                                   // max: 30,
                                     nameTextStyle:{
                                         color:'#fff'
                                     },

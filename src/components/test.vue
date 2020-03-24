@@ -59,11 +59,15 @@ Vue.component('i-switch', Switch)
                    x:0,
                    y:0,                
                    Mark:[   //信标列表
-                       {markid:4,x:1*20,y:2*20},
-                       {markid:1,x:1*20,y:52*20},
-                       {markid:2,x:51*20,y:52*20},
-                       {markid:3,x:26*20,y:27*20},
-                       {markid:5,x:51*20,y:2*20},
+                        {markid:1,x:1*200,y:1*200},
+                        {markid:2,x:3*200,y:1*200},
+                        {markid:3,x:5*200,y:1*200},
+                        {markid:4,x:1*200,y:3*200},
+                        {markid:5,x:3*200,y:3*200},
+                        {markid:6,x:5*200,y:3*200},
+                        {markid:7,x:1*200,y:5*200},
+                        {markid:8,x:3*200,y:5*200},
+                        {markid:9,x:5*200,y:5*200},
 
                    ], 
                    userStatus:false,
@@ -111,17 +115,17 @@ Vue.component('i-switch', Switch)
                   c.height=c.height;  
 
                   ctx.fillStyle='#000';
-                  ctx.fillRect(0,0,1200,1200);
+                  ctx.fillRect(0,0,1000,1000);
 
 
                   ctx.strokeStyle="#fff"; 
                  if(this.axois){
-                    for (let i=1;i<60;i++){
+                    for (let i=1;i<3;i++){
                 
-                        ctx.moveTo(i*20,0); 
-                        ctx.lineTo(i*20,1200); 
-                        ctx.moveTo(0,i*20); 
-                        ctx.lineTo(1200,i*20);    
+                        ctx.moveTo(i*400,0); 
+                        ctx.lineTo(i*400,1200); 
+                        ctx.moveTo(0,i*400); 
+                        ctx.lineTo(1200,i*400);    
                     } 
                     ctx.stroke(); 
                }
@@ -137,8 +141,8 @@ Vue.component('i-switch', Switch)
                 ctx.strokeStyle="#333"; 
                 ctx.fillText("0,0", 0, 10); 
                 for (let i=1;i<12;i++){
-                    ctx.fillText(i*5+"米", i*100, 10); 
-                    ctx.fillText(i*5+"米", 0, 100*i); 
+                    ctx.fillText(i*10+"米", i*200, 10); 
+                    ctx.fillText(i*10+"米", 0, 200*i); 
                
                 } 
                
@@ -286,7 +290,8 @@ Vue.component('i-switch', Switch)
             padding:0;
 			}
 			canvas{
-				/*background: black;*/
+				margin-left: 10px;
+                margin-top: 10px;
 				border: 1px solid #999 ;
 	}
     #scalet{
