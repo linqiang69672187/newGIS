@@ -26,13 +26,13 @@
      
 
       
-      <canvas @click="startcompute" id="myCanvas" height="1200px" width="1200px">
+      <canvas @click="startcompute" id="myCanvas" height="2000px" width="3500px">
       </canvas>
       <div style="display:none">
         <img ref="conf1" src="@/assets/images/BaseStation.png">
         <img ref="conf" src="@/assets/images/local_dw.png">
         <img ref="conf2" src="@/assets/images/north.png">
-        
+        <img ref="conf3" src="@/assets/images/dongxincad.png">
      </div>
      
   </div>
@@ -129,10 +129,11 @@ Vue.component('i-switch', Switch)
                     } 
                     ctx.stroke(); 
                }
-                let img2 = this.$refs.conf2    
-                ctx.drawImage(img2, 0,0)
+               // let img2 = this.$refs.conf2    
+               // ctx.drawImage(img2, 0,0)
                 
-               
+                let imgcad = this.$refs.conf3   
+                ctx.drawImage(imgcad, 0,0)
 
 
 

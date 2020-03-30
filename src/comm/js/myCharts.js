@@ -228,7 +228,7 @@ const install = function(Vue) {
                       
                         let that =this;
                         let updatedata = function (onlinetime,onlinecount,tonlinetime,tonlinecount){
-                         
+                          
                            if(tonlinetime){
                             option.legend.data.splice(0);
                             option.legend.data.push(tonlinetime);
@@ -248,12 +248,19 @@ const install = function(Vue) {
                                 option.series[1].data.shift();
                             }            
                             data0.push((onlinetime));                         
-                            data1.push(onlinecount);                       
+                            data1.push(onlinecount); 
+                           let max0= Math.ceil(data0.reduce(function(a , b){
+                                return b > a ? b : a;
+                                })/10)*10; 
+                           let max1= Math.ceil(data1.reduce(function(a , b){
+                                return b > a ? b : a;
+                                })/10)*10;                      
                             option.xAxis[0].data.push(axisData);  
-                          
+                            option.yAxis[0].max=max0;
+                            option.yAxis[1].max=max1;  
                           }
                           that.chart.setOption(option);
-                         // console.info(option);
+                           
                         }
                        return updatedata;
                     },
