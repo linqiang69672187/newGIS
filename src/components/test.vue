@@ -1,7 +1,7 @@
 <template>
-  <div id="scalet">
+  <div :style="backgroundDiv" id="scalet">
      <div v-if="showline" class="distanc">
-         比例尺：1:20<br/>  定位:
+         比例尺：1:20<br/>  基站:
          <i-switch   @on-change="initcanvas" v-model="openlocal"  size="large">
           <span slot="open">开启</span>
           <span slot="close">关闭</span>
@@ -22,7 +22,7 @@
           <span slot="open">开启</span>
           <span slot="close">关闭</span>
         </i-switch><br/>
-        坐标:({{(trilateration.x/20).toFixed(2)}},{{(trilateration.y/20).toFixed(2)}})</div> 
+        坐标:{{mouseposition}}</div> 
      
 
       
@@ -32,7 +32,7 @@
         <img ref="conf1" src="@/assets/images/BaseStation.png">
         <img ref="conf" src="@/assets/images/local_dw.png">
         <img ref="conf2" src="@/assets/images/north.png">
-        <img ref="conf3" src="@/assets/images/dongxincad.png">
+        
      </div>
      
   </div>
@@ -45,6 +45,9 @@ Vue.component('i-switch', Switch)
     export default {
         data () {
             return {//47米，51米  ,20倍放大1:20
+              backgroundDiv: {
+                            background: '#fff url(' + require('@/assets/images/dongxincad.jpg') + ') no-repeat scroll left center'
+                    } ,
                    x1:0,   //第一个信标
                    y1:0,
                    d1:0,
@@ -56,19 +59,16 @@ Vue.component('i-switch', Switch)
                    x3:0,  //第三个信标
                    y3:0,
                    d3:0,  
-                   x:0,
-                   y:0,                
+                   x:1430,
+                   y:1600,                
                    Mark:[   //信标列表
-                        {markid:1,x:1*200,y:1*200},
-                        {markid:2,x:3*200,y:1*200},
-                        {markid:3,x:5*200,y:1*200},
-                        {markid:4,x:1*200,y:3*200},
-                        {markid:5,x:3*200,y:3*200},
-                        {markid:6,x:5*200,y:3*200},
-                        {markid:7,x:1*200,y:5*200},
-                        {markid:8,x:3*200,y:5*200},
-                        {markid:9,x:5*200,y:5*200},
-
+                        {markid:1,x:3129,y:710},
+                        {markid:2,x:2711,y:787},
+                        {markid:3,x:2085,y:787},
+                        {markid:4,x:1428,y:787}, 
+                        {markid:5,x:735,y:787}, 
+                        {markid:6,x:735,y:1508}, 
+                        {markid:7,x:1428,y:1508}, 
                    ], 
                    userStatus:false,
                    inter:null,
@@ -77,6 +77,7 @@ Vue.component('i-switch', Switch)
                    historyposition:[],
                    historytrace:false,
                    axois:true,
+                   mouseposition:'',
             }
         },
         mounted(){
@@ -112,121 +113,123 @@ Vue.component('i-switch', Switch)
  
               var ctx=c.getContext("2d");
               var ctxline=c.getContext("2d");
-                  c.height=c.height;  
+                   c.height=c.height;  
 
-                  ctx.fillStyle='#000';
-                  ctx.fillRect(0,0,1000,1000);
+            
 
 
-                  ctx.strokeStyle="#fff"; 
-                 if(this.axois){
-                    for (let i=1;i<3;i++){
+            //       ctx.strokeStyle="#fff"; 
+            //      if(this.axois){
+            //         for (let i=1;i<3;i++){
                 
-                        ctx.moveTo(i*400,0); 
-                        ctx.lineTo(i*400,1200); 
-                        ctx.moveTo(0,i*400); 
-                        ctx.lineTo(1200,i*400);    
-                    } 
-                    ctx.stroke(); 
-               }
-               // let img2 = this.$refs.conf2    
-               // ctx.drawImage(img2, 0,0)
+            //             ctx.moveTo(i*400,0); 
+            //             ctx.lineTo(i*400,1200); 
+            //             ctx.moveTo(0,i*400); 
+            //             ctx.lineTo(1200,i*400);    
+            //         } 
+            //         ctx.stroke(); 
+            //    }
+                let img2 = this.$refs.conf2    
+                ctx.drawImage(img2, 0,0)
                 
-                let imgcad = this.$refs.conf3   
-                ctx.drawImage(imgcad, 0,0)
+               // let imgcad = this.$refs.conf3   
+               // ctx.drawImage(imgcad, 0,0)
 
 
 
-                ctx.fillStyle='#fff';
+                // ctx.fillStyle='#fff';
 
-                ctx.strokeStyle="#333"; 
-                ctx.fillText("0,0", 0, 10); 
-                for (let i=1;i<12;i++){
-                    ctx.fillText(i*10+"米", i*200, 10); 
-                    ctx.fillText(i*10+"米", 0, 200*i); 
+                // ctx.strokeStyle="#333"; 
+                // ctx.fillText("0,0", 0, 10); 
+                // for (let i=1;i<12;i++){
+                //     ctx.fillText(i*10+"米", i*200, 10); 
+                //     ctx.fillText(i*10+"米", 0, 200*i); 
                
-                } 
+                // } 
                
 
                   
                 
 
-              
+           
                 let img1 = this.$refs.conf1
-
+                 if(this.openlocal){
                 for (let i=0;i<this.Mark.length;i++){
                    ctx.drawImage(img1, this.Mark[i].x-15,this.Mark[i].y-39)
-                   ctx.fillText("X:"+(this.Mark[i].x/20).toFixed(2)+',Y:'+(this.Mark[i].y/20).toFixed(2), this.Mark[i].x-25,this.Mark[i].y+20); 
+                   //ctx.fillText("X:"+(this.Mark[i].x/20).toFixed(2)+',Y:'+(this.Mark[i].y/20).toFixed(2), this.Mark[i].x-25,this.Mark[i].y+20); 
                       
                 }
-               
+              }
+                ctx.stroke();
              
-                if (this.userStatus){
+            //     if (this.userStatus){
                     
 
-                ctxline.moveTo(this.x1,this.y1); 
-                ctxline.lineTo(this.trilateration.x,this.trilateration.y);   
-                ctxline.stroke(); 
+            //     ctxline.moveTo(this.x1,this.y1); 
+            //     ctxline.lineTo(this.trilateration.x,this.trilateration.y);   
+            //     ctxline.stroke(); 
               
             
-                ctxline.moveTo(this.x2,this.y2); 
-                ctxline.lineTo(this.trilateration.x,this.trilateration.y);   
-                ctxline.stroke(); 
+            //     ctxline.moveTo(this.x2,this.y2); 
+            //     ctxline.lineTo(this.trilateration.x,this.trilateration.y);   
+            //     ctxline.stroke(); 
     
-                ctxline.moveTo(this.x3,this.y3); 
-                ctxline.lineTo(this.trilateration.x,this.trilateration.y);   
-                ctxline.stroke(); 
+            //     ctxline.moveTo(this.x3,this.y3); 
+            //     ctxline.lineTo(this.trilateration.x,this.trilateration.y);   
+            //     ctxline.stroke(); 
 
-                ctx.strokeStyle="#fff"; 
-                ctx.beginPath();
-                ctx.arc(this.x1,this.y1,this.d1,0, Math.PI * 2, false);
-                ctx.stroke();
-                ctx.beginPath();
-                ctx.arc(this.x2,this.y2,this.d2,0, Math.PI * 2, false);
-                ctx.stroke();      
-                ctx.beginPath();
-                ctx.arc(this.x3,this.y3,this.d3,0, Math.PI * 2, false);
-                ctx.stroke();
+            //     ctx.strokeStyle="#fff"; 
+            //     ctx.beginPath();
+            //     ctx.arc(this.x1,this.y1,this.d1,0, Math.PI * 2, false);
+            //     ctx.stroke();
+            //     ctx.beginPath();
+            //     ctx.arc(this.x2,this.y2,this.d2,0, Math.PI * 2, false);
+            //     ctx.stroke();      
+            //     ctx.beginPath();
+            //     ctx.arc(this.x3,this.y3,this.d3,0, Math.PI * 2, false);
+            //     ctx.stroke();
 
-             }
+            //  }
            
 
 
 
             
-                let img = this.$refs.conf
-                if(this.openlocal){
-                ctx.drawImage(img, this.trilateration.x-12,this.trilateration.y-58);
-                }
+                 let img = this.$refs.conf
+        
+                 ctx.drawImage(img, this.trilateration.x-12,this.trilateration.y-58);
+           
                 ctx.stroke(); 
-             if (this.userStatus){
-                ctx.font = "14px bold 黑体";
-                ctx.fillStyle = "#fff";
-                ctx.fillText("距离:"+(this.d1/20).toFixed(2), (this.x1+this.trilateration.x)/2,(this.y1+this.trilateration.y)/2); 
-                ctx.fillText("距离:"+(this.d2/20).toFixed(2), (this.x2+this.trilateration.x)/2,(this.y2+this.trilateration.y)/2); 
-                ctx.fillText("距离:"+(this.d3/20).toFixed(2), (this.x3+this.trilateration.x)/2,(this.y3+this.trilateration.y)/2); 
-                }
-             ctx.stroke();
+            //  if (this.userStatus){
+            //     ctx.font = "14px bold 黑体";
+            //     ctx.fillStyle = "#fff";
+            //     ctx.fillText("距离:"+(this.d1/20).toFixed(2), (this.x1+this.trilateration.x)/2,(this.y1+this.trilateration.y)/2); 
+            //     ctx.fillText("距离:"+(this.d2/20).toFixed(2), (this.x2+this.trilateration.x)/2,(this.y2+this.trilateration.y)/2); 
+            //     ctx.fillText("距离:"+(this.d3/20).toFixed(2), (this.x3+this.trilateration.x)/2,(this.y3+this.trilateration.y)/2); 
+            //     }
+            //  ctx.stroke();
              
-              if (this.historyposition.length>0&&this.historytrace&&this.openlocal){
-               ctx.moveTo(this.historyposition[0][0],this.historyposition[0][1]); 
-                for (let i = 0; i < this.historyposition.length-1; i++) { 
-                    ctx.lineTo(this.historyposition[i+1][0],this.historyposition[i+1][1]);   
-                }
-              }
-            ctx.stroke();
+            //   if (this.historyposition.length>0&&this.historytrace&&this.openlocal){
+            //    ctx.moveTo(this.historyposition[0][0],this.historyposition[0][1]); 
+            //     for (let i = 0; i < this.historyposition.length-1; i++) { 
+            //         ctx.lineTo(this.historyposition[i+1][0],this.historyposition[i+1][1]);   
+            //     }
+            //   }
+            // ctx.stroke();
              
-               for (let i=0;i<this.Mark.length;i++){
-                    ctx.font = '38pt Arial'; //字体样式
-                    ctx.fillStyle = 'red'; //填充线样式
-                   ctx.fillText(this.Mark[i].markid, this.Mark[i].x,this.Mark[i].y); 
+            //    for (let i=0;i<this.Mark.length;i++){
+            //         ctx.font = '38pt Arial'; //字体样式
+            //         ctx.fillStyle = 'red'; //填充线样式
+            //        ctx.fillText(this.Mark[i].markid, this.Mark[i].x,this.Mark[i].y); 
                       
-                }
+            //     }
 
           },
-          startcompute(){
-              this.showline=!this.showline;       
+          startcompute(e){
+              this.showline=!this.showline; 
+              this.mouseposition=e.clientX+'/'+e.clientY;
           },
+       
          interLoadData(){
              let _this = this;
               Vue.axios.get('/Handlers/Indoor_position.ashx', { // ，/app/data/json/Indoor_position.json，/Handlers/Indoor_position.ashx，
@@ -234,8 +237,8 @@ Vue.component('i-switch', Switch)
                                 times:new Date().getTime(),
                             }
                           }).then((res) => {
-                              _this.x= (parseFloat(res.data[0].BsID)+1)*20;
-                              _this.y=(parseFloat(res.data[0].distance)+2)*20;
+                              _this.x= (parseFloat(res.data[0].BsID));
+                              _this.y=(parseFloat(res.data[0].distance));
 
                             //  for (let i=0;i<_this.Mark.length;i++){
                             //     if (res.data[0].BsID==_this.Mark[i].markid){
@@ -301,7 +304,8 @@ Vue.component('i-switch', Switch)
         font-size: 14px;
         overflow-y: auto;
         text-align: left;
-        background-color: black;
+        background-color: #000;
+
     }
     #myCanvas{
         left: 0;
