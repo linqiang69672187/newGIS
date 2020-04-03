@@ -32,7 +32,7 @@
         <img ref="conf1" src="@/assets/images/BaseStation.png">
         <img ref="conf" src="@/assets/images/local_dw.png">
         <img ref="conf2" src="@/assets/images/north.png">
-        
+        <img ref="conf3" src="@/assets/images/pc.png">
      </div>
      
   </div>
@@ -63,12 +63,12 @@ Vue.component('i-switch', Switch)
                    y:1600,                
                    Mark:[   //信标列表
                         {markid:1,x:3129,y:710},
-                        {markid:2,x:2711,y:787},
-                        {markid:3,x:2085,y:787},
-                        {markid:4,x:1428,y:787}, 
-                        {markid:5,x:735,y:787}, 
-                        {markid:6,x:735,y:1508}, 
-                        {markid:7,x:1428,y:1508}, 
+                        {markid:2,x:2711,y:787+50},
+                        {markid:3,x:2085,y:787+50},
+                        {markid:4,x:1428,y:787+50}, 
+                        {markid:5,x:535,y:787+50}, 
+                        {markid:6,x:535,y:1508+50}, 
+                        {markid:7,x:1428,y:1508+50}, 
                    ], 
                    userStatus:false,
                    inter:null,
@@ -86,7 +86,7 @@ Vue.component('i-switch', Switch)
             this.initcanvas();
            this.inter = setInterval(() => {
                _this.interLoadData();
-           }, 1000);
+           }, 100);
 
           if(typeof(Worker)!=="undefined")
             {
@@ -155,7 +155,7 @@ Vue.component('i-switch', Switch)
                 let img1 = this.$refs.conf1
                  if(this.openlocal){
                 for (let i=0;i<this.Mark.length;i++){
-                   ctx.drawImage(img1, this.Mark[i].x-15,this.Mark[i].y-39)
+                   ctx.drawImage(img1, this.Mark[i].x-45,this.Mark[i].y-164)
                    //ctx.fillText("X:"+(this.Mark[i].x/20).toFixed(2)+',Y:'+(this.Mark[i].y/20).toFixed(2), this.Mark[i].x-25,this.Mark[i].y+20); 
                       
                 }
@@ -195,9 +195,9 @@ Vue.component('i-switch', Switch)
 
 
             
-                 let img = this.$refs.conf
+                 let img = this.$refs.conf3
         
-                 ctx.drawImage(img, this.trilateration.x-12,this.trilateration.y-58);
+                 ctx.drawImage(img, this.trilateration.x-60,this.trilateration.y-223);
            
                 ctx.stroke(); 
             //  if (this.userStatus){
