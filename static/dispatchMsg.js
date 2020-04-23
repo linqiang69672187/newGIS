@@ -85,7 +85,9 @@ function LoadEvents(){
                     %>
 
 */
-
+function manageRealTimeUserInStockadeLayer(){
+    console.info('manageRealTimeUserInStockadeLayer')
+}
 function onClick(e, treeId, treeNode) { 
 
 
@@ -94,6 +96,6 @@ function displaypolicelistsdiv(){
     console.info("displaypolicelistsdiv");
 }
  setTimeout(function(){
-    window.vue_index.init();
+     window.vue_index.init();
      window.vue_index.updatelola();
  },3000)

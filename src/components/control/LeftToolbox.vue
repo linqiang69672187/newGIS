@@ -5,6 +5,7 @@
        @basestation="basestation"
        @lock="lock"
        @select_rangle="select_rangle"
+       @elec_outer ="elec_outer"
        :main-tooltip="language. main_tooltip"	
      	
   ></fab>
@@ -54,6 +55,13 @@ export default {
                   tooltip:'框选 (s)',
                   color:'#E54C3B',
               }
+              , 
+              {
+                  name: 'elec_outer',
+                  icon: 'border_outer',
+                  tooltip:'电子栅栏统计 (e)',
+                  color:'#8e44ad',
+              }
           ],
           language:{
             main_tooltip:'点击展开'
@@ -87,6 +95,10 @@ export default {
         let loadevent = LoadEvents("olBoxSelection");
          loadevent();//调用原来框选 
          this.cleardom();
+      },
+      elec_outer(){
+        window.manageRealTimeUserInStockadeLayer();//调用--实时电子栅栏信息弹层开启关闭，外部全局方法
+        this.cleardom();
       }
       ,
       cleardom(){
@@ -136,6 +148,13 @@ export default {
                   icon: 'select_all',
                   tooltip:GetTextByName("Selectionof")+" (s)",
                   color:'#E54C3B',
+              }
+              , 
+              {
+                  name: 'select_rangle',
+                  icon: 'border_outer',
+                  tooltip:GetTextByName("Stack")+" (s)",
+                  color:'#8e44ad',
               }
           )
       },

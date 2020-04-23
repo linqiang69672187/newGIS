@@ -73,7 +73,9 @@ export default {
                         {label:'人员设备管理',icon:'supervisor_account',name:'Lang_UserDeviceManage',enable:true},
                        // {label:'GPS数据管理',icon:'assignment',name:'Lang_GPSDataManage',enable:true},
                         {label:'预案管理',icon:'build',name:'Lang_emergency',enable:true},
-                        {label:'实时警力',icon:'alarm_add',name:'Lang_RealTimePoliceStrength',enable:true}
+                        {label:'实时警力',icon:'alarm_add',name:'Lang_RealTimePoliceStrength',enable:true},
+                        {label:'电子栅栏统计',icon:'directions_run',name:'HistoryUserInStockade',enable:true},
+                        {label:'在线统计',icon:'trending_up',name:'trending_up',enable:true}
             ],
               
         isshowmini:false,
@@ -271,7 +273,7 @@ export default {
              let gpssjgl = GetTextByName("Lang_GPSDataManage");  
              let yagl = GetTextByName("Lang_emergency"); 
              let ssjl = GetTextByName("Lang_RealTimePoliceStrength"); 
-
+             let dzzl = GetTextByName("Stack"); 
                 // DTCZEnable:true,   //动态重组权限
                 // SMSEnable:true,    //短信权限
                 // PullUp_ControlEnable:true, //GPS上拉权限
@@ -298,7 +300,11 @@ export default {
                 {label:rysbgl,icon:'supervisor_account',name:'Lang_UserDeviceManage',enable:true},
              //   {label:gpssjgl,icon:'assignment',name:'Lang_GPSDataManage',enable:true},
                 {label:yagl,icon:'build',name:'Lang_emergency',enable:true},
-                {label:ssjl,icon:'alarm_add',name:'Lang_RealTimePoliceStrength',enable:true});
+                {label:ssjl,icon:'alarm_add',name:'Lang_RealTimePoliceStrength',enable:true},
+                {label:'电子栅栏统计',icon:'directions_run',name:'HistoryUserInStockade',enable:true},
+                {label:'在线统计',icon:'trending_up',name:'trending_up',enable:true}
+                );
+               
         },
         init:function(){
             this.$refs.banner.updateuseprameters();
