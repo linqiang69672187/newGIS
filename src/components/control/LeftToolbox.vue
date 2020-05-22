@@ -6,7 +6,7 @@
        @lock="lock"
        @select_rangle="select_rangle"
        @elec_outer ="elec_outer"
-       :main-tooltip="language. main_tooltip"	
+       :main-tooltip="language.main_tooltip"	
      	
   ></fab>
 
@@ -59,7 +59,7 @@ export default {
               {
                   name: 'elec_outer',
                   icon: 'border_outer',
-                  tooltip:'电子栅栏统计 (e)',
+                  tooltip:'实时电子栅栏 (e)',
                   color:'#8e44ad',
               }
           ],
@@ -151,9 +151,9 @@ export default {
               }
               , 
               {
-                  name: 'select_rangle',
+                  name: 'elec_outer',
                   icon: 'border_outer',
-                  tooltip:GetTextByName("Stack")+" (s)",
+                  tooltip:GetTextByName("Lang_RealTimeFence")+" (e)",
                   color:'#8e44ad',
               }
           )

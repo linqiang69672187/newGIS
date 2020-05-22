@@ -142,8 +142,20 @@ const install = function(Vue) {
                                         show: false
                                     },
                                     axisLabel:{
-                                        color:'#fff'
+                                        color:'#fff',
+                                        formatter: function(value,index){
+                                                    		var value;
+                                                    		if (value >=1000) {
+                                                    			value = value/1000+'k';
+                                                    		}else if(value <1000){
+                                                    			value = value;
+                                                    		}
+                                                    		return value
+                                                    	}
+                                         ,
                                     },
+                                    
+                                       
                                     name: '在线时长(H)',
                                    // max: 30,
                                     nameTextStyle:{
@@ -166,7 +178,17 @@ const install = function(Vue) {
                                     },
                                     minInterval: 1, 
                                     axisLabel:{
-                                        color:'#fff'
+                                        color:'#fff',
+                                        formatter: function(value,index){
+                                                    		var value;
+                                                    		if (value >=1000) {
+                                                    			value = value/1000+'k';
+                                                    		}else if(value <1000){
+                                                    			value = value;
+                                                    		}
+                                                    		return value
+                                                    	}
+                                         ,
                                     },
                                     splitLine: {
                                         show: false
@@ -510,7 +532,17 @@ const install = function(Vue) {
                                             formatter: '{value} H'
                                         },
                                         axisLabel:{
-                                            color:'#fff'
+                                            color:'#fff',
+                                            formatter: function(value,index){
+                                                        		var value;
+                                                        		if (value >=1000) {
+                                                        			value = value/1000+'k';
+                                                        		}else if(value <1000){
+                                                        			value = value;
+                                                        		}
+                                                        		return value
+                                                        	}
+                                             ,
                                         },
                                         nameTextStyle:{
                                             color:'#fff'
@@ -539,7 +571,17 @@ const install = function(Vue) {
                                         axisLine:{
                                             lineStyle:{
                                                 color:'#fff'
-                                            } 
+                                            } ,
+                                            formatter: function(value,index){
+                                                        		var value;
+                                                        		if (value >=1000) {
+                                                        			value = value/1000+'k';
+                                                        		}else if(value <1000){
+                                                        			value = value;
+                                                        		}
+                                                        		return value
+                                                        	}
+                                             ,
                                          }
                                     }
                                 ],
@@ -717,7 +759,17 @@ const install = function(Vue) {
                                         axisLine:{
                                             lineStyle:{
                                                 color:'#fff'
-                                            } 
+                                            } ,
+                                            formatter: function(value,index){
+                                                        		var value;
+                                                        		if (value >=1000) {
+                                                        			value = value/1000+'k';
+                                                        		}else if(value <1000){
+                                                        			value = value;
+                                                        		}
+                                                        		return value
+                                                        	}
+                                             ,
                                          }
                                     }
                                 ],

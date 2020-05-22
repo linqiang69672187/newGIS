@@ -11,6 +11,7 @@
                                 @on-search="handleSearch2"
                                 :placeholder="language.placeholder"
                                 :transfer='transfer'
+                                :disabled="ocxRegStatus==false"
                                  class="input"
                                  placement="top"                            
                                 style="width:200px">

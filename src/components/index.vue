@@ -62,7 +62,7 @@ export default {
            lmenuitems1:[
                         {label:'操作窗口',icon:'gps_fixed',name:'hjmb',enable:true},
                         {label:'GPS上报',icon:'history',name:'gpslist',enable:true},
-                        {label:'GPS上拉',icon:'navigation',name:'GPSPullList',enable:true},
+                        {label:'GPS漫游订阅',icon:'navigation',name:'GPSPullList',enable:true},
                         {label:'短信',icon:'mail_outline',name:'sms_sjx',enable:true},
                         {label:'操作日志',icon:'event_note',name:'operationlog',enable:true},
                         {label:'动态重组',icon:'group_add',name:'dtczrestlt',enable:true},
@@ -273,7 +273,8 @@ export default {
              let gpssjgl = GetTextByName("Lang_GPSDataManage");  
              let yagl = GetTextByName("Lang_emergency"); 
              let ssjl = GetTextByName("Lang_RealTimePoliceStrength"); 
-             let dzzl = GetTextByName("Stack"); 
+             let dzzl = GetTextByName("Lang_DZLLStatistic"); 
+             let zxtj = GetTextByName("Lang_OnlinesStatistic"); 
                 // DTCZEnable:true,   //动态重组权限
                 // SMSEnable:true,    //短信权限
                 // PullUp_ControlEnable:true, //GPS上拉权限
@@ -301,8 +302,8 @@ export default {
              //   {label:gpssjgl,icon:'assignment',name:'Lang_GPSDataManage',enable:true},
                 {label:yagl,icon:'build',name:'Lang_emergency',enable:true},
                 {label:ssjl,icon:'alarm_add',name:'Lang_RealTimePoliceStrength',enable:true},
-                {label:'电子栅栏统计',icon:'directions_run',name:'HistoryUserInStockade',enable:true},
-                {label:'在线统计',icon:'trending_up',name:'trending_up',enable:true}
+                {label:dzzl,icon:'directions_run',name:'HistoryUserInStockade',enable:true},
+                {label:zxtj,icon:'trending_up',name:'trending_up',enable:true}
                 );
                
         },
