@@ -145,9 +145,9 @@ const install = function(Vue) {
                                         color:'#fff',
                                         formatter: function(value,index){
                                                     		var value;
-                                                    		if (value >=1000) {
+                                                    		if (value >=10000) {
                                                     			value = value/1000+'k';
-                                                    		}else if(value <1000){
+                                                    		}else if(value <10000){
                                                     			value = value;
                                                     		}
                                                     		return value
@@ -181,9 +181,9 @@ const install = function(Vue) {
                                         color:'#fff',
                                         formatter: function(value,index){
                                                     		var value;
-                                                    		if (value >=1000) {
+                                                    		if (value >=10000) {
                                                     			value = value/1000+'k';
-                                                    		}else if(value <1000){
+                                                    		}else if(value <10000){
                                                     			value = value;
                                                     		}
                                                     		return value
@@ -535,9 +535,9 @@ const install = function(Vue) {
                                             color:'#fff',
                                             formatter: function(value,index){
                                                         		var value;
-                                                        		if (value >=1000) {
+                                                        		if (value >=10000) {
                                                         			value = value/1000+'k';
-                                                        		}else if(value <1000){
+                                                        		}else if(value <10000){
                                                         			value = value;
                                                         		}
                                                         		return value
@@ -574,9 +574,9 @@ const install = function(Vue) {
                                             } ,
                                             formatter: function(value,index){
                                                         		var value;
-                                                        		if (value >=1000) {
+                                                        		if (value >=10000) {
                                                         			value = value/1000+'k';
-                                                        		}else if(value <1000){
+                                                        		}else if(value <10000){
                                                         			value = value;
                                                         		}
                                                         		return value
@@ -762,9 +762,9 @@ const install = function(Vue) {
                                             } ,
                                             formatter: function(value,index){
                                                         		var value;
-                                                        		if (value >=1000) {
+                                                        		if (value >=10000) {
                                                         			value = value/1000+'k';
-                                                        		}else if(value <1000){
+                                                        		}else if(value <10000){
                                                         			value = value;
                                                         		}
                                                         		return value
