@@ -44,6 +44,17 @@
                                     </div>
                                 </div>
                             </li>
+                            <li>
+                                <div>
+                                 <div class="left">{{language.Lang_Beacon}}：</div> 
+                                    <div class="right">
+                                    <i-switch  @on-change="Beaconchange"  v-model="BeaconStatus"  size="large">
+                                        <span slot="open">{{language.open}}</span>
+                                        <span slot="close">{{language.close}}</span>
+                                    </i-switch>
+                                    </div>
+                                </div>
+                            </li>
                         </ul>
                      </div>
                 </Poptip >
@@ -97,6 +108,7 @@ export default {
            basestationStatus:true,
            entityStatus:true,
            userStatus:true,
+           BeaconStatus:true,
            language:{
                measure:'测量',
                layercontrol:'图层控制',
@@ -110,7 +122,8 @@ export default {
                zoomOut:'缩小',
                zoomIn:'放大',
                distance:'距离',
-               area:'面积' 
+               area:'面积',
+               Lang_Beacon:'信 标',
            }           
        }
     },
@@ -141,6 +154,9 @@ export default {
          Userchange:function(){
              layershowControl('userLayer',this.userStatus);
         },
+         Beaconchange:function(){
+             beaconLayerManager.setVisible(this.BeaconStatus);
+        },
         zoomOut:function(){
             let loadevent = LoadEvents("zoomOut");
             loadevent();//调用原来缩小
@@ -163,7 +179,8 @@ export default {
                zoomOut:GetTextByName("ZoomOut"),
                zoomIn:GetTextByName("ZoomIn"),
                distance:GetTextByName("MeasureBar_distancetooltip"),
-               area:GetTextByName("MeasureBar_surfacetooltip") 
+               area:GetTextByName("MeasureBar_surfacetooltip"),
+               Lang_Beacon:GetTextByName("Lang_Beacon"),
            }  
 
          } 
