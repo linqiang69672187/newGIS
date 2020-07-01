@@ -44,7 +44,7 @@
                                     </div>
                                 </div>
                             </li>
-                            <li>
+                            <li v-if="isBeaconStatus">
                                 <div>
                                  <div class="left">{{language.Lang_Beacon}}：</div> 
                                     <div class="right">
@@ -109,6 +109,7 @@ export default {
            entityStatus:true,
            userStatus:true,
            BeaconStatus:true,
+           isBeaconStatus:false,
            language:{
                measure:'测量',
                layercontrol:'图层控制',
@@ -129,6 +130,21 @@ export default {
     },
     
     mounted(){
+            
+            //  let _this = this;
+            //   Vue.axios.get('/Handlers/MVCEasy.ashx', { 
+            //                 params: {
+            //                     times:new Date().getTime(),
+            //                     ctrl: "BeaconDao",
+            //                     action: "GetBeaconNavigationDisplay"
+            //                 }
+            //               }).then((res) => {
+            //                  _this.isBeaconStatus=res.data;
+
+            //               }).catch((err) => {
+            //               console.log(err)
+                           
+            //        })
     },
     methods:{
         showdistance:function(){
