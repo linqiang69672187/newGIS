@@ -131,20 +131,20 @@ export default {
     
     mounted(){
             
-            //  let _this = this;
-            //   Vue.axios.get('/Handlers/MVCEasy.ashx', { 
-            //                 params: {
-            //                     times:new Date().getTime(),
-            //                     ctrl: "BeaconDao",
-            //                     action: "GetBeaconNavigationDisplay"
-            //                 }
-            //               }).then((res) => {
-            //                  _this.isBeaconStatus=res.data;
+             let _this = this;
+              Vue.axios.get('/Handlers/MVCEasy.ashx', { 
+                            params: {
+                                times:new Date().getTime(),
+                                ctrl: "BeaconDao",
+                                action: "GetBeaconNavigationDisplay"
+                            }
+                          }).then((res) => {
+                             _this.isBeaconStatus=res.data;
 
-            //               }).catch((err) => {
-            //               console.log(err)
+                          }).catch((err) => {
+                          console.log(err)
                            
-            //        })
+                   })
     },
     methods:{
         showdistance:function(){
